@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes — Indieformer</title>
+
+<meta name="description" content="Notes from Indieformer — the free newsletter Josh and Clem send out. 77 issues and counting.">
+<link rel="canonical" href="https://indieformer.com/notes.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="Notes — Indieformer">
+<meta property="og:description" content="77 issues of indie game publishing, dispatched free.">
+<meta property="og:url" content="https://indieformer.com/notes.html">
+<meta property="og:image" content="https://indieformer.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+  :root {
+    --emerald: #28E291;
+    --coral: #F78154;
+    --periwinkle: #9381FF;
+    --shadow: #262730;
+    --shadow-mid: #2F3040;
+    --text-primary: #F0EEE8;
+    --text-secondary: #A8A6B8;
+    --text-tertiary: #6B6980;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-mid: rgba(255, 255, 255, 0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    position: relative;
+    background: var(--shadow);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
+    background-size: 26px 26px;
+    font-family: 'Sora', Arial, sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 20px;
+    overflow-x: hidden;
+  }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+  /* registration marks */
+  .crop {
+    position: absolute; width: 18px; height: 18px;
+    opacity: 0; animation: fade 0.6s ease 0.2s forwards;
+    z-index: 5; pointer-events: none;
+  }
+  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
+  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+  .crop.tl { top: 20px; left: 20px; }
+  .crop.tr { top: 20px; right: 20px; }
+  .crop.bl { bottom: 20px; left: 20px; }
+  .crop.br { bottom: 20px; right: 20px; }
+
+  /* nav */
+  .site-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1000px; margin: 0 auto; padding: 14px 56px;
+    position: relative; z-index: 4;
+  }
+  a.brand {
+    font-family: 'Sora'; font-weight: 800; font-size: 18px; letter-spacing: -0.02em;
+    color: var(--text-primary); text-decoration: none; transition: color 0.2s;
+  }
+  a.brand:hover { color: var(--emerald); }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a {
+    font-family: 'Sora'; font-size: 15px; font-weight: 500;
+    color: var(--text-secondary); text-decoration: none;
+    position: relative; transition: color 0.2s;
+  }
+  .primary-nav a:hover { color: var(--text-primary); }
+  .primary-nav a.current { color: var(--text-primary); font-weight: 600; }
+  .primary-nav a.current::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -7px;
+    height: 2px; background: var(--emerald); border-radius: 2px;
+  }
+
+  /* section / hero */
+  .section {
+    position: relative;
+    width: 100%; max-width: 1000px; margin: 0 auto;
+    padding: 40px 56px 24px;
+    z-index: 1;
+  }
+  .col { max-width: 720px; position: relative; z-index: 2; }
+  h1 {
+    font-size: clamp(38px, 6vw, 56px);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.025em;
+    margin-bottom: 16px;
+  }
+  .page-lede {
+    font-family: 'Caveat', cursive; font-size: 26px; color: var(--coral);
+    transform: rotate(-1deg); display: inline-block; margin-bottom: 24px;
+  }
+
+  /* notes list */
+  .notes-list { max-width: 760px; margin: 0 auto; padding: 24px 56px 8px; position: relative; z-index: 2; }
+  .notes-list .note-card:first-of-type { border-top: 1px solid var(--border); }
+  .note-card { padding: 24px 0; border-bottom: 1px solid var(--border); }
+  .note-link { display: block; text-decoration: none; color: inherit; }
+  .note-meta {
+    display: flex; gap: 14px; align-items: baseline;
+    margin-bottom: 6px;
+    font-size: 13px; color: var(--text-tertiary);
+  }
+  .note-tag {
+    font-family: 'Caveat', cursive; font-size: 18px; color: var(--coral);
+    transform: rotate(-1.5deg); display: inline-block; line-height: 1;
+  }
+  .note-title {
+    font-family: 'Sora'; font-size: 22px; font-weight: 700; line-height: 1.3;
+    color: var(--text-primary); margin-bottom: 6px;
+    transition: color 0.2s ease;
+  }
+  .note-link:hover .note-title { color: var(--emerald); }
+  .note-excerpt {
+    font-size: 15px; line-height: 1.6; color: var(--text-secondary);
+  }
+
+  /* archive footer link */
+  .archive-link {
+    max-width: 760px; margin: 0 auto; padding: 24px 56px 8px;
+    font-size: 15px; color: var(--text-tertiary);
+  }
+  .archive-link a {
+    color: var(--emerald); text-decoration: none; font-weight: 600;
+    border-bottom: 2px solid rgba(40, 226, 145, 0.42);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .archive-link a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  /* footer */
+  .site-footer {
+    max-width: 1000px; margin: 60px auto 0;
+    padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px;
+    font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+    position: relative; z-index: 2;
+  }
+  .footer-brand { font-family: 'Sora'; font-weight: 800; font-size: 17px; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 8px; }
+  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 22px; padding-top: 18px; font-size: 13px; color: var(--text-tertiary); }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 820px) {
+    body { padding: 20px 14px; }
+    .section, .notes-list, .archive-link { padding-left: 24px; padding-right: 24px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
+    .note-title { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<span class="crop tl"></span><span class="crop tr"></span>
+<span class="crop bl"></span><span class="crop br"></span>
+
+<header class="site-nav">
+  <a class="brand" href="/">Indieformer</a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular.html">The approach</a>
+    <a href="/notes.html" class="current">Notes</a>
+    <a href="/scorchpot.html">Scorchpot</a>
+  </nav>
+</header>
+
+<section class="section">
+  <div class="col">
+    <h1>Notes.</h1>
+    <p class="page-lede">the free notes we send out.</p>
+    <p style="color: var(--text-secondary); line-height: 1.65; font-size: 16px; max-width: 540px;">
+      The most recent dispatches. Click through to read on the archive. New issues land roughly twice a month.
+    </p>
+  </div>
+</section>
+
+<main class="notes-list" id="notes">
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/indievelopment0526" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">indievelopment</span>
+          <time datetime="2026-05-16">16 May 2026</time>
+        </div>
+        <h3 class="note-title">#76 | Indievelopment — May 2026</h3>
+        <p class="note-excerpt">Whether you are syncing your strikes to a multi-genre soundtrack or managing elemental synergies to break ancient curses, the focus is firmly on rewarding skill within beautifully realized,…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/iron-nest-frontline" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">frontline</span>
+          <time datetime="2026-05-06">6 May 2026</time>
+        </div>
+        <h3 class="note-title">#75 | Too niche, said everyone</h3>
+        <p class="note-excerpt">Two veterans, $750 spent, 10,000 wishlists in a single day — and a niche nobody believed in until they showed up.</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/showcase0426" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">showcase</span>
+          <time datetime="2026-05-01">1 May 2026</time>
+        </div>
+        <h3 class="note-title">#74 | Showcase — April 2026</h3>
+        <p class="note-excerpt">A month of identity and artifice, where you’ll navigate a decaying 1980s as an AI trapped in stolen flesh or pilot an ancient spirit-mech to dismantle a corporate fast-food empire.</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/how-to-really-make-a-game" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">special</span>
+          <time datetime="2026-04-23">23 Apr 2026</time>
+        </div>
+        <h3 class="note-title">#73 | How to Really Make a Game</h3>
+        <p class="note-excerpt">Making a game is the hardest creative thing a human being can attempt. Here&#x27;s why I actually mean that.</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/indievelopment0426" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">indievelopment</span>
+          <time datetime="2026-04-15">15 Apr 2026</time>
+        </div>
+        <h3 class="note-title">#72 | Indievelopment — April 2026</h3>
+        <p class="note-excerpt">Survive brutal border crossings and gothic plague-ridden villages in this week’s lineup of immersive sims and tactical builders. From engineering Roman aqueducts to performing VR bike flips, explore…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/fts-kickstarter-coming-soon" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">special</span>
+          <time datetime="2026-04-04">4 Apr 2026</time>
+        </div>
+        <h3 class="note-title">#71 | 12 years in the making</h3>
+        <p class="note-excerpt">Twelve years of hunting gems, and we’ve finally found our own. The story of how Indieformer went from immature uni students to a publishing house.</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/showcase0326" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">showcase</span>
+          <time datetime="2026-04-01">1 Apr 2026</time>
+        </div>
+        <h3 class="note-title">#70 | Showcase: Mar 26</h3>
+        <p class="note-excerpt">Negotiate with drunken sphinxes and sentient AIs in a week defined by deep narrative consequences and lethal tactical puzzles. From &quot;lumberpunk&quot; beaver colonies to finger-traced wizard escapes,…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/indievelopment0326" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">indievelopment</span>
+          <time datetime="2026-03-16">16 Mar 2026</time>
+        </div>
+        <h3 class="note-title">#69 | Indievelopment: Mar 26</h3>
+        <p class="note-excerpt">Master the rhythms of high-stakes strategy and surreal exploration, from the deep-earth mines of a dwarven fortress to the neon-soaked streets of a cyberpunk detective noir. This issue features 12…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/showcase0226" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">showcase</span>
+          <time datetime="2026-03-01">1 Mar 2026</time>
+        </div>
+        <h3 class="note-title">#68 | Showcase: Feb 26</h3>
+        <p class="note-excerpt">Prepare to channel unpredictable magic through your keyboard in a strategic word roguelike, purge electronic narcotics from broken androids, and stitch together a false narrative to satisfy a…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/indievelopment0226" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">indievelopment</span>
+          <time datetime="2026-02-16">16 Feb 2026</time>
+        </div>
+        <h3 class="note-title">#67 | Indievelopment: Feb 26</h3>
+        <p class="note-excerpt">From forging blades for a revolution to rolling goblin sushi under the gun, this past month was about mastering the job at hand. Balance industrial survival against alien flora or brew the perfect…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/gladieaters-frontline" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">frontline</span>
+          <time datetime="2026-02-14">14 Feb 2026</time>
+        </div>
+        <h3 class="note-title">#66 | How a Misunderstanding Created a Monster</h3>
+        <p class="note-excerpt">How a car-ride misunderstanding and a professional chef’s background turned the creature-collector genre into a high-stakes dinner rush.</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/65-we-are-officially-out-of-time" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">special</span>
+          <time datetime="2026-02-10">10 Feb 2026</time>
+        </div>
+        <h3 class="note-title">#65 | We are officially Out of Time ⏰</h3>
+        <p class="note-excerpt">We played through the time loops, the glitches, and the chaos to find our champions. From nuclear bomb heads to frantic office runners, see which games conquered the theme and took home the top…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/12-years-and-counting" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">special</span>
+          <time datetime="2026-02-06">6 Feb 2026</time>
+        </div>
+        <h3 class="note-title">#64 | 12 years later, we’re doing something &quot;stupid&quot;</h3>
+        <p class="note-excerpt">Twelve years of hunting gems, and we’ve finally found our own. The story of how Indieformer went from immature uni students to a publishing house.</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/showcase0126" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">showcase</span>
+          <time datetime="2026-01-31">31 Jan 2026</time>
+        </div>
+        <h3 class="note-title">#63 | Showcase: Jan 26</h3>
+        <p class="note-excerpt">Whether you are enforcing quarantines in a collapsing city or battling corporate fairytales, this month is about finding order in the chaos. We’ve curated a mix of punishing physics climbers, precise…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/indievelopment0126" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">indievelopment</span>
+          <time datetime="2026-01-16">16 Jan 2026</time>
+        </div>
+        <h3 class="note-title">#62 | Indievelopment: Jan 26</h3>
+        <p class="note-excerpt">Survive the freezing dark of a permadeath mechanic sim or drift through the colorful memories of a youth left behind. This month&#x27;s collection spans the gap between brutal technical challenges and…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/upcoming-indie-games-2026" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">special</span>
+          <time datetime="2026-01-11">11 Jan 2026</time>
+        </div>
+        <h3 class="note-title">#61 | 2026&#x27;s Upcoming Indie Games</h3>
+        <p class="note-excerpt">We’ve cracked open the &quot;To Watch&quot; stack to bring you a massive preview of the year ahead. Whether you&#x27;re into high-stakes stealth, chaotic physics brawlers, or deep strategy sims, these are the…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/best-indie-games-2025" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">special</span>
+          <time datetime="2026-01-08">8 Jan 2026</time>
+        </div>
+        <h3 class="note-title">#60 | 2025&#x27;s Best Indie Games</h3>
+        <p class="note-excerpt">A curated sweep of 2025’s releases, pulled from across the year and gathered in one place for anyone still looking for something worth playing.</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/hidden-gems-2025" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">special</span>
+          <time datetime="2026-01-05">5 Jan 2026</time>
+        </div>
+        <h3 class="note-title">#59 | 2025&#x27;s Hidden Gems</h3>
+        <p class="note-excerpt">A curated sweep of 2025’s lesser-talked-about releases, pulled from across the year and gathered in one place for anyone still looking for something worth playing.</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/showcase1225" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">showcase</span>
+          <time datetime="2026-01-01">1 Jan 2026</time>
+        </div>
+        <h3 class="note-title">#58 | Showcase: Dec 25</h3>
+        <p class="note-excerpt">From kickflipping through the underworld to managing a maple syrup racing empire, this collection thrives on distinct, high-concept hooks. Whether you are defibrillating hearts to a complex beat or…</p>
+      </a>
+    </article>
+
+    <article class="note-card">
+      <a class="note-link" href="https://indieformer.beehiiv.com/p/indievelopment1225" target="_blank" rel="noopener">
+        <div class="note-meta">
+          <span class="note-tag">indievelopment</span>
+          <time datetime="2025-12-16">16 Dec 2025</time>
+        </div>
+        <h3 class="note-title">#57 | Indievelopment: Dec 25</h3>
+        <p class="note-excerpt">We’ve rounded up a mix of titles where you can serve as a battle-worn turtle, a dungeon merchant, or a squad leader. Explore a variety of hand-drawn wilds and shattered realms in this month&#x27;s best…</p>
+      </a>
+    </article>
+</main>
+
+<p class="archive-link">All 77 issues live on the <a href="https://indieformer.beehiiv.com">full archive →</a></p>
+
+<footer class="site-footer">
+  <div class="footer-col">
+    <p class="footer-brand">Indieformer</p>
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <li><a href="https://indieformer.beehiiv.com/p/how-to-really-make-a-game">How to Really Make a Game</a></li>
+      <li><a href="#" data-todo="press-kit-guide-url">Press Kit Guide</a></li>
+      <li><a href="#" data-todo="steam-marketing-guide-url">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+      <li><a href="https://essay.indieformer.com">The Essay</a></li>
+      <li><a href="https://waypoint.indieformer.com">Waypoint archive</a></li>
+      <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
+    </ul>
+  </div>
+  <p class="footer-meta">© 2026 Indieformer. Hand-built. <a href="https://github.com/indieformer/indieformer.github.io">View source ↗</a></p>
+</footer>
+
+</body>
+</html>
