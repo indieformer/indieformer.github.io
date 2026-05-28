@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# editor scratch
+*.swp
+*.swo
+*~
+
+# IDE
+.idea/
+.vscode/
+
+# env / secrets — never commit
+.env
+.env.*
+*.token
+*.pat
+
+# node (in case build tools land here later)
+node_modules/
+
+# working notes that shouldn't ship to GitHub Pages
+new-copy-home-and-popular.md
+brand-overview.md
+design-prototype-*.html
+home-hero.html
+home-body.html
