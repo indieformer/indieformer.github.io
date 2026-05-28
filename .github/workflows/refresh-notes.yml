@@ -1,0 +1,48 @@
+name: Refresh notes index
+
+# Pulls the latest issues from the beehiiv RSS feed and rewrites notes.html.
+# Runs daily, and on-demand via the "Run workflow" button in the Actions tab.
+
+on:
+  schedule:
+    # 07:00 UTC every day = 17:00 / 18:00 Melbourne (depending on DST).
+    # Far enough after a typical morning send that new issues will be in feed.
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-notes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Rebuild notes.html from beehiiv RSS
+        run: python3 scripts/build_notes.py
+
+      - name: Commit & push only if changed
+        run: |
+          git config user.name  "indieformer-bot"
+          git config user.email "bot@indieformer.com"
+          git add notes.html
+          if git diff --staged --quiet; then
+            echo "notes.html unchanged — nothing to commit"
+          else
+            git commit -m "auto: refresh notes from beehiiv RSS"
+            git push
+          fi
