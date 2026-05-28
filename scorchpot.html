@@ -848,7 +848,7 @@
     }
     .fts-ts-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 14px;
     }
     .fts-ts-tile {
@@ -919,13 +919,12 @@
           <span class="fts-ts-num ember" data-fts-ts="days-to-launch">—</span>
           <span class="fts-ts-sub" data-fts-ts="launch-target">Steam release · target TBC</span>
         </div>
-        <!-- Optional 3rd tile — uncomment to flex the $0 budget badge:
+        <!-- TILE 3 — Playing demo now (Steam API, refreshed daily by GitHub Action) -->
         <div class="fts-ts-tile">
-          <span class="fts-ts-label">Marketing budget</span>
-          <span class="fts-ts-num">$0</span>
-          <span class="fts-ts-sub">Yep. Really. That's the pitch.</span>
+          <span class="fts-ts-label">Playing the demo now</span>
+          <span class="fts-ts-num gold" data-fts-ts="demo-players">—</span>
+          <span class="fts-ts-sub">Live from Steam · refresh: <span data-fts-ts="demo-players-asof">—</span></span>
         </div>
-        -->
       </div>
     </div>
   </div>
@@ -957,6 +956,24 @@
       var now = new Date();
       var diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
       setText('days-to-launch', isNaN(diff) ? '—' : (diff > 0 ? diff : 'LIVE'));
+
+      // Pull live Steam data — written daily by scripts/fetch_steam_data.py
+      // (GitHub Action commits the JSON file alongside notes.html).
+      fetch('/data/scorchpot.json', { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (!d) return;
+          if (d.demoPlayers != null) {
+            setText('demo-players', Number(d.demoPlayers).toLocaleString());
+          }
+          if (d.demoPlayersAsOf) {
+            try {
+              var dt = new Date(d.demoPlayersAsOf);
+              setText('demo-players-asof', dt.toLocaleString('en-AU', { dateStyle: 'medium', timeStyle: 'short' }));
+            } catch (e) { /* keep dash */ }
+          }
+        })
+        .catch(function () { /* silent — tile keeps the em dash */ });
     })();
   </script>
 
