@@ -1,12 +1,14 @@
-name: Refresh notes index
+name: Refresh site data
 
-# Pulls the latest issues from the beehiiv RSS feed and rewrites notes.html.
-# Runs daily, and on-demand via the "Run workflow" button in the Actions tab.
+# Daily job that does two things:
+#   1. Rebuild notes.html from the beehiiv RSS feed.
+#   2. Fetch live Steam data for Feed the Scorchpot → data/scorchpot.json.
+# Commits and pushes whichever changed.
+# Also exposed as a "Run workflow" button under Actions for on-demand refresh.
 
 on:
   schedule:
-    # 07:00 UTC every day = 17:00 / 18:00 Melbourne (depending on DST).
-    # Far enough after a typical morning send that new issues will be in feed.
+    # 07:00 UTC daily = 17:00 / 18:00 Melbourne depending on DST.
     - cron: '0 7 * * *'
   workflow_dispatch:
 
@@ -14,7 +16,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: refresh-notes
+  group: refresh-site-data
   cancel-in-progress: false
 
 jobs:
@@ -35,14 +37,20 @@ jobs:
       - name: Rebuild notes.html from beehiiv RSS
         run: python3 scripts/build_notes.py
 
-      - name: Commit & push only if changed
+      - name: Fetch Steam demo player count
+        run: python3 scripts/fetch_steam_data.py
+        continue-on-error: true   # Steam API blip shouldn't break the whole job
+
+      - name: Commit & push only if anything changed
         run: |
           git config user.name  "indieformer-bot"
           git config user.email "bot@indieformer.com"
-          git add notes.html
+          git add notes.html data/scorchpot.json
           if git diff --staged --quiet; then
-            echo "notes.html unchanged — nothing to commit"
+            echo "no changes — nothing to commit"
           else
-            git commit -m "auto: refresh notes from beehiiv RSS"
+            # Build a commit message naming whichever files actually changed
+            CHANGED=$(git diff --staged --name-only | tr '\n' ' ')
+            git commit -m "auto: refresh ${CHANGED}"
             git push
           fi
