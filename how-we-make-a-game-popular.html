@@ -107,7 +107,113 @@
     padding: 56px 56px;
     z-index: 1;
   }
-  .section.hero { padding: 72px 56px 40px; }
+  .section.hero { padding: 56px 56px 40px; }
+
+  /* ── site navigation ────────────────────────────────── */
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 14px 56px;
+    position: relative;
+    z-index: 4;
+  }
+  a.brand {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  a.brand:hover { color: var(--emerald); }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+  .primary-nav a:hover { color: var(--text-primary); }
+  .primary-nav a.current { color: var(--text-primary); font-weight: 600; }
+  .primary-nav a.current::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -7px;
+    height: 2px;
+    background: var(--emerald);
+    border-radius: 2px;
+  }
+
+  /* ── footer ─────────────────────────────────────────── */
+  .site-footer {
+    max-width: 1000px;
+    margin: 60px auto 0;
+    padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 40px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    position: relative;
+    z-index: 2;
+  }
+  .footer-brand {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .footer-label {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--border);
+    margin-top: 22px;
+    padding-top: 18px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  /* ── hand-drawn circle annotation (e.g. around "killer combo") ── */
+  .circ { position: relative; display: inline-block; font-weight: 600; }
+  .circ-ring {
+    position: absolute;
+    left: -10%; top: -25%;
+    width: 120%; height: 150%;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  /* small flame doodle in the Slow Burn heading */
+  .flame { display: inline-block; vertical-align: middle; width: 0.7em; height: 0.85em; margin-left: 0.15em; overflow: visible; }
 
   /* ── registration marks — one set bracketing the whole page ── */
   .crop {
@@ -289,9 +395,18 @@
   @media (max-width: 820px) {
     body { padding: 20px 14px; }
     .section { padding: 48px 24px; }
-    .section.hero { padding: 56px 24px 36px; }
+    .section.hero { padding: 40px 24px 32px; }
     .col { max-width: 100%; }
     .head { margin-bottom: 18px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .site-footer {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 36px 24px 24px;
+      margin-top: 48px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -320,12 +435,20 @@
   <path id="bgPath" pathLength="1"></path>
 </svg>
 
+<!-- ════ NAVIGATION ════ -->
+<header class="site-nav">
+  <a class="brand" href="/">Indieformer</a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular.html" class="current">The approach</a>
+    <a href="/notes.html">Notes</a>
+    <a href="/scorchpot.html">Scorchpot</a>
+  </nav>
+</header>
+
 <!-- ════ HERO ════ -->
 <section class="section hero gate" id="hero">
 
   <div class="col">
-
-    <a class="back-home" href="/">← back to home</a>
 
     <h1>How We Make a <span class="u">Game Popular<svg class="ink" viewBox="0 0 320 20" preserveAspectRatio="none" aria-hidden="true">
       <path class="draw" pathLength="1" d="M6 12 Q 30 4 54 12 T 102 12 T 150 13 T 198 11 T 246 13 T 294 11 T 314 12"
@@ -374,7 +497,9 @@
     <p class="lead">
       Let's treat your game like a bowl of pasta. The foundation is the Pasta. There can be many
       types of foundations. They're all similarly built, and can be swapped out for another
-      foundation. But the sauce — the sauce is what makes the pasta memorable. And the combination
+      foundation. But the sauce — <span class="u">the sauce<svg class="ink" viewBox="0 0 160 18" preserveAspectRatio="none" aria-hidden="true">
+        <path class="draw" pathLength="1" d="M5 10 Q 40 3 80 9 T 155 9" fill="none" stroke="#F78154" stroke-width="3" stroke-linecap="round" style="animation-delay:0.7s"/>
+      </svg></span> is what makes the pasta memorable. And the combination
       of correct pasta, and correct sauce is next level.
     </p>
 
@@ -385,7 +510,9 @@
 
     <p>
       We look for the pasta — a game with a good foundation. And then we listen for the sauce.
-      What are you combining it with to make a killer combo?
+      What are you combining it with to make a <span class="circ">killer combo<svg class="circ-ring ink" viewBox="0 0 130 30" preserveAspectRatio="none" aria-hidden="true">
+        <path class="draw" pathLength="1" d="M8 16 C 12 4 50 -2 65 2 C 85 4 124 6 122 16 C 120 26 80 30 65 28 C 30 26 4 24 8 16" fill="none" stroke="#F78154" stroke-width="2.6" stroke-linecap="round" style="animation-delay:0.9s"/>
+      </svg></span>?
     </p>
 
     <p>
@@ -425,7 +552,10 @@
 
     <h2 class="head">The <span class="u">Slow Burn<svg class="ink" viewBox="0 0 240 20" preserveAspectRatio="none" aria-hidden="true">
       <path class="draw" pathLength="1" d="M6 12 Q 36 4 64 11 T 130 11 T 196 11 T 234 11" fill="none" stroke="#F78154" stroke-width="3.4" stroke-linecap="round" style="animation-delay:0.4s"/>
-    </svg></span></h2>
+    </svg></span> <svg class="ink flame" viewBox="0 0 24 30" aria-hidden="true">
+      <path class="draw" pathLength="1" d="M12 4 C 8 8 5 13 7 19 C 9 24 14 24 17 21 C 20 18 19 13 15 8 C 13 6 13 9 12 4 Z" fill="none" stroke="#F78154" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:0.7s"/>
+      <path class="draw" pathLength="1" d="M12 14 C 10 17 11 21 13 21 C 15 21 15 18 13 16" fill="none" stroke="#F78154" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.95s"/>
+    </svg></h2>
 
     <p class="lead">
       There will be days where you ask yourself "can this just be over already?" That is the slow
@@ -480,7 +610,9 @@
     </p>
 
     <p class="punch">
-      Unsexy is what makes sexy. We'll be the Un.
+      Unsexy is what makes sexy. <span class="u">We'll be the Un<svg class="ink" viewBox="0 0 280 18" preserveAspectRatio="none" aria-hidden="true">
+        <path class="draw" pathLength="1" d="M5 10 Q 40 3 80 9 T 150 9 T 220 9 T 275 9" fill="none" stroke="#28E291" stroke-width="3.4" stroke-linecap="round" style="animation-delay:0.7s"/>
+      </svg></span>.
     </p>
 
   </div>
@@ -517,7 +649,7 @@
     <h2 class="head">Your Half</h2>
 
     <p class="lead">
-      We can see, smell, touch, taste and hear the sauce, but we can't make it.
+      We can <em>see</em>, <em>smell</em>, <em>touch</em>, <em>taste</em> and <em>hear</em> the sauce, but we can't make it.
     </p>
 
     <p>
@@ -541,7 +673,9 @@
     <h2 class="head">So, guys, can you really make my game popular?</h2>
 
     <p class="lead">
-      If the above is anything to go by, no. We cannot. But we can die trying. We'll help develop
+      If the above is anything to go by, no. We cannot. But we can <span class="u">die trying<svg class="ink" viewBox="0 0 160 18" preserveAspectRatio="none" aria-hidden="true">
+        <path class="draw" pathLength="1" d="M5 10 Q 30 3 60 9 T 110 9 T 155 9" fill="none" stroke="#28E291" stroke-width="3.2" stroke-linecap="round" style="animation-delay:0.5s"/>
+      </svg></span>. We'll help develop
       that sauce, get it to a slow burn, get past the boring bits, document it for the world to
       see, and hopefully find a minor stake of popularity somewhere in the cosmos.
     </p>
@@ -559,6 +693,32 @@
   </div>
 
 </section>
+
+<!-- ════ FOOTER ════ -->
+<footer class="site-footer">
+  <div class="footer-col">
+    <p class="footer-brand">Indieformer</p>
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <!-- TODO: replace these with the real beehiiv post / page URLs -->
+      <li><a href="https://indieformer.beehiiv.com/p/how-to-really-make-a-game">How to Really Make a Game</a></li>
+      <li><a href="#" data-todo="press-kit-guide-url">Press Kit Guide</a></li>
+      <li><a href="#" data-todo="steam-marketing-guide-url">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+      <li><a href="https://essay.indieformer.com">The Essay</a></li>
+      <li><a href="https://waypoint.indieformer.com">Waypoint archive</a></li>
+      <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
+    </ul>
+  </div>
+  <p class="footer-meta">© 2026 Indieformer. Hand-built. <a href="https://github.com/indieformer/indieformer.github.io">View source ↗</a></p>
+</footer>
 
 <script>
   /* ── scroll-gated reveal ─────────────────────────────── */
