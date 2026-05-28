@@ -119,6 +119,99 @@
     padding: 32px 56px 88px;
   }
 
+  /* ── site navigation ────────────────────────────────── */
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 14px 56px;
+    position: relative;
+    z-index: 4;
+  }
+  a.brand {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  a.brand:hover { color: var(--emerald); }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+  .primary-nav a:hover { color: var(--text-primary); }
+  .primary-nav a.current { color: var(--text-primary); font-weight: 600; }
+  .primary-nav a.current::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -7px;
+    height: 2px;
+    background: var(--emerald);
+    border-radius: 2px;
+  }
+
+  /* ── footer ─────────────────────────────────────────── */
+  .site-footer {
+    max-width: 1000px;
+    margin: 60px auto 0;
+    padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 40px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    position: relative;
+    z-index: 2;
+  }
+  .footer-brand {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .footer-label {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--border);
+    margin-top: 22px;
+    padding-top: 18px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
   /* ── registration marks — one set bracketing the whole page ── */
   .crop {
     position: absolute;
@@ -306,7 +399,7 @@
     font-size: 21px;
     font-weight: 600;
     line-height: 1.45;
-    color: #BFBFBF;
+    color: #EBE9DF;
     opacity: 0;
     animation: rise 0.6s ease forwards;
   }
@@ -391,6 +484,15 @@
       width: 100%; max-width: 320px; height: 200px;
       margin: 40px auto 0;
     }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .site-footer {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 36px 24px 24px;
+      margin-top: 48px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -419,6 +521,16 @@
 <svg class="bg-line" aria-hidden="true" preserveAspectRatio="none">
   <path id="bgPath" pathLength="1"></path>
 </svg>
+
+<!-- ════ NAVIGATION ════ -->
+<header class="site-nav">
+  <a class="brand" href="/">Indieformer</a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular.html">The approach</a>
+    <a href="/notes.html">Notes</a>
+    <a href="/scorchpot.html">Scorchpot</a>
+  </nav>
+</header>
 
 <!-- ════ HERO ════ -->
 <section class="section hero gate" id="hero">
@@ -691,6 +803,32 @@
   </div>
 
 </section>
+
+<!-- ════ FOOTER ════ -->
+<footer class="site-footer">
+  <div class="footer-col">
+    <p class="footer-brand">Indieformer</p>
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <!-- TODO: replace these with the real beehiiv post / page URLs -->
+      <li><a href="https://indieformer.beehiiv.com/p/how-to-really-make-a-game">How to Really Make a Game</a></li>
+      <li><a href="#" data-todo="press-kit-guide-url">Press Kit Guide</a></li>
+      <li><a href="#" data-todo="steam-marketing-guide-url">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+      <li><a href="https://essay.indieformer.com">The Essay</a></li>
+      <li><a href="https://waypoint.indieformer.com">Waypoint archive</a></li>
+      <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
+    </ul>
+  </div>
+  <p class="footer-meta">© 2026 Indieformer. Hand-built. <a href="https://github.com/indieformer/indieformer.github.io">View source ↗</a></p>
+</footer>
 
 <script>
   /* ── scroll-gated reveal ─────────────────────────────── */
