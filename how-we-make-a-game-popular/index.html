@@ -284,13 +284,14 @@
     max-width: 640px;
   }
   .toggle {
-    margin-left: 14px;
+    margin-left: auto;
     align-self: center;
     font-family: 'Caveat', cursive;
     font-size: 22px;
     color: var(--text-tertiary);
     transition: color 0.25s ease;
     white-space: nowrap;
+    order: 99;
   }
   .entry[open] .toggle { color: var(--emerald); }
   .entry .toggle .open-label { display: inline; }
@@ -640,7 +641,7 @@
 <section class="gate" id="dictionary-section">
   <div class="dictionary">
 
-    <details class="entry" id="sauce">
+    <details class="entry" name="dictionary" id="sauce">
       <summary>
         <h2 class="term">the sauce</h2>
         <span class="pos">— n.</span>
@@ -694,7 +695,7 @@
       </div>
     </details>
 
-    <details class="entry" id="slow-burn">
+    <details class="entry" name="dictionary" id="slow-burn">
       <summary>
         <h2 class="term">the <span class="u">slow burn<svg class="ink" viewBox="0 0 200 18" preserveAspectRatio="none" aria-hidden="true">
           <path class="draw" pathLength="1" d="M5 10 Q 30 3 56 9 T 110 9 T 196 9" fill="none" stroke="#F78154" stroke-width="3" stroke-linecap="round"/>
@@ -734,7 +735,7 @@
       </div>
     </details>
 
-    <details class="entry" id="boring">
+    <details class="entry" name="dictionary" id="boring">
       <summary>
         <h2 class="term">the boring list</h2>
         <span class="pos">— n.</span>
@@ -767,7 +768,7 @@
       </div>
     </details>
 
-    <details class="entry" id="write">
+    <details class="entry" name="dictionary" id="write">
       <summary>
         <h2 class="term">we write</h2>
         <span class="pos">— v.</span>
@@ -791,7 +792,7 @@
       </div>
     </details>
 
-    <details class="entry" id="your-half">
+    <details class="entry" name="dictionary" id="your-half">
       <summary>
         <h2 class="term">your half</h2>
         <span class="pos">— n.</span>
@@ -817,7 +818,7 @@
       </div>
     </details>
 
-    <details class="entry" id="answer">
+    <details class="entry" name="dictionary" id="answer">
       <summary>
         <h2 class="term">the answer</h2>
         <span class="pos">— n.</span>
