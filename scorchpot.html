@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feed the Scorchpot — A Cozy-Chaotic Tabletop Roguelike</title>
+  <title>Feed the Scorchpot — Indieformer</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -741,7 +741,7 @@
     <div class="hero-right">
       <div class="hero-badge">✦ Indieformer Publishing</div>
       <h1 class="hero-title">Feed the<br>Scorchpot</h1>
-      <p class="hero-genre">Cozy-chaotic tabletop roguelike · Dice · Dragons · Cooking</p>
+      <p class="hero-genre">Tabletop roguelike · Dice · Dragons · Cooking</p>
       <p class="hero-desc">Manage a medieval farm, cook meals for a very opinionated dragon, and try to survive 20 years
         without going bankrupt. Every roll matters. Every dish is one bad decision from disaster.
         Picked, backed, and championed by Indieformer.</p>
@@ -753,40 +753,12 @@
           <span class="hero-meta-label">Publisher</span><span class="hero-meta-val">Indieformer</span>
         </div>
         <div class="hero-meta-item">
-          <span class="hero-meta-label">Kickstarter</span><span class="hero-meta-val">April 14, 2026</span>
+          <span class="hero-meta-label">Steam release</span><span class="hero-meta-val">Aug 20, 2026</span>
         </div>
       </div>
       <div class="hero-actions">
-        <a href="https://www.kickstarter.com/projects/indieformer/feed-the-scorchpot-videogame" target="_blank"
-          class="btn-kickstarter">🐉 Back on Kickstarter</a>
         <a href="https://store.steampowered.com/app/4338170/Feed_the_Scorchpot_Demo/" target="_blank"
           class="btn-steam">▶ Play the Demo</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── KICKSTARTER COUNTDOWN ─────────────────────────────────────── -->
-  <div class="countdown-wrap">
-    <span class="countdown-label">🎲 Kickstarter launches April 14, 2026</span>
-    <div class="countdown-units">
-      <div class="countdown-unit">
-        <span class="countdown-num" id="cd-days">--</span>
-        <span class="countdown-unit-label">Days</span>
-      </div>
-      <span class="countdown-sep">:</span>
-      <div class="countdown-unit">
-        <span class="countdown-num" id="cd-hours">--</span>
-        <span class="countdown-unit-label">Hours</span>
-      </div>
-      <span class="countdown-sep">:</span>
-      <div class="countdown-unit">
-        <span class="countdown-num" id="cd-mins">--</span>
-        <span class="countdown-unit-label">Mins</span>
-      </div>
-      <span class="countdown-sep">:</span>
-      <div class="countdown-unit">
-        <span class="countdown-num" id="cd-secs">--</span>
-        <span class="countdown-unit-label">Secs</span>
       </div>
     </div>
   </div>
@@ -914,6 +886,7 @@
         <div class="fts-ts-tile">
           <span class="fts-ts-label">Steam wishlists</span>
           <span class="fts-ts-num gold" data-fts-ts="wishlists">—</span>
+          <span class="fts-ts-sub">as of June 1, 2026</span>
         </div>
         <!-- TILE 2 — Days to Launch -->
         <div class="fts-ts-tile">
@@ -1146,8 +1119,6 @@
         Every run is different. Every roll matters. And every dish is one bad decision away from disaster.
       </p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="https://www.kickstarter.com/projects/indieformer/feed-the-scorchpot-videogame" target="_blank"
-          class="btn-kickstarter">Back on Kickstarter</a>
         <a href="https://store.steampowered.com/app/4338170/Feed_the_Scorchpot_Demo/" target="_blank"
           class="btn-steam">Play Demo Free</a>
       </div>
@@ -1227,11 +1198,9 @@
   <!-- ── FOOTER CTA ────────────────────────────────────────────────── -->
   <div class="footer-cta">
     <h2>Ready to feed the dragon?</h2>
-    <p>Back the Kickstarter on April 14th or jump straight into the demo — no commitment, just one very hungry dragon
+    <p>Jump straight into the demo — no commitment, just one very hungry dragon
       and a bag of dice.</p>
     <div class="footer-cta-actions">
-      <a href="https://www.kickstarter.com/projects/indieformer/feed-the-scorchpot-videogame" target="_blank"
-        class="btn-kickstarter">🐉 Back on Kickstarter</a>
       <a href="https://store.steampowered.com/app/4338170/Feed_the_Scorchpot_Demo/" target="_blank" class="btn-steam">▶
         Play the Demo Free</a>
     </div>
@@ -1275,62 +1244,6 @@
   // Set dragon quote image
   var dqImg = document.getElementById('dragon-quote-img');
   if (dqImg) dqImg.src = ASSETS.dragonQuote;
-
-  // ── COUNTDOWN ─────────────────────────────────
-  var launch = new Date('2026-04-14T17:00:00+02:00').getTime();
-
-  function updateCountdown() {
-    var now  = Date.now();
-    var diff = launch - now;
-
-    if (diff <= 0) {
-      // UPDATE the five variables below with current Kickstarter stats
-      var PLEDGED    = 'AU$ 14,302';  // Kickstarter live stat
-      var GOAL       = 'AU$ 10,000';
-      var BACKERS    = '212';
-      var DAYS_LEFT  = '25';
-      var PCT_FUNDED = 100;           // capped at 100% visually (131% actual)
-      clearInterval(countdownInterval);
-      var wrap = document.querySelector('.countdown-wrap');
-      if (wrap) {
-        wrap.innerHTML =
-          '<div class="fts-campaign-live">' +
-            '<span class="fts-live-eyebrow">&#x1F409; Live on Kickstarter</span>' +
-            '<div class="fts-campaign-stats">' +
-              '<div class="fts-stat"><span class="fts-stat-num">' + PLEDGED + '</span><span class="fts-stat-lbl">pledged of ' + GOAL + '</span></div>' +
-              '<div class="fts-stat-divider"></div>' +
-              '<div class="fts-stat"><span class="fts-stat-num">' + BACKERS + '</span><span class="fts-stat-lbl">Backers</span></div>' +
-              '<div class="fts-stat-divider"></div>' +
-              '<div class="fts-stat"><span class="fts-stat-num">' + DAYS_LEFT + '</span><span class="fts-stat-lbl">Days to go</span></div>' +
-            '</div>' +
-            '<div class="fts-progress-track"><div class="fts-progress-bar" id="fts-prog-bar" style="width:0%"></div></div>' +
-            '<div style="display:flex;justify-content:center;margin-top:20px;"><div style="border-radius:12px;overflow:hidden;line-height:0;"><iframe src="https://www.kickstarter.com/projects/indieformer/feed-the-scorchpot-videogame/widget/card.html?v=2" width="220" height="420" frameborder="0" scrolling="no"></iframe></div></div>' +
-          '</div>';
-        setTimeout(function() { var b=document.getElementById('fts-prog-bar'); if(b) b.style.width=Math.min(PCT_FUNDED,100)+'%'; }, 200);
-      }
-      return;
-    }
-
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor((diff % 86400000) / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var s = Math.floor((diff % 60000) / 1000);
-
-    function pad(n) { return n < 10 ? '0' + n : String(n); }
-
-    var days  = document.getElementById('cd-days');
-    var hours = document.getElementById('cd-hours');
-    var mins  = document.getElementById('cd-mins');
-    var secs  = document.getElementById('cd-secs');
-
-    if (days)  days.textContent  = pad(d);
-    if (hours) hours.textContent = pad(h);
-    if (mins)  mins.textContent  = pad(m);
-    if (secs)  secs.textContent  = pad(s);
-  }
-
-  var countdownInterval = setInterval(updateCountdown, 1000);
-  updateCountdown();
 
   // ── CAROUSEL ──────────────────────────────────
   var track  = document.getElementById('carousel-track');
