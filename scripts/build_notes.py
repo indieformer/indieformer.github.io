@@ -360,7 +360,7 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
       <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
     </ul>
   </div>
-  <p class="footer-meta">© 2026 Indieformer. Hand-built. Notes refreshed daily from the beehiiv RSS. <a href="https://github.com/indieformer/indieformer.github.io">View source ↗</a></p>
+  <p class="footer-meta">© 2026 Indieformer.</p>
 </footer>
 
 </body>
