@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Indieformer — indie game publisher run by Josh &amp; Clem</title>
 
+<!-- ── icons ── -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
 <!-- ── SEO baseline — edit copy to taste, replace og:image + logo URLs ── -->
 <meta name="description" content="A small indie game publisher run by Josh and Clem. Twelve years of indie game writing — now publishing too, and talking about the work openly.">
 <link rel="canonical" href="https://indieformer.com/">
@@ -131,15 +136,13 @@
     z-index: 4;
   }
   a.brand {
-    font-family: 'Sora', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: opacity 0.2s ease;
   }
-  a.brand:hover { color: var(--emerald); }
+  a.brand img { display: block; height: 38px; width: auto; }
+  a.brand:hover { opacity: 0.82; }
   .primary-nav { display: flex; gap: 26px; align-items: center; }
   .primary-nav a {
     font-family: 'Sora', sans-serif;
@@ -524,7 +527,9 @@
 
 <!-- ════ NAVIGATION ════ -->
 <header class="site-nav">
-  <a class="brand" href="/">Indieformer</a>
+  <a class="brand" href="/" aria-label="Indieformer — home">
+    <img src="/logo-stacked.png" alt="Indieformer" width="30" height="38">
+  </a>
   <nav class="primary-nav" aria-label="Primary">
     <a href="/how-we-make-a-game-popular.html">The approach</a>
     <a href="/notes.html">Notes</a>
@@ -617,8 +622,7 @@
       <path class="draw" pathLength="1" d="M34 38 C 40 36 46 40 44 44 M58 38 C 64 36 70 40 68 44 M82 38 C 88 36 94 40 92 44"
         fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round" style="animation-delay:1.2s"/>
     </svg>
-    <!-- real screenshot: add a src to the img below and the placeholder hides itself -->
-    <img class="frame-img" src="" alt="The old Indieformer release tracker">
+    <img class="frame-img" src="/waypoint-tracker.jpg" alt="The old Indieformer release tracker — Waypoint">
     <div class="place-label">
       <span class="pl-1" style="margin-top:34px">Waypoint</span>
       <span class="pl-2">— click to visit the archive —</span>
