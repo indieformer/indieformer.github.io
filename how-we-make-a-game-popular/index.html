@@ -217,10 +217,11 @@
   .flame { display: inline-block; vertical-align: middle; width: 0.7em; height: 0.85em; margin-left: 0.15em; overflow: visible; }
 
   /* ── dictionary entry styling ─────────────────────── */
+  #preamble.section { padding-top: 16px; padding-bottom: 12px; }
   .preamble {
     font-size: 18px; line-height: 1.78;
     color: var(--text-secondary);
-    margin: 0 auto 26px;
+    margin: 0 0 26px;
     max-width: 720px;
   }
   .preamble em { color: var(--text-primary); }
@@ -232,10 +233,18 @@
     display: inline-block;
     margin: 18px 0 6px;
   }
-  .dictionary { max-width: 760px; margin: 0 auto; padding: 0 56px 8px; position: relative; z-index: 2; }
+  /* dictionary container — left aligned against the same edge as preamble text */
+  .dictionary {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 56px 8px;
+    position: relative;
+    z-index: 2;
+  }
   .entry {
     border-top: 1px solid var(--border);
-    padding: 26px 0;
+    padding: 22px 0;
+    max-width: 780px;
   }
   .entry:last-of-type { border-bottom: 1px solid var(--border); }
   .entry > summary {
@@ -244,7 +253,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 10px 14px;
+    gap: 6px 14px;
     transition: opacity 0.2s ease;
   }
   .entry > summary::-webkit-details-marker,
@@ -259,47 +268,59 @@
     line-height: 1.1;
     margin: 0;
   }
-  .term em { font-style: italic; color: var(--coral); }
-  .phon {
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    color: var(--text-tertiary);
-  }
   .pos {
     font-style: italic;
     color: var(--coral);
-    font-size: 15px;
+    font-size: 16px;
     font-family: 'Sora', sans-serif;
   }
   .def {
     flex: 1 1 100%;
-    margin-top: 4px;
+    margin-top: 6px;
     font-style: italic;
     color: var(--text-secondary);
     font-size: 17px;
     line-height: 1.55;
-    max-width: 600px;
+    max-width: 640px;
   }
   .toggle {
-    margin-left: auto;
+    margin-left: 14px;
     align-self: center;
     font-family: 'Caveat', cursive;
-    font-size: 24px;
+    font-size: 22px;
     color: var(--text-tertiary);
-    transition: transform 0.3s ease, color 0.2s ease;
+    transition: color 0.25s ease;
     white-space: nowrap;
   }
-  .entry[open] .toggle { color: var(--text-primary); }
+  .entry[open] .toggle { color: var(--emerald); }
   .entry .toggle .open-label { display: inline; }
   .entry .toggle .close-label { display: none; }
   .entry[open] .toggle .open-label { display: none; }
   .entry[open] .toggle .close-label { display: inline; }
+
+  /* smooth open/close via grid-row trick — body always present, height animates */
+  .entry > .entry-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s ease;
+  }
+  .entry[open] > .entry-wrap { grid-template-rows: 1fr; }
   .entry-body {
+    min-height: 0;
+    overflow: hidden;
+    padding-top: 0;
+    opacity: 0;
+    transition: opacity 0.35s ease 0.05s, padding-top 0.4s ease;
+  }
+  .entry[open] .entry-body {
     padding-top: 22px;
+    opacity: 1;
+  }
+  .entry-body .body-inner {
     font-size: 18px;
     line-height: 1.8;
     color: var(--text-primary);
-    max-width: 640px;
+    max-width: 680px;
   }
   .entry-body p + p { margin-top: 1.2em; }
   .entry-body em { font-style: italic; }
@@ -314,6 +335,27 @@
     line-height: 1.4;
   }
   .dragon { font-style: italic; color: var(--coral); font-weight: 600; }
+
+  /* inline hand-drawn moments inside the entry bodies */
+  .entry-body .u { position: relative; display: inline-block; white-space: nowrap; }
+  .entry-body .u svg {
+    position: absolute;
+    left: -2%; bottom: -0.16em;
+    width: 104%; height: 0.42em;
+    overflow: visible; pointer-events: none;
+  }
+  .entry-body .circ { position: relative; display: inline-block; font-weight: 600; }
+  .entry-body .circ-ring {
+    position: absolute;
+    left: -10%; top: -25%;
+    width: 120%; height: 150%;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .entry-body .ink path { filter: url(#roughen); }
+  .entry-body .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 0.9s ease forwards; }
+  .entry-body .flame { display: inline-block; vertical-align: middle; width: 0.7em; height: 0.85em; margin-left: 0.15em; overflow: visible; }
+
   @media (max-width: 820px) {
     .dictionary { padding: 0 24px 8px; }
     .term { font-size: 24px; }
@@ -601,175 +643,205 @@
     <details class="entry" id="sauce">
       <summary>
         <h2 class="term">the sauce</h2>
-        <span class="phon">/sɔːs/</span>
-        <span class="pos">n.</span>
-        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close –</span></span>
+        <span class="pos">— n.</span>
+        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">the part of a game only its developer could have made — the thing people remember.</span>
       </summary>
-      <div class="entry-body">
-        <p>
-          Let's treat your game like a bowl of pasta. The foundation is the Pasta. There can be many
-          types of foundations. They're all similarly built, and can be swapped out for another
-          foundation. But the sauce — the sauce is what makes the pasta memorable. And the combination
-          of correct pasta, and correct sauce is next level.
-        </p>
-        <p>
-          A red vs white sauce. A thick vs thin. Chunky vs smooth. The sauce <em>makes</em> the game.
-          But if the pasta is crap, the sauce won't save it.
-        </p>
-        <p>
-          We look for the pasta — a game with a good foundation. And then we listen for the sauce.
-          What are you combining it with to make a killer combo?
-        </p>
-        <p>
-          That sauce is unique to every game, and it's the thing we focus on projecting. Not always
-          the thing that gets marketed, but the thing people remember.
-        </p>
-        <p>
-          Take Feed the Scorchpot (FtS). The sauce was obvious — it's the
-          <span class="dragon">Dragon</span>. Spotting that was the easy part. The work was
-          <em>personifying</em> it.
-        </p>
-        <p>
-          So the Dragon shows up everywhere it can. In the trailers. In the in-game quips. And, most
-          importantly, in the Discord — as an actual member. Ping the Dragon on Discord? You'll get a
-          response. A good one.
-        </p>
-        <p class="punch">
-          Now the Dragon isn't a character in a game you played. It's a regular in a discord you're in.
-        </p>
-        <p>
-          This is no "saving grace", or "marketing genius" that turns FtS into a mega-hit. But it's
-          memorable. It's the extra step that connects the game into someone's life.
-        </p>
+      <div class="entry-wrap">
+        <div class="entry-body">
+          <div class="body-inner">
+            <p>
+              Let's treat your game like a bowl of pasta. The foundation is the Pasta. There can be many
+              types of foundations. They're all similarly built, and can be swapped out for another
+              foundation. But the sauce — <span class="u">the sauce<svg class="ink" viewBox="0 0 160 18" preserveAspectRatio="none" aria-hidden="true">
+                <path class="draw" pathLength="1" d="M5 10 Q 40 3 80 9 T 155 9" fill="none" stroke="#F78154" stroke-width="3" stroke-linecap="round"/>
+              </svg></span> is what makes the pasta memorable. And the combination
+              of correct pasta, and correct sauce is next level.
+            </p>
+            <p>
+              A red vs white sauce. A thick vs thin. Chunky vs smooth. The sauce <em>makes</em> the game.
+              But if the pasta is crap, the sauce won't save it.
+            </p>
+            <p>
+              We look for the pasta — a game with a good foundation. And then we listen for the sauce.
+              What are you combining it with to make a <span class="circ">killer combo<svg class="circ-ring ink" viewBox="0 0 130 30" preserveAspectRatio="none" aria-hidden="true">
+                <path class="draw" pathLength="1" d="M8 16 C 12 4 50 -2 65 2 C 85 4 124 6 122 16 C 120 26 80 30 65 28 C 30 26 4 24 8 16" fill="none" stroke="#F78154" stroke-width="2" stroke-linecap="round"/>
+              </svg></span>?
+            </p>
+            <p>
+              That sauce is unique to every game, and it's the thing we focus on projecting. Not always
+              the thing that gets marketed, but the thing people remember.
+            </p>
+            <p>
+              Take Feed the Scorchpot (FtS). The sauce was obvious — it's the
+              <span class="dragon">Dragon</span>. Spotting that was the easy part. The work was
+              <em>personifying</em> it.
+            </p>
+            <p>
+              So the Dragon shows up everywhere it can. In the trailers. In the in-game quips. And, most
+              importantly, in the Discord — as an actual member. Ping the Dragon on Discord? You'll get a
+              response. A good one.
+            </p>
+            <p class="punch">
+              Now the Dragon isn't a character in a game you played. It's a regular in a discord you're in.
+            </p>
+            <p>
+              This is no "saving grace", or "marketing genius" that turns FtS into a mega-hit. But it's
+              memorable. It's the extra step that connects the game into someone's life.
+            </p>
+          </div>
+        </div>
       </div>
     </details>
 
     <details class="entry" id="slow-burn">
       <summary>
-        <h2 class="term">the slow burn</h2>
-        <span class="phon">/sləʊ bɜːn/</span>
-        <span class="pos">n.</span>
-        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close –</span></span>
+        <h2 class="term">the <span class="u">slow burn<svg class="ink" viewBox="0 0 200 18" preserveAspectRatio="none" aria-hidden="true">
+          <path class="draw" pathLength="1" d="M5 10 Q 30 3 56 9 T 110 9 T 196 9" fill="none" stroke="#F78154" stroke-width="3" stroke-linecap="round"/>
+        </svg></span> <svg class="ink flame" viewBox="0 0 24 30" aria-hidden="true">
+          <path class="draw" pathLength="1" d="M12 4 C 8 8 5 13 7 19 C 9 24 14 24 17 21 C 20 18 19 13 15 8 C 13 6 13 9 12 4 Z" fill="none" stroke="#F78154" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg></h2>
+        <span class="pos">— n.</span>
+        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">the long middle of a project where you ask "can this just be over already?" — and don't quit.</span>
       </summary>
-      <div class="entry-body">
-        <p>
-          There will be days where you ask yourself "can this just be over already?" That is the slow
-          burn. The culmination of development, content, marketing, feedback, features (we could list
-          for days here) — this feeling — this is where we want to sit. It will test your game to the
-          nth degree, and make you question whether it's the right thing to pursue.
-        </p>
-        <p>
-          Stepping back a bit, anything creative is almost a form of torture when there's the
-          expectation of money involved. Yes, you're making a game you want to play, but you're making
-          a game you need to sell as well, so you can keep making games you want to play. A "necessary
-          evil", sure — but then, isn't most of the world? Paying for water is a "necessary evil" too.
-        </p>
-        <p>
-          But the slow burn... this gives us time to come to terms with such an "evil". Perhaps even
-          learn to love it. Once you realise how piercing that burn is, you definitely don't want to
-          be wasting your time on something that won't turn a profit.
-        </p>
-        <p>
-          Call it a philosophy, an idea, a metaphor, a stretch of time, but we've been there, and we
-          expect it with every game.
-        </p>
+      <div class="entry-wrap">
+        <div class="entry-body">
+          <div class="body-inner">
+            <p>
+              There will be days where you ask yourself "can this just be over already?" That is the slow
+              burn. The culmination of development, content, marketing, feedback, features (we could list
+              for days here) — this feeling — this is where we want to sit. It will test your game to the
+              nth degree, and make you question whether it's the right thing to pursue.
+            </p>
+            <p>
+              Stepping back a bit, anything creative is almost a form of torture when there's the
+              expectation of money involved. Yes, you're making a game you want to play, but you're making
+              a game you need to sell as well, so you can keep making games you want to play. A "necessary
+              evil", sure — but then, isn't most of the world? Paying for water is a "necessary evil" too.
+            </p>
+            <p>
+              But the slow burn... this gives us time to come to terms with such an "evil". Perhaps even
+              learn to love it. Once you realise how piercing that burn is, you definitely don't want to
+              be wasting your time on something that won't turn a profit.
+            </p>
+            <p>
+              Call it a philosophy, an idea, a metaphor, a stretch of time, but we've been there, and we
+              expect it with every game.
+            </p>
+          </div>
+        </div>
       </div>
     </details>
 
     <details class="entry" id="boring">
       <summary>
         <h2 class="term">the boring list</h2>
-        <span class="phon">/ˈbɔː.rɪŋ lɪst/</span>
-        <span class="pos">n.</span>
-        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close –</span></span>
+        <span class="pos">— n.</span>
+        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">the unsexy admin work that holds every creative and marketing strategy together.</span>
       </summary>
-      <div class="entry-body">
-        <p>
-          We all have an unsexy side. Game dev is no exception. Store pages, creator emails, key
-          management, version management. Gameplay and screenshots at the right time. Press kits.
-        </p>
-        <p>
-          In all honesty, we actually like that stuff. It's the glue. Connects all of the creative
-          and marketing strategies together.
-        </p>
-        <p>
-          It's mostly just a time-suck, and most don't want to do it. We pride ourselves on whatever
-          it is we need to do — it's done to the best standard we can think of. If we need to learn
-          how to do something better just for your game, we do.
-        </p>
-        <p class="punch">
-          Unsexy is what makes sexy. We'll be the Un.
-        </p>
+      <div class="entry-wrap">
+        <div class="entry-body">
+          <div class="body-inner">
+            <p>
+              We all have an unsexy side. Game dev is no exception. Store pages, creator emails, key
+              management, version management. Gameplay and screenshots at the right time. Press kits.
+            </p>
+            <p>
+              In all honesty, we actually like that stuff. It's the glue. Connects all of the creative
+              and marketing strategies together.
+            </p>
+            <p>
+              It's mostly just a time-suck, and most don't want to do it. We pride ourselves on whatever
+              it is we need to do — it's done to the best standard we can think of. If we need to learn
+              how to do something better just for your game, we do.
+            </p>
+            <p class="punch">
+              Unsexy is what makes sexy. <span class="u">We'll be the Un<svg class="ink" viewBox="0 0 280 18" preserveAspectRatio="none" aria-hidden="true">
+                <path class="draw" pathLength="1" d="M5 10 Q 40 3 80 9 T 150 9 T 220 9 T 275 9" fill="none" stroke="#28E291" stroke-width="3.4" stroke-linecap="round"/>
+              </svg></span>.
+            </p>
+          </div>
+        </div>
       </div>
     </details>
 
     <details class="entry" id="write">
       <summary>
         <h2 class="term">we write</h2>
-        <span class="phon">/wiː raɪt/</span>
-        <span class="pos">v.</span>
-        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close –</span></span>
+        <span class="pos">— v.</span>
+        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">publicly. about what we're trying, learning, failing at, and figuring out.</span>
       </summary>
-      <div class="entry-body">
-        <p>
-          Game dev is about learning, all the time. And whilst we aren't exactly in that boat, we
-          wanna join in somehow. Writing about our failings, what we're trying to achieve, how we are
-          doing it — can all hopefully help some other wandering soul out there navigate the
-          undulating slopes of creating and releasing a game.
-        </p>
-        <p>
-          We aren't perfect (which is the point), but we'll try hard to be different, and show you how.
-        </p>
+      <div class="entry-wrap">
+        <div class="entry-body">
+          <div class="body-inner">
+            <p>
+              Game dev is about learning, all the time. And whilst we aren't exactly in that boat, we
+              wanna join in somehow. Writing about our failings, what we're trying to achieve, how we are
+              doing it — can all hopefully help some other wandering soul out there navigate the
+              undulating slopes of creating and releasing a game.
+            </p>
+            <p>
+              We aren't perfect (which is the point), but we'll try hard to be different, and show you how.
+            </p>
+          </div>
+        </div>
       </div>
     </details>
 
     <details class="entry" id="your-half">
       <summary>
         <h2 class="term">your half</h2>
-        <span class="phon">/jɔː hɑːf/</span>
-        <span class="pos">n.</span>
-        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close –</span></span>
+        <span class="pos">— n.</span>
+        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">the other sauce — the developer's undying passion. the part we can't supply.</span>
       </summary>
-      <div class="entry-body">
-        <p>
-          We can <em>see</em>, <em>smell</em>, <em>touch</em>, <em>taste</em> and <em>hear</em> the sauce, but we can't make it.
-        </p>
-        <p>
-          Yes, above we spoke about the sauce of the <em>game</em>, but the other sauce is <em>you</em>
-          — the developer. Without undying, relentless passion, your game isn't being given a good
-          shot. It is hard. It is like creating a baby from scratch (which kind of happens automatically
-          over 9 months), but without any automation. You will be the hardest working person in the
-          room no matter what. And we just have the opportunity to also be in that room, helping you
-          release what's in your head (and heart, awww).
-        </p>
+      <div class="entry-wrap">
+        <div class="entry-body">
+          <div class="body-inner">
+            <p>
+              We can <em>see</em>, <em>smell</em>, <em>touch</em>, <em>taste</em> and <em>hear</em> the sauce, but we can't make it.
+            </p>
+            <p>
+              Yes, above we spoke about the sauce of the <em>game</em>, but the other sauce is <em>you</em>
+              — the developer. Without undying, relentless passion, your game isn't being given a good
+              shot. It is hard. It is like creating a baby from scratch (which kind of happens automatically
+              over 9 months), but without any automation. You will be the hardest working person in the
+              room no matter what. And we just have the opportunity to also be in that room, helping you
+              release what's in your head (and heart, awww).
+            </p>
+          </div>
+        </div>
       </div>
     </details>
 
     <details class="entry" id="answer">
       <summary>
         <h2 class="term">the answer</h2>
-        <span class="phon">/ˈɑːn.sə/</span>
-        <span class="pos">n.</span>
-        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close –</span></span>
+        <span class="pos">— n.</span>
+        <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">no. and also yes. mostly: try with us.</span>
       </summary>
-      <div class="entry-body">
-        <p>
-          If the above is anything to go by, no. We cannot. But we can die trying. We'll help develop
-          that sauce, get it to a slow burn, get past the boring bits, document it for the world to
-          see, and hopefully find a minor stake of popularity somewhere in the cosmos.
-        </p>
-        <p>
-          If you need guaranteed success, we can't do that. But if you want a <em>partner</em> instead
-          of a publisher, that's us.
-        </p>
-        <div class="chat-wrap">
-          <a class="chat" href="mailto:pr@indieformer.com?subject=Let's%20chat">Let's chat</a>
+      <div class="entry-wrap">
+        <div class="entry-body">
+          <div class="body-inner">
+            <p>
+              If the above is anything to go by, no. We cannot. But we can <span class="u">die trying<svg class="ink" viewBox="0 0 160 18" preserveAspectRatio="none" aria-hidden="true">
+                <path class="draw" pathLength="1" d="M5 10 Q 30 3 60 9 T 110 9 T 155 9" fill="none" stroke="#28E291" stroke-width="3.2" stroke-linecap="round"/>
+              </svg></span>. We'll help develop
+              that sauce, get it to a slow burn, get past the boring bits, document it for the world to
+              see, and hopefully find a minor stake of popularity somewhere in the cosmos.
+            </p>
+            <p>
+              If you need guaranteed success, we can't do that. But if you want a <em>partner</em> instead
+              of a publisher, that's us.
+            </p>
+            <div class="chat-wrap" style="margin-top:24px;">
+              <a class="chat" href="mailto:pr@indieformer.com?subject=Let's%20chat" style="display:inline-flex;align-items:center;font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--shadow);background:var(--emerald);border-radius:10px;padding:15px 32px;text-decoration:none;transition:transform 0.15s ease, background 0.2s ease;">Let's chat</a>
+            </div>
+          </div>
         </div>
       </div>
     </details>
