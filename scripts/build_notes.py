@@ -119,7 +119,7 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notes — Indieformer</title>
+<title>Notes | Indieformer</title>
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -130,7 +130,7 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Indieformer">
-<meta property="og:title" content="Notes — Indieformer">
+<meta property="og:title" content="Notes | Indieformer">
 <meta property="og:description" content="What we're learning and doing as a publisher.">
 <meta property="og:url" content="https://indieformer.com/notes/">
 <meta property="og:image" content="https://indieformer.com/og-image.png">
@@ -315,7 +315,7 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 <span class="crop bl"></span><span class="crop br"></span>
 
 <header class="site-nav">
-  <a class="brand" href="/" aria-label="Indieformer — home">
+  <a class="brand" href="/" aria-label="Indieformer home">
     <img src="/logo.png" alt="Indieformer" width="40" height="40">
   </a>
   <nav class="primary-nav" aria-label="Primary">
