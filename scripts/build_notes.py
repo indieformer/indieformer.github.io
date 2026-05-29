@@ -5,7 +5,7 @@ Build notes.html from the Indieformer beehiiv RSS feed.
 Run manually with `python3 scripts/build_notes.py`, or via the GitHub Action
 .github/workflows/refresh-notes.yml on a daily schedule.
 
-Output path defaults to ./notes.html (cwd-relative) — override with NOTES_OUT.
+Output path defaults to ./notes/ (cwd-relative) — override with NOTES_OUT.
 """
 import os, re, html, sys
 import urllib.request
@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 
 FEED = "https://rss.beehiiv.com/feeds/2WtWfTwjg3.xml"
-OUT  = os.environ.get("NOTES_OUT", "notes.html")
+OUT  = os.environ.get("NOTES_OUT", "notes/index.html")
 NS_CONTENT = "http://purl.org/rss/1.0/modules/content/"
 NS_MEDIA   = "http://search.yahoo.com/mrss/"
 
@@ -126,13 +126,13 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <meta name="description" content="Notes from Indieformer. We try to post at least monthly about what we're learning and doing as a publisher.">
-<link rel="canonical" href="https://indieformer.com/notes.html">
+<link rel="canonical" href="https://indieformer.com/notes/">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Indieformer">
 <meta property="og:title" content="Notes — Indieformer">
 <meta property="og:description" content="What we're learning and doing as a publisher.">
-<meta property="og:url" content="https://indieformer.com/notes.html">
+<meta property="og:url" content="https://indieformer.com/notes/">
 <meta property="og:image" content="https://indieformer.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -184,7 +184,7 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
     display: inline-flex; align-items: center;
     text-decoration: none; transition: opacity 0.2s ease;
   }}
-  a.brand img {{ display: block; height: 38px; width: auto; }}
+  a.brand img {{ display: block; height: 40px; width: 40px; }}
   a.brand:hover {{ opacity: 0.82; }}
   .primary-nav {{ display: flex; gap: 26px; align-items: center; }}
   .primary-nav a {{
@@ -278,7 +278,9 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
     font-size: 14px; line-height: 1.65; color: var(--text-secondary);
     position: relative; z-index: 2;
   }}
-  .footer-brand {{ font-family: 'Sora'; font-weight: 800; font-size: 17px; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 8px; }}
+  .footer-col.brand-col {{ display: flex; gap: 18px; align-items: flex-start; }}
+  .footer-logo {{ flex: 0 0 auto; height: 92px; width: auto; display: block; }}
+  .footer-col.brand-col p {{ flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }}
   .footer-label {{ font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }}
   .footer-col ul {{ list-style: none; }}
   .footer-col li {{ margin-bottom: 6px; }}
@@ -314,12 +316,12 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 
 <header class="site-nav">
   <a class="brand" href="/" aria-label="Indieformer — home">
-    <img src="/logo-stacked.png" alt="Indieformer" width="30" height="38">
+    <img src="/logo.png" alt="Indieformer" width="40" height="40">
   </a>
   <nav class="primary-nav" aria-label="Primary">
-    <a href="/how-we-make-a-game-popular.html">The approach</a>
-    <a href="/notes.html" class="current">Notes</a>
-    <a href="/scorchpot.html">Scorchpot</a>
+    <a href="/how-we-make-a-game-popular/">The Approach</a>
+    <a href="/notes/" class="current">Notes</a>
+    <a href="/scorchpot/">Scorchpot</a>
   </nav>
 </header>
 
@@ -341,14 +343,14 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 <p class="archive-link">All {total} issues live on the <a href="https://indieformer.beehiiv.com">full archive →</a></p>
 
 <footer class="site-footer">
-  <div class="footer-col">
-    <p class="footer-brand">Indieformer</p>
+  <div class="footer-col brand-col">
+    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
     <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
   </div>
   <div class="footer-col">
     <p class="footer-label">Guides &amp; reads</p>
     <ul>
-      <li><a href="https://essay.indieformer.com">The Essay</a></li>
+      <li><a href="https://essay.indieformer.com">How to Really Make a Game</a></li>
       <li><a href="https://indieformer.beehiiv.com/press-kit-guide">Press Kit Guide</a></li>
       <li><a href="https://indieformer.beehiiv.com/steam-marketing-guide">Steam Marketing Guide</a></li>
     </ul>
