@@ -299,19 +299,18 @@
   .entry[open] .toggle .open-label { display: none; }
   .entry[open] .toggle .close-label { display: inline; }
 
-  /* smooth open/close via grid-row trick — body always present, height animates */
+  /* smooth open/close — JS animates wrap height; force display:block so
+     the entry-body is always in layout (browsers default to hiding it) */
   .entry > .entry-wrap {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.45s ease;
-  }
-  .entry[open] > .entry-wrap { grid-template-rows: 1fr; }
-  .entry-body {
-    min-height: 0;
+    display: block !important;
     overflow: hidden;
+    height: 0;
+    transition: height 0.42s ease;
+  }
+  .entry-body {
     padding-top: 0;
     opacity: 0;
-    transition: opacity 0.35s ease 0.05s, padding-top 0.4s ease;
+    transition: opacity 0.32s ease 0.06s, padding-top 0.42s ease;
   }
   .entry[open] .entry-body {
     padding-top: 22px;
@@ -641,7 +640,7 @@
 <section class="gate" id="dictionary-section">
   <div class="dictionary">
 
-    <details class="entry" name="dictionary" id="sauce">
+    <details class="entry" id="sauce">
       <summary>
         <h2 class="term">the sauce</h2>
         <span class="pos">— n.</span>
@@ -695,7 +694,7 @@
       </div>
     </details>
 
-    <details class="entry" name="dictionary" id="slow-burn">
+    <details class="entry" id="slow-burn">
       <summary>
         <h2 class="term">the <span class="u">slow burn<svg class="ink" viewBox="0 0 200 18" preserveAspectRatio="none" aria-hidden="true">
           <path class="draw" pathLength="1" d="M5 10 Q 30 3 56 9 T 110 9 T 196 9" fill="none" stroke="#F78154" stroke-width="3" stroke-linecap="round"/>
@@ -735,7 +734,7 @@
       </div>
     </details>
 
-    <details class="entry" name="dictionary" id="boring">
+    <details class="entry" id="boring">
       <summary>
         <h2 class="term">the boring list</h2>
         <span class="pos">— n.</span>
@@ -768,7 +767,7 @@
       </div>
     </details>
 
-    <details class="entry" name="dictionary" id="write">
+    <details class="entry" id="write">
       <summary>
         <h2 class="term">we write</h2>
         <span class="pos">— v.</span>
@@ -792,7 +791,7 @@
       </div>
     </details>
 
-    <details class="entry" name="dictionary" id="your-half">
+    <details class="entry" id="your-half">
       <summary>
         <h2 class="term">your half</h2>
         <span class="pos">— n.</span>
@@ -818,7 +817,7 @@
       </div>
     </details>
 
-    <details class="entry" name="dictionary" id="answer">
+    <details class="entry" id="answer">
       <summary>
         <h2 class="term">the answer</h2>
         <span class="pos">— n.</span>
@@ -875,6 +874,60 @@
 </footer>
 
 <script>
+  /* ── dictionary entries: JS-animated open/close + accordion ── */
+  (function () {
+    var entries = Array.prototype.slice.call(document.querySelectorAll('.dictionary .entry'));
+    if (!entries.length) return;
+
+    function openEntry(entry) {
+      var wrap = entry.querySelector('.entry-wrap');
+      if (!wrap) return;
+      entry.setAttribute('open', '');
+      wrap.style.height = '0px';
+      // force layout flush so the transition has a starting frame
+      void wrap.offsetHeight;
+      wrap.style.height = wrap.scrollHeight + 'px';
+      function done(e) {
+        if (e.propertyName !== 'height') return;
+        wrap.removeEventListener('transitionend', done);
+        wrap.style.height = 'auto';
+      }
+      wrap.addEventListener('transitionend', done);
+    }
+
+    function closeEntry(entry) {
+      var wrap = entry.querySelector('.entry-wrap');
+      if (!wrap) return;
+      // capture current height (might be 'auto') and set numeric for transition
+      wrap.style.height = wrap.scrollHeight + 'px';
+      void wrap.offsetHeight;
+      wrap.style.height = '0px';
+      function done(e) {
+        if (e.propertyName !== 'height') return;
+        wrap.removeEventListener('transitionend', done);
+        entry.removeAttribute('open');
+      }
+      wrap.addEventListener('transitionend', done);
+    }
+
+    entries.forEach(function (entry) {
+      var summary = entry.querySelector('summary');
+      if (!summary) return;
+      summary.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (entry.hasAttribute('open')) {
+          closeEntry(entry);
+        } else {
+          // accordion — close any open siblings
+          entries.forEach(function (other) {
+            if (other !== entry && other.hasAttribute('open')) closeEntry(other);
+          });
+          openEntry(entry);
+        }
+      });
+    });
+  })();
+
   /* ── scroll-gated reveal ─────────────────────────────── */
   (function () {
     var gates = document.querySelectorAll('.gate');
