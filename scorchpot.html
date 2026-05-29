@@ -907,11 +907,10 @@
     <div class="fts-ts">
       <h3 class="fts-ts-title">Where this campaign stands.</h3>
       <div class="fts-ts-grid">
-        <!-- TILE 1 — Wishlists -->
+        <!-- TILE 1 — Wishlists (manual; bump in DASHBOARD config below) -->
         <div class="fts-ts-tile">
           <span class="fts-ts-label">Steam wishlists</span>
           <span class="fts-ts-num gold" data-fts-ts="wishlists">—</span>
-          <span class="fts-ts-sub">Updated weekly · last refresh: <span data-fts-ts="wishlists-asof">—</span></span>
         </div>
         <!-- TILE 2 — Days to Launch -->
         <div class="fts-ts-tile">
@@ -937,10 +936,9 @@
     ────────────────────────────────────────────────────────────────── */
     (function () {
       var DASHBOARD = {
-        wishlists: 'TBC',                 // e.g. '4,217'
-        wishlistsAsOf: 'Apr 20, 2026',    // human-readable date you last updated this
-        launchDate: '2026-09-01',         // YYYY-MM-DD — Steam launch target
-        launchTargetLabel: 'Steam release · target Sep 2026'
+        wishlists: '6,500+',              // manual — bump as Steamworks updates
+        launchDate: '2026-08-20',         // YYYY-MM-DD — Steam launch target
+        launchTargetLabel: 'Steam release · target Aug 2026'
       };
 
       function setText(sel, val) {
@@ -949,7 +947,6 @@
       }
 
       setText('wishlists', DASHBOARD.wishlists);
-      setText('wishlists-asof', DASHBOARD.wishlistsAsOf);
       setText('launch-target', DASHBOARD.launchTargetLabel);
 
       var target = new Date(DASHBOARD.launchDate + 'T00:00:00');
