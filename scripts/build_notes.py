@@ -121,6 +121,10 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notes — Indieformer</title>
 
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
 <meta name="description" content="Notes from Indieformer. We try to post at least monthly about what we're learning and doing as a publisher.">
 <link rel="canonical" href="https://indieformer.com/notes.html">
 <meta name="robots" content="index, follow">
@@ -177,10 +181,11 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
     position: relative; z-index: 4;
   }}
   a.brand {{
-    font-family: 'Sora'; font-weight: 800; font-size: 18px; letter-spacing: -0.02em;
-    color: var(--text-primary); text-decoration: none; transition: color 0.2s;
+    display: inline-flex; align-items: center;
+    text-decoration: none; transition: opacity 0.2s ease;
   }}
-  a.brand:hover {{ color: var(--emerald); }}
+  a.brand img {{ display: block; height: 38px; width: auto; }}
+  a.brand:hover {{ opacity: 0.82; }}
   .primary-nav {{ display: flex; gap: 26px; align-items: center; }}
   .primary-nav a {{
     font-family: 'Sora'; font-size: 15px; font-weight: 500;
@@ -308,7 +313,9 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 <span class="crop bl"></span><span class="crop br"></span>
 
 <header class="site-nav">
-  <a class="brand" href="/">Indieformer</a>
+  <a class="brand" href="/" aria-label="Indieformer — home">
+    <img src="/logo-stacked.png" alt="Indieformer" width="30" height="38">
+  </a>
   <nav class="primary-nav" aria-label="Primary">
     <a href="/how-we-make-a-game-popular.html">The approach</a>
     <a href="/notes.html" class="current">Notes</a>
