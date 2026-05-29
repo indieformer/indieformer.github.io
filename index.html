@@ -412,8 +412,7 @@
     line-height: 1.45;
     color: #FFFFFF !important;
     text-align: center;
-    background: #1B1C24;  /* solid dark — no SVG transparency artefacts */
-    border-radius: 8px;
+    background: transparent;  /* just the wobble outline, no fill */
     opacity: 1;
     animation: rise 0.6s ease forwards;
   }
@@ -453,13 +452,14 @@
   }
   a.chat:hover { transform: translateY(-2px); background: var(--text-primary); }
 
-  /* ── hand-drawn arrow pointing from the col area toward the Waypoint image ── */
+  /* ── hand-drawn arrow attached to "watching in real-time" → Waypoint image ── */
+  .watching-mark { position: relative; display: inline-block; }
   .tracker-pointer {
     position: absolute;
-    top: 110px;
-    right: 240px;
-    width: 260px;
-    height: 90px;
+    left: 100%;
+    top: -42px;
+    width: 280px;
+    height: 70px;
     overflow: visible;
     pointer-events: none;
     z-index: 3;
@@ -622,7 +622,10 @@
       <span class="edit"><span class="struck">curator<svg class="ink" viewBox="0 0 130 24" preserveAspectRatio="none" aria-hidden="true">
         <path class="draw" pathLength="1" d="M4 13 Q 32 6 64 12 T 126 11" fill="none" stroke="#F78154" stroke-width="3" stroke-linecap="round" style="animation-delay:0.9s"/>
       </svg></span><span class="newword">publisher</span></span>.
-      We even had a site that tracked what we were watching in real-time.
+      We even had a site that tracked what we were <span class="watching-mark">watching in real-time<svg class="tracker-pointer ink" viewBox="0 0 280 70" aria-hidden="true">
+        <path class="draw" pathLength="1" d="M5 55 Q 70 50 140 38 T 270 10" fill="none" stroke="#F78154" stroke-width="2.4" stroke-linecap="round" style="animation-delay:1.6s"/>
+        <path class="draw" pathLength="1" d="M270 10 L 254 16 M270 10 L 262 26" fill="none" stroke="#F78154" stroke-width="2.4" stroke-linecap="round" style="animation-delay:1.85s"/>
+      </svg></span>.
     </p>
 
     <p>
@@ -638,11 +641,6 @@
     </p>
 
   </div>
-
-  <svg class="tracker-pointer ink" viewBox="0 0 260 90" aria-hidden="true">
-    <path class="draw" pathLength="1" d="M8 78 Q 70 78 130 60 T 250 14" fill="none" stroke="#F78154" stroke-width="2.4" stroke-linecap="round" style="animation-delay:1.8s"/>
-    <path class="draw" pathLength="1" d="M250 14 L 232 18 M250 14 L 238 30" fill="none" stroke="#F78154" stroke-width="2.4" stroke-linecap="round" style="animation-delay:2.05s"/>
-  </svg>
 
   <a class="tracker" href="https://waypoint.indieformer.com/" rel="noopener" aria-label="Visit the Waypoint archive — the decommissioned Indieformer release tracker">
     <img class="frame-img" src="/waypoint-tracker.jpg" alt="The old Indieformer release tracker — Waypoint">
