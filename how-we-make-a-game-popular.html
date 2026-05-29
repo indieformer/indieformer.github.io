@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How We Make a Game Popular — Indieformer</title>
 
+<!-- ── icons ── -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
 <!-- ── SEO ── -->
 <meta name="description" content="The Indieformer approach to publishing an indie game — pasta and sauce, the slow burn, the boring list, your half. Honest about what we can and can't do.">
 <link rel="canonical" href="https://indieformer.com/how-we-make-a-game-popular.html">
@@ -121,15 +126,13 @@
     z-index: 4;
   }
   a.brand {
-    font-family: 'Sora', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: opacity 0.2s ease;
   }
-  a.brand:hover { color: var(--emerald); }
+  a.brand img { display: block; height: 38px; width: auto; }
+  a.brand:hover { opacity: 0.82; }
   .primary-nav { display: flex; gap: 26px; align-items: center; }
   .primary-nav a {
     font-family: 'Sora', sans-serif;
@@ -437,7 +440,9 @@
 
 <!-- ════ NAVIGATION ════ -->
 <header class="site-nav">
-  <a class="brand" href="/">Indieformer</a>
+  <a class="brand" href="/" aria-label="Indieformer — home">
+    <img src="/logo-stacked.png" alt="Indieformer" width="30" height="38">
+  </a>
   <nav class="primary-nav" aria-label="Primary">
     <a href="/how-we-make-a-game-popular.html" class="current">The approach</a>
     <a href="/notes.html">Notes</a>
