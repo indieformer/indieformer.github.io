@@ -218,6 +218,34 @@
   /* small flame doodle in the Slow Burn heading */
   .flame { display: inline-block; vertical-align: middle; width: 0.7em; height: 0.85em; margin-left: 0.15em; overflow: visible; }
 
+  /* ── section-side hand-drawn doodles ──────────────── */
+  .section-doodle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+    opacity: 0.92;
+  }
+  .section-doodle path { filter: url(#roughen); }
+  .section-doodle path.draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 1.4s ease forwards;
+  }
+  .section-doodle circle,
+  .section-doodle line,
+  .section-doodle text {
+    opacity: 0;
+    animation: fade 0.7s ease forwards;
+  }
+  .pasta-doodle      { top: 60px;  right: 30px; width: 220px; height: 200px; }
+  .dragon-doodle     { top: 520px; right: 24px; width: 220px; height: 200px; }
+  .checklist-doodle  { top: 60px;  right: 24px; width: 200px; height: 220px; }
+  .newsletter-doodle { top: 60px;  right: 28px; width: 220px; height: 180px; }
+  @media (max-width: 900px) {
+    .section-doodle { display: none; }
+  }
+
   /* ── registration marks — one set bracketing the whole page ── */
   .crop {
     position: absolute;
@@ -495,6 +523,27 @@
 <!-- ════ THE SAUCE ════ -->
 <section class="section gate" id="sauce">
 
+  <svg class="section-doodle pasta-doodle" viewBox="0 0 240 200" aria-hidden="true">
+    <path class="draw" pathLength="1" d="M70 105 C 65 85 80 70 70 50"      fill="none" stroke="#28E291" stroke-width="2"   stroke-linecap="round" style="animation-delay:0.4s"/>
+    <path class="draw" pathLength="1" d="M100 100 C 95 78 110 62 95 42"   fill="none" stroke="#28E291" stroke-width="2"   stroke-linecap="round" style="animation-delay:0.55s"/>
+    <path class="draw" pathLength="1" d="M130 98 C 130 75 120 60 135 42"  fill="none" stroke="#28E291" stroke-width="2"   stroke-linecap="round" style="animation-delay:0.7s"/>
+    <path class="draw" pathLength="1" d="M160 102 C 165 80 155 65 170 50" fill="none" stroke="#28E291" stroke-width="2"   stroke-linecap="round" style="animation-delay:0.85s"/>
+    <path class="draw" pathLength="1" d="M30 115 Q 120 95 210 115 Q 120 135 30 115 Z" fill="none" stroke="#F78154" stroke-width="2.6" stroke-linecap="round" style="animation-delay:0.2s"/>
+    <path class="draw" pathLength="1" d="M35 118 C 40 150 75 175 120 175 C 165 175 200 150 205 118" fill="none" stroke="#F78154" stroke-width="2.6" stroke-linecap="round" style="animation-delay:1s"/>
+    <circle cx="85"  cy="78" r="3"   fill="#F78154" style="animation-delay:1.4s"/>
+    <circle cx="115" cy="68" r="2.5" fill="#F78154" style="animation-delay:1.5s"/>
+    <circle cx="148" cy="80" r="3"   fill="#F78154" style="animation-delay:1.6s"/>
+  </svg>
+
+  <svg class="section-doodle dragon-doodle" viewBox="0 0 240 200" aria-hidden="true">
+    <path class="draw" pathLength="1" d="M35 105 Q 50 75 85 65 Q 135 55 175 80 Q 195 100 180 125 Q 165 145 130 150 Q 85 150 55 135 Q 30 120 35 105 Z" fill="none" stroke="#F78154" stroke-width="2.5" stroke-linecap="round" style="animation-delay:0.3s"/>
+    <path class="draw" pathLength="1" d="M95 65 L 88 35 L 108 50"  fill="none" stroke="#F78154" stroke-width="2" stroke-linecap="round" style="animation-delay:0.9s"/>
+    <path class="draw" pathLength="1" d="M130 58 L 138 28 L 152 48" fill="none" stroke="#F78154" stroke-width="2" stroke-linecap="round" style="animation-delay:1.0s"/>
+    <circle cx="140" cy="100" r="4"   fill="#F78154" style="animation-delay:1.3s"/>
+    <circle cx="183" cy="108" r="2.2" fill="#F78154" style="animation-delay:1.35s"/>
+    <path class="draw" pathLength="1" d="M192 118 Q 207 113 215 100 Q 220 117 228 117 Q 218 130 228 142 Q 213 138 205 152 Q 200 138 192 135" fill="none" stroke="#F78154" stroke-width="2" stroke-linecap="round" style="animation-delay:1.5s"/>
+  </svg>
+
   <div class="col story">
 
     <h2 class="head">The Sauce</h2>
@@ -594,6 +643,22 @@
 <!-- ════ THE HAND OVER MOUTH (BORING) LIST ════ -->
 <section class="section gate" id="boring">
 
+  <svg class="section-doodle checklist-doodle" viewBox="0 0 200 220" aria-hidden="true">
+    <g transform="rotate(-2.5 100 110)">
+      <path class="draw" pathLength="1" d="M25 25 L 175 25 L 175 195 L 25 195 Z" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round" style="animation-delay:0.2s"/>
+      <path class="draw" pathLength="1" d="M40 50 L 54 50 L 54 64 L 40 64 Z" fill="none" stroke="#28E291" stroke-width="2" style="animation-delay:0.5s"/>
+      <path class="draw" pathLength="1" d="M42 56 L 46 60 L 53 50"            fill="none" stroke="#28E291" stroke-width="2.5" stroke-linecap="round" style="animation-delay:0.7s"/>
+      <line x1="62" y1="57" x2="160" y2="57" stroke="#6B6980" stroke-width="1.5" style="animation-delay:0.6s"/>
+      <path class="draw" pathLength="1" d="M40 80 L 54 80 L 54 94 L 40 94 Z" fill="none" stroke="#28E291" stroke-width="2" style="animation-delay:0.85s"/>
+      <path class="draw" pathLength="1" d="M42 86 L 46 90 L 53 80"            fill="none" stroke="#28E291" stroke-width="2.5" stroke-linecap="round" style="animation-delay:1.0s"/>
+      <line x1="62" y1="87" x2="152" y2="87" stroke="#6B6980" stroke-width="1.5" style="animation-delay:0.9s"/>
+      <path class="draw" pathLength="1" d="M40 110 L 54 110 L 54 124 L 40 124 Z" fill="none" stroke="#6B6980" stroke-width="2" style="animation-delay:1.15s"/>
+      <line x1="62" y1="117" x2="148" y2="117" stroke="#6B6980" stroke-width="1.5" style="animation-delay:1.2s"/>
+      <path class="draw" pathLength="1" d="M40 140 L 54 140 L 54 154 L 40 154 Z" fill="none" stroke="#6B6980" stroke-width="2" style="animation-delay:1.3s"/>
+      <line x1="62" y1="147" x2="156" y2="147" stroke="#6B6980" stroke-width="1.5" style="animation-delay:1.35s"/>
+    </g>
+  </svg>
+
   <div class="col story">
 
     <h2 class="head">The Hand Over Mouth <span class="caveat-note">(Boring)</span> List</h2>
@@ -626,6 +691,15 @@
 
 <!-- ════ WE WRITE ABOUT IT ════ -->
 <section class="section gate" id="write">
+
+  <svg class="section-doodle newsletter-doodle" viewBox="0 0 220 180" aria-hidden="true">
+    <path class="draw" pathLength="1" d="M20 50 L 200 50 L 200 150 L 20 150 Z" fill="none" stroke="#9381FF" stroke-width="2.5" stroke-linecap="round" style="animation-delay:0.3s"/>
+    <path class="draw" pathLength="1" d="M20 50 L 110 105 L 200 50"             fill="none" stroke="#9381FF" stroke-width="2.5" stroke-linecap="round" style="animation-delay:0.7s"/>
+    <path class="draw" pathLength="1" d="M160 62 L 192 62 L 192 84 L 160 84 Z" fill="none" stroke="#F78154" stroke-width="2" style="animation-delay:1.1s"/>
+    <text x="176" y="80" text-anchor="middle" font-family="Caveat, cursive" font-size="18" font-weight="700" fill="#F78154" style="animation-delay:1.5s">if</text>
+    <line x1="30" y1="65" x2="80" y2="65" stroke="#A8A6B8" stroke-width="1.5" style="animation-delay:1.3s"/>
+    <line x1="30" y1="72" x2="65" y2="72" stroke="#A8A6B8" stroke-width="1.5" style="animation-delay:1.4s"/>
+  </svg>
 
   <div class="col story">
 
@@ -719,7 +793,7 @@
       <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
     </ul>
   </div>
-  <p class="footer-meta">© 2026 Indieformer. Hand-built. <a href="https://github.com/indieformer/indieformer.github.io">View source ↗</a></p>
+  <p class="footer-meta">© 2026 Indieformer.</p>
 </footer>
 
 <script>
