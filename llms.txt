@@ -1,8 +1,8 @@
 # Indieformer
 
-> A small indie game publisher run by Josh & Clem in Melbourne, Australia. Twelve years of indie game writing, now publishing too — and we talk about the work openly.
+> Indieformer publishes indie games and talks about the process openly. Run by Josh and Clem in Melbourne, Australia.
 
-Indieformer started in 2013 as a newsletter that picked out indie games worth playing. It still is one. It is also a YouTube channel, a release tracker called Waypoint (now archived), a game jam called Patch Notes, and a small publishing arm.
+Indieformer is a small indie game publisher. We publish indie games and talk about the process openly — what we're learning, what we're trying, what didn't work. The free newsletter goes out roughly monthly. It is also a YouTube channel, a release tracker called Waypoint (now archived), and a game jam called Patch Notes.
 
 The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a tabletop roguelike by Moravian Games. Steam release August 2026.
 
