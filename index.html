@@ -141,7 +141,7 @@
     text-decoration: none;
     transition: opacity 0.2s ease;
   }
-  a.brand img { display: block; height: 38px; width: auto; }
+  a.brand img { display: block; height: 40px; width: 40px; }
   a.brand:hover { opacity: 0.82; }
   .primary-nav { display: flex; gap: 26px; align-items: center; }
   .primary-nav a {
@@ -179,13 +179,12 @@
     position: relative;
     z-index: 2;
   }
-  .footer-brand {
-    font-family: 'Sora', sans-serif;
-    font-weight: 800;
-    font-size: 17px;
-    color: var(--text-primary);
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
+  /* footer brand column — stacked logo on the left, descriptor stacked on the right */
+  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
+  .footer-col.brand-col p {
+    flex: 1; margin: 0;
+    line-height: 1.65; color: var(--text-secondary);
   }
   .footer-label {
     font-family: 'Caveat', cursive;
@@ -237,6 +236,8 @@
   .crop.br { bottom: 20px; right: 20px; }
 
   .col { max-width: 600px; position: relative; z-index: 2; }
+  /* sections after the origin don't have right-side imagery — let them breathe wider so the page is less scroll */
+  #pitch .col, #approach .col, #jam .col, #close .col { max-width: 780px; }
 
   h1 {
     font-size: clamp(38px, 6vw, 58px);
@@ -399,13 +400,16 @@
     margin: 0 auto;
     padding: 13px 20px 13px 22px;
     font-family: 'Caveat', cursive;
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 600;
     line-height: 1.45;
-    color: #EBE9DF;
+    color: #FFFFFF !important;
     opacity: 0;
     animation: rise 0.6s ease forwards;
   }
+  /* drop the roughen filter on the box fill — it was punching transparent
+     gaps in the dark fill which made the white text read as low-contrast */
+  .fbox-path { filter: none; }
   .fstep:nth-child(1) { max-width: 100%; transform: rotate(-0.8deg); animation-delay: 0.2s; }
   .fstep:nth-child(3) { max-width: 90%;  transform: rotate(0.7deg);  animation-delay: 0.55s; }
   .fstep:nth-child(5) { max-width: 80%;  transform: rotate(-0.6deg); animation-delay: 0.9s; }
@@ -528,12 +532,12 @@
 <!-- ════ NAVIGATION ════ -->
 <header class="site-nav">
   <a class="brand" href="/" aria-label="Indieformer — home">
-    <img src="/logo-stacked.png" alt="Indieformer" width="30" height="38">
+    <img src="/logo.png" alt="Indieformer" width="40" height="40">
   </a>
   <nav class="primary-nav" aria-label="Primary">
-    <a href="/how-we-make-a-game-popular.html">The approach</a>
-    <a href="/notes.html">Notes</a>
-    <a href="/scorchpot.html">Scorchpot</a>
+    <a href="/how-we-make-a-game-popular/">The Approach</a>
+    <a href="/notes/">Notes</a>
+    <a href="/scorchpot/">Scorchpot</a>
   </nav>
 </header>
 
@@ -658,7 +662,7 @@
       <em>you</em> make a <span class="u">great game<svg class="ink" viewBox="0 0 200 18" preserveAspectRatio="none" aria-hidden="true">
         <path class="draw" pathLength="1" d="M5 10 Q 48 3 96 9 T 195 9" fill="none" stroke="#28E291" stroke-width="3.2" stroke-linecap="round" style="animation-delay:0.8s"/>
       </svg></span>, <em>we</em> make it <span class="circ">pop<svg class="circ-ring ink" viewBox="0 0 58 32" preserveAspectRatio="none" aria-hidden="true">
-        <path class="draw" pathLength="1" d="M4 16 C 6 4 16 -1 29 2 C 42 5 56 8 54 16 C 52 24 42 32 29 30 C 16 28 2 26 4 16" fill="none" stroke="#F78154" stroke-width="2.8" stroke-linecap="round" style="animation-delay:1.3s"/>
+        <path class="draw" pathLength="1" d="M4 16 C 6 4 16 -1 29 2 C 42 5 56 8 54 16 C 52 24 42 32 29 30 C 16 28 2 26 4 16" fill="none" stroke="#F78154" stroke-width="2" stroke-linecap="round" style="animation-delay:1.3s"/>
       </svg></span>ular.
     </p>
 
@@ -676,7 +680,7 @@
     <p class="lead">
       Man, we wish that was easy. But every game needs a unique approach. We can't (and won't)
       cookie cutter from game-to-game. And if you want to know about our approach, read more about
-      <a class="ilink" href="how-we-make-a-game-popular.html">How We Make a Game Popular</a>
+      <a class="ilink" href="/how-we-make-a-game-popular/">How We Make a Game Popular</a>
       (the secret sauce, if you will).
     </p>
 
@@ -709,7 +713,7 @@
       <div class="fstep" role="listitem">
         <svg class="fbox" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
           <path class="fbox-path" d="M 4 4 C 60 2 140 3 196 4 C 198 20 198 40 196 56 C 140 58 60 57 4 56 C 2 40 2 20 4 4 Z"
-            fill="rgba(47,48,64,0.88)" stroke="rgba(147,129,255,0.55)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            fill="rgba(38,39,48,0.96)" stroke="rgba(147,129,255,0.6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         We give you an idea + 3 days
       </div>
@@ -722,7 +726,7 @@
       <div class="fstep" role="listitem">
         <svg class="fbox" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
           <path class="fbox-path" d="M 4 4 C 60 2 140 3 196 4 C 198 20 198 40 196 56 C 140 58 60 57 4 56 C 2 40 2 20 4 4 Z"
-            fill="rgba(47,48,64,0.88)" stroke="rgba(147,129,255,0.55)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            fill="rgba(38,39,48,0.96)" stroke="rgba(147,129,255,0.6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         you make a playable prototype
       </div>
@@ -735,7 +739,7 @@
       <div class="fstep" role="listitem">
         <svg class="fbox" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
           <path class="fbox-path" d="M 4 4 C 60 2 140 3 196 4 C 198 20 198 40 196 56 C 140 58 60 57 4 56 C 2 40 2 20 4 4 Z"
-            fill="rgba(47,48,64,0.88)" stroke="rgba(147,129,255,0.55)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            fill="rgba(38,39,48,0.96)" stroke="rgba(147,129,255,0.6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         we scout the entries (and take participant feedback) for what we love
       </div>
@@ -748,7 +752,7 @@
       <div class="fstep" role="listitem">
         <svg class="fbox" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
           <path class="fbox-path" d="M 4 4 C 60 2 140 3 196 4 C 198 20 198 40 196 56 C 140 58 60 57 4 56 C 2 40 2 20 4 4 Z"
-            fill="rgba(47,48,64,0.88)" stroke="rgba(147,129,255,0.55)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            fill="rgba(38,39,48,0.96)" stroke="rgba(147,129,255,0.6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         we chat about what progressing the game might look like
       </div>
@@ -809,14 +813,14 @@
 
 <!-- ════ FOOTER ════ -->
 <footer class="site-footer">
-  <div class="footer-col">
-    <p class="footer-brand">Indieformer</p>
+  <div class="footer-col brand-col">
+    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
     <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
   </div>
   <div class="footer-col">
     <p class="footer-label">Guides &amp; reads</p>
     <ul>
-      <li><a href="https://essay.indieformer.com">The Essay</a></li>
+      <li><a href="https://essay.indieformer.com">How to Really Make a Game</a></li>
       <li><a href="https://indieformer.beehiiv.com/press-kit-guide">Press Kit Guide</a></li>
       <li><a href="https://indieformer.beehiiv.com/steam-marketing-guide">Steam Marketing Guide</a></li>
     </ul>
