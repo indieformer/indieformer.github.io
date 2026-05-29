@@ -2,14 +2,14 @@
 
 > Indieformer publishes indie games and talks about the process. Run by Josh and Clem in Melbourne, Australia.
 
-Indieformer is a small indie game publisher. We publish indie games and talk about the process — what we're learning, what we're trying, what didn't work. The free newsletter goes out roughly monthly. It is also a YouTube channel, a release tracker called Waypoint (now archived), and a game jam called Patch Notes.
+Indieformer is a small indie game publisher. We publish indie games and talk about the process. What we're learning, what we're trying, what didn't work. The free newsletter goes out roughly monthly. It is also a YouTube channel, a release tracker called Waypoint (now archived), and a game jam called Patch Notes.
 
 The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a tabletop roguelike by Moravian Games. Steam release August 2026.
 
 ## Pages
 
 - [Home](https://indieformer.com/): Who we are, what we publish, and how to reach us.
-- [The Approach](https://indieformer.com/how-we-make-a-game-popular/): How we make a game popular — our publishing philosophy, including The Sauce (the pasta-sauce metaphor for what makes a game memorable), The Slow Burn, The Boring List, and Your Half.
+- [The Approach](https://indieformer.com/how-we-make-a-game-popular/): How we make a game popular. Our publishing philosophy, including The Sauce (the pasta-sauce metaphor for what makes a game memorable), The Slow Burn, The Boring List, and Your Half.
 - [Notes](https://indieformer.com/notes/): The Indieformer newsletter index, refreshed daily from the beehiiv RSS feed. ~77 issues. Free. No paywall.
 - [Feed the Scorchpot](https://indieformer.com/scorchpot/): Page for the first game on our publishing slate.
 
@@ -17,7 +17,7 @@ The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a 
 
 - [Newsletter archive on beehiiv](https://indieformer.beehiiv.com): The full archive of all newsletter issues.
 - [The Essay (How to Really Make a Game)](https://essay.indieformer.com): Our long-form essay on what it takes to make an indie game.
-- [Waypoint archive](https://waypoint.indieformer.com): Decommissioned indie game release calendar — kept as a read-only archive.
+- [Waypoint archive](https://waypoint.indieformer.com): Decommissioned indie game release calendar. Kept as a read-only archive.
 - [Press Kit Guide](https://indieformer.beehiiv.com/press-kit-guide): Guide to building a press kit as an indie game developer.
 - [Steam Marketing Guide](https://indieformer.beehiiv.com/steam-marketing-guide): Guide to Steam marketing for indie developers.
 
@@ -29,8 +29,8 @@ The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a 
 
 ## Positioning
 
-Indieformer is moving from being an indie-game outlet (curation, reviews, showcases) toward being an indie-game publisher. We document the publishing journey openly — what we're learning, what we're trying, what didn't work. The newsletter has shifted with us, from "what to play" toward "what it's like to publish".
+Indieformer is moving from being an indie-game outlet (curation, reviews, showcases) toward being an indie-game publisher. We document the publishing journey. What we're learning, what we're trying, what didn't work. The newsletter has shifted with us, from "what to play" toward "what it's like to publish".
 
-We do not chase trends. We are slow. We sign games because they have something only their developer could have made — not because they fit a commercial slot. Our standard developer/publisher split is up to 30/70 in the developer's favour; it never moves against the developer.
+We do not chase trends. We are slow. We sign games because they have something only their developer could have made, not because they fit a commercial slot. Our standard developer/publisher split is up to 30/70 in the developer's favour; it never moves against the developer.
 
-— Josh & Clem
+Josh & Clem
