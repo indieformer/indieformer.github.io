@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://indieformer.com/sitemap.xml
