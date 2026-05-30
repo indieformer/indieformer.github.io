@@ -244,6 +244,7 @@
   .entry {
     opacity: 0;
     animation: rise 0.6s ease both;
+    scroll-margin-top: 24px;
   }
   .entry:nth-of-type(1) { animation-delay: 0.55s; }
   .entry:nth-of-type(2) { animation-delay: 0.7s; }
@@ -1183,17 +1184,9 @@
         if (e.propertyName !== 'height') return;
         wrap.removeEventListener('transitionend', done);
         wrap.style.height = 'auto';
-        // scroll AFTER the height transition completes — by now the document is
-        // at its final height, so the scroll target is reachable without any
-        // phantom empty space below the footer.
-        var rect = entry.getBoundingClientRect();
-        var target = window.pageYOffset + rect.top - 24;
-        var maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-        target = Math.max(0, Math.min(target, maxScroll));
-        // skip if we're already pretty close — avoids a tiny correcting jitter
-        if (Math.abs(window.pageYOffset - target) > 8) {
-          window.scrollTo({ top: target, behavior: 'smooth' });
-        }
+        // browser-native scrollIntoView handles clamping + dynamic layout cleanly.
+        // pairs with `.entry { scroll-margin-top }` for the nav offset.
+        entry.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
       wrap.addEventListener('transitionend', done);
     }
