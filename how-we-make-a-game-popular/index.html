@@ -247,31 +247,68 @@
     color: var(--coral);
   }
 
-  /* in-body callout — for the case-study / featured section of an entry */
+  /* in-body callout — for the case-study / featured section of an entry
+     reads like a note pinned to the page (Caveat handwriting) */
   .entry-body .callout {
     margin: 26px 0;
-    padding: 20px 24px;
-    border-radius: 10px;
-    background: rgba(40, 226, 145, 0.06);
-    border-left: 3px solid var(--emerald);
+    padding: 22px 26px;
+    border-radius: 12px;
+    background: rgba(40, 226, 145, 0.07);
+    border: 1.5px solid rgba(40, 226, 145, 0.22);
+    font-family: 'Caveat', cursive;
+    font-size: clamp(20px, 2.1vw, 23px);
+    line-height: 1.5;
+    color: var(--text-primary);
   }
   .entry-body .callout > p { margin: 0; }
-  .entry-body .callout > p + p { margin-top: 1.1em; }
-  .entry-body .callout > p.punch { margin: 22px 0 0; }
+  .entry-body .callout > p + p { margin-top: 0.9em; }
+  .entry-body .callout em { font-style: italic; color: var(--emerald); }
+  .entry-body .callout .dragon { color: var(--coral); font-weight: 700; }
+  .entry-body .callout > p.punch {
+    margin: 18px 0 6px;
+    border-left: 3px solid var(--emerald);
+    padding: 6px 0 6px 20px;
+    font-family: 'Caveat', cursive;
+    font-style: normal;
+    font-weight: 700;
+    font-size: clamp(22px, 2.5vw, 27px);
+    background: transparent;
+  }
 
-  /* in-body aside — for tangents, philosophical detours, side-thoughts */
+  /* in-body aside — for tangents/philosophical detours, also handwritten */
   .entry-body .aside {
     margin: 22px 0;
-    padding: 14px 22px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.025);
-    border-left: 2px solid var(--text-tertiary);
-    font-size: 16.5px;
+    padding: 16px 24px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed var(--border-mid);
+    font-family: 'Caveat', cursive;
+    font-size: clamp(20px, 2vw, 22px);
+    line-height: 1.45;
     color: var(--text-secondary);
   }
   .entry-body .aside > p { margin: 0; }
-  .entry-body .aside > p + p { margin-top: 12px; }
-  .entry-body .aside em { color: var(--text-primary); }
+  .entry-body .aside > p + p { margin-top: 0.7em; }
+  .entry-body .aside em { font-style: italic; color: var(--text-primary); }
+
+  /* image-style illustration (replacing inline SVGs with Josh's drawings) */
+  .body-illustration-img {
+    display: block;
+    margin: 28px auto 8px;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+  }
+  .illustration-caption {
+    display: block;
+    margin: 0 auto 24px;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--text-tertiary);
+    transform: rotate(-1.5deg);
+    max-width: 240px;
+  }
   .dict-label {
     font-family: 'Caveat', cursive;
     font-size: 28px;
@@ -739,18 +776,8 @@
               of correct pasta, and correct sauce is next level.
             </p>
 
-            <svg class="body-illustration" viewBox="0 0 200 160" aria-hidden="true">
-              <path class="draw" d="M55 80 C 50 65 60 55 55 38" fill="none" stroke="#28E291" stroke-width="2" stroke-linecap="round"/>
-              <path class="draw" d="M80 78 C 75 60 85 50 80 32" fill="none" stroke="#28E291" stroke-width="2" stroke-linecap="round"/>
-              <path class="draw" d="M105 76 C 105 60 95 50 110 30" fill="none" stroke="#28E291" stroke-width="2" stroke-linecap="round"/>
-              <path class="draw" d="M130 78 C 130 60 120 50 135 34" fill="none" stroke="#28E291" stroke-width="2" stroke-linecap="round"/>
-              <path class="draw" d="M150 82 C 155 64 145 55 158 38" fill="none" stroke="#28E291" stroke-width="2" stroke-linecap="round"/>
-              <path class="draw" d="M25 95 Q 100 80 175 95 Q 100 108 25 95 Z" fill="none" stroke="#F78154" stroke-width="2.6" stroke-linecap="round"/>
-              <path class="draw" d="M30 97 C 34 130 65 150 100 150 C 135 150 166 130 170 97" fill="none" stroke="#F78154" stroke-width="2.6" stroke-linecap="round"/>
-              <circle cx="68" cy="60" r="2.5" fill="#F78154" class="no-roughen"/>
-              <circle cx="100" cy="50" r="2" fill="#F78154" class="no-roughen"/>
-              <circle cx="128" cy="62" r="2.5" fill="#F78154" class="no-roughen"/>
-            </svg>
+            <img class="body-illustration-img" src="/pasta.svg" alt="" loading="lazy">
+            <span class="illustration-caption">spaghetti has eyes (it's watching)</span>
 
             <p>
               A red vs white sauce. A thick vs thin. Chunky vs smooth. The sauce <em>makes</em> the game.
@@ -946,20 +973,7 @@
               wanna join in somehow.
             </p>
 
-            <svg class="body-illustration" viewBox="0 0 220 180" aria-hidden="true">
-              <path class="draw" d="M30 30 L 100 30 L 100 150 L 30 145 Z" fill="none" stroke="#9381FF" stroke-width="2.4" stroke-linecap="round"/>
-              <path class="draw" d="M100 30 L 190 35 L 195 150 L 100 150" fill="none" stroke="#9381FF" stroke-width="2.4" stroke-linecap="round"/>
-              <line x1="40" y1="60" x2="90" y2="60" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
-              <line x1="40" y1="75" x2="85" y2="75" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
-              <line x1="40" y1="90" x2="88" y2="90" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
-              <line x1="40" y1="105" x2="80" y2="105" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
-              <line x1="110" y1="65" x2="180" y2="65" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
-              <line x1="110" y1="80" x2="175" y2="80" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
-              <line x1="110" y1="95" x2="180" y2="95" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
-              <line x1="110" y1="110" x2="170" y2="110" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
-              <path class="draw" d="M150 130 L 200 90" fill="none" stroke="#28E291" stroke-width="4" stroke-linecap="round"/>
-              <circle cx="148" cy="132" r="2.5" fill="#28E291" class="no-roughen"/>
-            </svg>
+            <img class="body-illustration-img" src="/notebook.svg" alt="" loading="lazy">
 
             <p>
               Writing about our failings, what we're trying to achieve, how we are
@@ -991,10 +1005,8 @@
               We can <em>see</em>, <em>smell</em>, <em>touch</em>, <em>taste</em> and <em>hear</em> the sauce, but we can't make it.
             </p>
 
-            <svg class="body-illustration" viewBox="0 0 180 180" aria-hidden="true">
-              <path class="draw" d="M90 150 C 50 120 25 90 25 65 C 25 45 40 30 60 30 C 75 30 85 40 90 50 C 95 40 105 30 120 30 C 140 30 155 45 155 65 C 155 90 130 120 90 150 Z" fill="none" stroke="#F78154" stroke-width="2.6" stroke-linecap="round"/>
-              <text x="90" y="172" text-anchor="middle" font-family="Caveat, cursive" font-size="16" fill="#A8A6B8" class="no-roughen">(yours)</text>
-            </svg>
+            <img class="body-illustration-img" src="/heart.svg" alt="" loading="lazy">
+            <span class="illustration-caption">(the literal one)</span>
 
             <p>
               Yes, above we spoke about the sauce of the <em>game</em>, but the other sauce is <em>you</em>
@@ -1037,15 +1049,6 @@
                 <path class="draw" pathLength="1" d="M5 10 Q 30 3 60 9 T 110 9 T 155 9" fill="none" stroke="#28E291" stroke-width="3.2" stroke-linecap="round"/>
               </svg></span>.
             </p>
-
-            <svg class="body-illustration" viewBox="0 0 220 140" aria-hidden="true">
-              <path class="draw" d="M20 110 Q 60 105 100 95" fill="none" stroke="#6B6980" stroke-width="2.6" stroke-linecap="round"/>
-              <path class="draw" d="M100 95 Q 140 70 195 35" fill="none" stroke="#28E291" stroke-width="2.6" stroke-linecap="round"/>
-              <path class="draw" d="M100 95 Q 140 100 195 115" fill="none" stroke="#A8A6B8" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="4,4"/>
-              <path class="draw" d="M195 35 L 184 40 L 188 28 Z" fill="#28E291" stroke="#28E291" stroke-width="2"/>
-              <text x="200" y="60" text-anchor="end" font-family="Caveat, cursive" font-size="16" font-weight="700" fill="#28E291" class="no-roughen">partner</text>
-              <text x="200" y="135" text-anchor="end" font-family="Caveat, cursive" font-size="14" fill="#A8A6B8" class="no-roughen">publisher</text>
-            </svg>
 
             <p>
               We'll help develop that sauce, get it to a slow burn, get past the boring bits, document it for the world to see, and hopefully find a minor stake of popularity somewhere in the cosmos.
