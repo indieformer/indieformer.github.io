@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy | Indieformer</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta name="description" content="What we collect, what we don't, and what we do with any of it. The boring necessary one. But honest.">
+<link rel="canonical" href="https://indieformer.com/privacy/">
+<meta name="robots" content="index, follow">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+  :root {
+    --emerald: #28E291; --coral: #F78154; --periwinkle: #9381FF;
+    --shadow: #262730; --shadow-mid: #2F3040;
+    --text-primary: #F0EEE8; --text-secondary: #A8A6B8; --text-tertiary: #6B6980;
+    --border: rgba(255, 255, 255, 0.08); --border-mid: rgba(255, 255, 255, 0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; overscroll-behavior-y: none; }
+  body {
+    position: relative;
+    background: var(--shadow);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
+    background-size: 26px 26px;
+    font-family: 'Sora', Arial, sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 20px;
+    overflow-x: hidden;
+  }
+
+  .crop {
+    position: absolute; width: 18px; height: 18px;
+    opacity: 0; animation: fade 0.6s ease 0.2s forwards;
+    z-index: 5; pointer-events: none;
+  }
+  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
+  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+  .crop.bl { bottom: 20px; left: 20px; }
+  .crop.br { bottom: 20px; right: 20px; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  .site-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1000px; margin: 0 auto; padding: 14px 56px;
+    position: relative; z-index: 4;
+  }
+  a.brand { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s ease; }
+  a.brand img { display: block; height: 40px; width: 40px; }
+  a.brand:hover { opacity: 0.82; }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a {
+    font-family: 'Sora'; font-size: 15px; font-weight: 500;
+    color: var(--text-secondary); text-decoration: none;
+    position: relative; transition: color 0.2s;
+  }
+  .primary-nav a:hover { color: var(--text-primary); }
+
+  .section {
+    position: relative;
+    width: 100%; max-width: 1000px; margin: 0 auto;
+    padding: 40px 56px 16px;
+    z-index: 1;
+  }
+  .col { max-width: 720px; position: relative; z-index: 2; }
+  h1 {
+    font-size: clamp(38px, 6vw, 56px);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.025em;
+    margin-bottom: 14px;
+  }
+  .page-lede {
+    font-family: 'Caveat', cursive; font-size: 26px; color: var(--coral);
+    transform: rotate(-1deg); display: inline-block; margin-bottom: 18px;
+  }
+  .page-desc { color: var(--text-secondary); line-height: 1.65; font-size: 16px; max-width: 560px; }
+  .updated {
+    font-family: 'Caveat', cursive; font-size: 18px; color: var(--text-tertiary);
+    margin-top: 8px; display: inline-block;
+  }
+
+  .legal {
+    max-width: 1000px; margin: 0 auto;
+    padding: 24px 56px 8px;
+    position: relative; z-index: 2;
+  }
+  .legal-inner { max-width: 720px; }
+  .legal h2 {
+    font-size: 22px; font-weight: 700; line-height: 1.2;
+    margin-top: 36px; margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+  .legal h2:first-of-type { margin-top: 8px; }
+  .legal p { color: var(--text-secondary); line-height: 1.7; font-size: 16px; margin-bottom: 14px; }
+  .legal ul { margin: 8px 0 18px 22px; color: var(--text-secondary); line-height: 1.7; font-size: 16px; }
+  .legal li { margin-bottom: 6px; }
+  .legal a { color: var(--emerald); text-decoration: none; border-bottom: 1px solid rgba(40, 226, 145, 0.42); }
+  .legal a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .legal em { color: var(--text-primary); font-style: italic; }
+  .legal .short {
+    border-left: 3px solid var(--emerald);
+    padding: 4px 0 4px 20px;
+    margin: 18px 0 24px;
+    font-family: 'Caveat', cursive;
+    font-size: 22px; line-height: 1.45;
+    color: var(--text-primary);
+  }
+
+  .site-footer {
+    max-width: 1000px; margin: 60px auto 0;
+    padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px;
+    font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+    position: relative; z-index: 2;
+  }
+  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
+  .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
+  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta {
+    grid-column: 1 / -1; border-top: 1px solid var(--border);
+    margin-top: 22px; padding-top: 18px;
+    font-size: 13px; color: var(--text-tertiary);
+    display: flex; flex-wrap: wrap; gap: 14px;
+  }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta .sep { color: var(--text-tertiary); opacity: 0.5; }
+
+  @media (max-width: 820px) {
+    body { padding: 20px 14px; }
+    .section, .legal { padding-left: 24px; padding-right: 24px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
+  }
+
+  /* ── loading overlay (Lottie gem) ─────────────────────────── */
+  #loader-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #262730;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.45s ease;
+  }
+  #loader-overlay.gone { opacity: 0; pointer-events: none; }
+  #loader-gem { width: 140px; height: 140px; }
+  @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
+</style>
+</head>
+<body>
+
+<div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+  (function () {
+    var o = document.getElementById('loader-overlay');
+    if (!o) return;
+    var anim;
+    try {
+      if (typeof lottie !== 'undefined') {
+        anim = lottie.loadAnimation({
+          container: document.getElementById('loader-gem'),
+          renderer: 'svg', loop: true, autoplay: true,
+          path: '/loading-gem.json'
+        });
+      }
+    } catch (e) {}
+    var shown = Date.now();
+    function hide() {
+      if (o.classList.contains('gone')) return;
+      o.classList.add('gone');
+      setTimeout(function () {
+        try { if (anim) anim.destroy(); } catch (e) {}
+        if (o.parentNode) o.parentNode.removeChild(o);
+      }, 500);
+    }
+    function maybeHide() { setTimeout(hide, Math.max(0, 400 - (Date.now() - shown))); }
+    if (document.readyState === 'complete') maybeHide();
+    else window.addEventListener('load', maybeHide);
+    setTimeout(hide, 4000);
+  })();
+</script>
+
+<span class="crop bl"></span><span class="crop br"></span>
+
+<header class="site-nav">
+  <a class="brand" href="/" aria-label="Indieformer home"><img src="/logo.png" alt="Indieformer" width="40" height="40"></a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular/">The Approach</a>
+    <a href="/notes/">Notes</a>
+    <a href="/scorchpot/">Scorchpot</a>
+  </nav>
+</header>
+
+<section class="section">
+  <div class="col">
+    <h1>Privacy.</h1>
+    <p class="page-lede">the boring necessary one.</p>
+    <p class="page-desc">What we collect, what we don't, and what we do with any of it. Written by humans, no template ghosts.</p>
+    <p class="updated">last updated: 30 May 2026</p>
+  </div>
+</section>
+
+<main class="legal">
+  <div class="legal-inner">
+
+    <p class="short">
+      Short version: we don't run ads, don't sell anything to data brokers, and don't have a Google Analytics on the site. If you email us, we read it. If you subscribe to the newsletter, Beehiiv holds your email. That's about it.
+    </p>
+
+    <h2>Who "we" are</h2>
+    <p>
+      Indieformer is a small indie game publisher run by Josh Chiodo and Clem (Moravian Games), based in Melbourne, Australia. We can be reached at <a href="mailto:pr@indieformer.com">pr@indieformer.com</a>. When this page says <em>we</em>, it means us.
+    </p>
+
+    <h2>What we collect</h2>
+    <ul>
+      <li><strong>If you email us</strong> (via the Let's chat button or directly to <a href="mailto:pr@indieformer.com">pr@indieformer.com</a>) — your email address, your name if you give it, and whatever you wrote. Standard Gmail-style stuff.</li>
+      <li><strong>If you subscribe to the newsletter</strong> — your email goes into Beehiiv. We see your email, your subscribe date, and aggregate engagement (opens, clicks). We don't track which specific links you click in a way we'd ever look at individually; we just look at totals.</li>
+      <li><strong>If you visit the site</strong> — GitHub Pages (our host) keeps standard server logs: IP address, browser, what page you asked for, and when. We don't run our own analytics on top of that. No Google Analytics. No Meta Pixel. No fingerprinting scripts.</li>
+    </ul>
+
+    <h2>What we don't collect</h2>
+    <ul>
+      <li>We don't have user accounts, so no passwords, no profiles.</li>
+      <li>We don't take payments on this site, so no card or bank info ever touches us.</li>
+      <li>We don't run third-party advertising trackers.</li>
+      <li>We don't sell, rent, or trade any of the above to anyone. Ever.</li>
+    </ul>
+
+    <h2>Who sees what we collect</h2>
+    <p>
+      Three services help us run this thing, and they see different pieces of it:
+    </p>
+    <ul>
+      <li><strong>Beehiiv</strong> stores the newsletter list and sends the issues. Their privacy policy: <a href="https://www.beehiiv.com/privacy" rel="noopener">beehiiv.com/privacy</a>.</li>
+      <li><strong>GitHub Pages</strong> hosts the site you're reading. Their privacy: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub's privacy statement</a>.</li>
+      <li><strong>Google Fonts &amp; cdnjs</strong> serve the fonts and one animation library this page loads. Your browser makes a request to them. We don't share anything proactively; that's just how the web works.</li>
+    </ul>
+
+    <h2>Cookies</h2>
+    <p>
+      The site itself doesn't set any cookies. If you subscribe to the newsletter, Beehiiv may set its own. That's the only one on the whole property. No banner because there's nothing to consent to that isn't already covered by you choosing to subscribe.
+    </p>
+
+    <h2>Your rights</h2>
+    <p>
+      If we have something on you, you can ask for it, ask us to delete it, or ask us to stop using it. Email <a href="mailto:pr@indieformer.com">pr@indieformer.com</a> and we'll handle it within 30 days. The newsletter has an unsubscribe link in every issue if all you want is to stop hearing from us.
+    </p>
+    <p>
+      If you're in the EU, UK, or California, you have a longer list of named rights under the GDPR, UK GDPR, and CCPA respectively. Same email works for any of them.
+    </p>
+
+    <h2>Kids</h2>
+    <p>
+      The site isn't aimed at anyone under 16, and we don't knowingly collect anything from anyone under that age. If you think we have, email us and we'll delete it.
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      If we change anything material here, the date at the top moves and we'll mention it in a newsletter. If we change something minor (typo, clarification), we just update it quietly.
+    </p>
+
+    <h2>How to get hold of us</h2>
+    <p>
+      <a href="mailto:pr@indieformer.com">pr@indieformer.com</a>. We read everything.
+    </p>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-col brand-col">
+    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <li><a href="https://essay.indieformer.com">How to Really Make a Game</a></li>
+      <li><a href="https://indieformer.beehiiv.com/press-kit-guide">Press Kit Guide</a></li>
+      <li><a href="https://indieformer.beehiiv.com/steam-marketing-guide">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+      <li><a href="https://waypoint.indieformer.com">Waypoint archive</a></li>
+      <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
+    </ul>
+  </div>
+  <p class="footer-meta">
+    <span>© 2026 Indieformer.</span>
+    <span class="sep">·</span>
+    <a href="/privacy/">Privacy</a>
+    <span class="sep">·</span>
+    <a href="/terms/">Terms</a>
+  </p>
+</footer>
+
+</body>
+</html>
