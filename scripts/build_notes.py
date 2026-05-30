@@ -312,7 +312,6 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 </head>
 <body>
 
-<span class="crop tl"></span><span class="crop tr"></span>
 <span class="crop bl"></span><span class="crop br"></span>
 
 <header class="site-nav">
