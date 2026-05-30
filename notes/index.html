@@ -103,9 +103,9 @@
     color: var(--text-secondary); line-height: 1.65; font-size: 16px; max-width: 560px;
   }
 
-  .notes-list { max-width: 780px; margin: 0 auto; padding: 24px 56px 8px; position: relative; z-index: 2; }
+  .notes-list { max-width: 1000px; margin: 0 auto; padding: 24px 56px 8px; position: relative; z-index: 2; }
   .notes-list .note-card:first-of-type { border-top: 1px solid var(--border); }
-  .note-card { padding: 22px 0; border-bottom: 1px solid var(--border); }
+  .note-card { padding: 22px 0; border-bottom: 1px solid var(--border); max-width: 720px; }
   .note-link {
     display: grid; grid-template-columns: 1fr; gap: 0;
     text-decoration: none; color: inherit;
@@ -145,7 +145,7 @@
   .note-excerpt { font-size: 15px; line-height: 1.6; color: var(--text-secondary); }
 
   .archive-link {
-    max-width: 780px; margin: 0 auto; padding: 24px 56px 8px;
+    max-width: 1000px; margin: 0 auto; padding: 24px 56px 8px;
     font-size: 15px; color: var(--text-tertiary);
   }
   .archive-link a {
@@ -188,6 +188,18 @@
     .note-card.has-thumb .note-link { grid-template-columns: 100px 1fr; gap: 14px; }
     .note-thumb { width: 100px; }
   }
+
+  /* ── loading overlay (Lottie gem) ─────────────────────────── */
+  #loader-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #262730;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.45s ease;
+  }
+  #loader-overlay.gone { opacity: 0; pointer-events: none; }
+  #loader-gem { width: 140px; height: 140px; }
+  @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
+
   @media (max-width: 500px) {
     .note-card.has-thumb .note-link { grid-template-columns: 1fr; gap: 12px; }
     .note-thumb { width: 100%; }
@@ -195,6 +207,40 @@
 </style>
 </head>
 <body>
+
+<div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+  (function () {
+    var o = document.getElementById('loader-overlay');
+    if (!o) return;
+    var anim;
+    try {
+      if (typeof lottie !== 'undefined') {
+        anim = lottie.loadAnimation({
+          container: document.getElementById('loader-gem'),
+          renderer: 'svg', loop: true, autoplay: true,
+          path: '/loading-gem.json'
+        });
+      }
+    } catch (e) {}
+    var shown = Date.now();
+    function hide() {
+      if (o.classList.contains('gone')) return;
+      o.classList.add('gone');
+      setTimeout(function () {
+        try { if (anim) anim.destroy(); } catch (e) {}
+        if (o.parentNode) o.parentNode.removeChild(o);
+      }, 500);
+    }
+    function maybeHide() {
+      setTimeout(hide, Math.max(0, 400 - (Date.now() - shown)));
+    }
+    if (document.readyState === 'complete') maybeHide();
+    else window.addEventListener('load', maybeHide);
+    setTimeout(hide, 4000);
+  })();
+</script>
 
 <span class="crop bl"></span><span class="crop br"></span>
 
