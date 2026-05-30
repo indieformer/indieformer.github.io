@@ -701,6 +701,10 @@
     .bg-line path { stroke-dashoffset: 0; }
   }
 
+  /* prevent iOS rubber-band overscroll from making it look like the page has
+     empty space past the bottom when the accordion grows mid-scroll */
+  html, body { overscroll-behavior-y: none; }
+
   /* ── loading overlay (Lottie gem) ─────────────────────────── */
   #loader-overlay {
     position: fixed; inset: 0; z-index: 9999;
@@ -1175,20 +1179,21 @@
       void wrap.offsetHeight;
       wrap.style.height = wrap.scrollHeight + 'px';
 
-      // siblings have already snap-closed (see click handler), so the layout is
-      // stable and rect.top is accurate. clamp to CURRENT max scroll so we never
-      // ask the page to scroll past its bottom — on mobile that creates a phantom
-      // empty space below the footer while the open transition plays out.
-      var rect = entry.getBoundingClientRect();
-      var target = window.pageYOffset + rect.top - 24;
-      var maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-      target = Math.max(0, Math.min(target, maxScroll));
-      window.scrollTo({ top: target, behavior: 'smooth' });
-
       function done(e) {
         if (e.propertyName !== 'height') return;
         wrap.removeEventListener('transitionend', done);
         wrap.style.height = 'auto';
+        // scroll AFTER the height transition completes — by now the document is
+        // at its final height, so the scroll target is reachable without any
+        // phantom empty space below the footer.
+        var rect = entry.getBoundingClientRect();
+        var target = window.pageYOffset + rect.top - 24;
+        var maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        target = Math.max(0, Math.min(target, maxScroll));
+        // skip if we're already pretty close — avoids a tiny correcting jitter
+        if (Math.abs(window.pageYOffset - target) > 8) {
+          window.scrollTo({ top: target, behavior: 'smooth' });
+        }
       }
       wrap.addEventListener('transitionend', done);
     }
