@@ -1130,27 +1130,14 @@
       void wrap.offsetHeight;
       wrap.style.height = wrap.scrollHeight + 'px';
 
-      // figure out where the entry will land AFTER sibling close animations finish.
-      // entries above this one that are currently closing will shrink to 0 px,
-      // pulling this entry upward by their current rendered height — correct for that
-      // up front, otherwise smooth-scroll overshoots into the footer/empty space.
+      // siblings have already snap-closed (see click handler), so the layout is
+      // stable and rect.top is accurate. clamp to CURRENT max scroll so we never
+      // ask the page to scroll past its bottom — on mobile that creates a phantom
+      // empty space below the footer while the open transition plays out.
       var rect = entry.getBoundingClientRect();
       var target = window.pageYOffset + rect.top - 24;
-      var shrinkAbove = 0;
-      for (var i = 0; i < entries.length; i++) {
-        var other = entries[i];
-        if (other === entry) break;
-        if (other.classList.contains('closing')) {
-          var ow = other.querySelector('.entry-wrap');
-          if (ow) shrinkAbove += ow.offsetHeight;
-        }
-      }
-      target -= shrinkAbove;
-      // clamp to the document's FINAL max scroll (current scrollHeight loses shrinkAbove
-      // and gains this wrap's scrollHeight once transitions settle).
-      var futureDocHeight = document.documentElement.scrollHeight - shrinkAbove + wrap.scrollHeight;
-      var futureMaxScroll = Math.max(0, futureDocHeight - window.innerHeight);
-      target = Math.max(0, Math.min(target, futureMaxScroll));
+      var maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      target = Math.max(0, Math.min(target, maxScroll));
       window.scrollTo({ top: target, behavior: 'smooth' });
 
       function done(e) {
@@ -1161,12 +1148,21 @@
       wrap.addEventListener('transitionend', done);
     }
 
-    function closeEntry(entry) {
+    function closeEntry(entry, instant) {
       var wrap = entry.querySelector('.entry-wrap');
       if (!wrap) return;
-      // mark this entry as closing so openEntry can account for its shrinking height
-      entry.classList.add('closing');
-      // capture current height (might be 'auto') and set numeric for transition
+      if (instant) {
+        // snap close — no transition. used when opening a sibling so layout is
+        // stable for the scroll-to calc.
+        var prev = wrap.style.transition;
+        wrap.style.transition = 'none';
+        wrap.style.height = '0px';
+        entry.removeAttribute('open');
+        void wrap.offsetHeight;
+        wrap.style.transition = prev;
+        return;
+      }
+      // animated close (used when collapsing the only-open entry by tapping it again)
       wrap.style.height = wrap.scrollHeight + 'px';
       void wrap.offsetHeight;
       wrap.style.height = '0px';
@@ -1174,7 +1170,6 @@
         if (e.propertyName !== 'height') return;
         wrap.removeEventListener('transitionend', done);
         entry.removeAttribute('open');
-        entry.classList.remove('closing');
       }
       wrap.addEventListener('transitionend', done);
     }
@@ -1185,11 +1180,12 @@
       summary.addEventListener('click', function (e) {
         e.preventDefault();
         if (entry.hasAttribute('open')) {
-          closeEntry(entry);
+          closeEntry(entry, false);
         } else {
-          // accordion — close any open siblings
+          // accordion — snap any open siblings closed instantly so the scroll-to
+          // calc in openEntry sees the post-collapse layout, not mid-transition.
           entries.forEach(function (other) {
-            if (other !== entry && other.hasAttribute('open')) closeEntry(other);
+            if (other !== entry && other.hasAttribute('open')) closeEntry(other, true);
           });
           openEntry(entry);
         }
