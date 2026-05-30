@@ -496,6 +496,8 @@
     transition: transform 0.3s ease, filter 0.3s ease;
   }
   a.tracker:hover { transform: rotate(2deg) scale(1.025); filter: brightness(1.1); }
+  /* desktop shows the absolute-positioned tracker, mobile shows the inline one (under the lead paragraph) */
+  .tracker-inline { display: none; }
   .tracker svg.frame { position: absolute; inset: -14px; width: calc(100% + 28px); height: calc(100% + 28px); overflow: visible; }
 
   /* hand-drawn ink */
@@ -530,11 +532,19 @@
       width: 100%; max-width: 290px; height: 300px;
       margin: 40px auto 0;
     }
-    .tracker {
+    /* on mobile, hide the absolute-positioned desktop one and show the inline one under "real-time" */
+    .tracker:not(.tracker-inline) { display: none; }
+    .tracker-inline {
+      display: block;
       position: static;
       transform: rotate(2deg);
       width: 100%; max-width: 320px; height: 200px;
-      margin: 40px auto 0;
+      margin: 24px auto 8px;
+    }
+    /* soft fade on the photo so it doesn't have a hard rectangular edge against the dot grid */
+    .photo .frame-img {
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, rgba(0,0,0,0.4) 90%, transparent 100%);
+              mask-image: linear-gradient(to bottom, #000 0%, #000 70%, rgba(0,0,0,0.4) 90%, transparent 100%);
     }
     .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
     .primary-nav { gap: 18px; }
@@ -651,6 +661,14 @@
         <path class="draw" pathLength="1" d="M268 56 L 252 48 L 254 66 Z" fill="#F78154" stroke="#F78154" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation-delay:1.85s"/>
       </svg></span>.
     </p>
+
+    <a class="tracker tracker-inline" href="https://waypoint.indieformer.com/" rel="noopener" aria-label="Visit the Waypoint archive, the decommissioned Indieformer release tracker">
+      <img class="frame-img" src="/waypoint-tracker.jpg" alt="Waypoint, the old Indieformer release tracker">
+      <div class="place-label">
+        <span class="pl-1">Waypoint</span>
+        <span class="pl-2">click to visit the archive</span>
+      </div>
+    </a>
 
     <p>
       But as we got familiar with the narrative of publishing our own game, we saw that holding
