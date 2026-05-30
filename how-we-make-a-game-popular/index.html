@@ -231,7 +231,7 @@
     font-size: clamp(22px, 2.4vw, 26px);
     line-height: 1.45;
     color: var(--text-primary);
-    max-width: 740px;
+    max-width: 780px;
   }
   .preamble-box em { font-style: italic; color: var(--coral); }
   .preamble-box::before {
@@ -406,7 +406,7 @@
     font-size: 18px;
     line-height: 1.8;
     color: var(--text-primary);
-    max-width: 680px;
+    max-width: 780px;
   }
   .entry-body p + p { margin-top: 1.2em; }
   .entry-body em { font-style: italic; }
@@ -498,7 +498,8 @@
   .crop.bl { bottom: 20px; left: 20px; }
   .crop.br { bottom: 20px; right: 20px; }
 
-  .col { max-width: 600px; position: relative; z-index: 2; }
+  /* one shared content width across the page: hero col, preamble box, dictionary entries, and body text all line up */
+  .col { max-width: 780px; position: relative; z-index: 2; }
 
   /* ── small "← back to home" link at top of hero ──── */
   .back-home {
@@ -779,7 +780,7 @@
             </p>
 
             <img class="body-illustration-img" src="/pasta.svg" alt="" loading="lazy">
-            <span class="illustration-caption">spaghetti has eyes (it's watching)</span>
+            <span class="illustration-caption">a different kind of saucy pasta</span>
 
             <p>
               A red vs white sauce. A thick vs thin. Chunky vs smooth. The sauce <em>makes</em> the game.
