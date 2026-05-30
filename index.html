@@ -316,8 +316,21 @@
   }
   .photo:has(.frame-img[src]:not([src=""])) .place-label,
   .tracker:has(.frame-img[src]:not([src=""])) .place-label { display: none; }
-  .place-label .pl-1 { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
-  .place-label .pl-2 { font-family: 'Caveat', cursive; font-size: 26px; color: var(--periwinkle); }
+  /* placeholders read as a handwritten sticky-note — both lines in Caveat,
+     no uppercase letter-spaced kicker (which was the AI-trope eyebrow) */
+  .place-label .pl-1 {
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    transform: rotate(-1deg);
+  }
+  .place-label .pl-2 {
+    font-family: 'Caveat', cursive;
+    font-size: 21px;
+    color: var(--periwinkle);
+    transform: rotate(1deg);
+  }
   .tracker .place-label .pl-2 { color: var(--coral); }
 
   /* ── the origin story ───────────────────────────────── */
