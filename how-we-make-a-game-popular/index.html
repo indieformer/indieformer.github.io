@@ -705,7 +705,6 @@
 <body>
 
 <!-- registration marks bracket the whole page (one set, not per section) -->
-<span class="crop tl"></span><span class="crop tr"></span>
 <span class="crop bl"></span><span class="crop br"></span>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1130,10 +1129,30 @@
       // force layout flush so the transition has a starting frame
       void wrap.offsetHeight;
       wrap.style.height = wrap.scrollHeight + 'px';
-      // bring the entry top to the viewport (with a small offset for the nav)
+
+      // figure out where the entry will land AFTER sibling close animations finish.
+      // entries above this one that are currently closing will shrink to 0 px,
+      // pulling this entry upward by their current rendered height — correct for that
+      // up front, otherwise smooth-scroll overshoots into the footer/empty space.
       var rect = entry.getBoundingClientRect();
       var target = window.pageYOffset + rect.top - 24;
+      var shrinkAbove = 0;
+      for (var i = 0; i < entries.length; i++) {
+        var other = entries[i];
+        if (other === entry) break;
+        if (other.classList.contains('closing')) {
+          var ow = other.querySelector('.entry-wrap');
+          if (ow) shrinkAbove += ow.offsetHeight;
+        }
+      }
+      target -= shrinkAbove;
+      // clamp to the document's FINAL max scroll (current scrollHeight loses shrinkAbove
+      // and gains this wrap's scrollHeight once transitions settle).
+      var futureDocHeight = document.documentElement.scrollHeight - shrinkAbove + wrap.scrollHeight;
+      var futureMaxScroll = Math.max(0, futureDocHeight - window.innerHeight);
+      target = Math.max(0, Math.min(target, futureMaxScroll));
       window.scrollTo({ top: target, behavior: 'smooth' });
+
       function done(e) {
         if (e.propertyName !== 'height') return;
         wrap.removeEventListener('transitionend', done);
@@ -1145,6 +1164,8 @@
     function closeEntry(entry) {
       var wrap = entry.querySelector('.entry-wrap');
       if (!wrap) return;
+      // mark this entry as closing so openEntry can account for its shrinking height
+      entry.classList.add('closing');
       // capture current height (might be 'auto') and set numeric for transition
       wrap.style.height = wrap.scrollHeight + 'px';
       void wrap.offsetHeight;
@@ -1153,6 +1174,7 @@
         if (e.propertyName !== 'height') return;
         wrap.removeEventListener('transitionend', done);
         entry.removeAttribute('open');
+        entry.classList.remove('closing');
       }
       wrap.addEventListener('transitionend', done);
     }
