@@ -23,7 +23,7 @@ The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a 
 
 ## Contact
 
-- Email: pr@indieformer.com
+- Email: support@indieformer.com
 - Newsletter signup: embedded on the homepage at indieformer.com
 - GitHub: https://github.com/indieformer
 
