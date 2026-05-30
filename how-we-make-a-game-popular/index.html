@@ -365,7 +365,10 @@
     color: var(--text-secondary);
     font-size: 17px;
     line-height: 1.55;
-    max-width: 640px;
+    /* def lives on its own row beneath term+pos+toggle and stretches to the
+       same right edge so the two rows line up */
+    order: 99;
+    max-width: none;
   }
   .toggle {
     margin-left: auto;
@@ -375,7 +378,6 @@
     color: var(--text-tertiary);
     transition: color 0.25s ease;
     white-space: nowrap;
-    order: 99;
   }
   .entry[open] .toggle { color: var(--emerald); }
   .entry .toggle .open-label { display: inline; }
@@ -1004,7 +1006,7 @@
             </p>
 
             <img class="body-illustration-img" src="/heart.svg" alt="" loading="lazy">
-            <span class="illustration-caption">passion, anatomically</span>
+            <span class="illustration-caption">your passion (the organ)</span>
 
             <p>
               Yes, above we spoke about the sauce of the <em>game</em>, but the other sauce is <em>you</em>
