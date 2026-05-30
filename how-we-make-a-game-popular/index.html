@@ -326,13 +326,44 @@
   .entry-body em { font-style: italic; }
   .entry-body strong { font-weight: 700; color: var(--text-primary); }
   .entry-body p.punch {
+    position: relative;
+    margin: 34px 0 34px 6px;
+    padding: 6px 0 6px 26px;
+    border-left: 3px solid var(--coral);
     font-family: 'Sora', sans-serif;
     font-size: clamp(20px, 2.6vw, 26px);
     font-weight: 700;
+    font-style: italic;
     color: var(--text-primary);
     letter-spacing: -0.015em;
-    margin: 22px 0;
-    line-height: 1.4;
+    line-height: 1.45;
+  }
+
+  /* read-time badge on the closed summary */
+  .read-time {
+    font-family: 'Caveat', cursive;
+    font-size: 19px;
+    color: var(--text-tertiary);
+    align-self: center;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+
+  /* hand-drawn illustration anchored within an entry body */
+  .body-illustration {
+    display: block;
+    margin: 28px auto;
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    overflow: visible;
+  }
+  .body-illustration path { filter: url(#roughen); }
+  .body-illustration .no-roughen { filter: none; }
+  .body-illustration .draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 1.4s ease forwards;
   }
   .dragon { font-style: italic; color: var(--coral); font-weight: 600; }
 
@@ -644,12 +675,14 @@
       <summary>
         <h2 class="term">the sauce</h2>
         <span class="pos">n.</span>
+        <span class="read-time">2 min</span>
         <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">the part of a game only its developer could have made. the thing people remember.</span>
       </summary>
       <div class="entry-wrap">
         <div class="entry-body">
           <div class="body-inner">
+
             <p>
               Let's treat your game like a bowl of pasta. The foundation is the Pasta. There can be many
               types of foundations. They're all similarly built, and can be swapped out for another
@@ -658,37 +691,61 @@
               </svg></span> is what makes the pasta memorable. And the combination
               of correct pasta, and correct sauce is next level.
             </p>
+
+            <svg class="body-illustration" viewBox="0 0 200 160" aria-hidden="true">
+              <path class="draw" d="M55 80 C 50 65 60 55 55 38" fill="none" stroke="#28E291" stroke-width="2" stroke-linecap="round"/>
+              <path class="draw" d="M80 78 C 75 60 85 50 80 32" fill="none" stroke="#28E291" stroke-width="2" stroke-linecap="round"/>
+              <path class="draw" d="M105 76 C 105 60 95 50 110 30" fill="none" stroke="#28E291" stroke-width="2" stroke-linecap="round"/>
+              <path class="draw" d="M130 78 C 130 60 120 50 135 34" fill="none" stroke="#28E291" stroke-width="2" stroke-linecap="round"/>
+              <path class="draw" d="M150 82 C 155 64 145 55 158 38" fill="none" stroke="#28E291" stroke-width="2" stroke-linecap="round"/>
+              <path class="draw" d="M25 95 Q 100 80 175 95 Q 100 108 25 95 Z" fill="none" stroke="#F78154" stroke-width="2.6" stroke-linecap="round"/>
+              <path class="draw" d="M30 97 C 34 130 65 150 100 150 C 135 150 166 130 170 97" fill="none" stroke="#F78154" stroke-width="2.6" stroke-linecap="round"/>
+              <circle cx="68" cy="60" r="2.5" fill="#F78154" class="no-roughen"/>
+              <circle cx="100" cy="50" r="2" fill="#F78154" class="no-roughen"/>
+              <circle cx="128" cy="62" r="2.5" fill="#F78154" class="no-roughen"/>
+            </svg>
+
             <p>
               A red vs white sauce. A thick vs thin. Chunky vs smooth. The sauce <em>makes</em> the game.
               But if the pasta is crap, the sauce won't save it.
             </p>
+
             <p>
               We look for the pasta — a game with a good foundation. And then we listen for the sauce.
               What are you combining it with to make a <span class="circ">killer combo<svg class="circ-ring ink" viewBox="0 0 130 30" preserveAspectRatio="none" aria-hidden="true">
                 <path class="draw" pathLength="1" d="M8 16 C 12 4 50 -2 65 2 C 85 4 124 6 122 16 C 120 26 80 30 65 28 C 30 26 4 24 8 16" fill="none" stroke="#F78154" stroke-width="2" stroke-linecap="round"/>
               </svg></span>?
             </p>
+
             <p>
               That sauce is unique to every game, and it's the thing we focus on projecting. Not always
               the thing that gets marketed, but the thing people remember.
             </p>
+
             <p>
               Take Feed the Scorchpot (FtS). The sauce was obvious — it's the
               <span class="dragon">Dragon</span>. Spotting that was the easy part. The work was
               <em>personifying</em> it.
             </p>
+
             <p>
               So the Dragon shows up everywhere it can. In the trailers. In the in-game quips. And, most
-              importantly, in the Discord — as an actual member. Ping the Dragon on Discord? You'll get a
-              response. A good one.
+              importantly, in the Discord — as an actual member.
             </p>
+
+            <p>
+              Ping the Dragon on Discord? You'll get a response. A good one.
+            </p>
+
             <p class="punch">
               Now the Dragon isn't a character in a game you played. It's a regular in a discord you're in.
             </p>
+
             <p>
               This is no "saving grace", or "marketing genius" that turns FtS into a mega-hit. But it's
               memorable. It's the extra step that connects the game into someone's life.
             </p>
+
           </div>
         </div>
       </div>
@@ -702,33 +759,61 @@
           <path class="draw" pathLength="1" d="M12 4 C 8 8 5 13 7 19 C 9 24 14 24 17 21 C 20 18 19 13 15 8 C 13 6 13 9 12 4 Z" fill="none" stroke="#F78154" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg></h2>
         <span class="pos">n.</span>
+        <span class="read-time">1.5 min</span>
         <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">the long middle of a project where you ask "can this just be over already?" and don't quit.</span>
       </summary>
       <div class="entry-wrap">
         <div class="entry-body">
           <div class="body-inner">
+
             <p>
               There will be days where you ask yourself "can this just be over already?" That is the slow
-              burn. The culmination of development, content, marketing, feedback, features (we could list
+              burn.
+            </p>
+
+            <svg class="body-illustration" viewBox="0 0 240 140" style="max-width:260px;" aria-hidden="true">
+              <path class="no-roughen" d="M10 70 L 230 70" fill="none" stroke="#6B6980" stroke-width="1.2" stroke-dasharray="3,4"/>
+              <path class="draw" d="M10 50 Q 50 30 80 50 Q 110 120 160 110 Q 200 80 230 25" fill="none" stroke="#F78154" stroke-width="2.6" stroke-linecap="round"/>
+              <circle cx="80" cy="50" r="3" fill="#F78154" class="no-roughen"/>
+              <circle cx="135" cy="115" r="4" fill="#F78154" class="no-roughen"/>
+              <circle cx="230" cy="25" r="3" fill="#28E291" class="no-roughen"/>
+              <text x="80" y="40" text-anchor="middle" font-family="Caveat, cursive" font-size="14" fill="#A8A6B8" class="no-roughen">start</text>
+              <text x="135" y="135" text-anchor="middle" font-family="Caveat, cursive" font-size="14" fill="#F78154" class="no-roughen">the burn</text>
+              <text x="225" y="18" text-anchor="end" font-family="Caveat, cursive" font-size="14" fill="#28E291" class="no-roughen">release</text>
+            </svg>
+
+            <p>
+              The culmination of development, content, marketing, feedback, features (we could list
               for days here) — this feeling — this is where we want to sit. It will test your game to the
               nth degree, and make you question whether it's the right thing to pursue.
             </p>
+
             <p>
               Stepping back a bit, anything creative is almost a form of torture when there's the
-              expectation of money involved. Yes, you're making a game you want to play, but you're making
-              a game you need to sell as well, so you can keep making games you want to play. A "necessary
-              evil", sure — but then, isn't most of the world? Paying for water is a "necessary evil" too.
+              expectation of money involved.
             </p>
+
+            <p>
+              Yes, you're making a game you want to play, but you're making a game you need to sell
+              as well, so you can keep making games you want to play. A "necessary evil", sure — but
+              then, isn't most of the world?
+            </p>
+
+            <p>
+              Paying for water is a "necessary evil" too.
+            </p>
+
             <p>
               But the slow burn... this gives us time to come to terms with such an "evil". Perhaps even
               learn to love it. Once you realise how piercing that burn is, you definitely don't want to
               be wasting your time on something that won't turn a profit.
             </p>
-            <p>
-              Call it a philosophy, an idea, a metaphor, a stretch of time, but we've been there, and we
-              expect it with every game.
+
+            <p class="punch">
+              Call it a philosophy, an idea, a metaphor, a stretch of time. We've been there, and we expect it with every game.
             </p>
+
           </div>
         </div>
       </div>
@@ -738,30 +823,55 @@
       <summary>
         <h2 class="term">the boring list</h2>
         <span class="pos">n.</span>
+        <span class="read-time">1 min</span>
         <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">the unsexy admin work that holds every creative and marketing strategy together.</span>
       </summary>
       <div class="entry-wrap">
         <div class="entry-body">
           <div class="body-inner">
+
             <p>
               We all have an unsexy side. Game dev is no exception. Store pages, creator emails, key
               management, version management. Gameplay and screenshots at the right time. Press kits.
             </p>
+
+            <svg class="body-illustration" viewBox="0 0 200 200" aria-hidden="true">
+              <g transform="rotate(-2.5 100 100)">
+                <path class="draw" d="M20 20 L 180 20 L 180 180 L 20 180 Z" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round"/>
+                <path class="draw" d="M35 50 L 49 50 L 49 64 L 35 64 Z" fill="none" stroke="#28E291" stroke-width="2"/>
+                <path class="draw" d="M37 56 L 41 60 L 48 50" fill="none" stroke="#28E291" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="58" y1="57" x2="160" y2="57" stroke="#6B6980" stroke-width="1.5" class="no-roughen"/>
+                <path class="draw" d="M35 80 L 49 80 L 49 94 L 35 94 Z" fill="none" stroke="#28E291" stroke-width="2"/>
+                <path class="draw" d="M37 86 L 41 90 L 48 80" fill="none" stroke="#28E291" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="58" y1="87" x2="150" y2="87" stroke="#6B6980" stroke-width="1.5" class="no-roughen"/>
+                <path class="draw" d="M35 110 L 49 110 L 49 124 L 35 124 Z" fill="none" stroke="#6B6980" stroke-width="2"/>
+                <line x1="58" y1="117" x2="145" y2="117" stroke="#6B6980" stroke-width="1.5" class="no-roughen"/>
+                <path class="draw" d="M35 140 L 49 140 L 49 154 L 35 154 Z" fill="none" stroke="#6B6980" stroke-width="2"/>
+                <line x1="58" y1="147" x2="155" y2="147" stroke="#6B6980" stroke-width="1.5" class="no-roughen"/>
+              </g>
+            </svg>
+
             <p>
               In all honesty, we actually like that stuff. It's the glue. Connects all of the creative
               and marketing strategies together.
             </p>
+
             <p>
               It's mostly just a time-suck, and most don't want to do it. We pride ourselves on whatever
-              it is we need to do — it's done to the best standard we can think of. If we need to learn
-              how to do something better just for your game, we do.
+              it is we need to do — it's done to the best standard we can think of.
             </p>
+
+            <p>
+              If we need to learn how to do something better just for your game, we do.
+            </p>
+
             <p class="punch">
               Unsexy is what makes sexy. <span class="u">We'll be the Un<svg class="ink" viewBox="0 0 280 18" preserveAspectRatio="none" aria-hidden="true">
                 <path class="draw" pathLength="1" d="M5 10 Q 40 3 80 9 T 150 9 T 220 9 T 275 9" fill="none" stroke="#28E291" stroke-width="3.4" stroke-linecap="round"/>
               </svg></span>.
             </p>
+
           </div>
         </div>
       </div>
@@ -771,21 +881,44 @@
       <summary>
         <h2 class="term">we write</h2>
         <span class="pos">v.</span>
+        <span class="read-time">30 sec</span>
         <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">publicly. about what we're trying, learning, failing at, and figuring out.</span>
       </summary>
       <div class="entry-wrap">
         <div class="entry-body">
           <div class="body-inner">
+
             <p>
               Game dev is about learning, all the time. And whilst we aren't exactly in that boat, we
-              wanna join in somehow. Writing about our failings, what we're trying to achieve, how we are
+              wanna join in somehow.
+            </p>
+
+            <svg class="body-illustration" viewBox="0 0 220 180" aria-hidden="true">
+              <path class="draw" d="M30 30 L 100 30 L 100 150 L 30 145 Z" fill="none" stroke="#9381FF" stroke-width="2.4" stroke-linecap="round"/>
+              <path class="draw" d="M100 30 L 190 35 L 195 150 L 100 150" fill="none" stroke="#9381FF" stroke-width="2.4" stroke-linecap="round"/>
+              <line x1="40" y1="60" x2="90" y2="60" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
+              <line x1="40" y1="75" x2="85" y2="75" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
+              <line x1="40" y1="90" x2="88" y2="90" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
+              <line x1="40" y1="105" x2="80" y2="105" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
+              <line x1="110" y1="65" x2="180" y2="65" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
+              <line x1="110" y1="80" x2="175" y2="80" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
+              <line x1="110" y1="95" x2="180" y2="95" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
+              <line x1="110" y1="110" x2="170" y2="110" stroke="#A8A6B8" stroke-width="1.5" class="no-roughen"/>
+              <path class="draw" d="M150 130 L 200 90" fill="none" stroke="#28E291" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="148" cy="132" r="2.5" fill="#28E291" class="no-roughen"/>
+            </svg>
+
+            <p>
+              Writing about our failings, what we're trying to achieve, how we are
               doing it — can all hopefully help some other wandering soul out there navigate the
               undulating slopes of creating and releasing a game.
             </p>
-            <p>
-              We aren't perfect (which is the point), but we'll try hard to be different, and show you how.
+
+            <p class="punch">
+              We aren't perfect (which is the point). But we'll try hard to be different, and show you how.
             </p>
+
           </div>
         </div>
       </div>
@@ -795,23 +928,41 @@
       <summary>
         <h2 class="term">your half</h2>
         <span class="pos">n.</span>
+        <span class="read-time">1 min</span>
         <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">the other sauce. the developer's undying passion. the part we can't supply.</span>
       </summary>
       <div class="entry-wrap">
         <div class="entry-body">
           <div class="body-inner">
+
             <p>
               We can <em>see</em>, <em>smell</em>, <em>touch</em>, <em>taste</em> and <em>hear</em> the sauce, but we can't make it.
             </p>
+
+            <svg class="body-illustration" viewBox="0 0 180 180" aria-hidden="true">
+              <path class="draw" d="M90 150 C 50 120 25 90 25 65 C 25 45 40 30 60 30 C 75 30 85 40 90 50 C 95 40 105 30 120 30 C 140 30 155 45 155 65 C 155 90 130 120 90 150 Z" fill="none" stroke="#F78154" stroke-width="2.6" stroke-linecap="round"/>
+              <text x="90" y="172" text-anchor="middle" font-family="Caveat, cursive" font-size="16" fill="#A8A6B8" class="no-roughen">(yours)</text>
+            </svg>
+
             <p>
               Yes, above we spoke about the sauce of the <em>game</em>, but the other sauce is <em>you</em>
               — the developer. Without undying, relentless passion, your game isn't being given a good
-              shot. It is hard. It is like creating a baby from scratch (which kind of happens automatically
-              over 9 months), but without any automation. You will be the hardest working person in the
-              room no matter what. And we just have the opportunity to also be in that room, helping you
-              release what's in your head (and heart, awww).
+              shot. It is hard.
             </p>
+
+            <p>
+              It is like creating a baby from scratch (which kind of happens automatically over 9 months), but without any automation.
+            </p>
+
+            <p class="punch">
+              You will be the hardest working person in the room no matter what.
+            </p>
+
+            <p>
+              And we just have the opportunity to also be in that room, helping you release what's in your head (and heart, awww).
+            </p>
+
           </div>
         </div>
       </div>
@@ -821,26 +972,41 @@
       <summary>
         <h2 class="term">the answer</h2>
         <span class="pos">n.</span>
+        <span class="read-time">30 sec</span>
         <span class="toggle"><span class="open-label">read +</span><span class="close-label">close ×</span></span>
         <span class="def">no. and also yes. mostly: try with us.</span>
       </summary>
       <div class="entry-wrap">
         <div class="entry-body">
           <div class="body-inner">
+
             <p>
               If the above is anything to go by, no. We cannot. But we can <span class="u">die trying<svg class="ink" viewBox="0 0 160 18" preserveAspectRatio="none" aria-hidden="true">
                 <path class="draw" pathLength="1" d="M5 10 Q 30 3 60 9 T 110 9 T 155 9" fill="none" stroke="#28E291" stroke-width="3.2" stroke-linecap="round"/>
-              </svg></span>. We'll help develop
-              that sauce, get it to a slow burn, get past the boring bits, document it for the world to
-              see, and hopefully find a minor stake of popularity somewhere in the cosmos.
+              </svg></span>.
             </p>
+
+            <svg class="body-illustration" viewBox="0 0 220 140" aria-hidden="true">
+              <path class="draw" d="M20 110 Q 60 105 100 95" fill="none" stroke="#6B6980" stroke-width="2.6" stroke-linecap="round"/>
+              <path class="draw" d="M100 95 Q 140 70 195 35" fill="none" stroke="#28E291" stroke-width="2.6" stroke-linecap="round"/>
+              <path class="draw" d="M100 95 Q 140 100 195 115" fill="none" stroke="#A8A6B8" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="4,4"/>
+              <path class="draw" d="M195 35 L 184 40 L 188 28 Z" fill="#28E291" stroke="#28E291" stroke-width="2"/>
+              <text x="200" y="60" text-anchor="end" font-family="Caveat, cursive" font-size="16" font-weight="700" fill="#28E291" class="no-roughen">partner</text>
+              <text x="200" y="135" text-anchor="end" font-family="Caveat, cursive" font-size="14" fill="#A8A6B8" class="no-roughen">publisher</text>
+            </svg>
+
             <p>
-              If you need guaranteed success, we can't do that. But if you want a <em>partner</em> instead
-              of a publisher, that's us.
+              We'll help develop that sauce, get it to a slow burn, get past the boring bits, document it for the world to see, and hopefully find a minor stake of popularity somewhere in the cosmos.
             </p>
+
+            <p class="punch">
+              If you need guaranteed success, we can't do that. But if you want a <em>partner</em> instead of a publisher, that's us.
+            </p>
+
             <div class="chat-wrap" style="margin-top:24px;">
               <a class="chat" href="mailto:pr@indieformer.com?subject=Let's%20chat" style="display:inline-flex;align-items:center;font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--shadow);background:var(--emerald);border-radius:10px;padding:15px 32px;text-decoration:none;transition:transform 0.15s ease, background 0.2s ease;">Let's chat</a>
             </div>
+
           </div>
         </div>
       </div>
