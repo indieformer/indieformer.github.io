@@ -233,7 +233,24 @@
     color: var(--text-primary);
     width: 100%;
     max-width: 780px;
+    opacity: 0;
+    animation: rise 0.7s ease 0.15s both;
   }
+  .dict-label {
+    opacity: 0;
+    animation: rise 0.6s ease 0.45s both;
+  }
+  /* the dictionary entries themselves get a soft fade-in once the section gates */
+  .entry {
+    opacity: 0;
+    animation: rise 0.6s ease both;
+  }
+  .entry:nth-of-type(1) { animation-delay: 0.55s; }
+  .entry:nth-of-type(2) { animation-delay: 0.7s; }
+  .entry:nth-of-type(3) { animation-delay: 0.85s; }
+  .entry:nth-of-type(4) { animation-delay: 1.0s; }
+  .entry:nth-of-type(5) { animation-delay: 1.15s; }
+  .entry:nth-of-type(6) { animation-delay: 1.3s; }
   .preamble-box em { font-style: italic; color: var(--coral); }
   .preamble-box::before {
     content: '✎';
@@ -1113,6 +1130,10 @@
       // force layout flush so the transition has a starting frame
       void wrap.offsetHeight;
       wrap.style.height = wrap.scrollHeight + 'px';
+      // bring the entry top to the viewport (with a small offset for the nav)
+      var rect = entry.getBoundingClientRect();
+      var target = window.pageYOffset + rect.top - 24;
+      window.scrollTo({ top: target, behavior: 'smooth' });
       function done(e) {
         if (e.propertyName !== 'height') return;
         wrap.removeEventListener('transitionend', done);
