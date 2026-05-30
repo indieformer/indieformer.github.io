@@ -408,7 +408,7 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
       <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
     </ul>
   </div>
-  <p class="footer-meta">© 2026 Indieformer.</p>
+  <p class="footer-meta">© 2026 Indieformer. · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
 </footer>
 
 </body>
