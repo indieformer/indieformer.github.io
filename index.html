@@ -430,8 +430,9 @@
     color: #FFFFFF !important;
     text-align: center;
     background: transparent;  /* just the wobble outline, no fill */
-    opacity: 1;
-    animation: rise 0.6s ease forwards;
+    opacity: 0;
+    animation: rise 0.6s ease both;
+    animation-fill-mode: both;
   }
   .fbox-path { filter: none; }
   .fstep:nth-child(1) { transform: rotate(-0.8deg); animation-delay: 0.2s; }
