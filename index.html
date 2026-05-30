@@ -563,9 +563,56 @@
     .draw { stroke-dashoffset: 0; }
     .bg-line path { stroke-dashoffset: 0; }
   }
+
+  /* ── loading overlay (Lottie gem) ─────────────────────────── */
+  #loader-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #262730;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.45s ease;
+  }
+  #loader-overlay.gone { opacity: 0; pointer-events: none; }
+  #loader-gem { width: 140px; height: 140px; }
+  @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
 </style>
 </head>
 <body>
+
+<!-- loading overlay — fades out once window.load fires -->
+<div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+  (function () {
+    var o = document.getElementById('loader-overlay');
+    if (!o) return;
+    var anim;
+    try {
+      if (typeof lottie !== 'undefined') {
+        anim = lottie.loadAnimation({
+          container: document.getElementById('loader-gem'),
+          renderer: 'svg', loop: true, autoplay: true,
+          path: '/loading-gem.json'
+        });
+      }
+    } catch (e) {}
+    var shown = Date.now();
+    function hide() {
+      if (o.classList.contains('gone')) return;
+      o.classList.add('gone');
+      setTimeout(function () {
+        try { if (anim) anim.destroy(); } catch (e) {}
+        if (o.parentNode) o.parentNode.removeChild(o);
+      }, 500);
+    }
+    function maybeHide() {
+      // small minimum dwell so it doesn't flash on instant loads
+      setTimeout(hide, Math.max(0, 400 - (Date.now() - shown)));
+    }
+    if (document.readyState === 'complete') maybeHide();
+    else window.addEventListener('load', maybeHide);
+    setTimeout(hide, 4000); // safety: never block UI more than 4s
+  })();
+</script>
 
 <!-- registration marks bracket the whole page (one set, not per section) -->
 <span class="crop bl"></span><span class="crop br"></span>
