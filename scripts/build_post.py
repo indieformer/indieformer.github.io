@@ -151,6 +151,48 @@ _CUSTOM_HTML_OPEN_RE = re.compile(
     re.IGNORECASE,
 )
 
+_TABLE_TAG_RE = re.compile(r"<(/?)table\b[^>]*>", re.IGNORECASE)
+_TABLE_OPEN_RE = re.compile(r"<table\b[^>]*>", re.IGNORECASE)
+
+
+def _strip_blocks_containing(
+    body: str,
+    patterns: list,
+    open_re,
+    tag_re,
+    close_tag_len: int,
+) -> str:
+    """Generic walker: find each block opened by `open_re`, balance with
+    `tag_re`, and drop any whose inner content matches any pattern."""
+    pattern_res = [re.compile(p, re.IGNORECASE | re.DOTALL) for p in patterns]
+    out_parts = []
+    pos = 0
+    while True:
+        opener = open_re.search(body, pos)
+        if not opener:
+            out_parts.append(body[pos:])
+            break
+        end_pos = None
+        depth = 1
+        for tag in tag_re.finditer(body, opener.end()):
+            if tag.group(1) == "/":
+                depth -= 1
+                if depth == 0:
+                    end_pos = tag.end()
+                    break
+            else:
+                depth += 1
+        if end_pos is None:
+            out_parts.append(body[pos:])
+            break
+        inner = body[opener.end():end_pos - close_tag_len]
+        if any(pr.search(inner) for pr in pattern_res):
+            out_parts.append(body[pos:opener.start()])
+        else:
+            out_parts.append(body[pos:end_pos])
+        pos = end_pos
+    return "".join(out_parts)
+
 
 def _strip_custom_html_blocks_containing(body: str, patterns: list) -> str:
     """Walk the body, find every <div class='custom_html'> block, and drop
@@ -242,12 +284,18 @@ def _strip_waypoint(body: str) -> str:
 
 
 def _strip_polls(body: str) -> str:
-    """Remove every Beehiiv poll widget. Polls are rendered as a <ul> of
-    <a href='…beehiiv.com/polls/UUID/response?…'>option</a> items inside
-    a <div class='custom_html'> container. Strip the whole container."""
-    return _strip_custom_html_blocks_containing(
-        body, [r'beehiiv\.com/polls/']
+    """Remove every Beehiiv poll widget. Beehiiv emits polls in two layouts:
+    1. Custom-html div container (older posts / inline votes)
+    2. Email-style <table> with 'HOW DID THIS ISSUE HIT YOU?' headings
+       (wrap-up posts — Showcase / Indievelopment endings)
+    Both contain at least one <a href> pointing at beehiiv.com/polls/.
+    We sweep both wrapper types."""
+    patterns = [r'beehiiv\.com/polls/']
+    body = _strip_custom_html_blocks_containing(body, patterns)
+    body = _strip_blocks_containing(
+        body, patterns, _TABLE_OPEN_RE, _TABLE_TAG_RE, close_tag_len=8
     )
+    return body
 
 
 def _lazy_load_images(body: str) -> str:

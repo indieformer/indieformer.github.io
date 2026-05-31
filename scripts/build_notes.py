@@ -53,7 +53,7 @@ from build_post import build_post_page, sanitize_body  # noqa: F401
 PUB_ID = "pub_46dc4e51-4f9d-4b04-80e5-a5714a53bc93"
 API_BASE = "https://api.beehiiv.com/v2"
 MANIFEST_PATH = "notes/.posts.json"
-TEMPLATE_VERSION = 5  # bump when the post or index template changes materially
+TEMPLATE_VERSION = 6  # bump when the post or index template changes materially
 
 TAG_TO_CATEGORY = {
     "frontline":      "frontline",
