@@ -53,7 +53,7 @@ from build_post import build_post_page, sanitize_body  # noqa: F401
 PUB_ID = "pub_46dc4e51-4f9d-4b04-80e5-a5714a53bc93"
 API_BASE = "https://api.beehiiv.com/v2"
 MANIFEST_PATH = "notes/.posts.json"
-TEMPLATE_VERSION = 1  # bump when the post or index template changes materially
+TEMPLATE_VERSION = 2  # bump when the post or index template changes materially
 
 TAG_TO_CATEGORY = {
     "frontline":      "frontline",
@@ -160,6 +160,36 @@ def list_all_posts(token: str) -> list[dict]:
             break
         page += 1
     return all_posts
+
+
+def parse_post_date(post: dict) -> str:
+    """Return an ISO date string from whichever Beehiiv date field is present.
+
+    Beehiiv's API v2 returns dates as **unix timestamps** (integers) on the
+    posts resource — most importantly `publish_date` and `displayed_date`.
+    Earlier versions of this builder probed `scheduled_at` / `created_at`
+    which only get populated for scheduled-but-unpublished posts and
+    returned empty for everything in production. Empty date strings sort
+    equally → stable sort preserves API order (oldest first), which is
+    why the index pages came out backwards on the first backfill."""
+    for field in ("publish_date", "displayed_date", "scheduled_at", "created_at"):
+        v = post.get(field)
+        if not v:
+            continue
+        # unix timestamp (int or numeric string)
+        if isinstance(v, (int, float)):
+            try:
+                return datetime.fromtimestamp(int(v), tz=timezone.utc).isoformat()
+            except (ValueError, OSError):
+                continue
+        if isinstance(v, str):
+            if v.isdigit():
+                try:
+                    return datetime.fromtimestamp(int(v), tz=timezone.utc).isoformat()
+                except (ValueError, OSError):
+                    continue
+            return v
+    return ""
 
 
 def extract_thumbnail(post: dict, content_html: str = "") -> str:
@@ -570,8 +600,11 @@ def main() -> int:
             "title":       p.get("title") or "",
             "subtitle":    (p.get("seo_settings") or {}).get("default_description")
                            or p.get("subtitle") or "",
-            "date_iso":    p.get("scheduled_at") or p.get("created_at") or "",
-            "updated_at":  p.get("updated_at") or p.get("created_at") or "",
+            "date_iso":    parse_post_date(p),
+            "updated_at":  parse_post_date({
+                "publish_date": p.get("updated_at") or p.get("modified_at"),
+                "created_at":   p.get("created_at"),
+            }) or parse_post_date(p),
             "og_image":    extract_thumbnail(p),
             "_raw":        p,            # kept for content-based thumbnail fallback later
             "primary_tag": primary_tag,

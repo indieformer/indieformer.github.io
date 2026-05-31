@@ -39,18 +39,35 @@ BEEHIIV_FOOTER_RE = re.compile(
 )
 
 
+_DIV_TAG_RE = re.compile(r"<(/?)div\b[^>]*>", re.IGNORECASE)
+
+
 def _strip_beehiiv_wrappers(content: str) -> str:
-    """Pull the body out of the outer <div class='beehiiv'><div class='beehiiv__body'>."""
-    m = re.search(
-        r"<div class=['\"]beehiiv['\"]>.*?<div class=['\"]beehiiv__body['\"]>(.*?)</div>\s*$",
-        content,
-        re.DOTALL,
-    )
-    if m:
-        return m.group(1).strip()
-    # fallback: just the body
-    m = re.search(r"<div class=['\"]beehiiv__body['\"]>(.*?)</div>", content, re.DOTALL)
-    return (m.group(1) if m else content).strip()
+    """Extract just the article body from a Beehiiv content payload.
+
+    The API's `content.free.web` field returns a *full standalone HTML
+    page* (DOCTYPE, <head> with fonts, page chrome, `<div class='beehiiv'>`
+    containing `<div class='beehiiv__body'>...article...</div>`, then
+    closing tags). Earlier versions of this function tried to match the
+    whole thing with one regex anchored to end-of-string and silently
+    failed on the live API response — the entire standalone Beehiiv page
+    was getting nested inside the Indieformer page wrapper. Now we walk
+    the div tags and track depth properly."""
+    start_m = re.search(r"<div\s+class=['\"]beehiiv__body['\"]>", content)
+    if not start_m:
+        return content.strip()
+    inner_start = start_m.end()
+
+    depth = 1
+    for m in _DIV_TAG_RE.finditer(content, inner_start):
+        if m.group(1) == "/":
+            depth -= 1
+            if depth == 0:
+                return content[inner_start:m.start()].strip()
+        else:
+            depth += 1
+    # didn't balance — give up and return what's there
+    return content[inner_start:].strip()
 
 
 def _strip_leading_eyebrow_and_title(body: str) -> str:
