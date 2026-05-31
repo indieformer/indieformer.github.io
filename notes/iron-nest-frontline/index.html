@@ -196,16 +196,15 @@
   }
 
   /* Divider */
-  .post-content .content_break {
-    display: flex; align-items: center; justify-content: center;
-    margin: 36px 0;
-    color: var(--text-tertiary);
-    letter-spacing: 0.4em;
+  /* Dividers — handle both <hr class="content_break"> (Indievelopment) and <div class="content_break"> */
+  .post-content hr.content_break {
+    border: none;
+    border-top: 1px solid var(--border);
+    height: 0; margin: 36px 0;
   }
-  .post-content .content_break::before,
-  .post-content .content_break::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
-    margin: 0 18px;
+  .post-content div.content_break {
+    height: 1px; background: var(--border);
+    margin: 36px 0;
   }
 
   /* Embed cards (link previews) */
