@@ -200,9 +200,19 @@ def fetch_post_content(post_id: str, token: str) -> str:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def categorize(post: dict) -> tuple[str, str]:
-    """Return (category, primary_tag_slug)."""
+    """Return (category, primary_tag_slug).
+
+    Beehiiv's API returns content_tags as a list of slug *strings* (e.g.
+    ['frontline']). Some clients/wrappers normalise this to dicts, so we
+    handle both shapes."""
     tags = post.get("content_tags") or []
-    primary_tag = (tags[0] or {}).get("slug") if tags else "special"
+    primary_tag = "special"
+    if tags:
+        first = tags[0]
+        if isinstance(first, str):
+            primary_tag = first or "special"
+        elif isinstance(first, dict):
+            primary_tag = first.get("slug") or "special"
     slug = post.get("slug") or ""
     if slug in SLUG_OVERRIDES:
         return SLUG_OVERRIDES[slug], primary_tag
