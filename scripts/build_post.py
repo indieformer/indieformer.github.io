@@ -146,46 +146,108 @@ def _strip_utm(body: str) -> str:
 WAYPOINT_RE = re.compile(r"waypoint\.indieformer\.com", re.IGNORECASE)
 
 
+_CUSTOM_HTML_OPEN_RE = re.compile(
+    r"<div\b[^>]*\bclass=['\"][^'\"]*\bcustom_html\b[^'\"]*['\"][^>]*>",
+    re.IGNORECASE,
+)
+
+
+def _strip_custom_html_blocks_containing(body: str, patterns: list) -> str:
+    """Walk the body, find every <div class='custom_html'> block, and drop
+    any whose inner content matches any of the given regex patterns. Used
+    for Beehiiv polls and Waypoint promo widgets — they're always rendered
+    in custom_html containers we can identify reliably."""
+    pattern_res = [re.compile(p, re.IGNORECASE | re.DOTALL) for p in patterns]
+
+    out_parts = []
+    pos = 0
+    while True:
+        opener = _CUSTOM_HTML_OPEN_RE.search(body, pos)
+        if not opener:
+            out_parts.append(body[pos:])
+            break
+
+        # Find matching </div> via depth-tracking
+        end_pos = None
+        depth = 1
+        for tag in _DIV_TAG_RE.finditer(body, opener.end()):
+            if tag.group(1) == "/":
+                depth -= 1
+                if depth == 0:
+                    end_pos = tag.end()
+                    break
+            else:
+                depth += 1
+        if end_pos is None:
+            # unbalanced — bail safely
+            out_parts.append(body[pos:])
+            break
+
+        inner = body[opener.end():end_pos - 6]  # exclude the closing </div>
+        if any(pr.search(inner) for pr in pattern_res):
+            # Drop this block entirely
+            out_parts.append(body[pos:opener.start()])
+        else:
+            # Keep this block
+            out_parts.append(body[pos:end_pos])
+        pos = end_pos
+
+    return "".join(out_parts)
+
+
 def _strip_waypoint(body: str) -> str:
-    """Remove any paragraph or button that links to waypoint, plus inline waypoint links."""
+    """Remove every Waypoint reference. Waypoint is the deprecated curator
+    tracker; under the new publisher identity, no mention of it should
+    leak through. Strips:
+      1. Any <div class='custom_html'> block containing the word Waypoint
+         (catches the 'Browse on Waypoint' button promo and the Waypoint
+         CTA cards).
+      2. Any <p> containing the word Waypoint (catches preamble text like
+         'Every game above came from Waypoint…' even when the URL has
+         been removed upstream).
+      3. Any standalone <button> with Waypoint in its text.
+      4. Any <a href> pointing at waypoint.indieformer.com — link removed
+         entirely (not just unwrapped — the surrounding text usually only
+         exists to label the link)."""
     out = body
 
-    # Remove <p class="paragraph"> that contains a waypoint link
-    while True:
-        m = re.search(
-            r'<p[^>]*class="paragraph"[^>]*>(?:(?!</p>).)*?waypoint\.indieformer\.com.*?</p>',
-            out,
-            re.DOTALL,
-        )
-        if not m:
-            break
-        out = out[: m.start()] + out[m.end():]
+    # 1. Strip custom_html blocks that mention Waypoint at all
+    out = _strip_custom_html_blocks_containing(out, [r'\bWaypoint\b'])
 
-    # Remove "Every game above came from Waypoint" paragraphs even if their link was stripped above
+    # 2. Paragraphs containing 'Waypoint' as a word
     out = re.sub(
-        r'<p[^>]*class="paragraph"[^>]*>[^<]*Every game above came from Waypoint.*?</p>',
+        r'<p\b[^>]*>(?:(?!</p>).)*?\bWaypoint\b.*?</p>',
         '',
         out,
-        flags=re.DOTALL,
+        flags=re.IGNORECASE | re.DOTALL,
     )
 
-    # Remove Beehiiv button blocks pointing to waypoint
+    # 3. Standalone buttons (in case any escape the custom_html sweep)
     out = re.sub(
-        r'<div\s+class="button"[^>]*>(?:(?!</div>).)*?waypoint\.indieformer\.com(?:(?!</div>).)*?</div>',
+        r'<button\b[^>]*>(?:(?!</button>).)*?\bWaypoint\b.*?</button>',
         '',
         out,
-        flags=re.DOTALL,
+        flags=re.IGNORECASE | re.DOTALL,
     )
 
-    # Unwrap any remaining <a href="...waypoint...">text</a> → text
+    # 4. Any leftover <a href="…waypoint.indieformer.com…">…</a>: remove entirely
     out = re.sub(
-        r'<a[^>]+href="[^"]*waypoint\.indieformer\.com[^"]*"[^>]*>(.*?)</a>',
-        r'\1',
+        r'<a[^>]+href="[^"]*waypoint\.indieformer\.com[^"]*"[^>]*>.*?</a>',
+        '',
         out,
         flags=re.DOTALL,
     )
 
     return out
+
+
+def _strip_polls(body: str) -> str:
+    """Remove every Beehiiv poll widget. Polls are rendered as a <ul> of
+    <a href='…beehiiv.com/polls/UUID/response?…'>option</a> items inside
+    a <div class='custom_html'> container. Strip the whole container."""
+    return _strip_custom_html_blocks_containing(
+        body, [r'beehiiv\.com/polls/']
+    )
 
 
 def _lazy_load_images(body: str) -> str:
@@ -210,7 +272,10 @@ def sanitize_body(content_html: str) -> str:
     body = _strip_leading_eyebrow_and_title(body)
     body = _strip_signoff(body)
     body = _strip_utm(body)
-    body = _strip_waypoint(body)
+    body = _strip_polls(body)        # strip Beehiiv poll widgets
+    body = _strip_waypoint(body)     # strip Waypoint promos (must run after polls
+                                     # so the Waypoint block-strip doesn't trip on
+                                     # any shared parent container)
     body = _lazy_load_images(body)
     # collapse runs of blank lines
     body = re.sub(r"\n\s*\n\s*\n+", "\n\n", body)
@@ -293,7 +358,18 @@ PAGE_CSS = """  :root {
     font-family: 'Sora', Arial, sans-serif; color: var(--text-primary);
     line-height: 1.7; font-size: 17px; position: relative; z-index: 2;
   }
-  .post-content .paragraph, .post-content p { margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7; }
+  /* Beehiiv hardcodes 'DM Sans' as inline style on every paragraph & list
+     item, which beats our class-level rule. Force Sora with !important
+     across the elements Beehiiv touches. Embed-card text inherits Sora
+     from the card's own inline style so we don't need to touch .custom_html. */
+  .post-content .paragraph, .post-content p,
+  .post-content li, .post-content ul, .post-content ol,
+  .post-content figcaption, .post-content td, .post-content th {
+    font-family: 'Sora', Arial, sans-serif !important;
+  }
+  .post-content .paragraph, .post-content p {
+    margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7;
+  }
   .post-content .heading, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
     font-family: 'Sora' !important; color: var(--text-primary); line-height: 1.25; letter-spacing: -0.01em; margin: 2em 0 0.6em;
   }
