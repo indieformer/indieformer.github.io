@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#75 | Too niche, said everyone — Indieformer</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta name="description" content="Two veterans, $750 spent, 10,000 wishlists in a single day — and a niche nobody believed in until they showed up.">
+<link rel="canonical" href="https://indieformer.com/notes/iron-nest-frontline/">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="#75 | Too niche, said everyone">
+<meta property="og:description" content="Two veterans, $750 spent, 10,000 wishlists in a single day — and a niche nobody believed in until they showed up.">
+<meta property="og:url" content="https://indieformer.com/notes/iron-nest-frontline/">
+<meta property="og:image" content="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/6d4c36b1-d635-47a2-9508-ba3788c98186/frontline-iron-nest_Thumbnail.png">
+<meta property="article:published_time" content="2026-05-06">
+<meta property="article:section" content="frontline">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="#75 | Too niche, said everyone">
+<meta name="twitter:description" content="Two veterans, $750 spent, 10,000 wishlists in a single day — and a niche nobody believed in until they showed up.">
+<meta name="twitter:image" content="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/6d4c36b1-d635-47a2-9508-ba3788c98186/frontline-iron-nest_Thumbnail.png">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+  :root {
+    --emerald: #28E291; --coral: #F78154; --periwinkle: #9381FF;
+    --shadow: #262730; --shadow-mid: #2F3040;
+    --text-primary: #F0EEE8; --text-secondary: #C9C7B8; --text-tertiary: #8B8970;
+    --border: rgba(255, 255, 255, 0.08); --border-mid: rgba(255, 255, 255, 0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    position: relative;
+    background: var(--shadow);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
+    background-size: 26px 26px;
+    font-family: 'Sora', Arial, sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 20px;
+    overflow-x: hidden;
+  }
+
+  .crop {
+    position: absolute; width: 18px; height: 18px;
+    opacity: 0; animation: fade 0.6s ease 0.2s forwards;
+    z-index: 5; pointer-events: none;
+  }
+  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
+  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+  .crop.bl { bottom: 20px; left: 20px; }
+  .crop.br { bottom: 20px; right: 20px; }
+
+  .site-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1000px; margin: 0 auto; padding: 14px 56px;
+    position: relative; z-index: 4;
+  }
+  a.brand { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s ease; }
+  a.brand img { display: block; height: 40px; width: 40px; }
+  a.brand:hover { opacity: 0.82; }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a {
+    font-family: 'Sora'; font-size: 15px; font-weight: 500;
+    color: var(--text-secondary); text-decoration: none;
+    position: relative; transition: color 0.2s;
+  }
+  .primary-nav a:hover { color: var(--text-primary); }
+  .primary-nav a.current { color: var(--text-primary); font-weight: 600; }
+  .primary-nav a.current::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -7px;
+    height: 2px; background: var(--emerald); border-radius: 2px;
+  }
+
+  /* ── Post header ───────────────────────────────────────── */
+  .post-header {
+    max-width: 720px; margin: 0 auto; padding: 32px 56px 18px;
+    position: relative; z-index: 2;
+  }
+  .back-link {
+    display: inline-block; margin-bottom: 18px;
+    font-size: 14px; color: var(--text-tertiary);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--text-primary); }
+  .back-link { margin-bottom: 22px; }
+  /* meta row holds tag + date together, below subtitle */
+  .post-meta {
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+    font-size: 13px; color: var(--text-tertiary);
+    border-top: 1px solid var(--border); padding-top: 14px;
+    margin-top: 20px;
+  }
+  .post-tag {
+    font-family: 'Caveat', cursive; font-size: 20px; color: var(--coral);
+    transform: rotate(-1deg); display: inline-block; line-height: 1;
+  }
+  .post-tag .dot {
+    color: var(--text-tertiary); margin: 0 8px;
+    font-family: 'Sora', sans-serif; font-size: 13px;
+    vertical-align: 2px;
+  }
+  .post-tag .num {
+    color: var(--text-tertiary); font-family: 'Sora', sans-serif;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .post-title {
+    font-size: clamp(34px, 5vw, 50px);
+    font-weight: 800; line-height: 1.08; letter-spacing: -0.025em;
+    margin-bottom: 14px;
+  }
+  .post-subtitle {
+    font-size: 18px; line-height: 1.55;
+    color: var(--text-secondary); margin-bottom: 18px;
+  }
+
+
+  /* ── Post body — scopes Beehiiv content to fit our design ── */
+  .post-content {
+    max-width: 720px;
+    margin: 0 auto; padding: 24px 56px 8px;
+    font-family: 'Sora', Arial, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 17px;
+    position: relative; z-index: 2;
+  }
+
+  .post-content .paragraph,
+  .post-content p {
+    margin: 0 0 1.1em;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .post-content .heading,
+  .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+    font-family: 'Sora' !important;
+    color: var(--text-primary);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 2em 0 0.6em;
+  }
+  .post-content h2, .post-content h2.heading { font-size: 28px; font-weight: 700; }
+  .post-content h3, .post-content h3.heading { font-size: 22px; font-weight: 700; }
+  .post-content h4, .post-content h4.heading { font-size: 18px; font-weight: 600; color: var(--periwinkle); text-transform: uppercase; letter-spacing: 0.06em; }
+  .post-content h6, .post-content h6.heading { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+  .post-content a, .post-content .link {
+    color: var(--coral) !important;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(247, 129, 84, 0.35);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .post-content a:hover, .post-content .link:hover {
+    color: var(--text-primary) !important;
+    border-bottom-color: var(--text-primary);
+  }
+  .post-content em, .post-content i { color: var(--text-secondary); }
+
+  /* Images */
+  .post-content .image { margin: 28px 0; }
+  .post-content .image__image,
+  .post-content img {
+    max-width: 100%; height: auto; display: block;
+    border-radius: 6px; border: 1px solid var(--border);
+  }
+  .post-content .image__source {
+    display: block; margin-top: 8px;
+    font-size: 13px; color: var(--text-tertiary); font-style: italic;
+  }
+  .post-content .image__source_text p { margin: 0; color: var(--text-tertiary); font-style: italic; }
+
+  /* Blockquote — only style inner element so nested wrappers don't double up */
+  .post-content .blockquote {
+    margin: 28px 0; padding: 0; border: none; background: none;
+  }
+  .post-content blockquote,
+  .post-content .blockquote__quote {
+    display: block;
+    margin: 0; padding: 6px 0 6px 22px;
+    border-left: 3px solid var(--periwinkle);
+    color: var(--text-primary);
+    font-family: 'Caveat', cursive;
+    font-size: 24px; line-height: 1.4;
+    font-style: normal;
+  }
+
+  /* Divider */
+  .post-content .content_break {
+    display: flex; align-items: center; justify-content: center;
+    margin: 36px 0;
+    color: var(--text-tertiary);
+    letter-spacing: 0.4em;
+  }
+  .post-content .content_break::before,
+  .post-content .content_break::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+    margin: 0 18px;
+  }
+
+  /* Embed cards (link previews) */
+  .post-content .embed {
+    display: block;
+    border: 1px solid var(--border-mid);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 28px 0;
+    background: var(--shadow-mid);
+    transition: border-color 0.2s;
+  }
+  .post-content .embed:hover { border-color: var(--emerald); }
+  .post-content .embed__image { display: block; }
+  .post-content .embed__image img { border-radius: 0; border: none; }
+  .post-content .embed__content { padding: 14px 18px; }
+  .post-content .embed__title { font-weight: 700; margin-bottom: 4px; color: var(--text-primary); }
+  .post-content .embed__description { font-size: 14px; color: var(--text-secondary); margin-bottom: 6px; line-height: 1.5; }
+  .post-content .embed__url { font-size: 12px; color: var(--text-tertiary); }
+  .post-content .embed__link { display: block; color: inherit !important; border: none; text-decoration: none; }
+
+  /* Hide any Beehiiv footer leakage */
+  .post-content .beehiiv__footer { display: none !important; }
+
+  /* ── Footer ──────────────────────────────────────────────── */
+  .site-footer {
+    max-width: 1000px; margin: 60px auto 0;
+    padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px;
+    font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+    position: relative; z-index: 2;
+  }
+  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
+  .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
+  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 22px; padding-top: 18px; font-size: 13px; color: var(--text-tertiary); }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 820px) {
+    body { padding: 20px 14px; }
+    .post-header, .post-content{ padding-left: 24px; padding-right: 24px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
+    .post-content { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<span class="crop bl"></span><span class="crop br"></span>
+
+<header class="site-nav">
+  <a class="brand" href="/" aria-label="Indieformer home">
+    <img src="/logo.png" alt="Indieformer" width="40" height="40">
+  </a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular/">The Approach</a>
+    <a href="/notes/" class="current">Notes</a>
+    <a href="/scorchpot/">Scorchpot</a>
+  </nav>
+</header>
+
+<section class="post-header">
+  <a href="/notes/" class="back-link">← All notes</a>
+  <h1 class="post-title">Too niche, said everyone</h1>
+  <p class="post-subtitle">Two veterans, $750 spent, 10,000 wishlists in a single day — and a niche nobody believed in until they showed up.</p>
+  <div class="post-meta">
+    <span class="post-tag">frontline<span class="dot">·</span><span class="num">Issue #75</span></span>
+    <time datetime="2026-05-06">6 May 2026</time>
+  </div>
+</section>
+
+<article class="post-content">
+<p class="paragraph" style="text-align:left;"><i>Before you dive in, the conversation this issue is based on (about half of it), is on </i><i><span style="text-decoration:underline;"><a class="link" href="https://youtu.be/-oF_nzYl08o?utm_source=indieformer.beehiiv.com&utm_medium=newsletter&utm_campaign=75-too-niche-said-everyone" target="_blank" rel="noopener noreferrer nofollow" style="color: #f78154">YouTube to listen to right now.</a></span></i></p><div class="image"><img alt="" class="image__image" style="" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/82b45d06-813a-4398-912e-0bb9c17d94ea/1afc4394c78662771073a63c2a34a880_1_1__1_.gif?t=1777772067"/></div><p class="paragraph" style="text-align:left;">For more than a decade, Nick Talmers Nieuwoudt was told the game he wanted to make wouldn&#39;t work. He pitched it at studios. He floated it past friends. The answer was always the same shape: <i>too niche. </i>He kept it in the back of his head and made other things — nineteen years of indie work, a stint running R&D at Wargaming, a steady career inside the AAA machine.</p><p class="paragraph" style="text-align:left;">Then, in the summer of 2025, the machine collapsed underneath him. The studio he was working at was acquired by Netflix. His freelance contracts dried up at the same moment. Microsoft was shuttering fifteen studios. The whole AAA layer he&#39;d been threading was, in his words, <i>&quot;going to s</i>***.” He tried to enjoy his summer for two days and then went, in his own assessment, <i>&quot;absolutely insane&quot;</i> because he needed to be making something.</p><p class="paragraph" style="text-align:left;">So he made the niche game.</p><p class="paragraph" style="text-align:left;">Nine months later, <i>IRON NEST: Heavy Turret Simulator</i> hit <b>10,000 wishlists in a single day</b> during an open Discord playtest. Their internal target had been 15,000 by launch — Nick had inflated his real goal of 10,000 to keep his marketing partner Dominik motivated, and admits this is <i>&quot;a great example of my personality.&quot;</i> They&#39;re now well past 260,000. The game has a Rock Paper Shotgun quote on the Steam page. IGN covered it. Roughly <b>$750 has been spent on marketing in total</b>, and even that, Nick says, <i>&quot;wasn&#39;t really worth it.&quot;</i></p><p class="paragraph" style="text-align:left;">This is what indie viral success looks like in 2026. But the more interesting story is <i>why</i> it worked — and it isn&#39;t because they got lucky.</p><hr class="content_break"><h1 class="heading" style="text-align:left;" id="why-games-why-this-genre"><span style="color:#28E291;">They’re both one thing</span></h1><div class="image"><img alt="" class="image__image" style="" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/39a62398-04de-4118-b2e0-b22dbbaa64b9/1afc4394c78662771073a63c2a34a880__1_.gif?t=1778034122"/></div><p class="paragraph" style="text-align:left;">I asked Nick how he was thinking about the business side when he started IRON NEST. Was he heads-down on the craft first, planning to figure marketing out later?</p><p class="paragraph" style="text-align:left;"><i>&quot;They&#39;re the same thing from my perspective,&quot;</i> he said. <i>&quot;Because the reason I make games — the satisfaction I get from it — is people playing my game and enjoying it. So if the game isn&#39;t enjoyed by people, and if people never discover the game to enjoy it, that&#39;s a failure of my fun of creating.&quot;</i></p><p class="paragraph" style="text-align:left;">That sentence is the spine of the whole interview. Most indie developers, when they talk about marketing, talk about it like a tax on development — a thing they have to do <i>in addition to</i> making the game. Nick treats them as the same act. <i>&quot;From the beginning I was thinking: how can I introduce people to the game? What is that new player experience? What is the 15-second short that someone sees that will get them interested enough to try the game and then enjoy it? That&#39;s part of my design philosophy.&quot;</i></p><p class="paragraph" style="text-align:left;">You can see this in how the first viral short happened. The Steam page had been live since around September. It generated almost no traffic, which was fine — Nick had set the bar low on purpose. <i>&quot;We&#39;re just two guys. We&#39;re not going to be able to do everything the right way.&quot;</i> Then, a couple of months in, he and Dominik decided to start posting shorts. Mechanical animations. Gears meshing. The kind of looping CAD animation Nick had been quietly obsessed with for fifteen years.</p><p class="paragraph" style="text-align:left;">The game was still in greybox. Untextured. Rough. They posted anyway.</p><p class="paragraph" style="text-align:left;">The first one didn&#39;t go anywhere. The second pulled 20-30,000 views.</p><p class="paragraph" style="text-align:left;">The point isn&#39;t that the second video got lucky. The point is that <b>even in a totally untextured state, the fantasy was already legible.</b> People in the comments understood what the game was, what they would do in it, and why it would feel good — and they understood it from raw mechanical animation alone. Marketing didn&#39;t dress up the game. It found the part of the game that was already telling the story, and let the player arrive there themselves.</p><p class="paragraph" style="text-align:left;">That isn&#39;t a marketing tactic. That&#39;s a design test. And IRON NEST passed it before it had a coat of paint on.</p><hr class="content_break"><h1 class="heading" style="text-align:left;" id="the-threeword-rule"><span style="color:#28E291;">The three-word rule</span></h1><div class="image"><img alt="" class="image__image" style="" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/18d25de2-c3b4-428f-b350-f67f4fda73bd/IRON_NEST_Heavy_Turret_Simulator__1__3840x2160_.png?t=1777772282"/></div><p class="paragraph" style="text-align:left;">Dominik Latos — credited on the Steam page as handling <i>propaganda</i>, which tells you something about the project&#39;s sense of humour — joined the project after Nick decided not to chase publishers. The two had worked together at a previous publisher, with Dominik on the publishing side and Nick on the developer side. <i>&quot;The majority of the value I got was from him,&quot;</i> Nick told me. <i>&quot;So I decided I would rather just work with him. Why not just partner up and do it ourselves?&quot;</i></p><p class="paragraph" style="text-align:left;">Dominik&#39;s marketing playbook is sharp, opinionated, and almost entirely about clarity.</p><p class="paragraph" style="text-align:left;">It starts with what he calls a <i>spread</i>: post on every possible platform from day one. Not because every platform will work, but because if a video flops on five channels at once, you can stop blaming the algorithm. <i>&quot;It&#39;s a bigger possibility that it&#39;s a bad video rather than just the algorithm,&quot;</i> he said. The spread is a diagnostic tool, not a megaphone.</p><p class="paragraph" style="text-align:left;">Then comes the piece of advice he keeps returning to:</p><div class="blockquote"><blockquote class="blockquote__quote">If you&#39;re unable to sell your game in three words, you will be unable to sell your game.</blockquote></div><p class="paragraph" style="text-align:left;">Take that with a grain of salt, not literally. The point is: be concise with your communication. People’s attention spans are getting shorter by the week.</p><p class="paragraph" style="text-align:left;">It sounds extreme. He concedes it&#39;s extreme. But the principle underneath isn&#39;t: if a viewer sees your short for two seconds while scrolling and <i>can&#39;t</i> describe what your game is afterward, you&#39;ve lost them. Not because your short was bad. Because your game&#39;s identity isn&#39;t legible at speed.</p><p class="paragraph" style="text-align:left;">The hack he found for IRON NEST specifically was music. <i>&quot;At the beginning we were using a lot of World War I and World War II songs — Soviet marches, German marches, the United States hymn of the artillery man. It resonates very, very well. People see big bullet, they hear the march from World War I, and you don&#39;t need to tell them anything else.&quot;</i></p><p class="paragraph" style="text-align:left;">Stop and look at what&#39;s happening there. The game isn&#39;t a war story. It&#39;s a dieselpunk artillery simulator in alternate-history late-1920s Spain. But Dominik isn&#39;t trying to <i>teach</i> the player the setting in 20 seconds — he&#39;s letting the player arrive <i>pre-loaded</i> with one. The march does the world-building before the gameplay even starts. By the time the first shell flies, you already know how to feel about it.</p><p class="paragraph" style="text-align:left;">This is the three-word rule applied as a craft skill rather than a slogan. And it&#39;s the same instinct as Nick&#39;s &quot;fantasy first&quot; — strip the experience down to the simplest thing it can be, get the player there fast, then expand outward from there. <i>&quot;Most really successful games,&quot;</i> Nick said, <i>&quot;the moment you start, they immerse you into something kind of simple and clear. Then as you play longer, it gets more and more fun and crazy. The first five minutes — they&#39;ve sold you on the core fantasy. Like, what&#39;s the three words?&quot;</i></p><p class="paragraph" style="text-align:left;">Marketing is design. Design is marketing. They keep saying it in different shapes, but it&#39;s the same sentence.</p><hr class="content_break"><h1 class="heading" style="text-align:left;" id="the-discord-that-does-both-jobs"><span style="color:#28E291;">The Discord that does both jobs</span></h1><div class="image"><img alt="" class="image__image" style="" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/acf3fd9e-4466-4151-a503-ee2b35752dc2/1afc4394c78662771073a63c2a34a880_1__1_.gif?t=1778034150"/></div><p class="paragraph" style="text-align:left;">Most indie devs treat their development Discord as a marketing arm. Nick built his as a development tool that happens to also be marketing.</p><p class="paragraph" style="text-align:left;">His internal chats with Dominik are public. Not just announcements — the actual back-and-forth. The community can read the threads where Nick is taking notes, brainstorming features, working through design problems. They can&#39;t comment in those threads — that would create chaos — but they can leave emoji reactions. They can see the idea land. They can quietly tell him when something&#39;s hitting and when it isn&#39;t.</p><div class="blockquote"><blockquote class="blockquote__quote">When I&#39;m just writing notes for myself, the community is able to read those notes, give emojis, get excited about an idea, or forward it to general chat for discussion.</blockquote></div><p class="paragraph" style="text-align:left;">This solves two problems with one move. Nick can keep developing — heads down, in the work — while still being publicly present. He doesn&#39;t have to context-switch from &quot;build the game&quot; to &quot;talk about the game&quot; the way a single dev usually has to. The work <i>is</i> the talking. And when the playtest opened in February — anyone could join the Discord, react to a bot, get a key — the community was already warm. Already invested. Already ready to make videos of their own.</p><p class="paragraph" style="text-align:left;">That playtest is where things broke open. Players started cutting their own shorts from the gameplay they&#39;d recorded. One of them hit a million views on its own. Nick describes it like a snowball: <i>&quot;In about eight or nine days of the playtest, we got 8,000 to 9,000 people to join Discord, crash the bot, play the s** out of the demo, and put up a bunch of content about it.</i>&quot; The 10,000-wishlists-in-a-day spike happened in the middle of that.</p><p class="paragraph" style="text-align:left;">But here&#39;s the part most studios would have missed: the playtest wasn&#39;t really a marketing event. It was a release rehearsal.</p><p class="paragraph" style="text-align:left;"><i>&quot;The open playtest on Discord was a mock release,&quot;</i> Nick said. <i>&quot;Like 8,000 people who knew nothing about the game came on, downloaded it, installed it, played it. And there were so many problems. If you had a joystick or a controller or a simulator rig plugged in, the entire game broke. If you had Turkish locale, all the mission text was broken because they use a comma instead of a decimal point. All sorts of stuff that would have been game-breaking issues — but I never would have found, because you don&#39;t find that with 100 beta testers.&quot;</i></p><p class="paragraph" style="text-align:left;">He calls the practice <i>push-ups</i>. Assume you&#39;re going to fail. The first push-up smashes your nose on the floor. So do the next one, and the next, until launch isn&#39;t your first attempt — it&#39;s your hundredth. The viral playtest was, secretly, a stress test of the entire pipeline. It just happened to also be the best marketing event they&#39;d had to date.</p><p class="paragraph" style="text-align:left;">Same act. Both things at once.</p><hr class="content_break"><h2 class="heading" style="text-align:left;" id="feather-or-stone"><span style="color:#28E291;">Feather or stone</span></h2><div class="image"><img alt="" class="image__image" style="" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/d69349dd-8376-4b99-b7b5-78b57a1996a1/IRON_NEST_Heavy_turret_Simulator__2__3840x2160_.png?t=1777772309"/></div><p class="paragraph" style="text-align:left;">Internally, Nick and Dominik divide all games into two categories: <i>feathers</i> and <i>stones</i>.</p><p class="paragraph" style="text-align:left;">A stone is a game that has to be pushed. Hard to market, hard to communicate, hard to move. You can still sell a stone — Dominik reckons a decent amount of revenue is achievable with a year of disciplined marketing if you treat it like a business and not a hobby — but you have to do all the lifting yourself, and the ceiling depends <i>heavily</i> on the game underneath. Marketing can do a lot before release, especially in building the fantasy around the game. It can&#39;t fabricate one that isn&#39;t there.</p><p class="paragraph" style="text-align:left;">A feather is a game that flies once you let go of it. The fantasy is legible. The community self-organises. The shorts get edited and reposted by people who don&#39;t work for you.</p><p class="paragraph" style="text-align:left;">The terrifying truth Dominik wants more developers to internalise is that <b>almost any game with a </b><i><b>genuinely</b></i><b> interesting concept can clear the first hurdle</b>. Catching attention is the easy part — provided the concept earns it. <i>&quot;Every game is able to generate that initial interest,&quot;</i> he said. <i>&quot;If you came up with the fantasy, with a good short, you can generate this interest. But then when people get interested and they go to your Discord — that&#39;s where it&#39;s decided. If the game is interesting enough. If your Discord is interactive. If there&#39;s enough satisfying content for them to investigate.&quot; </i>The bar isn&#39;t &quot;any Steam page.&quot; The bar is &quot;any project with something genuinely unique about it.&quot; Most indies who pass that bar still fall at the second hurdle.</p><p class="paragraph" style="text-align:left;">90% of indies, in his experience, never even attempt step one — the easy step, the universal step. The ones that clear it then fail at step two: holding the attention they caught. IRON NEST cleared step one early enough that they could see, in real time, that the game underneath was a feather and not a stone. Which is why they stopped considering publishing deals almost immediately.</p><p class="paragraph" style="text-align:left;">It&#39;s also why Nick is brutal about scope.</p><hr class="content_break"><h2 class="heading" style="text-align:left;" id="feather-or-stone"><span style="color:rgb(40, 226, 145);">The discipline of saying no</span></h2><div class="image"><img alt="" class="image__image" style="" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/37698b85-040b-4ee5-9803-1123ecc3265d/1afc4394c78662771073a63c2a34a880_1_1__1_.gif?t=1778034168"/></div><p class="paragraph" style="text-align:left;">The single most consistent thread in the interview — the lesson Nick keeps coming back to — is that the hardest skill in indie development isn&#39;t programming or marketing. It&#39;s saying <i>no</i>.</p><p class="paragraph" style="text-align:left;"><i>&quot;A big part of expectations is people ask you, &#39;Are you going to include X?&#39; and you are financially incentivised to say yes. But that is just digging a hole for yourself. Scope creep — what you&#39;re trying to do gets bigger and bigger and bigger. I&#39;ve made this mistake before, probably more than once in my career.&quot;</i></p><p class="paragraph" style="text-align:left;">The first question every IRON NEST viewer asks is multiplayer. The answer is no. It&#39;s not in this game. It might be in the next one. Single-player is what was promised, and single-player is what ships. Dominik takes it further: he&#39;s actively <i>discouraged</i> people from buying IRON NEST if multiplayer is what they want. <i>&quot;We even have community members saying, &#39;Hey, buy IRON NEST because they want to make multiplayer next.&#39; And we&#39;re like, no, you&#39;re not supporting the next game. If you want multiplayer, click wishlist. Like our posts. But don&#39;t buy this game — you&#39;ll be disappointed.&quot;</i></p><p class="paragraph" style="text-align:left;">This is heretical advice for a Kickstarter-era developer. You&#39;re supposed to upsell. You&#39;re supposed to convert. They&#39;re talking people <i>out</i> of purchases — and the community loves them for it. Not despite the refusals, because of them. Nick says players now compliment the discipline directly: <i>&quot;Oh, I&#39;m confident this game will come out and live up to expectations, because Nick says no to everything.&quot;</i></p><p class="paragraph" style="text-align:left;">The same logic flows through their post-success scaling decisions. The viral spike has accelerated Nick&#39;s plans for a second and third game. But it hasn&#39;t changed the scope of <i>this</i> one. Dominik is firm about that: <i>&quot;Right now is the worst time to switch the development plan. We will learn from IRON NEST and implement improvements into the next game. Sticking to the plan is necessary because that&#39;s what we publicly committed to.&quot;</i></p><p class="paragraph" style="text-align:left;">And they&#39;re not scaling the company either. No new hires. No expansion into AAA-adjacent ambitions. <i>&quot;If you stick at that level — bigger budgets, bigger team — people will have bigger expectations. They&#39;ll look at the next game like a double-A-plus. I want to evade that. Keeping indie releases once per year allows us to keep this indie vibe.&quot;</i></p><hr class="content_break"><h2 class="heading" style="text-align:left;" id="the-biggest-bundle-on-steam"><span style="color:rgb(40, 226, 145);">The biggest bundle on Steam</span></h2><p class="paragraph" style="text-align:left;">He&#39;s building, with a growing coalition of indie studios, what&#39;s set to become the <b>biggest bundle ever assembled on Steam</b>. The current record sits around 359 titles. They&#39;ve already passed 320 commitments and are aiming for 100-150 more, building in margin for studios that drop out before lock-in. Untold Tales has joined with their full catalogue. The bundle is open — <i>&quot;there are no restrictions, anyone can join&quot;</i> — and developers are coordinating in a Discord because Steam doesn&#39;t notify you when it&#39;s time to finalise.</p><p class="paragraph" style="text-align:left;">But the bundle isn&#39;t the goal. The bundle is the <i>artifact</i>. What Dominik actually wants is the leverage that comes from breaking the record:</p><p class="paragraph" style="text-align:left;">A negotiation with Steam to secure a <b>yearly main-page placement</b> if they pull it off. And a second, more interesting negotiation: a <b>custom cross-discount system</b>, where owning any one game in the bundle unlocks the bundle discount for all the others — letting players buy individual titles at the same price as if they were inside it.</p><p class="paragraph" style="text-align:left;">If you&#39;ve been reading carefully, this is the same operating system IRON NEST was built on, scaled out one ring further.</p><ul><li><p class="paragraph" style="text-align:left;">Open by design — <span style="text-decoration:underline;"><a class="link" href="https://partner.steamgames.com/bundles/view/72873?token=d84ba72f26e88240&utm_source=indieformer.beehiiv.com&utm_medium=newsletter&utm_campaign=75-too-niche-said-everyone" target="_blank" rel="noopener noreferrer nofollow" style="color: #f78154">anyone can join</a></span>.</p></li><li><p class="paragraph" style="text-align:left;">Community-coordinated — <span style="text-decoration:underline;"><a class="link" href="http://Anddd... here is the link to join the biggest bundle https://partner.steamgames.com/bundles/view/72873?token=d84ba72f26e88240 + here is the Discord link where the devs who joined are gathering https://discord.gg/sktCVpugzg" target="_blank" rel="noopener noreferrer nofollow" style="color: #f78154">the Discord</a></span>.</p></li><li><p class="paragraph" style="text-align:left;">Concrete artifact — the record.</p></li><li><p class="paragraph" style="text-align:left;">Used as leverage — the Steam negotiations.</p></li></ul><p class="paragraph" style="text-align:left;">The marketing isn&#39;t <i>for</i> something. The marketing <i>is</i> the something. The bundle is, structurally, the same move as the open-development Discord: a tool that makes other studios&#39; lives easier, that incidentally also generates visibility for everyone inside it, including IRON NEST.</p><p class="paragraph" style="text-align:left;">If you&#39;re a developer reading this and the bundle sounds like something worth being part of — message Dominik. They&#39;re still adding studios.</p><hr class="content_break"><h1 class="heading" style="text-align:left;" id="the-point"><span style="color:#28E291;">The point</span></h1><div class="image"><img alt="" class="image__image" style="" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/1aa0083a-95e8-4922-ad77-080d00e24a24/IRON_NEST_Heavy_turret_Simulator__3__3840x2160_.png?t=1777772340"/></div><p class="paragraph" style="text-align:left;">Here&#39;s what nags at me about IRON NEST, two days after the interview.</p><p class="paragraph" style="text-align:left;">If you only listened to the surface of the story, you&#39;d take away the wrong lesson. You&#39;d think it&#39;s a story about how you don&#39;t need money to launch a game. <i>&quot;We spent zero dollars on organic marketing,&quot;</i> Dominik said proudly, before Nick gently corrected him to about $750 on events that <i>&quot;weren&#39;t really worth it much.&quot;</i> You could read that and conclude that an indie can pull this off on grit alone.</p><p class="paragraph" style="text-align:left;">But Dominik is honest about the rest of the cost. <i>&quot;It&#39;s easy to say &#39;just do this content AB testing.&#39; But the story behind IRON NEST</i> <i>is that we&#39;re two pretty experienced guys in our fields. Nick has 20 years of development. I have years in marketing and publishing. To hire someone at the senior level we operate at would be very expensive.&quot;</i></p><p class="paragraph" style="text-align:left;">I summarised it back to him in the call: <i>you&#39;ve already spent the money and the time, acquiring the experience.</i></p><p class="paragraph" style="text-align:left;">He laughed. Yeah. That&#39;s it.</p><p class="paragraph" style="text-align:left;">That&#39;s the actual story. IRON NEST didn&#39;t go viral on $750. It went viral on <b>30+ years of combined craft, deployed inside a worldview where development and marketing are the same act.</b> Two veterans who refused to treat them as separate problems, refused to outsource the part they&#39;re best at, and refused to take publisher money once the playtest told them they didn&#39;t need to.</p><p class="paragraph" style="text-align:left;">And the reason that worldview matters — the reason any of this generalises beyond two guys with the right pedigree — is that <b>the choice to see development and marketing as one thing is available to every developer</b>, regardless of experience. You don&#39;t need 20 years to ask whether your fantasy is legible in 15 seconds. You don&#39;t need a publisher&#39;s marketing team to put your gameplay in front of a march and see if it lands. You don&#39;t need money to keep your Discord public, or to say no to scope creep, or to do a mock release in front of strangers to find the bugs that beta testers won&#39;t.</p><p class="paragraph" style="text-align:left;">The hard part isn&#39;t the experience. The hard part is the discipline. Nick spent ten years being told his idea was too niche. Dominik spent years inside publishers watching marketers and developers communicate around each other instead of with each other. They built IRON NEST from minute one as a refusal of both of those failures.</p><p class="paragraph" style="text-align:left;">The result is a feather.</p><h6 class="heading" style="text-align:left;" id="whats-next"><span style="color:#9381FF;"><b>WHAT’S NEXT</b></span></h6><p class="paragraph" style="text-align:left;">🎯 <b>Demo:</b> drops on Steam on <b>June 15, 10am PDT</b> — to the minute that Steam Next Fest opens. They&#39;re skipping the conventional pre-Next-Fest release window deliberately.</p><p class="paragraph" style="text-align:left;">📅 <b>Release date:</b> to be announced <i>during</i> Next Fest.</p><p class="paragraph" style="text-align:left;">🤝 <b>Bundle:</b> if you&#39;re a developer and want in on the record-breaking Steam bundle, reach out to Dominik directly.</p><div class="embed"><a class="embed__url" href="https://store.steampowered.com/app/2950790/IRON_NEST_Heavy_Turret_Simulator/?utm_source=indieformer.beehiiv.com&utm_medium=newsletter&utm_campaign=75-too-niche-said-everyone" target="_blank"><img class="embed__image embed__image--left" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2950790/467cd309f0ba64b432367910801e56fe01e03373/capsule_616x353.jpg?t=1777406111"/><div class="embed__content"><p class="embed__title"> IRON NEST: Heavy Turret Simulator </p><p class="embed__description"> Crank massive iron wheels and hammer ballistic calculations to swing a 5,000-ton turret into position, feeling the entire dieselpunk structure shudder as you haul the heavy firing lever. </p><p class="embed__link"> Wishlist Now </p></div></a></div><ul><li><p class="paragraph" style="text-align:left;"><b><span style="text-decoration:underline;"><a class="link" href="https://linktr.ee/IRONNEST?utm_source=indieformer.beehiiv.com&utm_medium=newsletter&utm_campaign=75-too-niche-said-everyone" target="_blank" rel="noopener noreferrer nofollow" style="color: #f78154">IRON NEST Linktree</a></span></b></p></li><li><p class="paragraph" style="text-align:left;"><b><a class="link" href="https://store.steampowered.com/app/2950790/IRON_NEST_Heavy_Turret_Simulator/?utm_source=indieformer.beehiiv.com&utm_medium=newsletter&utm_campaign=75-too-niche-said-everyone" target="_blank" rel="noopener noreferrer nofollow" style="color: #f78154">Wishlist on Steam</a></b></p></li><li><p class="paragraph" style="text-align:left;"><b><a class="link" href="https://discord.gg/E92DaqgnZv?utm_source=indieformer.beehiiv.com&utm_medium=newsletter&utm_campaign=75-too-niche-said-everyone" target="_blank" rel="noopener noreferrer nofollow" style="color: #f78154">Join the Discord</a></b></p></li><li><p class="paragraph" style="text-align:left;"><b><a class="link" href="https://www.tiktok.com/@ironnestgame?utm_source=indieformer.beehiiv.com&utm_medium=newsletter&utm_campaign=75-too-niche-said-everyone" target="_blank" rel="noopener noreferrer nofollow" style="color: #f78154">Follow on TikTok</a></b></p></li><li><p class="paragraph" style="text-align:left;"><b><a class="link" href="https://www.youtube.com/@IRONNESTgame?utm_source=indieformer.beehiiv.com&utm_medium=newsletter&utm_campaign=75-too-niche-said-everyone" target="_blank" rel="noopener noreferrer nofollow" style="color: #f78154">Follow on YouTube</a></b></p></li><li><p class="paragraph" style="text-align:left;"><b><a class="link" href="https://x.com/IRONNESTgame?utm_source=indieformer.beehiiv.com&utm_medium=newsletter&utm_campaign=75-too-niche-said-everyone" target="_blank" rel="noopener noreferrer nofollow" style="color: #f78154">Follow on X</a></b></p></li></ul><p id="the-indieformer-team" class="paragraph" style="text-align:left;"><span style="color:#28E291;"><b>The Indieformer Team</b></span></p>
+</article>
+
+<footer class="site-footer">
+  <div class="footer-col brand-col">
+    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <li><a href="https://essay.indieformer.com">How to Really Make a Game</a></li>
+      <li><a href="https://indieformer.beehiiv.com/press-kit-guide">Press Kit Guide</a></li>
+      <li><a href="https://indieformer.beehiiv.com/steam-marketing-guide">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+      <li><a href="https://waypoint.indieformer.com">Waypoint archive</a></li>
+      <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
+    </ul>
+  </div>
+  <p class="footer-meta">© 2026 Indieformer. · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
+</footer>
+
+</body>
+</html>
