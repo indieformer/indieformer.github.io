@@ -124,7 +124,17 @@
     font-size: 18px; line-height: 1.55;
     color: var(--text-secondary); margin-bottom: 18px;
   }
-
+  .post-hero {
+    margin: 22px 0 6px;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--shadow-mid);
+    transition: border-color 0.2s ease;
+  }
+  .post-hero img {
+    display: block; width: 100%; height: auto;
+    aspect-ratio: 1200 / 630; object-fit: cover;
+  }
 
   /* ── Post body — scopes Beehiiv content to fit our design ── */
   .post-content {
@@ -166,6 +176,20 @@
     border-bottom-color: var(--text-primary);
   }
   .post-content em, .post-content i { color: var(--text-secondary); }
+
+  /* Don't recolor or underline links inside Beehiiv custom_html embed cards —
+     they bring their own complete styling (white text on periwinkle, etc.) */
+  .post-content .custom_html a,
+  .post-content .custom_html a:hover {
+    color: inherit !important;
+    border-bottom: none !important;
+    background: none !important;
+  }
+  .post-content .custom_html a span,
+  .post-content .custom_html a div,
+  .post-content .custom_html a p {
+    border-bottom: none !important;
+  }
 
   /* Images */
   .post-content .image { margin: 28px 0; }
@@ -282,6 +306,9 @@
   <a href="/notes/" class="back-link">← All notes</a>
   <h1 class="post-title">Too niche, said everyone</h1>
   <p class="post-subtitle">Two veterans, $750 spent, 10,000 wishlists in a single day — and a niche nobody believed in until they showed up.</p>
+    <figure class="post-hero">
+    <img src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/6d4c36b1-d635-47a2-9508-ba3788c98186/frontline-iron-nest_Thumbnail.png" alt="Too niche, said everyone" loading="eager" width="1200" height="630">
+  </figure>
   <div class="post-meta">
     <span class="post-tag">frontline<span class="dot">·</span><span class="num">Issue #75</span></span>
     <time datetime="2026-05-06">6 May 2026</time>
@@ -308,7 +335,6 @@
   <div class="footer-col">
     <p class="footer-label">Elsewhere</p>
     <ul>
-      <li><a href="https://waypoint.indieformer.com">Waypoint archive</a></li>
       <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
     </ul>
   </div>
