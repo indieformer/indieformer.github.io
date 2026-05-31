@@ -100,7 +100,18 @@
     font-family: 'Sora', Arial, sans-serif; color: var(--text-primary);
     line-height: 1.7; font-size: 17px; position: relative; z-index: 2;
   }
-  .post-content .paragraph, .post-content p { margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7; }
+  /* Beehiiv hardcodes 'DM Sans' as inline style on every paragraph & list
+     item, which beats our class-level rule. Force Sora with !important
+     across the elements Beehiiv touches. Embed-card text inherits Sora
+     from the card's own inline style so we don't need to touch .custom_html. */
+  .post-content .paragraph, .post-content p,
+  .post-content li, .post-content ul, .post-content ol,
+  .post-content figcaption, .post-content td, .post-content th {
+    font-family: 'Sora', Arial, sans-serif !important;
+  }
+  .post-content .paragraph, .post-content p {
+    margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7;
+  }
   .post-content .heading, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
     font-family: 'Sora' !important; color: var(--text-primary); line-height: 1.25; letter-spacing: -0.01em; margin: 2em 0 0.6em;
   }
@@ -226,7 +237,7 @@
   p span[style*="font-size"] { line-height: 1.6; }
 </style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> If that&#39;s not what you signed up for, no hard feelings — unsubscribe is right there (sorry I didn’t know how to link it here). I&#39;d rather not send you something you didn&#39;t ask for. </p></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;">Waypoint will live on as a static archive of where we got to. Plenty of games to dig through from the last 18 or so months, but the project itself has come to a close. </p></div><style>
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
 </style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> A few other bits: </p></div><div style="padding-bottom:12px;padding-left:37px;padding-right:27px;padding-top:12px;"><ul style="color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:24px;list-style-type:disc;margin:0px 0px 0px 25px;padding:0;"><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"><a class="link" href="http://indieformer.com/" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">A new website is up.</a> If you want to talk to us — pitching a game for publishing, marketing or co-marketing help, funding/partnership chats, or just to say hi — hello@indieformer.com is the way in. </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"> Want to follow Scorchpot itself? It lives on <a class="link" href="https://discord.gg/KZgxrn3Kpv" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Discord</a> and <a class="link" href="https://store.steampowered.com/app/3966510/Feed_the_Scorchpot/" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Steam</a> now. </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"><a class="link" href="https://itch.io/jam/patch-notes" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Patch Notes</a> is coming back, after Scorchpot releases in August. </p></li></ul></div><style>
   p span[style*="font-size"] { line-height: 1.6; }

@@ -100,7 +100,18 @@
     font-family: 'Sora', Arial, sans-serif; color: var(--text-primary);
     line-height: 1.7; font-size: 17px; position: relative; z-index: 2;
   }
-  .post-content .paragraph, .post-content p { margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7; }
+  /* Beehiiv hardcodes 'DM Sans' as inline style on every paragraph & list
+     item, which beats our class-level rule. Force Sora with !important
+     across the elements Beehiiv touches. Embed-card text inherits Sora
+     from the card's own inline style so we don't need to touch .custom_html. */
+  .post-content .paragraph, .post-content p,
+  .post-content li, .post-content ul, .post-content ol,
+  .post-content figcaption, .post-content td, .post-content th {
+    font-family: 'Sora', Arial, sans-serif !important;
+  }
+  .post-content .paragraph, .post-content p {
+    margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7;
+  }
   .post-content .heading, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
     font-family: 'Sora' !important; color: var(--text-primary); line-height: 1.25; letter-spacing: -0.01em; margin: 2em 0 0.6em;
   }

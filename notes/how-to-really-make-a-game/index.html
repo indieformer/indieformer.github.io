@@ -100,7 +100,18 @@
     font-family: 'Sora', Arial, sans-serif; color: var(--text-primary);
     line-height: 1.7; font-size: 17px; position: relative; z-index: 2;
   }
-  .post-content .paragraph, .post-content p { margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7; }
+  /* Beehiiv hardcodes 'DM Sans' as inline style on every paragraph & list
+     item, which beats our class-level rule. Force Sora with !important
+     across the elements Beehiiv touches. Embed-card text inherits Sora
+     from the card's own inline style so we don't need to touch .custom_html. */
+  .post-content .paragraph, .post-content p,
+  .post-content li, .post-content ul, .post-content ol,
+  .post-content figcaption, .post-content td, .post-content th {
+    font-family: 'Sora', Arial, sans-serif !important;
+  }
+  .post-content .paragraph, .post-content p {
+    margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7;
+  }
   .post-content .heading, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
     font-family: 'Sora' !important; color: var(--text-primary); line-height: 1.25; letter-spacing: -0.01em; margin: 2em 0 0.6em;
   }
@@ -228,7 +239,7 @@
   p span[style*="font-size"] { line-height: 1.6; }
 </style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> I&#39;d grab a coffee for this one. Set aside thirty minutes. Maybe more. </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/1e0081b1-cbfb-429c-b6e3-619c598f6acd/How_to_really_make_a_game.jpg?t=1776291877"/ loading="lazy" decoding="async"></div></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"><a class="link" href="https://indieformer.com/essay/" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">→ Read: How to Really Make a Game</a></p></div><style>
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"><a class="link" href="https://essay.indieformer.com/" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">→ Read: How to Really Make a Game</a></p></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
 </style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Always Indieformer, <span style="color:#28E291;"><b>Josh & Clem</b></span></p></div>
 </article>

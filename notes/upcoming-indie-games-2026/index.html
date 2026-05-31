@@ -100,7 +100,18 @@
     font-family: 'Sora', Arial, sans-serif; color: var(--text-primary);
     line-height: 1.7; font-size: 17px; position: relative; z-index: 2;
   }
-  .post-content .paragraph, .post-content p { margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7; }
+  /* Beehiiv hardcodes 'DM Sans' as inline style on every paragraph & list
+     item, which beats our class-level rule. Force Sora with !important
+     across the elements Beehiiv touches. Embed-card text inherits Sora
+     from the card's own inline style so we don't need to touch .custom_html. */
+  .post-content .paragraph, .post-content p,
+  .post-content li, .post-content ul, .post-content ol,
+  .post-content figcaption, .post-content td, .post-content th {
+    font-family: 'Sora', Arial, sans-serif !important;
+  }
+  .post-content .paragraph, .post-content p {
+    margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7;
+  }
   .post-content .heading, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
     font-family: 'Sora' !important; color: var(--text-primary); line-height: 1.25; letter-spacing: -0.01em; margin: 2em 0 0.6em;
   }
@@ -212,7 +223,7 @@
 <article class="post-content">
 <div style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h6 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:14px;font-weight:Bold;line-height:0.875;margin:0;text-align:left;"><span style="color:#9381FF;"><b>SPECIAL</b></span></h6></div><div style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;"><span style="color:#28E291;"><b>What’s on the menu for 2026?</b></span></h2></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Throughout 2025, whenever a game caught my eye on social media, it went straight into the Waypoint database as an early entry. While I usually revisit these individually upon release, the &quot;upcoming&quot; collection has grown into a massive stack that is too good to ignore. </p></div><style>
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
 </style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Here is a curated selection of titles arriving in 2026 (and beyond) that deserve a spot on your wishlist. </p></div><div style="font-size:0px;line-height:0px;padding:30px 0px 30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><style type="text/css">
   .generic-embed--root {
@@ -1102,7 +1113,7 @@
   p span[style*="font-size"] { line-height: 1.6; }
 </style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Now that we’ve closed the book on 2025 and set the stage for the year ahead, we are officially back to regular programming. Expect the usual deep dives, highlights, and early access picks from the middle of the month. </p></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> GLHF. </p></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"><button style="background-color:#28e291;border-radius:10px;color:#222222;cursor:pointer;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:18px;font-weight:700;line-height:20px;padding:18px 22px;width:fit-content;" type="button"> Browse Waypoint </button></div><div style="font-size:0px;line-height:0px;padding:30px 0px 30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><style>
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> GLHF. </p></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"></div><div style="font-size:0px;line-height:0px;padding:30px 0px 30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
 </style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Happy gaming! </p></div><style>
   p span[style*="font-size"] { line-height: 1.6; }

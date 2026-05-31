@@ -100,7 +100,18 @@
     font-family: 'Sora', Arial, sans-serif; color: var(--text-primary);
     line-height: 1.7; font-size: 17px; position: relative; z-index: 2;
   }
-  .post-content .paragraph, .post-content p { margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7; }
+  /* Beehiiv hardcodes 'DM Sans' as inline style on every paragraph & list
+     item, which beats our class-level rule. Force Sora with !important
+     across the elements Beehiiv touches. Embed-card text inherits Sora
+     from the card's own inline style so we don't need to touch .custom_html. */
+  .post-content .paragraph, .post-content p,
+  .post-content li, .post-content ul, .post-content ol,
+  .post-content figcaption, .post-content td, .post-content th {
+    font-family: 'Sora', Arial, sans-serif !important;
+  }
+  .post-content .paragraph, .post-content p {
+    margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7;
+  }
   .post-content .heading, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
     font-family: 'Sora' !important; color: var(--text-primary); line-height: 1.25; letter-spacing: -0.01em; margin: 2em 0 0.6em;
   }
@@ -873,7 +884,7 @@
   }
 </style><div class="generic-embed--root"><a href="https://store.steampowered.com/app/3081690/Chromatic_Conundrum/" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3081690/7bde55156e77bf8c04b5c8000eacbe28589b79a6/capsule_616x353.jpg?t=1769421917" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;DM Sans&#39;,Lato,Montserrat,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Chromatic Conundrum</p></div><div class="generic-embed--description" style="font-family: &#39;DM Sans&#39;,Lato,Montserrat,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">Manipulate light and shadow in a first-person puzzle adventure, blending colors to illuminate your path through an enigmatic world. Solve intricate logic challenges by combining beams and casting silhouettes in a concise experience designed to be completed in a single afternoon.</p></div><div class="generic-embed--link" style="font-family: &#39;DM Sans&#39;,Lato,Montserrat,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">$4.99 | PC</p></div></div></div></div></a></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> These highlights only scratch the <i>surface</i>. Waypoint has the complete calendar of January 2026’s indie releases, extras, and <i>even more</i> hidden gems. </p></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"><button style="background-color:#28e291;border-radius:10px;color:#222222;cursor:pointer;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:18px;font-weight:700;line-height:20px;padding:18px 22px;width:fit-content;" type="button"> Browse Waypoint </button></div><div style="font-size:0px;line-height:0px;padding:30px 0px 30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><style>
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"></div><div style="font-size:0px;line-height:0px;padding:30px 0px 30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
 </style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Happy gaming! </p></div><style>
   p span[style*="font-size"] { line-height: 1.6; }

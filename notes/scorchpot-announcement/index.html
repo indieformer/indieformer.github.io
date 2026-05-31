@@ -100,7 +100,18 @@
     font-family: 'Sora', Arial, sans-serif; color: var(--text-primary);
     line-height: 1.7; font-size: 17px; position: relative; z-index: 2;
   }
-  .post-content .paragraph, .post-content p { margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7; }
+  /* Beehiiv hardcodes 'DM Sans' as inline style on every paragraph & list
+     item, which beats our class-level rule. Force Sora with !important
+     across the elements Beehiiv touches. Embed-card text inherits Sora
+     from the card's own inline style so we don't need to touch .custom_html. */
+  .post-content .paragraph, .post-content p,
+  .post-content li, .post-content ul, .post-content ol,
+  .post-content figcaption, .post-content td, .post-content th {
+    font-family: 'Sora', Arial, sans-serif !important;
+  }
+  .post-content .paragraph, .post-content p {
+    margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7;
+  }
   .post-content .heading, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
     font-family: 'Sora' !important; color: var(--text-primary); line-height: 1.25; letter-spacing: -0.01em; margin: 2em 0 0.6em;
   }
@@ -214,7 +225,7 @@
   p span[style*="font-size"] { line-height: 1.6; }
 </style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> It’s wild how far Indieformer has come in the last 12 months. This time last year, I never would’ve imagined we’d be saying: <b>we’re publishing a game.</b></p></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> What started as a simple newsletter to get great games into players’ hands has grown into so much more. <span style="text-decoration:underline;"><a class="link" href="https://itch.io/jam/patch-notes" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><span style="color: rgb(247, 129, 84)">First came the jam</span></a></span>, a chance to celebrate ideas right at their inception. Then <span style="text-decoration:underline;"><span style="color: rgb(247, 129, 84)">Waypoint</span></span>, our indie-curated calendar, to keep every recommendation in one easy place. And now… we’re stepping up again. Into publishing. </p></div><style>
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
 </style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> It’s exciting, it’s scary — but that’s why we do it. </p></div><style>
   p span[style*="font-size"] { line-height: 1.6; }
