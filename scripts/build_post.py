@@ -42,32 +42,49 @@ BEEHIIV_FOOTER_RE = re.compile(
 _DIV_TAG_RE = re.compile(r"<(/?)div\b[^>]*>", re.IGNORECASE)
 
 
-def _strip_beehiiv_wrappers(content: str) -> str:
-    """Extract just the article body from a Beehiiv content payload.
-
-    The API's `content.free.web` field returns a *full standalone HTML
-    page* (DOCTYPE, <head> with fonts, page chrome, `<div class='beehiiv'>`
-    containing `<div class='beehiiv__body'>...article...</div>`, then
-    closing tags). Earlier versions of this function tried to match the
-    whole thing with one regex anchored to end-of-string and silently
-    failed on the live API response — the entire standalone Beehiiv page
-    was getting nested inside the Indieformer page wrapper. Now we walk
-    the div tags and track depth properly."""
-    start_m = re.search(r"<div\s+class=['\"]beehiiv__body['\"]>", content)
-    if not start_m:
-        return content.strip()
-    inner_start = start_m.end()
-
+def _extract_wrapped(content: str, open_pattern: str) -> str | None:
+    """Find the open tag matching `open_pattern` and return everything inside
+    its balanced-div close. Returns None if the open tag isn't found."""
+    m = re.search(open_pattern, content)
+    if not m:
+        return None
+    inner_start = m.end()
     depth = 1
-    for m in _DIV_TAG_RE.finditer(content, inner_start):
-        if m.group(1) == "/":
+    for tag in _DIV_TAG_RE.finditer(content, inner_start):
+        if tag.group(1) == "/":
             depth -= 1
             if depth == 0:
-                return content[inner_start:m.start()].strip()
+                return content[inner_start:tag.start()].strip()
         else:
             depth += 1
-    # didn't balance — give up and return what's there
+    # didn't balance — return what we have
     return content[inner_start:].strip()
+
+
+def _strip_beehiiv_wrappers(content: str) -> str:
+    """Extract just the article body. Beehiiv returns content in two shapes:
+
+    1. RSS feed-style: wrapped in <div class='beehiiv'><div class='beehiiv__body'>…
+       (this is what the public RSS feed publishes and was what earlier
+       versions of this script were calibrated against)
+    2. Current API standalone web page (content.free.web): a full HTML
+       document with <div class='rendered-post'> containing
+       <div id='web-header'> (duplicated title/subtitle/byline/share-
+       buttons/hero — all of which we already render natively) and
+       <div class='content-blocks'>…ACTUAL ARTICLE…</div>.
+
+    We probe for content-blocks first (current API). Falls back to
+    beehiiv__body (RSS), then to raw content."""
+    for pattern in (
+        # Current API: <div id='content-blocks'> inside <div class='rendered-post'>
+        r"<div\b[^>]*\bid=['\"]content-blocks['\"][^>]*>",
+        # RSS feed shape: <div class='beehiiv'><div class='beehiiv__body'>
+        r"<div\b[^>]*\bclass=['\"][^'\"]*\bbeehiiv__body\b[^'\"]*['\"][^>]*>",
+    ):
+        inner = _extract_wrapped(content, pattern)
+        if inner is not None:
+            return inner
+    return content.strip()
 
 
 def _strip_leading_eyebrow_and_title(body: str) -> str:
