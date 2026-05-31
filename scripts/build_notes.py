@@ -219,6 +219,10 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
     color: var(--text-secondary); line-height: 1.65; font-size: 16px; max-width: 560px;
   }}
 
+  /* beehiiv embed wrapper — sits in the page-header column above the notes list */
+  .subscribe-inline {{ margin: 22px 0 4px; max-width: 560px; }}
+  .subscribe-inline iframe {{ max-width: 100% !important; }}
+
   .notes-list {{ max-width: 1000px; margin: 0 auto; padding: 24px 56px 8px; position: relative; z-index: 2; }}
   .notes-list .note-card:first-of-type {{ border-top: 1px solid var(--border); }}
   .note-card {{ padding: 22px 0; border-bottom: 1px solid var(--border); max-width: 720px; }}
@@ -379,6 +383,9 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
       We try to post at least monthly about what we're learning and doing as a publisher.
       The most recent are below.
     </p>
+    <div class="subscribe-inline">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="23908dcc-ff1f-4876-95a9-61a164fb3893"></script>
+    </div>
   </div>
 </section>
 
