@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curator Archive | Indieformer</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://media.beehiiv.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap">
+
+<meta name="description" content="Monthly Showcase and Indievelopment curation from when Indieformer was a curator. We're a publisher now — these are kept for posterity.">
+<link rel="canonical" href="https://indieformer.com/notes/archive/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="Curator Archive">
+<meta property="og:description" content="Monthly Showcase and Indievelopment curation from when Indieformer was a curator. We're a publisher now — these are kept for posterity.">
+<meta property="og:url" content="https://indieformer.com/notes/archive/">
+<meta property="og:image" content="https://indieformer.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root {
+    --emerald: #28E291; --coral: #F78154; --periwinkle: #9381FF;
+    --shadow: #262730; --shadow-mid: #2F3040;
+    --text-primary: #F0EEE8; --text-secondary: #C9C7B8; --text-tertiary: #8B8970;
+    --border: rgba(255, 255, 255, 0.08); --border-mid: rgba(255, 255, 255, 0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    position: relative;
+    background: var(--shadow);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
+    background-size: 26px 26px;
+    font-family: 'Sora', Arial, sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 20px;
+    overflow-x: hidden;
+  }
+
+  .crop { position: absolute; width: 18px; height: 18px; opacity: 0; animation: fade 0.6s ease 0.2s forwards; z-index: 5; pointer-events: none; }
+  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
+  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+  .crop.bl { bottom: 20px; left: 20px; }
+  .crop.br { bottom: 20px; right: 20px; }
+
+  .site-nav { display: flex; align-items: center; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 14px 56px; position: relative; z-index: 4; }
+  a.brand { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s ease; }
+  a.brand img { display: block; height: 40px; width: 40px; }
+  a.brand:hover { opacity: 0.82; }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a { font-family: 'Sora'; font-size: 15px; font-weight: 500; color: var(--text-secondary); text-decoration: none; position: relative; transition: color 0.2s; }
+  .primary-nav a:hover { color: var(--text-primary); }
+  .primary-nav a.current { color: var(--text-primary); font-weight: 600; }
+  .primary-nav a.current::after { content: ''; position: absolute; left: 0; right: 0; bottom: -7px; height: 2px; background: var(--emerald); border-radius: 2px; }
+
+  /* ── Page header ───────────────────────────────────── */
+  .section { position: relative; width: 100%; max-width: 1000px; margin: 0 auto; padding: 40px 56px 16px; z-index: 1; }
+  .col { max-width: 720px; position: relative; z-index: 2; }
+  h1 { font-size: clamp(38px, 6vw, 56px); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 14px; }
+  .page-lede { font-family: 'Caveat', cursive; font-size: 26px; color: var(--coral); transform: rotate(-1deg); display: inline-block; margin-bottom: 18px; }
+  .page-desc { color: var(--text-secondary); line-height: 1.65; font-size: 16px; max-width: 560px; }
+  .subscribe-inline { margin: 22px 0 4px; max-width: 560px; }
+  .subscribe-inline iframe { max-width: 100% !important; }
+
+  /* ── Tabs ──────────────────────────────────────────── */
+  .notes-tabs {
+    max-width: 1000px; margin: 16px auto 0; padding: 0 56px;
+    display: flex; gap: 0; border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .notes-tabs a {
+    font-family: 'Sora'; font-size: 15px; font-weight: 500;
+    color: var(--text-secondary); text-decoration: none;
+    padding: 12px 0; margin-right: 28px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .notes-tabs a:hover { color: var(--text-primary); }
+  .notes-tabs a.current {
+    color: var(--text-primary); font-weight: 600;
+    border-bottom-color: var(--emerald);
+  }
+
+  /* ── Card list ─────────────────────────────────────── */
+  .notes-list { max-width: 1000px; margin: 0 auto; padding: 24px 56px 8px; position: relative; z-index: 2; }
+  .notes-list .note-card:first-of-type { border-top: 1px solid var(--border); }
+  .note-card { padding: 22px 0; border-bottom: 1px solid var(--border); max-width: 720px; }
+  .note-link { display: grid; grid-template-columns: 1fr; gap: 0; text-decoration: none; color: inherit; }
+  .note-card.has-thumb .note-link { grid-template-columns: 140px 1fr; gap: 22px; align-items: start; }
+  .note-thumb { width: 140px; aspect-ratio: 1200 / 630; overflow: hidden; border-radius: 8px; background: var(--shadow-mid); border: 1px solid var(--border); transition: border-color 0.2s ease; }
+  .note-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .note-link:hover .note-thumb { border-color: var(--emerald); }
+  .note-link:hover .note-thumb img { transform: scale(1.04); }
+  .note-meta { display: flex; gap: 14px; align-items: baseline; margin-bottom: 6px; font-size: 13px; color: var(--text-tertiary); }
+  .note-tag { font-family: 'Caveat', cursive; font-size: 18px; color: var(--coral); transform: rotate(-1.5deg); display: inline-block; line-height: 1; }
+  .note-title { font-family: 'Sora'; font-size: 21px; font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-bottom: 6px; transition: color 0.2s ease; }
+  .note-link:hover .note-title { color: var(--emerald); }
+  .note-excerpt { font-size: 15px; line-height: 1.6; color: var(--text-secondary); }
+  .empty-state { padding: 40px 0; color: var(--text-tertiary); font-size: 16px; max-width: 560px; }
+
+  /* ── Footer ─────────────────────────────────────────── */
+  .site-footer {
+    max-width: 1000px; margin: 60px auto 0; padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px;
+    font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+    position: relative; z-index: 2;
+  }
+  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
+  .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
+  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 22px; padding-top: 18px; font-size: 13px; color: var(--text-tertiary); }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 820px) {
+    body { padding: 20px 14px; }
+    .section, .notes-list, .notes-tabs { padding-left: 24px; padding-right: 24px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
+    .note-title { font-size: 19px; }
+    .note-card.has-thumb .note-link { grid-template-columns: 100px 1fr; gap: 14px; }
+    .note-thumb { width: 100px; }
+  }
+  @media (max-width: 500px) {
+    .note-card.has-thumb .note-link { grid-template-columns: 1fr; gap: 12px; }
+    .note-thumb { width: 100%; }
+  }
+
+</style>
+</head>
+<body>
+
+<span class="crop bl"></span><span class="crop br"></span>
+
+<header class="site-nav">
+  <a class="brand" href="/" aria-label="Indieformer home">
+    <img src="/logo.png" alt="Indieformer" width="40" height="40">
+  </a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular/">The Approach</a>
+    <a href="/notes/" class="current">Notes</a>
+    <a href="/scorchpot/">Scorchpot</a>
+  </nav>
+</header>
+
+<section class="section">
+  <div class="col">
+    <h1>Curator Archive.</h1>
+    <p class="page-lede">what we used to do.</p>
+    <p class="page-desc">Monthly Showcase and Indievelopment curation from when Indieformer was a curator. We're a publisher now — these are kept for posterity.</p>
+    <div class="subscribe-inline">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="23908dcc-ff1f-4876-95a9-61a164fb3893"></script>
+    </div>
+  </div>
+</section>
+
+<nav class="notes-tabs" aria-label="Notes categories">
+  <a href="/notes/">Publog</a>
+  <a href="/notes/frontline/">Frontline</a>
+  <a href="/notes/archive/" class="current">Curator Archive</a>
+</nav>
+
+<main class="notes-list" id="notes">
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0624/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/ed766c8e-e682-4494-a020-60100c5aba6a/showcase0624_Thumbnail.png?t=1719552307" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase: June’s Indie Gems</h3>
+          <p class="note-excerpt">Handpicked indie masterpieces you can&#x27;t miss!</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0624/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/2eea1c0b-f2f9-4536-9079-c24faf0f38ff/indiedevelopment0624_Thumbnail.png?t=1719552882" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment: June’s Early Access</h3>
+          <p class="note-excerpt">Discover tomorrow&#x27;s indie hits, today.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0724/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/5f958fc0-ed5c-4fcd-9c9e-a6392626be90/indiedevelopment0724_Thumbnail.png?t=1721522710" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment: July&#x27;s Games-in-Creation</h3>
+          <p class="note-excerpt">There&#x27;s a bit of Studio Ghibli, gardening, and a Raccoon coming soon from devs around the world.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0724/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/8ece0931-3f9c-4934-bbeb-98459f18ac9a/showcase0724_Thumbnail.png?t=1722317695" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase: July&#x27;s Gems</h3>
+          <p class="note-excerpt">Epic Quests, Puzzle-Solving, and Retro-Inspired Adventures: July is Packed with Indie Gaming Delights!</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0824/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/d328c53a-7c1f-4f9b-b2de-6df5ca1f8d9c/indiedevelopment0824_Thumbnail.jpg?t=1723761595" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">Discover magic, rebuild worlds, and race to victory—get the latest on must-play indie games that blend nostalgia with fresh twists.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0824/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/96b3e4df-0a07-4a84-af09-2200a43f283c/showcase0824_Thumbnail.png?t=1724818650" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">From ricochet shots in tactical battles to uncovering ancient secrets in evolving worlds—explore games where you tame creatures, battle Titans, and craft your own adventure.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0924/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/615b9b26-0b9a-463d-bdac-56cd7efa1f8f/indievelopment0924.png?t=1726207436" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">Culinary quests to roguelike adventures, this issue delivers endless worlds of discovery, strategy, and creative freedom.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0924/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/3b1e5679-c59e-447c-b3db-c0e7acbd1add/showcase0924_Thumbnail.jpg?t=1727161468" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">Tactical shootouts, deck-building roguelikes, and puzzle-platformers await. Explore unique mechanics, butter-up your platforming, and conveyer your way through September’s top indie picks!</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment1024/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/6c0410e1-5bd4-4861-b036-f21d56e56da7/indievelopment1024_Thumbnail.png?t=1729144294" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">Unleash magic, hunt witches, and survive a tower of trials—this issue’s must-play indies are packed with chaos, deception, and dungeon-crawling adventure!</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase1024/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/3c780d14-3c28-4c4d-95e7-e57590a2ba1d/showcase1024_Thumbnail.png?t=1730175195" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">This month’s lineup takes you from eerie gardens to cyber dystopias, with fast-paced roguelikes, tactical deck-builders, and more.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment1124/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/417962bf-89f4-401c-94fd-47522fe0fb5f/indievelopment1124_Thumbnail.png?t=1731561438" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">Dive into unforgettable worlds—from jungle chaos and haunted hotels to cosmic cults and vampire clans.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase1124/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/2d9eece8-5b5e-4f17-84a6-7943d29df684/showcase1124_Thumbnail.png?t=1732843614" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">From epic space battles and tactical puzzlers to wholesome quests and cosmic adventures, this month’s indie games offer thrilling action, charming challenges, and unique stories to explore.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment1224/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/eefede83-9c53-4b91-b5c4-9ed62b4b2a7e/indievelopment1224_Thumbnail.png?t=1733822142" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">This issue dives into inventive roguelikes, cozy creations, and action-packed co-op adventures. Whether you’re defending wagons, swapping bodies, or running a Japanese shop, there’s a game to capture…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase1224/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/fdf65764-b1a0-4e65-8ee3-3e6432ac398e/showcase1224_Thumbnail.png?t=1735272692" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">From surreal symphonies to chaotic snowboarding and psychological horror, this month’s lineup is packed with epic battles, serene journeys, and endless creativity.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0125/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/ecd25675-6e23-42a3-9d93-d0ce3f1ae1b3/indievelopment0125_Thumbnail.jpg?t=1736903263" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">This issue dives into inventive roguelikes, cozy creations, and action-packed co-op adventures. Whether you’re defending wagons, swapping bodies, or running a Japanese shop, there’s a game to capture…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0125/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/d3cd2f35-51f0-4f40-a2fd-dd1ac4dbc5b4/showcase0125_Thumbnail.png?t=1738283593" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">Magical duels to gravity-defying combat and time-warping puzzles, this month’s lineup is all about power, precision, and unforgettable adventures.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0225/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/06b54e49-f917-4652-ad2c-8a8fc54ac88b/indievelopment0225_Thumbnail.jpg?t=1739508513" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">Legends reborn, minds unraveled, and battles fought across time and space—this lineup brings fast-paced action, rich storytelling, and deep strategy to the forefront.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0225/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/e5042ce2-cb0c-4a75-abb2-898e15c7e99b/showcase0225_Thumbnail.png?t=1740800472" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">From medieval battles to rhythm-fueled chaos, this lineup brings intense action, deep strategy, and creative twists on classic genres.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0325/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/415f6bed-7d0b-46f8-95b5-793f3d9abe49/indievelopment0325_Thumbnail.jpg?t=1741925257" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">A journey through mystical realms, forgotten towns, and untamed frontiers—where dice decide fates, patience is a virtue, and chaos reigns supreme.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0325/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/992cba91-acef-4d4c-9505-63af1648feb0/showcase0325_Thumbnail.jpg?t=1743133331" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">From Western treasure hunts to dystopian rebellions, eerie apartments to empty ponds — this month’s games dive deep into stories of survival, resilience, and reluctant beginnings.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0425/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/23291768-a3be-4654-868e-26e845272f24/indievelopment0425_Thumbnail.png?t=1744671399" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">From cozy monster towns to medieval warzones and animated stick brawls—this month’s picks are packed with nostalgia, rebellion, and wildly creative worlds.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0425/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/835c0d82-a8be-4c29-bd6c-d83adb174e99/showcase0425_Thumbnail.png?t=1745893276" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">Adventures built on wild shots, broken timelines, crumbling worlds, and second chances — which one will you dive into?</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0525/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/0580d8fd-2b00-47fe-bf0b-4caccdcdf0bf/indievelopment0525_Thumbnail.png?t=1747106235" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">Venture into worlds unknown. From post-apocalyptic oases and eldritch horrors to towering fortresses and literary realms—discover the stories that demand to be told.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0525/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/42c31a5f-08df-4f90-b424-df77fc6624b6/showcase0525_Thumbnail.png?t=1748500099" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">From handheld monsters to underwater myths and vertical biomes—this month’s picks go places.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0625/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/c3d21d8b-3e60-42f3-a0a5-af474fa4128d/indievelopment0625_Thumbnail.png?t=1749705847" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">Deckbuilders, doodlers, designers, and goblins—this month’s batch covers every corner of the indie map.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0625/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/56f6584d-8dc2-495e-b060-81075df3347b/showcase0625_Thumbnail_copy.png?t=1751003652" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">A backpack battler, a dream god, a mountaintop rescue, and a priest in hell—June’s games are strange, stylish, and impossible to pin down.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0725/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/219d87c4-ae38-4c6a-993b-c01868a5e330/indievelopment0725_Thumbnail.png?t=1752535286" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">This one’s unhinged (in the best way). Fungi, fame, feudalism, and full-body VR. These games are not playing it safe.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0725/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/bd25a90a-4e34-46ef-99ee-ec7d7cac5305/showcase0725_Thumbnail.png?t=1753851791" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">Jam-packed and bursting at the seams—roaming city-builders, rhythm shootouts, beat-blasted gunfights, and snow-sniffing pups. Clear some hard-drive space; this lineup doesn’t travel light.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0825/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/415bf098-c8f0-4cd7-a3ac-622b2e815f5c/indievelopment0825_Thumbnail.jpg?t=1755137059" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">From bullet-hell magic duels and surreal open-world oddities to papercraft critter quests, memory-bending puzzles, and chaotic hoop-slam showdowns — this line-up delivers weird, wonderful worlds…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0825/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/7dc3d86f-d9c5-448b-ac35-b654c57fef65/showcase0825_Thumbnail.png?t=1756365007" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Monthly Showcase</h3>
+          <p class="note-excerpt">From wordless journeys and rhythm-fuelled roguelikes to cult classics and cozy sims, these are August’s standout indies—each one brimming with craft, heart, and a reason to hit ‘play.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0925/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/07774c89-c38a-4b04-ab0a-b96eb1f9d32f/indievelopment0925_Thumbnail.png?t=1757574007" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">Roguelikes, co-op chaos, oddball worlds, and bold experiments—September’s highlights show just how wide indie creativity can stretch.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0925/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/21ebdd40-6dab-4415-96ab-7b0d58ce134b/showcase0925_Thumbnail.png?t=1759042231" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Showcase: Sept 25</h3>
+          <p class="note-excerpt">It’s been a stacked month: strange curiosities alongside heavy-hitters, games that wobble, drill, or gamble their way into your memory.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment1025/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/e9398c2e-8e4b-4b0c-96cb-4ea205df150d/indievelopment1025_Thumbnail.png?t=1760388834" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment</h3>
+          <p class="note-excerpt">Fresh early access indies that twist the familiar — horror with humor, roguelikes with heart, and stories stitched from madness.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase1025/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/df2faabb-9f20-4054-ba32-135dab3a1b60/showcase1125_Thumbnail.png?t=1761618053" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Showcase: Oct 25</h3>
+          <p class="note-excerpt">Games about cycles, chances, and what happens when you hit replay. From coded loops to spinning reels, these worlds twist the rules until luck, logic, and timing collide.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment1125/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/a3d9bb89-6202-4270-8d93-f3b69dcbf922/indievelopment1125_Thumbnail.png?t=1763006969" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment: Nov 25</h3>
+          <p class="note-excerpt">A colourful clash of worlds: roll the dice, sculpt continents, rebuild kingdoms, raid derelict ships, and stitch together whatever limbs get you through the run.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase1125/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/5d2f02e5-282d-49a2-85a8-f63465efd1ed/showcase1125_Thumbnail.png?t=1764133503" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Showcase: Nov 25</h3>
+          <p class="note-excerpt">It was a tighter field than usual, tucked between haunted homes, retro collectathons, pixel-dust mining, tactical grid chaos, and rhythm-driven mayhem — but the games that made the cut show why…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment1225/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/2954dabf-fb5c-476d-85a6-722a65b77a5a/indievelopment1225_Thumbnail.png?t=1765609131" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment: Dec 25</h3>
+          <p class="note-excerpt">We’ve rounded up a mix of titles where you can serve as a battle-worn turtle, a dungeon merchant, or a squad leader. Explore a variety of hand-drawn wilds and shattered realms in this month&#x27;s best…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/hidden-gems-2025/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/95153b03-6a8f-4781-b081-b7db78885d82/special25_Hidden_Gems.png?t=1767004200" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">special</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">2025&#x27;s Hidden Gems</h3>
+          <p class="note-excerpt">A curated sweep of 2025’s lesser-talked-about releases, pulled from across the year and gathered in one place for anyone still looking for something worth playing.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase1225/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/3219d0bf-d795-47a1-bc1d-2945854375d3/showcase1225_Thumbnail.png?t=1766991746" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Showcase: Dec 25</h3>
+          <p class="note-excerpt">From kickflipping through the underworld to managing a maple syrup racing empire, this collection thrives on distinct, high-concept hooks. Whether you are defibrillating hearts to a complex beat or…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/best-indie-games-2025/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/6097c3c4-9fa3-4608-aeeb-b113602ee86f/special25_Best_Games.png?t=1767159382" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">special</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">2025&#x27;s Best Indie Games</h3>
+          <p class="note-excerpt">A curated sweep of 2025’s releases, pulled from across the year and gathered in one place for anyone still looking for something worth playing.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/upcoming-indie-games-2026/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/92709ed3-5dd4-40e8-acb9-44d58cf7563d/special25_Upcoming_26.png?t=1767673139" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">special</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">2026&#x27;s Upcoming Indie Games</h3>
+          <p class="note-excerpt">We’ve cracked open the &quot;To Watch&quot; stack to bring you a massive preview of the year ahead. Whether you&#x27;re into high-stakes stealth, chaotic physics brawlers, or deep strategy sims, these are the…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0126/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/ad44998a-df7b-409c-b389-900b86b0fde7/indievelopment0126_Thumbnail.png?t=1768361267" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment: Jan 26</h3>
+          <p class="note-excerpt">Survive the freezing dark of a permadeath mechanic sim or drift through the colorful memories of a youth left behind. This month&#x27;s collection spans the gap between brutal technical challenges and…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0126/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/a49d6789-d6fe-40b3-bf39-977818e6e1da/showcase0126_Thumbnail.png?t=1769746808" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Showcase: Jan 26</h3>
+          <p class="note-excerpt">Whether you are enforcing quarantines in a collapsing city or battling corporate fairytales, this month is about finding order in the chaos. We’ve curated a mix of punishing physics climbers, precise…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0226/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/8dfb67a4-e7aa-43ed-9f82-06e7ac81024e/indievelopment0226_Thumbnail.png?t=1771028906" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment: Feb 26</h3>
+          <p class="note-excerpt">From forging blades for a revolution to rolling goblin sushi under the gun, this past month was about mastering the job at hand. Balance industrial survival against alien flora or brew the perfect…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0226/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/76a03a62-f21f-4ecc-ae36-fa71f0eadb9e/showcase0226_Thumbnail_V2.png?t=1772325290" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Showcase: Feb 26</h3>
+          <p class="note-excerpt">Prepare to channel unpredictable magic through your keyboard in a strategic word roguelike, purge electronic narcotics from broken androids, and stitch together a false narrative to satisfy a…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0326/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/368b0a32-1d0a-49e2-adee-39ecd437e40f/indievelopment0326_Thumbnail.png?t=1773309451" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment: Mar 26</h3>
+          <p class="note-excerpt">Master the rhythms of high-stakes strategy and surreal exploration, from the deep-earth mines of a dwarven fortress to the neon-soaked streets of a cyberpunk detective noir. This issue features 12…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0326/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/2b663341-5c69-411e-aa00-ec41343f7e16/showcase0326_Thumbnail.png?t=1774775290" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Showcase: Mar 26</h3>
+          <p class="note-excerpt">Negotiate with drunken sphinxes and sentient AIs in a week defined by deep narrative consequences and lethal tactical puzzles. From &quot;lumberpunk&quot; beaver colonies to finger-traced wizard escapes,…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0426/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/ffb61515-99f2-48dc-968b-d555876f118b/indievelopment0426_Thumbnail.png?t=1775900964" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment — April 2026</h3>
+          <p class="note-excerpt">Survive brutal border crossings and gothic plague-ridden villages in this week’s lineup of immersive sims and tactical builders. From engineering Roman aqueducts to performing VR bike flips, explore…</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/showcase0426/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/69c8c6e3-f2ce-4085-a1f4-d0cc1c6162bf/showcase0426_Thumbnail.png?t=1777253411" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">showcase</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Showcase — April 2026</h3>
+          <p class="note-excerpt">A month of identity and artifice, where you’ll navigate a decaying 1980s as an AI trapped in stolen flesh or pilot an ancient spirit-mech to dismantle a corporate fast-food empire.</p>
+        </div>
+      </a>
+    </article>
+    <article class="note-card has-thumb">
+      <a class="note-link" href="/notes/indievelopment0526/">
+        <div class="note-thumb"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/4d351311-9b1d-4428-ae14-a9cc7acb64f5/indievelopment0526_Thumbnail.png?t=1778730413" alt="" loading="lazy" decoding="async"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="note-tag">indievelopment</span>
+            <time datetime=""></time>
+          </div>
+          <h3 class="note-title">Indievelopment — May 2026</h3>
+          <p class="note-excerpt">Whether you are syncing your strikes to a multi-genre soundtrack or managing elemental synergies to break ancient curses, the focus is firmly on rewarding skill within beautifully realized,…</p>
+        </div>
+      </a>
+    </article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-col brand-col">
+    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <li><a href="https://essay.indieformer.com">How to Really Make a Game</a></li>
+      <li><a href="https://indieformer.beehiiv.com/press-kit-guide">Press Kit Guide</a></li>
+      <li><a href="https://indieformer.beehiiv.com/steam-marketing-guide">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+      <li><a href="/notes/">Notes</a></li>
+      <li><a href="/notes/archive/">Curator archive</a></li>
+    </ul>
+  </div>
+  <p class="footer-meta">© 2026 Indieformer. · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
+</footer>
+
+</body>
+</html>

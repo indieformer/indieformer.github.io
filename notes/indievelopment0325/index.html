@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#23 | Indievelopment — Indieformer</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- Warm up DNS+TLS for the origins every page hits — fonts + Beehiiv image CDN. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://media.beehiiv.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap">
+
+<meta name="description" content="A journey through mystical realms, forgotten towns, and untamed frontiers—where dice decide fates, patience is a virtue, and chaos reigns supreme.">
+<link rel="canonical" href="https://indieformer.com/notes/indievelopment0325/">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="#23 | Indievelopment">
+<meta property="og:description" content="A journey through mystical realms, forgotten towns, and untamed frontiers—where dice decide fates, patience is a virtue, and chaos reigns supreme.">
+<meta property="og:url" content="https://indieformer.com/notes/indievelopment0325/">
+<meta property="og:image" content="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/415f6bed-7d0b-46f8-95b5-793f3d9abe49/indievelopment0325_Thumbnail.jpg?t=1741925257">
+<meta property="article:published_time" content="">
+<meta property="article:section" content="indievelopment">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="#23 | Indievelopment">
+<meta name="twitter:description" content="A journey through mystical realms, forgotten towns, and untamed frontiers—where dice decide fates, patience is a virtue, and chaos reigns supreme.">
+<meta name="twitter:image" content="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/415f6bed-7d0b-46f8-95b5-793f3d9abe49/indievelopment0325_Thumbnail.jpg?t=1741925257">
+
+<style>
+  :root {
+    --emerald: #28E291; --coral: #F78154; --periwinkle: #9381FF;
+    --shadow: #262730; --shadow-mid: #2F3040;
+    --text-primary: #F0EEE8; --text-secondary: #C9C7B8; --text-tertiary: #8B8970;
+    --border: rgba(255, 255, 255, 0.08); --border-mid: rgba(255, 255, 255, 0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    position: relative;
+    background: var(--shadow);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
+    background-size: 26px 26px;
+    font-family: 'Sora', Arial, sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 20px;
+    overflow-x: hidden;
+  }
+
+  .crop { position: absolute; width: 18px; height: 18px; opacity: 0; animation: fade 0.6s ease 0.2s forwards; z-index: 5; pointer-events: none; }
+  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
+  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+  .crop.bl { bottom: 20px; left: 20px; }
+  .crop.br { bottom: 20px; right: 20px; }
+
+  .site-nav { display: flex; align-items: center; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 14px 56px; position: relative; z-index: 4; }
+  a.brand { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s ease; }
+  a.brand img { display: block; height: 40px; width: 40px; }
+  a.brand:hover { opacity: 0.82; }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a { font-family: 'Sora'; font-size: 15px; font-weight: 500; color: var(--text-secondary); text-decoration: none; position: relative; transition: color 0.2s; }
+  .primary-nav a:hover { color: var(--text-primary); }
+  .primary-nav a.current { color: var(--text-primary); font-weight: 600; }
+  .primary-nav a.current::after { content: ''; position: absolute; left: 0; right: 0; bottom: -7px; height: 2px; background: var(--emerald); border-radius: 2px; }
+
+  /* ── Post header ───────────────────────────────────────── */
+  .post-header { max-width: 720px; margin: 0 auto; padding: 32px 56px 18px; position: relative; z-index: 2; }
+  .back-link { display: inline-block; margin-bottom: 22px; font-size: 14px; color: var(--text-tertiary); text-decoration: none; transition: color 0.2s; }
+  .back-link:hover { color: var(--text-primary); }
+  .post-meta {
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+    font-size: 13px; color: var(--text-tertiary);
+    border-top: 1px solid var(--border); padding-top: 14px; margin-top: 20px;
+  }
+  .post-tag { font-family: 'Caveat', cursive; font-size: 20px; color: var(--coral); transform: rotate(-1deg); display: inline-block; line-height: 1; }
+  .post-tag .dot { color: var(--text-tertiary); margin: 0 8px; font-family: 'Sora', sans-serif; font-size: 13px; vertical-align: 2px; }
+  .post-tag .num { color: var(--text-tertiary); font-family: 'Sora', sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .post-title { font-size: clamp(34px, 5vw, 50px); font-weight: 800; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 14px; }
+  .post-subtitle { font-size: 18px; line-height: 1.55; color: var(--text-secondary); margin-bottom: 18px; }
+  .post-hero {
+    margin: 22px 0 6px;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--shadow-mid);
+  }
+  .post-hero img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; }
+
+  /* ── Post body — scopes Beehiiv content to fit our design ── */
+  .post-content {
+    max-width: 720px; margin: 0 auto; padding: 24px 56px 8px;
+    font-family: 'Sora', Arial, sans-serif; color: var(--text-primary);
+    line-height: 1.7; font-size: 17px; position: relative; z-index: 2;
+  }
+  .post-content .paragraph, .post-content p { margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7; }
+  .post-content .heading, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+    font-family: 'Sora' !important; color: var(--text-primary); line-height: 1.25; letter-spacing: -0.01em; margin: 2em 0 0.6em;
+  }
+  .post-content h2, .post-content h2.heading { font-size: 28px; font-weight: 700; }
+  .post-content h3, .post-content h3.heading { font-size: 22px; font-weight: 700; }
+  .post-content h4, .post-content h4.heading { font-size: 18px; font-weight: 600; color: var(--periwinkle); text-transform: uppercase; letter-spacing: 0.06em; }
+  .post-content h6, .post-content h6.heading { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* Only restyle Beehiiv's inline-text links — embed cards keep their own styles */
+  .post-content .link { color: var(--coral) !important; text-decoration: none; border-bottom: 1px solid rgba(247, 129, 84, 0.35); transition: color 0.2s, border-color 0.2s; }
+  .post-content .link:hover { color: var(--text-primary) !important; border-bottom-color: var(--text-primary); }
+  .post-content em, .post-content i { color: var(--text-secondary); }
+
+  /* Images */
+  .post-content .image { margin: 28px 0; }
+  .post-content .image__image, .post-content img { max-width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--border); }
+  .post-content .image__source { display: block; margin-top: 8px; font-size: 13px; color: var(--text-tertiary); font-style: italic; }
+  .post-content .image__source_text p { margin: 0; color: var(--text-tertiary); font-style: italic; }
+
+  /* Blockquote — only style inner element so nested wrappers don't double up */
+  .post-content .blockquote { margin: 28px 0; padding: 0; border: none; background: none; }
+  .post-content blockquote, .post-content .blockquote__quote {
+    display: block; margin: 0; padding: 6px 0 6px 22px;
+    border-left: 3px solid var(--periwinkle);
+    color: var(--text-primary); font-family: 'Caveat', cursive;
+    font-size: 24px; line-height: 1.4; font-style: normal;
+  }
+
+  /* Dividers — handle both <hr class="content_break"> and <div class="content_break"> */
+  .post-content hr.content_break { border: none; border-top: 1px solid var(--border); height: 0; margin: 36px 0; }
+  .post-content div.content_break { height: 1px; background: var(--border); margin: 36px 0; }
+
+  /* Embed cards (link previews) */
+  .post-content .embed { display: block; border: 1px solid var(--border-mid); border-radius: 10px; overflow: hidden; margin: 28px 0; background: var(--shadow-mid); transition: border-color 0.2s; }
+  .post-content .embed:hover { border-color: var(--emerald); }
+  .post-content .embed__image { display: block; }
+  .post-content .embed__image img { border-radius: 0; border: none; }
+  .post-content .embed__content { padding: 14px 18px; }
+  .post-content .embed__title { font-weight: 700; margin-bottom: 4px; color: var(--text-primary); }
+  .post-content .embed__description { font-size: 14px; color: var(--text-secondary); margin-bottom: 6px; line-height: 1.5; }
+  .post-content .embed__url { font-size: 12px; color: var(--text-tertiary); }
+  .post-content .embed__link { display: block; color: inherit !important; border: none; text-decoration: none; }
+
+  /* Hide any Beehiiv footer leakage */
+  .post-content .beehiiv__footer { display: none !important; }
+
+  /* ── Footer ──────────────────────────────────────────────── */
+  .site-footer {
+    max-width: 1000px; margin: 60px auto 0; padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px;
+    font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+    position: relative; z-index: 2;
+  }
+  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
+  .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
+  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 22px; padding-top: 18px; font-size: 13px; color: var(--text-tertiary); }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 820px) {
+    body { padding: 20px 14px; }
+    .post-header, .post-content { padding-left: 24px; padding-right: 24px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
+    .post-content { font-size: 16px; }
+  }
+
+</style>
+</head>
+<body>
+
+<span class="crop bl"></span><span class="crop br"></span>
+
+<header class="site-nav">
+  <a class="brand" href="/" aria-label="Indieformer home">
+    <img src="/logo.png" alt="Indieformer" width="40" height="40">
+  </a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular/">The Approach</a>
+    <a href="/notes/" class="current">Notes</a>
+    <a href="/scorchpot/">Scorchpot</a>
+  </nav>
+</header>
+
+<section class="post-header">
+  <a href="/notes/archive/" class="back-link">← All Archive</a>
+  <h1 class="post-title">Indievelopment</h1>
+  <p class="post-subtitle">A journey through mystical realms, forgotten towns, and untamed frontiers—where dice decide fates, patience is a virtue, and chaos reigns supreme.</p>
+  <figure class="post-hero">
+    <img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/415f6bed-7d0b-46f8-95b5-793f3d9abe49/indievelopment0325_Thumbnail.jpg?t=1741925257" alt="Indievelopment" loading="eager" width="1200" height="630">
+  </figure>
+  <div class="post-meta">
+    <span class="post-tag">indievelopment<span class="dot">·</span><span class="num">Issue #23</span></span>
+    <time datetime=""></time>
+  </div>
+</section>
+
+<article class="post-content">
+<!DOCTYPE html><html><head><link href='https://fonts.gstatic.com' rel='preconnect'><link href='https://fonts.googleapis.com/css2?family=Poppins&display=swap' rel='stylesheet'><link href='https://fonts.googleapis.com/css2?family=DM+Sans&display=swap' rel='stylesheet'><link href='https://fonts.googleapis.com/css2?family=Poppins&display=swap' rel='stylesheet'><style type='text/css'>
+:root {
+  --wt-primary-color: #28E291;
+  --wt-text-on-primary-color: #FFFFFF;
+
+  --wt-secondary-color: #9381FF;
+  --wt-text-on-secondary-color: #FFFFFF;
+
+  --wt-tertiary-color: #FFFFFF;
+  --wt-text-on-tertiary-color: #222222;
+
+  --wt-background-color: #262730;
+  --wt-text-on-background-color: #FFFFFF;
+
+  --wt-subscribe-background-color: #262730;
+  --wt-text-on-subscribe-background-color: #FFFFFF;
+
+  --wt-header-font: "Poppins", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,"Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --wt-body-font: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --wt-button-font: "Poppins", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --wt-border-radius: 8px
+}
+
+.bg-wt-primary { background-color: var(--wt-primary-color); }
+.text-wt-primary { color: var(--wt-primary-color); }
+.border-wt-primary { border-color: var(--wt-primary-color); }
+
+.bg-wt-text-on-primary { background-color: var(--wt-text-on-primary-color); }
+.text-wt-text-on-primary { color: var(--wt-text-on-primary-color); }
+.border-wt-text-on-primary { border-color: var(--wt-text-on-primary-color); }
+
+.bg-wt-secondary { background-color: var(--wt-secondary-color); }
+.text-wt-secondary { color: var(--wt-secondary-color); }
+.border-wt-secondary { border-color: var(--wt-secondary-color); }
+
+.bg-wt-text-on-secondary { background-color: var(--wt-text-on-secondary-color); }
+.text-wt-text-on-secondary { color: var(--wt-text-on-secondary-color); }
+.border-wt-text-on-secondary { border-color: var(--wt-text-on-secondary-color); }
+
+.bg-wt-tertiary { background-color: var(--wt-tertiary-color); }
+.text-wt-tertiary { color: var(--wt-tertiary-color); }
+.border-wt-tertiary { border-color: var(--wt-tertiary-color); }
+
+.bg-wt-text-on-tertiary { background-color: var(--wt-text-on-tertiary-color); }
+.text-wt-text-on-tertiary { color: var(--wt-text-on-tertiary-color); }
+.border-wt-text-on-tertiary { border-color: var(--wt-text-on-tertiary-color); }
+
+.bg-wt-background { background-color: var(--wt-background-color); }
+.text-wt-background { color: var(--wt-background-color); }
+.border-wt-background { border-color: var(--wt-background-color); }
+
+.bg-wt-text-on-background { background-color: var(--wt-text-on-background-color); }
+.text-wt-text-on-background { color: var(--wt-text-on-background-color); }
+.border-wt-text-on-background { border-color: var(--wt-text-on-background-color); }
+
+.bg-wt-subscribe-background { background-color: var(--wt-subscribe-background-color); }
+.text-wt-subscribe-background { color: var(--wt-subscribe-background-color); }
+.border-wt-subscribe-background { border-color: var(--wt-subscribe-background-color); }
+
+.bg-wt-text-on-subscribe-background { background-color: var(--wt-text-on-subscribe-background-color); }
+.text-wt-text-on-subscribe-background { color: var(--wt-text-on-subscribe-background-color); }
+.border-wt-text-on-subscribe-background { border-color: var(--wt-text-on-subscribe-background-color); }
+
+.rounded-wt { border-radius: var(--wt-border-radius); }
+
+.wt-header-font { font-family: var(--wt-header-font); }
+.wt-body-font { font-family: var(--wt-body-font); }
+.wt-button-font { font-family: var(--wt-button-font); }
+
+input:focus { --tw-ring-color: transparent !important; }
+
+li a { word-break: break-word; }
+
+@media only screen and (max-width:667px) {
+  .mob-stack {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .mob-w-full {
+    width: 100% !important;
+  }
+}
+
+</style><style>
+        @font-face {
+          font-family: 'Space Grotesk';
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+          src: url('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7oUXskPMBBSSJLm2E.woff2') format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Space Grotesk';
+          font-style: normal;
+          font-weight: 700;
+          font-display: swap;
+          src: url('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj4PVnskPMBBSSJLm2E.woff2') format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Poppins';
+          font-style: normal;
+          font-weight: 700;
+          font-display: swap;
+          src: url('https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2') format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Poppins';
+          font-style: italic;
+          font-weight: 700;
+          font-display: swap;
+          src: url('https://fonts.gstatic.com/s/poppins/v22/pxiDyp8kv8JHgFVrJJLmy15VF9eOYktMqg.woff2') format('woff2');
+        }
+</style><script async id='tiktok-script' src='https://www.tiktok.com/embed.js' type='text/javascript'></script><script async defer id='twitter-wjs' src='https://platform.twitter.com/widgets.js' type='text/javascript'></script><style>
+  .table-base, .table-c, .table-h { border: 1px solid #C0C0C0; }
+  .table-c { padding:5px; background-color:#FFFFFF; }
+  .table-c p { color: #2D2D2D; font-family:'Helvetica',Arial,sans-serif !important; overflow-wrap: break-word; }
+  .table-h { padding:5px; background-color:#F1F1F1; }
+  .table-h p { color: #2A2A2A; font-family:'Space Grotesk',Helvetica,Arial,sans-serif !important; overflow-wrap: break-word; }
+</style></head><body class='bg-wt-background' style='color: var(--wt-text-on-background-color) !important;'><div class='rendered-post' style='max-width: 672px; margin: 0 auto;'><div class='bg-wt-background text-wt-text-on-background'><div style='padding-top:1.5rem; padding-bottom:1.5rem;'><style>
+  .bh__byline_wrapper {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    vertical-align: middle;
+    justify-content: space-between;
+    display: block;
+  }
+  
+  .bh__byline_social_wrapper {
+    display: flex;
+    margin-top: 0.5rem;
+    align-items: center;
+  }
+  
+  .bh__byline_social_wrapper > * + * {
+    margin-left: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .bh__byline_wrapper {
+      display: flex;
+    }
+  
+    .bh__byline_social_wrapper {
+      margin-top: 0rem;
+    }
+  }
+</style><div id='web-header' style='padding-left: 15px; padding-right: 15px; color: var(--wt-text-on-background-color) !important; padding-bottom: 2rem;'><h1 style='font-size: 36px; font-family:&#39;Poppins&#39;,Helvetica,sans-serif; line-height: 2.5rem; padding-bottom: 8px; font-weight: 700;'>#23 | Indievelopment</h1><h2 style='font-size: 20px; font-family:&#39;Helvetica&#39;,Arial,sans-serif; line-height: 1.75rem; padding-bottom: 20px; font-weight: 400;'>A journey through mystical realms, forgotten towns, and untamed frontiers—where dice decide fates, patience is a virtue, and chaos reigns supreme.</h2><div class='bh__byline_wrapper'><div><div style='display:flex;'><div style='display:flex; flex-direction:row; justify-content:flex-start;'><div style='display:flex;'><img alt='Author' height='40' src='https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/user/profile_picture/114cfac4-3f20-450a-a10d-02a6e26e1637/thumb_Josh_Gem_Profile.jpg' style='height:40px;width:40px;border:4px solid rgba(0,0,0,0);left:-4px;z-index:1;box-sizing:content-box;position:relative;border-radius:9999px;' width='40' loading="lazy" decoding="async"></div><div style='display:flex; align-items:center;'><p style='left:8px;position:relative;font-family:&#39;Helvetica&#39;,Arial,sans-serif;font-weight:normal;font-size:14px;color: var(--wt-text-on-background-color);margin:0px;line-height:20px;'><span><a href="https://indieformer.beehiiv.com/authors/indieformer" target="_blank" style="color:var(--wt-text-on-background-color) !important;text-decoration:underline !important;">Indieformer</a></span><br><span class='text-wt-text-on-background' style='opacity:0.75;'> March 16, 2025 </span></p></div></div></div></div><div class='bh__byline_social_wrapper'><a href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Findieformer.beehiiv.com%2Fp%2Findievelopment0325' target='_blank'><div style='max-width:28px;'><svg fill='none' height='100%' viewBox='0 0 212 212' width='100%' xmlns='http://www.w3.org/2000/svg'><circle cx='106.214' cy='105.5' fill-opacity='0.15' fill='#9CA3AF' r='105.5'></circle><path d='M96.9223 92.1778H87.0327V105.498H96.9223V145.461H113.405V105.498H125.273L126.591 92.1778H113.405V86.5165C113.405 83.5193 114.064 82.1873 117.031 82.1873H126.591V65.5364H114.064C102.197 65.5364 96.9223 70.8647 96.9223 80.8552V92.1778Z' fill='#BAC2CE'></path></svg></div></a><a href='https://twitter.com/intent/tweet?text=A+journey+through+mystical+realms%2C+forgotten+towns%2C+and+untamed+frontiers%E2%80%94where+dice+decide+fates%2C+patience+is+a+virtue%2C+and+chaos+reigns+supreme.&url=https%3A%2F%2Findieformer.beehiiv.com%2Fp%2Findievelopment0325&via=indieformer' target='_blank'><div style='max-width:28px;'><svg fill='none' height='100%' viewBox='0 0 52 52' width='100%' xmlns='http://www.w3.org/2000/svg'><circle cx='26' cy='26' fill-opacity='0.15' fill='#9CA3AF' r='26'></circle><path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' fill='#BAC2CE' transform='translate(14,14)'></path></svg></div></a><a href='https://www.threads.net/intent/post?text=A+journey+through+mystical+realms%2C+forgotten+towns%2C+and+untamed+frontiers%E2%80%94where+dice+decide+fates%2C+patience+is+a+virtue%2C+and+chaos+reigns+supreme.+https%3A%2F%2Findieformer.beehiiv.com%2Fp%2Findievelopment0325' target='_blank'><div style='max-width:28px;'><svg fill='none' height='100%' viewBox='0 0 211 211' width='100%' xmlns='http://www.w3.org/2000/svg'><circle cx='105.5' cy='105.5' fill-opacity='0.15' fill='#9CA3AF' r='105.5'></circle><path d='M125.185 102.469C124.828 102.298 124.465 102.133 124.097 101.975C123.456 90.1702 117.006 83.4121 106.175 83.3429C106.126 83.3426 106.077 83.3426 106.028 83.3426C99.5502 83.3426 94.1624 86.1078 90.8463 91.1396L96.8028 95.2256C99.2801 91.4671 103.168 90.6658 106.031 90.6658C106.064 90.6658 106.097 90.6658 106.13 90.6661C109.696 90.6889 112.387 91.7257 114.129 93.7477C115.397 95.2198 116.244 97.254 116.664 99.8213C113.502 99.2839 110.083 99.1187 106.427 99.3283C96.13 99.9214 89.5101 105.927 89.9547 114.272C90.1803 118.505 92.2891 122.147 95.8924 124.526C98.9389 126.537 102.863 127.52 106.941 127.297C112.326 127.002 116.551 124.948 119.498 121.19C121.737 118.337 123.152 114.64 123.777 109.981C126.344 111.53 128.246 113.568 129.296 116.019C131.083 120.184 131.187 127.028 125.602 132.608C120.709 137.496 114.827 139.611 105.938 139.677C96.0779 139.603 88.6207 136.441 83.7723 130.278C79.2321 124.506 76.8857 116.17 76.7982 105.5C76.8857 94.8301 79.2321 86.4937 83.7723 80.7222C88.6207 74.5587 96.0778 71.3965 105.938 71.3232C115.87 71.3971 123.457 74.5745 128.491 80.7677C130.959 83.8048 132.82 87.6242 134.047 92.0775L141.028 90.2151C139.54 84.7337 137.2 80.0102 134.016 76.0929C127.563 68.1529 118.124 64.0844 105.962 64H105.914C93.777 64.0841 84.4441 68.1681 78.1742 76.1384C72.5949 83.2311 69.7169 93.1 69.6202 105.471L69.6199 105.5L69.6202 105.529C69.7169 117.9 72.5949 127.769 78.1742 134.862C84.4441 142.832 93.777 146.916 105.914 147H105.962C116.753 146.925 124.358 144.1 130.624 137.84C138.822 129.65 138.575 119.385 135.873 113.083C133.934 108.564 130.239 104.893 125.185 102.469ZM106.555 119.985C102.042 120.239 97.3533 118.213 97.1221 113.874C96.9507 110.657 99.4116 107.067 106.832 106.64C107.682 106.591 108.516 106.567 109.335 106.567C112.03 106.567 114.552 106.829 116.844 107.33C115.989 118.008 110.974 119.742 106.555 119.985Z' fill='#BAC2CE'></path></svg></div></a><a href='https://www.linkedin.com/sharing/share-offsite?url=https%3A%2F%2Findieformer.beehiiv.com%2Fp%2Findievelopment0325' target='_blank'><div style='max-width:28px;'><svg fill='none' height='100%' viewBox='0 0 211 211' width='100%' xmlns='http://www.w3.org/2000/svg'><circle cx='105.5' cy='105.5' fill-opacity='0.15' fill='#9CA3AF' r='105.5'></circle><path d='M82.1892 75.4698C82.1892 80.1362 78.526 83.8026 73.8638 83.8026C69.2015 83.8026 65.5383 80.1362 65.5383 75.4698C65.5383 70.8034 69.2015 67.137 73.8638 67.137C78.526 67.137 82.1892 70.8034 82.1892 75.4698ZM82.1892 90.4689H65.5383V143.799H82.1892V90.4689ZM108.831 90.4689H92.1797V143.799H108.831V115.801C108.831 100.135 128.812 98.8017 128.812 115.801V143.799H145.463V110.134C145.463 83.8026 115.824 84.8026 108.831 97.8018V90.4689Z' fill='#BAC2CE'></path></svg></div></a></div></div></div><div style='padding-bottom:2rem;'><img style="margin-left:auto; margin-right:auto;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/415f6bed-7d0b-46f8-95b5-793f3d9abe49/indievelopment0325_Thumbnail.jpg?t=1741925257"/ loading="lazy" decoding="async"></div><div id='content-blocks'><div style="align-items:center;display:flex;flex-direction:column;gap:20px;justify-content:center;margin:0 auto 0 auto;padding-bottom:20px;padding-left:15px;padding-right:15px;padding-top:20px;"><p style="color:var(--wt-text-on-background-color) !important;display:block;margin:0 auto 0 auto;text-align:center;width:300px;"><b> In partnership with </b></p><a href="https://l.join1440.com/bh?_bhiiv=opp_96573076-90f4-49b3-9d0e-2e2ef4d61559_1b75ca79&bhcl_id=628877f2-322e-4421-a38f-cba9d59eaadc_SUBSCRIBER_ID_{{email_address_id}}" rel="nofollow noopener noreferrer" style="text-decoration: none; margin:0 auto 0 auto;width:300px;" target="_blank"><img style="width:300px;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/ad_network/advertiser/logo/fb346edc-3086-4180-9f35-38f6f4ac5efe/1440_Primary_Brandmark_RBG_Black.png"/ loading="lazy" decoding="async"></a></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><a href="https://www.indieformer.com/" rel="nofollow noopener noreferrer" style="text-decoration: none;" target="_blank"><img alt="The Indieformer Logo in Fulll" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/928cc29b-9a83-4f4f-afc8-d7f99b1b0f85/Indieformer_Logotype_Banner_PNG.png?t=1718745092"/ loading="lazy" decoding="async"></a><div style="margin:0 auto 0 auto;padding-left:0px;padding-right:0px;padding-top:4px;text-align:center;width:100%;"><small style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Poppins',Helvetica,sans-serif;font-size:12px;font-style:italic;text-decoration-color:#ffffff;text-decoration:none;"><p>Issue #23</p></small></div></div></div><div style="background-color:transparent;border-color:#9381FF;border-radius:10px;border-style:dashed;border-width:2px;margin:20.0px 20.0px 20.0px 20.0px;padding:5.0px 5.0px 5.0px 5.0px;"><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"><span style="color:#28E291;"><b>Housekeeping:</b></span></p></div><div style="padding-bottom:12px;padding-left:37px;padding-right:27px;padding-top:12px;"><ul style="color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;list-style-type:disc;margin:0px 0px 0px 25px;padding:0;"><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"> Revisit the <span style="text-decoration:underline;"><a class="link" href="https://www.indieformer.com/p/showcase0225" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><span style="color: rgb(247, 129, 84)">Showcase</span></a></span> from February. </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"> Prices are listed in <b>USD</b>. </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"> Join the Indieformer <span style="text-decoration:underline;"><b><a class="link" href="https://discord.gg/rztz9s2wb3" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><span style="color: rgb(247, 129, 84)">Discord</span></a></b></span>. </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"> Follow the Indieformer <span style="text-decoration:underline;"><b><a class="link" href="https://store.steampowered.com/curator/18119780-Indieformer/" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><span style="color: rgb(247, 129, 84)">Steam Curator Page</span></a></b></span>. </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"> Support us by becoming a <span style="text-decoration:underline;"><b><a class="link" href="https://www.indieformer.com/upgrade" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><span style="color: rgb(247, 129, 84)">Key Supporter</span></a></b></span>! </p></li></ul></div><div style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h5 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:16px;font-weight:Bold;line-height:24px;margin:0;text-align:left;"><span style="color:#28E291;">Let’s go.</span></h5></div></div><div style="padding:30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><div style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h6 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:14px;font-weight:Bold;line-height:21px;margin:0;text-align:left;"><span style="color:#9381FF;"><b>INDIEVELOPEMENT</b></span></h6></div><div style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:43px;margin:0;text-align:left;"><span style="color:#28E291;"><b>Early Access Highlights</b></span></h2></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Discover these gems released between <b>Feb 16, 2025 - Mar 16, 2025</b>, already making waves in Early Access. </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/d06e3524-5fe9-4b68-9e4f-0496e9e17344/OdinfallGIF.gif?t=1741920699"/ loading="lazy" decoding="async"><div style="margin:0 auto 0 auto;padding-left:0px;padding-right:0px;padding-top:4px;text-align:center;width:100%;"><small style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Poppins',Helvetica,sans-serif;font-size:12px;font-style:italic;text-decoration-color:#ffffff;text-decoration:none;"><p>Odinfall</p></small></div></div></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://store.steampowered.com/app/2154240/Odinfall" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2154240/capsule_616x353.jpg?t=1741713946" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Odinfall</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">Battle through a post-apocalyptic Viking future as berserkers, elves, or even a Viking moose. Build absurd weapons, break the game with upgrades, and take on Odin and his AI robot gods in twin-stick action chaos.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">$12.99 (Click this box for Steam)</p></div></div></div></div></a></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://store.steampowered.com/app/2026820/Die_in_the_Dungeon/" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2026820/capsule_616x353.jpg?t=1741623199" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Die in the Dungeon</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">A deck-building roguelite where dice replace cards. Upgrade and combine dice to create powerful synergies, battle through shifting dungeons, and stack relics to push your strategy further.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">$12.99</p></div></div></div></div></a></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://store.steampowered.com/app/2789460/Ale_Abbey__Monastery_Brewery_Tycoon/" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2789460/43e1f36fdc7f840e8a119f98aea8339db45656b5/capsule_616x353_alt_assets_1.jpg?t=1740566020" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Ale Abbey</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">Brew legendary ales, manage a monastery, and expand your brewing empire. Experiment with beer styles, optimize production, and navigate noble requests, rival abbeys, and unexpected events to ensure your monks thrive.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">$14.99</p></div></div></div></div></a></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://store.steampowered.com/app/1828650/The_Silent_Kingdom/" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1828650/capsule_616x353.jpg?t=1740081544" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">The Silent Kingdom</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">A dark, choice-driven RPG where Princess Erinys fights a kingdom-wide curse. Your decisions shape her fate, relationships, and morality in a branching story with turn-based combat and multiple endings.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">$17.99</p></div></div></div></div></a></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://store.steampowered.com/app/3111080/Secret_Agent_Wizard_Boy_and_the_International_Crime_Syndicate/" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3111080/d39e9df0ba0eba6b4a2035dd931e83903b73425e/capsule_616x353.jpg?t=1741901667" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Secret Agent Wizard Boy and the International Crime Syndicate</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">A full-blown magic-fueled physics sandbox where you infiltrate an evil wizard school—or just unleash total destruction. Cast spells, wreak havoc, and team up (or sabotage friends) in an unpredictable co-op playground.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">$9.99</p></div></div></div></div></a></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://store.steampowered.com/app/3241660/REPO/" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/3241660/fda868129a96b58493b4935c7e2c3390b4ebb108/capsule_616x353.jpg?t=1740578354" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">R.E.P.O.</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">A physics-based co-op horror game where you and up to five friends salvage haunted ruins while avoiding terrifying creatures. Use robotic tools to transport fragile cargo—just stay quiet or risk being hunted.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">$9.99</p></div></div></div></div></a></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://store.steampowered.com/app/3308550/Sky_End_Market/" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/3308550/7dfdee13fe39ddbf77176353f8961b7a9ddd77f6/capsule_616x353.jpg?t=1740744798" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Sky End Market</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">Run the last supermarket on Earth, serving humans, robots, and animals. Stock shelves, manage checkout, and customize your store in a cozy, pixel-art world teetering on the edge of extinction.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">$18.99</p></div></div></div></div></a></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"><a target="_blank" rel="noopener nofollow noreferrer" href="https://magic.beehiiv.com/v1/46dc4e51-4f9d-4b04-80e5-a5714a53bc93?email={{email}}"><button style="background-color:#28e291;border-radius:8px;color:#222222;cursor:pointer;font-family:'Poppins',Helvetica,sans-serif;font-size:18px;font-weight:normal;line-height:20px;padding:18px 28px;width:fit-content;" type="button"> One Click and You’re Signed Up </button></a></div><div style="padding:30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><div style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h6 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:14px;font-weight:Bold;line-height:21px;margin:0;text-align:left;"><span style="color:#9381FF;"><b>CROWDFUNDING</b></span></h6></div><div style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:43px;margin:0;text-align:left;"><span style="color:#28E291;"><b>Kickstarter Picks</b></span></h2></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Here are projects personally backed this month—<span style="text-decoration:underline;"><a class="link" href="https://www.kickstarter.com/profile/indieformer" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><span style="color: rgb(247, 129, 84)">plus our profile to prove it</span></a></span>. </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/be73bd6d-beed-4652-aeb3-6a2f34fca932/Elusive.gif?t=1741925618"/ loading="lazy" decoding="async"><div style="margin:0 auto 0 auto;padding-left:0px;padding-right:0px;padding-top:4px;text-align:center;width:100%;"><small style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Poppins',Helvetica,sans-serif;font-size:12px;font-style:italic;text-decoration-color:#ffffff;text-decoration:none;"><p>Elusive—Kickstarter Project</p></small></div></div></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://www.kickstarter.com/projects/desertcucco/isle-of-reveries" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://i.kickstarter.com/assets/048/374/434/68001f10ae6a8c822cae61053fa9178d_original.png?anim=false&fit=cover&gravity=auto&height=873&origin=ugc&q=92&v=1740981054&width=1552&sig=OvlSojJXHClJgQZt4G6iHxKIEp587DZUnLsIrcGK1pA%3D" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Isle of Reveries</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">Guide Lief, a small owl, through a skybound pilgrimage filled with puzzles and adventure. Use a fairy companion to copy and spawn objects, solve environmental challenges, and explore dungeons in a world inspired by classic Game Boy Color aesthetics.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">(Click this box to go to the campaign)</p></div></div></div></div></a></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://www.kickstarter.com/projects/solohack3r/our-town-hero-a-cozy-retro-rpg" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/4bae65f4-2321-422f-8768-b5e31320ba28/2c3802bd20eedf237be941d7b9e6be1a_original.jpg?t=1741920856" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Our Town Hero</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">Rescue kidnapped villagers, rebuild a struggling town, and prepare for seasonal changes in this cozy RPG. With turn-based battles, town management, and retro visuals, every choice helps restore a once-thriving community.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">(Click this box to go to the campaign)</p></div></div></div></div></a></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://www.kickstarter.com/projects/aesirinteractive/windstorm" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://i.kickstarter.com/assets/048/421/815/10dacca6df49d0d77829c022e5a80774_original.jpg?anim=false&fit=cover&gravity=auto&height=873&origin=ugc&q=92&v=1741269107&width=1552&sig=SBHo8CVoEOH%2BMfAAKsZxUsDUseMOaxTjNeTg%2Fe21dnI%3D" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Windstorm: The Legend of Khiimori</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">Ride through 13th-century Mongolia as a courier navigating vast landscapes. Train and breed horses, master archery for survival, and uncover the legend of Khiimori in this open-world adventure blending history and myth.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">(Click this box to go to the campaign)</p></div></div></div></div></a></div><style type="text/css">
+  .generic-embed--root {
+    padding: 6px 19px 6px 19px;
+  }
+
+  .generic-embed--root:hover {
+    filter: brightness(90%)
+  }
+
+  .generic-embed--root a {
+    text-decoration: none !important;
+  }
+
+  .generic-embed {
+    background-color: #424453;
+    border-radius: 10px;
+    border: solid 1px #f78154;
+  }
+
+  .generic-embed--wrapper {
+    min-height: 75px;
+    border-collapse: collapse;
+    width: 100%;
+    display: flex;
+  }
+
+  .generic-embed--title {
+    color: #28e291;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--description {
+    color: #ffffff;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+
+  .generic-embed--link {
+    color: #9381ff;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .generic-embed--image {
+      width: 100% !important;
+      padding: 0px 0px 12px 0px !important;
+    }
+
+    .generic-embed--wrapper {
+      flex-direction: column;
+    }
+  }
+</style><div class="generic-embed--root"><a href="https://www.kickstarter.com/projects/abraham-cozar/elusive" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://i.kickstarter.com/assets/048/486/669/03e6d209e8f726910b80c960eb303006_original.png?anim=false&fit=cover&gravity=auto&height=873&origin=ugc&q=92&v=1741724051&width=1552&sig=AxLD2CZBOtZaT4TfxBSg7NlqPzqTCBSx4ReT6oT7NVg%3D" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Elusive</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">Explore a giant human home as a tiny creature, navigating hidden tunnels and gathering treasures while avoiding prowling cats and magical dangers. A metroidvania-style adventure packed with acrobatics, exploration, and charm.</p></div><div class="generic-embed--link" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:12px;line-height:12px;margin:0;word-break: break-word;">(Click this box to go to the campaign)</p></div></div></div></div></a></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"><a target="_blank" rel="noopener nofollow noreferrer" href="https://discord.com/invite/rztz9s2wb3"><button style="background-color:#28e291;border-radius:8px;color:#222222;cursor:pointer;font-family:'Poppins',Helvetica,sans-serif;font-size:18px;font-weight:normal;line-height:20px;padding:18px 28px;width:fit-content;" type="button"> Join the Discord for More Discussion </button></a></div><div style="padding:30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Happy gaming! </p></div><div id="the-indieformer-team" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h5 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:16px;font-weight:Bold;line-height:24px;margin:0;text-align:left;"><span style="color:#28E291;">The Indieformer Team</span></h5></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"><a target="_blank" rel="noopener nofollow noreferrer" href="https://www.indieformer.com/upgrade"><button style="background-color:#28e291;border-radius:8px;color:#222222;cursor:pointer;font-family:'Poppins',Helvetica,sans-serif;font-size:18px;font-weight:normal;line-height:20px;padding:18px 28px;width:fit-content;" type="button"> Become a Key Supporter </button></a></div><table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;" width="100%"><tr><td align="left" style="padding:15px 15px 12px;"><h3 style="color:var(--wt-text-on-background-color);font-family:'Poppins',Helvetica,sans-serif;font-size:20px;font-weight:Bold;line-height:30px;margin:0;text-align:left;">Rate Your Indieformer Experience:</h3></td></tr><tr><td align="left" style="font-size:.75rem;line-height:1rem;opacity:.75;padding:0px 15px 15px;text-align:left;"><div style="padding-bottom:12px;padding-left:22px;padding-right:12px;padding-top:12px;"><ul style="color:var(--wt-text-on-background-color);font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;list-style-type:none;margin-left:25px;margin:0;padding:0;"><li style="color:var(--wt-text-on-background-color);font-weight:bold;text-decoration-color:#f78154;text-decoration:underline;"><a data-skip-tracking="true" rel="noopener noreferrer nofollow" style="color:inherit;" target="_blank" href="https://indieformer.beehiiv.com/polls/8881dc6b-0642-470e-b47f-e6bb6d0dde76/response?pcid=479bb94e-832b-488a-9b2b-fbd4a888808f&ppid=83698ccb-ebac-4d35-a2fc-a9e66bb30fb4&sid=SUBSCRIBER_ID"> ✦✦✦✦✦ “Outstanding” </a></li><li style="color:var(--wt-text-on-background-color);font-weight:bold;text-decoration-color:#f78154;text-decoration:underline;"><a data-skip-tracking="true" rel="noopener noreferrer nofollow" style="color:inherit;" target="_blank" href="https://indieformer.beehiiv.com/polls/8881dc6b-0642-470e-b47f-e6bb6d0dde76/response?pcid=976b4925-0886-4d97-8c96-f7c29dddd9c9&ppid=83698ccb-ebac-4d35-a2fc-a9e66bb30fb4&sid=SUBSCRIBER_ID"> ✦✦✦✦ “Great” </a></li><li style="color:var(--wt-text-on-background-color);font-weight:bold;text-decoration-color:#f78154;text-decoration:underline;"><a data-skip-tracking="true" rel="noopener noreferrer nofollow" style="color:inherit;" target="_blank" href="https://indieformer.beehiiv.com/polls/8881dc6b-0642-470e-b47f-e6bb6d0dde76/response?pcid=6a656bd3-246c-4a76-bbf6-1846bfa538aa&ppid=83698ccb-ebac-4d35-a2fc-a9e66bb30fb4&sid=SUBSCRIBER_ID"> ✦✦✦ “Good” </a></li><li style="color:var(--wt-text-on-background-color);font-weight:bold;text-decoration-color:#f78154;text-decoration:underline;"><a data-skip-tracking="true" rel="noopener noreferrer nofollow" style="color:inherit;" target="_blank" href="https://indieformer.beehiiv.com/polls/8881dc6b-0642-470e-b47f-e6bb6d0dde76/response?pcid=51ddc7f1-d996-48b1-ba17-96a87fd1f942&ppid=83698ccb-ebac-4d35-a2fc-a9e66bb30fb4&sid=SUBSCRIBER_ID"> ✦✦ “Could be better” </a></li><li style="color:var(--wt-text-on-background-color);font-weight:bold;text-decoration-color:#f78154;text-decoration:underline;"><a data-skip-tracking="true" rel="noopener noreferrer nofollow" style="color:inherit;" target="_blank" href="https://indieformer.beehiiv.com/polls/8881dc6b-0642-470e-b47f-e6bb6d0dde76/response?pcid=1becb131-2965-4d61-90ff-c43a95f38237&ppid=83698ccb-ebac-4d35-a2fc-a9e66bb30fb4&sid=SUBSCRIBER_ID"> ✦ “Needs work” </a></li></ul></div></td></tr></table><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"><i>P.S. Don’t forget to share your thoughts and favourite discoveries with us via the comments, </i><i><a class="link" href="https://www.threads.net/@indieformer" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Threads</a></i><i>, or reach us at </i><i><a class="link" href="mailto:pr@indieformer.com" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;" data-skip-tracking="true">pr@indieformer.com</a></i></p>
+</article>
+
+<footer class="site-footer">
+  <div class="footer-col brand-col">
+    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <li><a href="https://essay.indieformer.com">How to Really Make a Game</a></li>
+      <li><a href="https://indieformer.beehiiv.com/press-kit-guide">Press Kit Guide</a></li>
+      <li><a href="https://indieformer.beehiiv.com/steam-marketing-guide">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+      <li><a href="/notes/">Notes</a></li>
+      <li><a href="/notes/archive/">Curator archive</a></li>
+    </ul>
+  </div>
+  <p class="footer-meta">© 2026 Indieformer. · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
+</footer>
+
+</body>
+</html>
