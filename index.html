@@ -123,11 +123,22 @@
      section grows naturally with whichever is taller — no min-height wasted */
   .section.hero { display: flex; gap: 40px; align-items: flex-start; }
   .section.hero .col { flex: 1 1 0; max-width: 600px; }
+
+  /* inline beehiiv form wrapper — used both after the first paragraph
+     and inside the bottom #subscribe slot */
+  .subscribe-inline {
+    margin: 26px 0 8px;
+    max-width: 560px;
+  }
+  .subscribe-inline iframe { max-width: 100% !important; }
+
   #subscribe {
     padding: 32px 56px 48px;
   }
   /* collapse the subscribe section while the beehiiv embed slot is empty,
      so there's no dead space below the Let's chat CTA */
+  /* (the #beehiiv-embed slot is now populated by the Beehiiv loader script —
+     the :empty fallback rules below stay as a safety net in case the script fails) */
   #subscribe:has(#beehiiv-embed:empty) { padding: 0; }
   #subscribe:has(#beehiiv-embed:empty) > .col { display: none; }
 
@@ -709,6 +720,10 @@
       </svg></span>.
     </p>
 
+    <div class="subscribe-inline">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="23908dcc-ff1f-4876-95a9-61a164fb3893"></script>
+    </div>
+
     <a class="tracker tracker-inline" href="https://waypoint.indieformer.com/" rel="noopener" aria-label="Visit the Waypoint archive, the decommissioned Indieformer release tracker">
       <img class="frame-img" src="/waypoint-tracker.jpg" alt="Waypoint, the old Indieformer release tracker">
       <div class="place-label">
@@ -912,7 +927,9 @@
          ║  Paste your beehiiv email-capture embed code       ║
          ║  inside the div below.                             ║
          ╚══════════════════════════════════════════════════╝ -->
-    <div id="beehiiv-embed"></div>
+    <div id="beehiiv-embed">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="23908dcc-ff1f-4876-95a9-61a164fb3893"></script>
+    </div>
   </div>
 
 </section>
