@@ -16,7 +16,7 @@ The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a 
 ## Related properties
 
 - [Newsletter archive on beehiiv](https://indieformer.beehiiv.com): The full archive of all newsletter issues.
-- [The Essay (How to Really Make a Game)](https://essay.indieformer.com): Our long-form essay on what it takes to make an indie game.
+- [The Essay (How to Really Make a Game)](https://indieformer.com/essay/): Our long-form essay on what it takes to make an indie game.
 - [Waypoint archive](https://waypoint.indieformer.com): Decommissioned indie game release calendar. Kept as a read-only archive.
 - [Press Kit Guide](https://indieformer.beehiiv.com/press-kit-guide): Guide to building a press kit as an indie game developer.
 - [Steam Marketing Guide](https://indieformer.beehiiv.com/steam-marketing-guide): Guide to Steam marketing for indie developers.

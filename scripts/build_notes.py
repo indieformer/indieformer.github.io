@@ -53,7 +53,7 @@ from build_post import build_post_page, sanitize_body  # noqa: F401
 PUB_ID = "pub_46dc4e51-4f9d-4b04-80e5-a5714a53bc93"
 API_BASE = "https://api.beehiiv.com/v2"
 MANIFEST_PATH = "notes/.posts.json"
-TEMPLATE_VERSION = 3  # bump when the post or index template changes materially
+TEMPLATE_VERSION = 4  # bump when the post or index template changes materially
 
 TAG_TO_CATEGORY = {
     "frontline":      "frontline",
@@ -464,7 +464,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
   <div class="footer-col">
     <p class="footer-label">Guides &amp; reads</p>
     <ul>
-      <li><a href="https://essay.indieformer.com">How to Really Make a Game</a></li>
+      <li><a href="https://indieformer.com/essay/">How to Really Make a Game</a></li>
       <li><a href="https://indieformer.beehiiv.com/press-kit-guide">Press Kit Guide</a></li>
       <li><a href="https://indieformer.beehiiv.com/steam-marketing-guide">Steam Marketing Guide</a></li>
     </ul>
