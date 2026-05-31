@@ -1,154 +1,244 @@
 #!/usr/bin/env python3
 """
-Build notes.html from the Indieformer beehiiv RSS feed.
+build_notes.py — Fetch all Indieformer Beehiiv posts via API, generate a
+per-post HTML page for every post, and emit three tabbed index pages:
 
-Run manually with `python3 scripts/build_notes.py`, or via the GitHub Action
-.github/workflows/refresh-notes.yml on a daily schedule.
+    /notes/            — Publog  (special tag + journey content)
+    /notes/frontline/  — Frontline case studies
+    /notes/archive/    — Curator Archive (Showcase + Indievelopment monthlies)
 
-Output path defaults to ./notes/ (cwd-relative) — override with NOTES_OUT.
+Routing
+-------
+Default: Beehiiv content_tag → category
+    frontline      → frontline
+    showcase       → archive
+    indievelopment → archive
+    special        → publog
+Overrides per slug live in SLUG_OVERRIDES below — append entries to move
+individual posts between tabs without code changes elsewhere.
+
+Caching
+-------
+A small manifest at notes/.posts.json records each post's updated_at and the
+TEMPLATE_VERSION it was built against. Pages are regenerated when the
+post's updated_at differs OR the template version has been bumped.
+
+Requires
+--------
+Environment variable BEEHIIV_API_KEY (also exposed via GitHub Actions
+secret of the same name). Run with NO arguments — the script is the entry
+point both locally and in CI:
+
+    BEEHIIV_API_KEY=... python3 scripts/build_notes.py
 """
-import os, re, html, sys
+import os
+import re
+import sys
+import json
+import time
 import urllib.request
-import xml.etree.ElementTree as ET
-from email.utils import parsedate_to_datetime
+import urllib.parse
+import urllib.error
+import html as html_lib
+from datetime import datetime, timezone
 
-FEED = "https://rss.beehiiv.com/feeds/2WtWfTwjg3.xml"
-OUT  = os.environ.get("NOTES_OUT", "notes/index.html")
-NS_CONTENT = "http://purl.org/rss/1.0/modules/content/"
-NS_MEDIA   = "http://search.yahoo.com/mrss/"
-
-
-def fetch_feed() -> str:
-    req = urllib.request.Request(
-        FEED,
-        headers={"User-Agent": "Mozilla/5.0 (notes-builder; indieformer.com)"}
-    )
-    with urllib.request.urlopen(req) as r:
-        return r.read().decode("utf-8")
+# Reuse the post-page template + sanitization passes
+from build_post import build_post_page, sanitize_body  # noqa: F401
 
 
-def text(elem, tag) -> str:
-    v = elem.find(tag)
-    return (v.text or "").strip() if v is not None else ""
+# ─────────────────────────────────────────────────────────────────────────────
+# Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+
+PUB_ID = "pub_46dc4e51-4f9d-4b04-80e5-a5714a53bc93"
+API_BASE = "https://api.beehiiv.com/v2"
+MANIFEST_PATH = "notes/.posts.json"
+TEMPLATE_VERSION = 1  # bump when the post or index template changes materially
+
+TAG_TO_CATEGORY = {
+    "frontline":      "frontline",
+    "showcase":       "archive",
+    "indievelopment": "archive",
+    "special":        "publog",
+}
+
+# Per-slug routing overrides — these were curated lists that landed under the
+# "special" tag but editorially belong in the archive.
+SLUG_OVERRIDES = {
+    "upcoming-indie-games-2026": "archive",
+    "best-indie-games-2025":     "archive",
+    "hidden-gems-2025":          "archive",
+}
+
+CATEGORY_CONFIG = {
+    "publog": {
+        "url":    "/notes/",
+        "title":  "The Publog.",
+        "lede":   "from inside the publishing house.",
+        "desc":   "Notes on what we're trying, what's working, what isn't. The journey of running a small indie publisher — written while we're in it.",
+        "out":    "notes/index.html",
+        "og":     "/og-image.png",
+    },
+    "frontline": {
+        "url":    "/notes/frontline/",
+        "title":  "Frontline.",
+        "lede":   "how indie games actually get made.",
+        "desc":   "Case studies of the devs and studios we think are doing it right. Tactics, trade-offs, and the hard parts they're willing to talk about.",
+        "out":    "notes/frontline/index.html",
+        "og":     "/og-image.png",
+    },
+    "archive": {
+        "url":    "/notes/archive/",
+        "title":  "Curator Archive.",
+        "lede":   "what we used to do.",
+        "desc":   "Monthly Showcase and Indievelopment curation from when Indieformer was a curator. We're a publisher now — these are kept for posterity.",
+        "out":    "notes/archive/index.html",
+        "og":     "/og-image.png",
+    },
+}
+
+CATEGORIES_IN_ORDER = ["publog", "frontline", "archive"]
+CATEGORY_LABELS = {"publog": "Publog", "frontline": "Frontline", "archive": "Curator Archive"}
 
 
-def get_ns(elem, tag, ns) -> str:
-    v = elem.find(f"{{{ns}}}{tag}")
-    return (v.text or "").strip() if v is not None else ""
+# ─────────────────────────────────────────────────────────────────────────────
+# Beehiiv API client (no extra deps — plain stdlib)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _http_get(url: str, token: str, retries: int = 3) -> dict:
+    """GET with retries + basic error handling. Returns parsed JSON."""
+    last_err = None
+    for attempt in range(retries):
+        req = urllib.request.Request(
+            url,
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Accept":        "application/json",
+                "User-Agent":    "indieformer-build/1.0",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                return json.loads(resp.read())
+        except urllib.error.HTTPError as e:
+            # Retry only on 5xx and 429
+            if e.code in (429, 500, 502, 503, 504):
+                last_err = e
+                wait = 2 ** attempt
+                print(f"  api: {e.code} on {url} — retrying in {wait}s", file=sys.stderr)
+                time.sleep(wait)
+                continue
+            raise
+        except urllib.error.URLError as e:
+            last_err = e
+            wait = 2 ** attempt
+            print(f"  api: URLError {e} — retrying in {wait}s", file=sys.stderr)
+            time.sleep(wait)
+            continue
+    raise RuntimeError(f"giving up on {url}: {last_err}")
 
 
-def extract_image(item) -> str | None:
-    # 1. <enclosure url="...">
-    enc = item.find("enclosure")
-    if enc is not None and enc.get("url"):
-        return enc.get("url")
-    # 2. <media:content url="...">
-    mc = item.find(f"{{{NS_MEDIA}}}content")
-    if mc is not None and mc.get("url"):
-        return mc.get("url")
-    # 3. first <img src="..."> inside <content:encoded> HTML
-    enc_html = get_ns(item, "encoded", NS_CONTENT)
-    if enc_html:
-        m = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', enc_html, re.I)
+def list_all_posts(token: str) -> list[dict]:
+    """Page through every published post. Request as many expansions as we
+    might need so we don't have to refetch per post for metadata."""
+    all_posts = []
+    page = 1
+    while True:
+        qs = urllib.parse.urlencode([
+            ("limit", "100"),
+            ("page", str(page)),
+            ("status", "published"),
+            ("expand[]", "content_tags"),
+            ("expand[]", "thumbnail"),
+            ("expand[]", "seo_settings"),
+            ("expand[]", "web_settings"),
+        ])
+        data = _http_get(f"{API_BASE}/publications/{PUB_ID}/posts?{qs}", token)
+        all_posts.extend(data.get("data", []))
+        total_pages = data.get("total_pages", 1)
+        if page >= total_pages:
+            break
+        page += 1
+    return all_posts
+
+
+def extract_thumbnail(post: dict, content_html: str = "") -> str:
+    """Best-effort thumbnail URL extraction. Beehiiv's API has used different
+    field names across versions; try several, fall back to first <img> in
+    content if all else fails."""
+    candidates = [
+        post.get("thumbnail_url"),
+        (post.get("thumbnail") or {}).get("src") if isinstance(post.get("thumbnail"), dict) else post.get("thumbnail"),
+        (post.get("images") or {}).get("thumbnail", {}).get("url") if isinstance(post.get("images"), dict) else None,
+        (post.get("seo_settings") or {}).get("og_image"),
+        (post.get("web_settings") or {}).get("thumbnail_url"),
+    ]
+    for c in candidates:
+        if isinstance(c, str) and c.startswith("http"):
+            return c
+    # fall back: first <img src="…"> in the post HTML
+    if content_html:
+        m = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', content_html)
         if m:
             url = m.group(1)
             if "1x1" not in url and "pixel" not in url.lower():
                 return url
-    return None
+    return ""
 
 
-def parse_posts(xml_str):
-    root = ET.fromstring(xml_str)
-    items = root.find("channel").findall("item")
-    posts = []
-    for it in items:
-        title = text(it, "title")
-        link  = text(it, "link").replace(
-            "https://www.indieformer.com/",
-            "https://indieformer.beehiiv.com/"
-        )
-        pub   = text(it, "pubDate")
-        desc  = text(it, "description")
-        cat   = text(it, "category")
-        img   = extract_image(it)
-        try:
-            dt = parsedate_to_datetime(pub)
-            date_human = dt.strftime("%-d %b %Y")
-            date_iso   = dt.strftime("%Y-%m-%d")
-        except Exception:
-            date_human, date_iso = pub, ""
-        excerpt = re.sub(r"\s+", " ", desc).strip()
-        if len(excerpt) > 200:
-            excerpt = excerpt[:200].rsplit(" ", 1)[0] + "…"
-        cat = cat.lower() if cat else ""
-        posts.append({
-            "title": title, "link": link,
-            "date_human": date_human, "date_iso": date_iso,
-            "excerpt": excerpt, "cat": cat, "img": img,
-        })
-    return posts
+def fetch_post_content(post_id: str, token: str) -> str:
+    """Fetch the free web HTML content for a single post."""
+    qs = urllib.parse.urlencode([("expand[]", "free_web_content")])
+    data = _http_get(f"{API_BASE}/publications/{PUB_ID}/posts/{post_id}?{qs}", token)
+    post = data.get("data") or {}
+    content = post.get("content") or {}
+    return (content.get("free") or {}).get("web", "") or ""
 
 
-def render_entries(posts) -> str:
-    out = []
-    for p in posts:
-        tag_html = f'<span class="note-tag">{html.escape(p["cat"])}</span>' if p["cat"] else ""
-        img_html = (
-            f'<div class="note-thumb"><img src="{html.escape(p["img"])}" alt="" loading="lazy"></div>'
-            if p["img"] else ""
-        )
-        out.append(f'''
-    <article class="note-card{' has-thumb' if p["img"] else ''}">
-      <a class="note-link" href="{html.escape(p["link"])}" target="_blank" rel="noopener">
-        {img_html}
-        <div class="note-body">
-          <div class="note-meta">
-            {tag_html}
-            <time datetime="{p["date_iso"]}">{html.escape(p["date_human"])}</time>
-          </div>
-          <h3 class="note-title">{html.escape(p["title"])}</h3>
-          <p class="note-excerpt">{html.escape(p["excerpt"])}</p>
-        </div>
-      </a>
-    </article>''')
-    return "\n".join(out)
+# ─────────────────────────────────────────────────────────────────────────────
+# Routing + manifest
+# ─────────────────────────────────────────────────────────────────────────────
+
+def categorize(post: dict) -> tuple[str, str]:
+    """Return (category, primary_tag_slug)."""
+    tags = post.get("content_tags") or []
+    primary_tag = (tags[0] or {}).get("slug") if tags else "special"
+    slug = post.get("slug") or ""
+    if slug in SLUG_OVERRIDES:
+        return SLUG_OVERRIDES[slug], primary_tag
+    return TAG_TO_CATEGORY.get(primary_tag, "publog"), primary_tag
 
 
-PAGE_TEMPLATE = '''<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notes | Indieformer</title>
+def load_manifest() -> dict:
+    if not os.path.exists(MANIFEST_PATH):
+        return {"template_version": 0, "posts": {}}
+    try:
+        with open(MANIFEST_PATH) as f:
+            return json.load(f)
+    except Exception:
+        return {"template_version": 0, "posts": {}}
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-<meta name="description" content="Notes from Indieformer. We try to post at least monthly about what we're learning and doing as a publisher.">
-<link rel="canonical" href="https://indieformer.com/notes/">
-<meta name="robots" content="index, follow">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Indieformer">
-<meta property="og:title" content="Notes | Indieformer">
-<meta property="og:description" content="What we're learning and doing as a publisher.">
-<meta property="og:url" content="https://indieformer.com/notes/">
-<meta property="og:image" content="https://indieformer.com/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
+def save_manifest(manifest: dict) -> None:
+    os.makedirs(os.path.dirname(MANIFEST_PATH), exist_ok=True)
+    with open(MANIFEST_PATH, "w") as f:
+        json.dump(manifest, f, indent=2, sort_keys=True)
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
 
-  :root {{
+# ─────────────────────────────────────────────────────────────────────────────
+# Index page rendering
+# ─────────────────────────────────────────────────────────────────────────────
+
+INDEX_CSS = """  :root {
     --emerald: #28E291; --coral: #F78154; --periwinkle: #9381FF;
     --shadow: #262730; --shadow-mid: #2F3040;
-    --text-primary: #F0EEE8; --text-secondary: #A8A6B8; --text-tertiary: #6B6980;
+    --text-primary: #F0EEE8; --text-secondary: #C9C7B8; --text-tertiary: #8B8970;
     --border: rgba(255, 255, 255, 0.08); --border-mid: rgba(255, 255, 255, 0.16);
-  }}
+  }
 
-  * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-  html, body {{ min-height: 100%; }}
-  body {{
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
     position: relative;
     background: var(--shadow);
     background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
@@ -158,209 +248,141 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
     -webkit-font-smoothing: antialiased;
     padding: 28px 20px;
     overflow-x: hidden;
-  }}
+  }
 
-  .sr-only {{ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }}
+  .crop { position: absolute; width: 18px; height: 18px; opacity: 0; animation: fade 0.6s ease 0.2s forwards; z-index: 5; pointer-events: none; }
+  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
+  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+  .crop.bl { bottom: 20px; left: 20px; }
+  .crop.br { bottom: 20px; right: 20px; }
 
-  .crop {{
-    position: absolute; width: 18px; height: 18px;
-    opacity: 0; animation: fade 0.6s ease 0.2s forwards;
-    z-index: 5; pointer-events: none;
-  }}
-  .crop::before, .crop::after {{ content: ''; position: absolute; background: var(--text-tertiary); }}
-  .crop::before {{ left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }}
-  .crop::after  {{ top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }}
-  .crop.tl {{ top: 20px; left: 20px; }}
-  .crop.tr {{ top: 20px; right: 20px; }}
-  .crop.bl {{ bottom: 20px; left: 20px; }}
-  .crop.br {{ bottom: 20px; right: 20px; }}
+  .site-nav { display: flex; align-items: center; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 14px 56px; position: relative; z-index: 4; }
+  a.brand { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s ease; }
+  a.brand img { display: block; height: 40px; width: 40px; }
+  a.brand:hover { opacity: 0.82; }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a { font-family: 'Sora'; font-size: 15px; font-weight: 500; color: var(--text-secondary); text-decoration: none; position: relative; transition: color 0.2s; }
+  .primary-nav a:hover { color: var(--text-primary); }
+  .primary-nav a.current { color: var(--text-primary); font-weight: 600; }
+  .primary-nav a.current::after { content: ''; position: absolute; left: 0; right: 0; bottom: -7px; height: 2px; background: var(--emerald); border-radius: 2px; }
 
-  .site-nav {{
-    display: flex; align-items: center; justify-content: space-between;
-    max-width: 1000px; margin: 0 auto; padding: 14px 56px;
-    position: relative; z-index: 4;
-  }}
-  a.brand {{
-    display: inline-flex; align-items: center;
-    text-decoration: none; transition: opacity 0.2s ease;
-  }}
-  a.brand img {{ display: block; height: 40px; width: 40px; }}
-  a.brand:hover {{ opacity: 0.82; }}
-  .primary-nav {{ display: flex; gap: 26px; align-items: center; }}
-  .primary-nav a {{
+  /* ── Page header ───────────────────────────────────── */
+  .section { position: relative; width: 100%; max-width: 1000px; margin: 0 auto; padding: 40px 56px 16px; z-index: 1; }
+  .col { max-width: 720px; position: relative; z-index: 2; }
+  h1 { font-size: clamp(38px, 6vw, 56px); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 14px; }
+  .page-lede { font-family: 'Caveat', cursive; font-size: 26px; color: var(--coral); transform: rotate(-1deg); display: inline-block; margin-bottom: 18px; }
+  .page-desc { color: var(--text-secondary); line-height: 1.65; font-size: 16px; max-width: 560px; }
+  .subscribe-inline { margin: 22px 0 4px; max-width: 560px; }
+  .subscribe-inline iframe { max-width: 100% !important; }
+
+  /* ── Tabs ──────────────────────────────────────────── */
+  .notes-tabs {
+    max-width: 1000px; margin: 16px auto 0; padding: 0 56px;
+    display: flex; gap: 0; border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .notes-tabs a {
     font-family: 'Sora'; font-size: 15px; font-weight: 500;
     color: var(--text-secondary); text-decoration: none;
-    position: relative; transition: color 0.2s;
-  }}
-  .primary-nav a:hover {{ color: var(--text-primary); }}
-  .primary-nav a.current {{ color: var(--text-primary); font-weight: 600; }}
-  .primary-nav a.current::after {{
-    content: ''; position: absolute; left: 0; right: 0; bottom: -7px;
-    height: 2px; background: var(--emerald); border-radius: 2px;
-  }}
-
-  .section {{
-    position: relative;
-    width: 100%; max-width: 1000px; margin: 0 auto;
-    padding: 40px 56px 16px;
-    z-index: 1;
-  }}
-  .col {{ max-width: 720px; position: relative; z-index: 2; }}
-  h1 {{
-    font-size: clamp(38px, 6vw, 56px);
-    font-weight: 800; line-height: 1.05; letter-spacing: -0.025em;
-    margin-bottom: 14px;
-  }}
-  .page-lede {{
-    font-family: 'Caveat', cursive; font-size: 26px; color: var(--coral);
-    transform: rotate(-1deg); display: inline-block; margin-bottom: 18px;
-  }}
-  .page-desc {{
-    color: var(--text-secondary); line-height: 1.65; font-size: 16px; max-width: 560px;
-  }}
-
-  /* beehiiv embed wrapper — sits in the page-header column above the notes list */
-  .subscribe-inline {{ margin: 22px 0 4px; max-width: 560px; }}
-  .subscribe-inline iframe {{ max-width: 100% !important; }}
-
-  .notes-list {{ max-width: 1000px; margin: 0 auto; padding: 24px 56px 8px; position: relative; z-index: 2; }}
-  .notes-list .note-card:first-of-type {{ border-top: 1px solid var(--border); }}
-  .note-card {{ padding: 22px 0; border-bottom: 1px solid var(--border); max-width: 720px; }}
-  .note-link {{
-    display: grid; grid-template-columns: 1fr; gap: 0;
-    text-decoration: none; color: inherit;
-  }}
-  .note-card.has-thumb .note-link {{
-    grid-template-columns: 140px 1fr; gap: 22px; align-items: start;
-  }}
-  .note-thumb {{
-    width: 140px;
-    aspect-ratio: 1200 / 630;
-    overflow: hidden; border-radius: 8px;
-    background: var(--shadow-mid);
-    border: 1px solid var(--border);
-    transition: border-color 0.2s ease;
-  }}
-  .note-thumb img {{
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform 0.4s ease;
-  }}
-  .note-link:hover .note-thumb {{ border-color: var(--emerald); }}
-  .note-link:hover .note-thumb img {{ transform: scale(1.04); }}
-  .note-meta {{
-    display: flex; gap: 14px; align-items: baseline;
-    margin-bottom: 6px;
-    font-size: 13px; color: var(--text-tertiary);
-  }}
-  .note-tag {{
-    font-family: 'Caveat', cursive; font-size: 18px; color: var(--coral);
-    transform: rotate(-1.5deg); display: inline-block; line-height: 1;
-  }}
-  .note-title {{
-    font-family: 'Sora'; font-size: 21px; font-weight: 700; line-height: 1.3;
-    color: var(--text-primary); margin-bottom: 6px;
-    transition: color 0.2s ease;
-  }}
-  .note-link:hover .note-title {{ color: var(--emerald); }}
-  .note-excerpt {{ font-size: 15px; line-height: 1.6; color: var(--text-secondary); }}
-
-  .archive-link {{
-    max-width: 1000px; margin: 0 auto; padding: 24px 56px 8px;
-    font-size: 15px; color: var(--text-tertiary);
-  }}
-  .archive-link a {{
-    color: var(--emerald); text-decoration: none; font-weight: 600;
-    border-bottom: 2px solid rgba(40, 226, 145, 0.42);
+    padding: 12px 0; margin-right: 28px;
+    border-bottom: 2px solid transparent;
     transition: color 0.2s, border-color 0.2s;
-  }}
-  .archive-link a:hover {{ color: var(--text-primary); border-bottom-color: var(--text-primary); }}
+  }
+  .notes-tabs a:hover { color: var(--text-primary); }
+  .notes-tabs a.current {
+    color: var(--text-primary); font-weight: 600;
+    border-bottom-color: var(--emerald);
+  }
 
-  .site-footer {{
-    max-width: 1000px; margin: 60px auto 0;
-    padding: 44px 56px 28px;
+  /* ── Card list ─────────────────────────────────────── */
+  .notes-list { max-width: 1000px; margin: 0 auto; padding: 24px 56px 8px; position: relative; z-index: 2; }
+  .notes-list .note-card:first-of-type { border-top: 1px solid var(--border); }
+  .note-card { padding: 22px 0; border-bottom: 1px solid var(--border); max-width: 720px; }
+  .note-link { display: grid; grid-template-columns: 1fr; gap: 0; text-decoration: none; color: inherit; }
+  .note-card.has-thumb .note-link { grid-template-columns: 140px 1fr; gap: 22px; align-items: start; }
+  .note-thumb { width: 140px; aspect-ratio: 1200 / 630; overflow: hidden; border-radius: 8px; background: var(--shadow-mid); border: 1px solid var(--border); transition: border-color 0.2s ease; }
+  .note-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .note-link:hover .note-thumb { border-color: var(--emerald); }
+  .note-link:hover .note-thumb img { transform: scale(1.04); }
+  .note-meta { display: flex; gap: 14px; align-items: baseline; margin-bottom: 6px; font-size: 13px; color: var(--text-tertiary); }
+  .note-tag { font-family: 'Caveat', cursive; font-size: 18px; color: var(--coral); transform: rotate(-1.5deg); display: inline-block; line-height: 1; }
+  .note-title { font-family: 'Sora'; font-size: 21px; font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-bottom: 6px; transition: color 0.2s ease; }
+  .note-link:hover .note-title { color: var(--emerald); }
+  .note-excerpt { font-size: 15px; line-height: 1.6; color: var(--text-secondary); }
+  .empty-state { padding: 40px 0; color: var(--text-tertiary); font-size: 16px; max-width: 560px; }
+
+  /* ── Footer ─────────────────────────────────────────── */
+  .site-footer {
+    max-width: 1000px; margin: 60px auto 0; padding: 44px 56px 28px;
     border-top: 1px solid var(--border);
     display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px;
     font-size: 14px; line-height: 1.65; color: var(--text-secondary);
     position: relative; z-index: 2;
-  }}
-  .footer-col.brand-col {{ display: flex; gap: 18px; align-items: flex-start; }}
-  .footer-logo {{ flex: 0 0 auto; height: 92px; width: auto; display: block; }}
-  .footer-col.brand-col p {{ flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }}
-  .footer-label {{ font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }}
-  .footer-col ul {{ list-style: none; }}
-  .footer-col li {{ margin-bottom: 6px; }}
-  .footer-col a {{ color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }}
-  .footer-col a:hover {{ color: var(--text-primary); border-bottom-color: var(--text-primary); }}
-  .footer-meta {{ grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 22px; padding-top: 18px; font-size: 13px; color: var(--text-tertiary); }}
-  .footer-meta a {{ color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }}
-  .footer-meta a:hover {{ color: var(--text-primary); border-bottom-color: var(--text-primary); }}
+  }
+  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
+  .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
+  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 22px; padding-top: 18px; font-size: 13px; color: var(--text-tertiary); }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
 
-  @keyframes fade {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
-  @media (max-width: 820px) {{
-    body {{ padding: 20px 14px; }}
-    .section, .notes-list, .archive-link {{ padding-left: 24px; padding-right: 24px; }}
-    .site-nav {{ padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }}
-    .primary-nav {{ gap: 18px; }}
-    .primary-nav a {{ font-size: 14px; }}
-    .site-footer {{ grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }}
-    .note-title {{ font-size: 19px; }}
-    .note-card.has-thumb .note-link {{ grid-template-columns: 100px 1fr; gap: 14px; }}
-    .note-thumb {{ width: 100px; }}
-  }}
+  @media (max-width: 820px) {
+    body { padding: 20px 14px; }
+    .section, .notes-list, .notes-tabs { padding-left: 24px; padding-right: 24px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
+    .note-title { font-size: 19px; }
+    .note-card.has-thumb .note-link { grid-template-columns: 100px 1fr; gap: 14px; }
+    .note-thumb { width: 100px; }
+  }
+  @media (max-width: 500px) {
+    .note-card.has-thumb .note-link { grid-template-columns: 1fr; gap: 12px; }
+    .note-thumb { width: 100%; }
+  }
+"""
 
-  /* ── loading overlay (Lottie gem) ─────────────────────────── */
-  #loader-overlay {{
-    position: fixed; inset: 0; z-index: 9999;
-    background: #262730;
-    display: flex; align-items: center; justify-content: center;
-    transition: opacity 0.45s ease;
-  }}
-  #loader-overlay.gone {{ opacity: 0; pointer-events: none; }}
-  #loader-gem {{ width: 140px; height: 140px; }}
-  @media (max-width: 600px) {{ #loader-gem {{ width: 110px; height: 110px; }} }}
+INDEX_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title} | Indieformer</title>
 
-  @media (max-width: 500px) {{
-    .note-card.has-thumb .note-link {{ grid-template-columns: 1fr; gap: 12px; }}
-    .note-thumb {{ width: 100%; }}
-  }}
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://media.beehiiv.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap">
+
+<meta name="description" content="{description}">
+<link rel="canonical" href="https://indieformer.com{path}">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="{og_title}">
+<meta property="og:description" content="{description}">
+<meta property="og:url" content="https://indieformer.com{path}">
+<meta property="og:image" content="https://indieformer.com{og_image}">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+{css}
 </style>
 </head>
 <body>
-
-<div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-<script>
-  (function () {{
-    var o = document.getElementById('loader-overlay');
-    if (!o) return;
-    var anim;
-    try {{
-      if (typeof lottie !== 'undefined') {{
-        anim = lottie.loadAnimation({{
-          container: document.getElementById('loader-gem'),
-          renderer: 'svg', loop: true, autoplay: true,
-          path: '/loading-gem.json'
-        }});
-      }}
-    }} catch (e) {{}}
-    var shown = Date.now();
-    function hide() {{
-      if (o.classList.contains('gone')) return;
-      o.classList.add('gone');
-      setTimeout(function () {{
-        try {{ if (anim) anim.destroy(); }} catch (e) {{}}
-        if (o.parentNode) o.parentNode.removeChild(o);
-      }}, 500);
-    }}
-    function maybeHide() {{
-      setTimeout(hide, Math.max(0, 400 - (Date.now() - shown)));
-    }}
-    if (document.readyState === 'complete') maybeHide();
-    else window.addEventListener('load', maybeHide);
-    setTimeout(hide, 4000);
-  }})();
-</script>
 
 <span class="crop bl"></span><span class="crop br"></span>
 
@@ -377,23 +399,22 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 
 <section class="section">
   <div class="col">
-    <h1>Notes.</h1>
-    <p class="page-lede">the free notes we send out.</p>
-    <p class="page-desc">
-      We try to post at least monthly about what we're learning and doing as a publisher.
-      The most recent are below.
-    </p>
+    <h1>{heading}</h1>
+    <p class="page-lede">{lede}</p>
+    <p class="page-desc">{description}</p>
     <div class="subscribe-inline">
       <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="23908dcc-ff1f-4876-95a9-61a164fb3893"></script>
     </div>
   </div>
 </section>
 
-<main class="notes-list" id="notes">
-{posts_html}
-</main>
+<nav class="notes-tabs" aria-label="Notes categories">
+{tabs_html}
+</nav>
 
-<p class="archive-link">All {total} issues live on the <a href="https://indieformer.beehiiv.com">full archive →</a></p>
+<main class="notes-list" id="notes">
+{cards_html}
+</main>
 
 <footer class="site-footer">
   <div class="footer-col brand-col">
@@ -411,31 +432,221 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
   <div class="footer-col">
     <p class="footer-label">Elsewhere</p>
     <ul>
-      <li><a href="https://waypoint.indieformer.com">Waypoint archive</a></li>
-      <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
+      <li><a href="/notes/">Notes</a></li>
+      <li><a href="/notes/archive/">Curator archive</a></li>
     </ul>
   </div>
-  <p class="footer-meta">© 2026 Indieformer. · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
+  <p class="footer-meta">© {year} Indieformer. · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
 </footer>
 
 </body>
 </html>
-'''
+"""
 
 
-def main():
-    xml_str = fetch_feed()
-    posts = parse_posts(xml_str)
-    print(f"parsed {len(posts)} posts ({sum(1 for p in posts if p['img'])} with images)",
-          file=sys.stderr)
-    page = PAGE_TEMPLATE.format(
-        posts_html=render_entries(posts),
-        total=77,  # NOTE: total published in the publication — bump when archive grows
+def _excerpt(subtitle: str, max_chars: int = 200) -> str:
+    text = re.sub(r"\s+", " ", subtitle or "").strip()
+    if len(text) > max_chars:
+        text = text[:max_chars].rsplit(" ", 1)[0] + "…"
+    return text
+
+
+def _format_human_date(date_iso: str) -> str:
+    try:
+        dt = datetime.fromisoformat(date_iso.replace("Z", "+00:00"))
+        return dt.strftime("%-d %b %Y")
+    except Exception:
+        return date_iso
+
+
+def _render_card(post: dict) -> str:
+    slug = post["slug"]
+    title_human, _ = _split_issue(post["title"])
+    excerpt = _excerpt(post.get("subtitle", ""))
+    tag_display = (post.get("primary_tag") or "").lower()
+    og_image = post.get("og_image", "")
+    date_iso = post.get("date_iso", "")
+    date_human = _format_human_date(date_iso)
+    date_iso_short = date_iso.split("T", 1)[0]
+
+    thumb = ""
+    if og_image:
+        thumb = (
+            f'<div class="note-thumb">'
+            f'<img src="{og_image}" alt="" loading="lazy" decoding="async">'
+            f'</div>'
+        )
+    has_thumb = " has-thumb" if og_image else ""
+    tag_html = f'<span class="note-tag">{html_lib.escape(tag_display)}</span>' if tag_display else ""
+
+    return (
+        f'    <article class="note-card{has_thumb}">\n'
+        f'      <a class="note-link" href="/notes/{slug}/">\n'
+        f'        {thumb}\n'
+        f'        <div class="note-body">\n'
+        f'          <div class="note-meta">\n'
+        f'            {tag_html}\n'
+        f'            <time datetime="{date_iso_short}">{html_lib.escape(date_human)}</time>\n'
+        f'          </div>\n'
+        f'          <h3 class="note-title">{html_lib.escape(title_human)}</h3>\n'
+        f'          <p class="note-excerpt">{html_lib.escape(excerpt)}</p>\n'
+        f'        </div>\n'
+        f'      </a>\n'
+        f'    </article>'
     )
-    with open(OUT, "w", encoding="utf-8") as f:
-        f.write(page)
-    print(f"wrote {OUT} ({len(page)} bytes)", file=sys.stderr)
+
+
+def _split_issue(title: str) -> tuple[str, str]:
+    m = re.match(r"^\s*(#\d+)\s*\|\s*(.+?)\s*$", title)
+    if m:
+        return m.group(2).strip(), m.group(1).strip()
+    return title.strip(), ""
+
+
+def _render_tabs(current: str) -> str:
+    lines = []
+    for cat in CATEGORIES_IN_ORDER:
+        cfg = CATEGORY_CONFIG[cat]
+        cls = ' class="current"' if cat == current else ""
+        label = CATEGORY_LABELS[cat]
+        lines.append(f'  <a href="{cfg["url"]}"{cls}>{label}</a>')
+    return "\n".join(lines)
+
+
+def render_index_page(category: str, posts_in_cat: list[dict]) -> str:
+    cfg = CATEGORY_CONFIG[category]
+    cards = [_render_card(p) for p in posts_in_cat]
+    cards_html = "\n".join(cards) if cards else (
+        '    <p class="empty-state">Nothing here yet. Subscribe above — '
+        'the first one lands in your inbox.</p>'
+    )
+
+    return INDEX_TEMPLATE.format(
+        title=cfg["title"].rstrip("."),
+        og_title=cfg["title"].rstrip("."),
+        heading=cfg["title"],
+        lede=cfg["lede"],
+        description=cfg["desc"],
+        path=cfg["url"],
+        og_image=cfg["og"],
+        cards_html=cards_html,
+        tabs_html=_render_tabs(category),
+        css=INDEX_CSS,
+        year=datetime.now(timezone.utc).year,
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Main
+# ─────────────────────────────────────────────────────────────────────────────
+
+def main() -> int:
+    token = os.environ.get("BEEHIIV_API_KEY", "").strip()
+    if not token:
+        print("ERROR: BEEHIIV_API_KEY env var not set.", file=sys.stderr)
+        return 2
+
+    print("→ listing posts via Beehiiv API …", file=sys.stderr)
+    raw_posts = list_all_posts(token)
+    print(f"  got {len(raw_posts)} published posts", file=sys.stderr)
+
+    # Normalise and categorise every post
+    posts = []
+    for p in raw_posts:
+        category, primary_tag = categorize(p)
+        posts.append({
+            "id":          p["id"],
+            "slug":        p.get("slug") or "",
+            "title":       p.get("title") or "",
+            "subtitle":    (p.get("seo_settings") or {}).get("default_description")
+                           or p.get("subtitle") or "",
+            "date_iso":    p.get("scheduled_at") or p.get("created_at") or "",
+            "updated_at":  p.get("updated_at") or p.get("created_at") or "",
+            "og_image":    extract_thumbnail(p),
+            "_raw":        p,            # kept for content-based thumbnail fallback later
+            "primary_tag": primary_tag,
+            "category":    category,
+        })
+
+    # Sort newest-first for the index pages
+    posts.sort(key=lambda x: x["date_iso"] or "", reverse=True)
+
+    # ── Per-post pages (rebuild only when needed) ─────────────────────────
+    manifest = load_manifest()
+    posts_manifest = manifest.get("posts", {})
+    template_version_changed = manifest.get("template_version", 0) != TEMPLATE_VERSION
+
+    rebuilt = 0
+    skipped = 0
+    for p in posts:
+        m_entry = posts_manifest.get(p["slug"]) or {}
+        out_path = f"notes/{p['slug']}/index.html"
+        needs_rebuild = (
+            template_version_changed
+            or not os.path.exists(out_path)
+            or m_entry.get("updated_at") != p["updated_at"]
+            or m_entry.get("category")   != p["category"]
+        )
+        if not needs_rebuild:
+            skipped += 1
+            continue
+
+        print(f"  + {p['slug']:40s} → {p['category']}", file=sys.stderr)
+        content_html = fetch_post_content(p["id"], token)
+        if not content_html:
+            print(f"    WARN: empty content for {p['slug']}; skipping", file=sys.stderr)
+            continue
+
+        # If we still don't have a thumbnail, fish one from the content
+        if not p["og_image"]:
+            p["og_image"] = extract_thumbnail(p["_raw"], content_html)
+
+        build_post_page(
+            title=p["title"],
+            subtitle=p["subtitle"],
+            slug=p["slug"],
+            tag_slug=p["primary_tag"],
+            date_iso=p["date_iso"],
+            og_image=p["og_image"],
+            content_html=content_html,
+            category=p["category"],
+            out_root=".",
+        )
+
+        posts_manifest[p["slug"]] = {
+            "id":         p["id"],
+            "title":      p["title"],
+            "category":   p["category"],
+            "tag":        p["primary_tag"],
+            "date_iso":   p["date_iso"],
+            "updated_at": p["updated_at"],
+        }
+        rebuilt += 1
+        # be polite to the API
+        time.sleep(0.15)
+
+    print(f"  posts: rebuilt={rebuilt} skipped={skipped}", file=sys.stderr)
+
+    # ── Index pages (always rebuild — they're cheap and may change ordering) ──
+    by_cat: dict[str, list[dict]] = {c: [] for c in CATEGORIES_IN_ORDER}
+    for p in posts:
+        by_cat[p["category"]].append(p)
+
+    for cat in CATEGORIES_IN_ORDER:
+        out = CATEGORY_CONFIG[cat]["out"]
+        os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
+        page = render_index_page(cat, by_cat[cat])
+        with open(out, "w", encoding="utf-8") as f:
+            f.write(page)
+        print(f"  ✓ index → {out} ({len(by_cat[cat])} posts)", file=sys.stderr)
+
+    # ── Persist manifest ─────────────────────────────────────────────────
+    manifest = {"template_version": TEMPLATE_VERSION, "posts": posts_manifest}
+    save_manifest(manifest)
+    print(f"  manifest → {MANIFEST_PATH}", file=sys.stderr)
+
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

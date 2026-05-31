@@ -1,7 +1,7 @@
 name: Refresh site data
 
 # Daily job that does two things:
-#   1. Rebuild notes.html from the beehiiv RSS feed.
+#   1. Rebuild per-post pages + 3 tabbed notes indexes from the Beehiiv API.
 #   2. Fetch live Steam data for Feed the Scorchpot → data/scorchpot.json.
 # Commits and pushes whichever changed.
 # Also exposed as a "Run workflow" button under Actions for on-demand refresh.
@@ -22,7 +22,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -34,7 +34,9 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Rebuild notes.html from beehiiv RSS
+      - name: Rebuild notes (per-post pages + tabbed indexes) from Beehiiv API
+        env:
+          BEEHIIV_API_KEY: ${{ secrets.BEEHIIV_API_KEY }}
         run: python3 scripts/build_notes.py
 
       - name: Fetch Steam demo player count
@@ -45,12 +47,12 @@ jobs:
         run: |
           git config user.name  "indieformer-bot"
           git config user.email "bot@indieformer.com"
-          git add notes/index.html data/scorchpot.json
+          git add notes/ data/scorchpot.json
           if git diff --staged --quiet; then
             echo "no changes — nothing to commit"
           else
-            # Build a commit message naming whichever files actually changed
-            CHANGED=$(git diff --staged --name-only | tr '\n' ' ')
-            git commit -m "auto: refresh ${CHANGED}"
+            CHANGED=$(git diff --staged --name-only | head -5 | tr '\n' ' ')
+            COUNT=$(git diff --staged --name-only | wc -l)
+            git commit -m "auto: refresh ${COUNT} files (e.g. ${CHANGED})"
             git push
           fi
