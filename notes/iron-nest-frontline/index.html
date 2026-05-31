@@ -165,31 +165,19 @@
   .post-content h3, .post-content h3.heading { font-size: 22px; font-weight: 700; }
   .post-content h4, .post-content h4.heading { font-size: 18px; font-weight: 600; color: var(--periwinkle); text-transform: uppercase; letter-spacing: 0.06em; }
   .post-content h6, .post-content h6.heading { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
-  .post-content a, .post-content .link {
+  /* Only restyle Beehiiv's inline-text links (they all carry class="link").
+     Embed-card anchors stay untouched so their inline borders/badges render correctly. */
+  .post-content .link {
     color: var(--coral) !important;
     text-decoration: none;
     border-bottom: 1px solid rgba(247, 129, 84, 0.35);
     transition: color 0.2s, border-color 0.2s;
   }
-  .post-content a:hover, .post-content .link:hover {
+  .post-content .link:hover {
     color: var(--text-primary) !important;
     border-bottom-color: var(--text-primary);
   }
   .post-content em, .post-content i { color: var(--text-secondary); }
-
-  /* Don't recolor or underline links inside Beehiiv custom_html embed cards —
-     they bring their own complete styling (white text on periwinkle, etc.) */
-  .post-content .custom_html a,
-  .post-content .custom_html a:hover {
-    color: inherit !important;
-    border-bottom: none !important;
-    background: none !important;
-  }
-  .post-content .custom_html a span,
-  .post-content .custom_html a div,
-  .post-content .custom_html a p {
-    border-bottom: none !important;
-  }
 
   /* Images */
   .post-content .image { margin: 28px 0; }
