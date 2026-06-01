@@ -25,6 +25,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://indieformer.com/press-kit-guide/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://indieformer.com/steam-marketing-guide/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://indieformer.com/privacy/</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>yearly</changefreq>
