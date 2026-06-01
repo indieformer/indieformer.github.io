@@ -204,6 +204,50 @@
     line-height: 1.65;
   }
   .template em { color: var(--periwinkle); font-style: italic; }
+  .template-example {
+    margin-top: 14px;
+    color: var(--text-secondary);
+    font-size: 15px; line-height: 1.65; font-style: italic;
+  }
+  .template-example strong { color: var(--text-primary); font-weight: 600; font-style: normal; }
+
+  /* embedded media — Steam widgets + YouTube */
+  .embed {
+    margin-top: 16px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--shadow-deep);
+  }
+  .embed.steam {
+    height: 190px;
+  }
+  .embed.steam iframe {
+    width: 100%; height: 100%;
+    border: 0; display: block;
+  }
+  .embed.video {
+    position: relative;
+    padding-top: 56.25%;
+    height: 0;
+  }
+  .embed.video iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0; display: block;
+  }
+  .embed-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px; font-weight: 600;
+    color: var(--emerald);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(40, 226, 145, 0.42);
+  }
+  .embed-link:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  @media (max-width: 600px) {
+    .embed.steam { height: 220px; }
+  }
 
   /* tag pills (section 5) */
   .tags {
@@ -445,6 +489,9 @@
         <span class="point-label">Compounding</span>
         <p class="point-body">Publishing sooner gives you more time to accumulate wishlists.</p>
         <p class="point-tip">Example: <strong>Dome Keeper</strong> launched their page ~9 months before release, gathering tens of thousands of wishlists before entering their demo into Next Fest.</p>
+        <div class="embed steam">
+          <iframe src="https://store.steampowered.com/widget/1637320/" frameborder="0" loading="lazy" title="Dome Keeper on Steam"></iframe>
+        </div>
       </div>
       <div class="point">
         <span class="point-label">Updating</span>
@@ -495,6 +542,10 @@
         <span class="point-label">Template</span>
         <p class="point-body">Use a clean, repeatable shape:</p>
         <p class="template">A <em>[camera perspective]</em> <em>[genre/subgenre]</em> where you <em>[core gameplay loop]</em>.</p>
+        <p class="template-example">"A <strong>tough-as-nails 2D physics platformer</strong> where you swing to freedom as a plunger-wielding rooster. One wrong move sends you straight back to the pit. Cluck up, and it's a long way down."</p>
+        <div class="embed steam">
+          <iframe src="https://store.steampowered.com/widget/2826970/" frameborder="0" loading="lazy" title="Example game on Steam"></iframe>
+        </div>
       </div>
       <div class="point">
         <span class="point-label">Camera</span>
@@ -528,6 +579,10 @@
         <span class="point-label">Immediate</span>
         <p class="point-body">Open with gameplay instead of logos.</p>
         <p class="point-tip">Example: <strong>I Am Your Beast</strong> shows gameplay within the first five seconds.</p>
+        <div class="embed video">
+          <iframe src="https://www.youtube.com/embed/UR5swbsAtbo?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="I Am Your Beast trailer"></iframe>
+        </div>
+        <a class="embed-link" href="https://store.steampowered.com/app/1876590/I_Am_Your_Beast/" target="_blank" rel="noopener">View I Am Your Beast on Steam →</a>
       </div>
       <div class="point">
         <span class="point-label">Polished</span>
