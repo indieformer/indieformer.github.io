@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steam Marketing Guide for Indie Devs | Indieformer</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta name="description" content="A practical guide to optimizing your Steam page — build visibility, boost wishlists, and stand out in the world's biggest PC storefront.">
+<link rel="canonical" href="https://indieformer.com/steam-marketing-guide/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="Steam Marketing Guide for Indie Devs | Indieformer">
+<meta property="og:description" content="Nine practical steps to publish your Steam page early and optimize it so gamers discover your hidden gem through the Steam algorithm.">
+<meta property="og:url" content="https://indieformer.com/steam-marketing-guide/">
+<meta property="og:image" content="https://indieformer.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+  :root {
+    --emerald: #28E291; --coral: #F78154; --periwinkle: #9381FF;
+    --shadow: #262730; --shadow-mid: #2F3040; --shadow-deep: #1E1C28;
+    --text-primary: #F0EEE8; --text-secondary: #A8A6B8; --text-tertiary: #6B6980;
+    --border: rgba(255, 255, 255, 0.08); --border-mid: rgba(255, 255, 255, 0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; overscroll-behavior-y: none; }
+  body {
+    position: relative;
+    background: var(--shadow);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
+    background-size: 26px 26px;
+    font-family: 'Sora', Arial, sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 20px;
+    overflow-x: hidden;
+  }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+  .crop {
+    position: absolute; width: 18px; height: 18px;
+    opacity: 0; animation: fade 0.6s ease 0.2s forwards;
+    z-index: 5; pointer-events: none;
+  }
+  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
+  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+  .crop.bl { bottom: 20px; left: 20px; }
+  .crop.br { bottom: 20px; right: 20px; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  .site-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1000px; margin: 0 auto; padding: 14px 56px;
+    position: relative; z-index: 4;
+  }
+  a.brand { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s ease; }
+  a.brand img { display: block; height: 40px; width: 40px; }
+  a.brand:hover { opacity: 0.82; }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a {
+    font-family: 'Sora'; font-size: 15px; font-weight: 500;
+    color: var(--text-secondary); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .primary-nav a:hover { color: var(--text-primary); }
+
+  .section {
+    position: relative;
+    width: 100%; max-width: 1000px; margin: 0 auto;
+    padding: 40px 56px 16px;
+    z-index: 1;
+  }
+  .col { max-width: 720px; position: relative; z-index: 2; }
+  .eyebrow {
+    font-family: 'Caveat', cursive; font-size: 22px; color: var(--coral);
+    transform: rotate(-1deg); display: inline-block; margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(38px, 6vw, 56px);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.025em;
+    margin-bottom: 18px;
+  }
+  h1 .em { color: var(--emerald); }
+  .page-intro { color: var(--text-secondary); line-height: 1.7; font-size: 17px; margin-bottom: 16px; max-width: 640px; }
+  .page-intro strong { color: var(--text-primary); font-weight: 600; }
+  .page-intro a { color: var(--emerald); border-bottom: 1px solid rgba(40, 226, 145, 0.42); text-decoration: none; }
+  .page-intro a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  .facts {
+    max-width: 1000px; margin: 28px auto 0;
+    padding: 0 56px;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+    position: relative; z-index: 2;
+  }
+  .fact {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .fact-k {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--text-tertiary); margin-bottom: 6px; display: block;
+  }
+  .fact-v { font-size: 14px; font-weight: 600; color: var(--text-primary); display: block; }
+  .fact-v a { color: var(--emerald); text-decoration: none; }
+  .fact-v a:hover { color: var(--text-primary); }
+  .fact-v .up { color: var(--coral); }
+
+  .body {
+    max-width: 1000px; margin: 0 auto;
+    padding: 36px 56px 8px;
+    position: relative; z-index: 2;
+  }
+  .pk {
+    margin-top: 44px;
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+  }
+  .pk:first-of-type { border-top: none; padding-top: 0; margin-top: 14px; }
+  .pk-head {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 22px;
+  }
+  .pk-num {
+    flex: 0 0 auto;
+    width: 34px; height: 34px;
+    background: var(--emerald); color: var(--shadow);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 15px;
+  }
+  .pk-title { font-size: 22px; font-weight: 700; line-height: 1.2; color: var(--text-primary); }
+  .pk-sub {
+    margin-left: auto;
+    font-family: 'Caveat', cursive; font-size: 19px;
+    color: var(--text-tertiary);
+    transform: rotate(-0.5deg);
+  }
+
+  /* point cards — the main structural unit */
+  .points { display: flex; flex-direction: column; gap: 14px; }
+  .point {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .point-label {
+    display: block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--emerald);
+    margin-bottom: 10px;
+  }
+  .point-body {
+    color: var(--text-primary);
+    font-size: 15px; line-height: 1.65;
+  }
+  .point-body strong { font-weight: 700; }
+  .point-body a {
+    color: var(--emerald);
+    border-bottom: 1px solid rgba(40, 226, 145, 0.42);
+    text-decoration: none;
+  }
+  .point-body a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .point-tip {
+    display: block; margin-top: 12px;
+    font-family: 'Caveat', cursive;
+    font-size: 19px; line-height: 1.45;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--coral);
+    padding: 4px 0 4px 14px;
+  }
+  .point-tip strong { color: var(--text-primary); font-weight: 700; }
+  .point-tip a {
+    color: var(--coral);
+    border-bottom: 1px solid rgba(247, 129, 84, 0.42);
+    text-decoration: none;
+  }
+  .point-tip a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  /* template-text block (section 3) */
+  .template {
+    background: var(--shadow-deep);
+    border: 1px solid rgba(40, 226, 145, 0.22);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--emerald);
+    line-height: 1.65;
+  }
+  .template em { color: var(--periwinkle); font-style: italic; }
+
+  /* tag pills (section 5) */
+  .tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 12px;
+  }
+  .tag-pill {
+    background: var(--shadow-deep);
+    border: 1px solid var(--border-mid);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px; font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* timeline block (section 9) */
+  .timeline {
+    margin-top: 16px;
+    background: var(--shadow-deep);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 18px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .timeline-row:last-child { border-bottom: none; }
+  .timeline-act {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--emerald);
+    line-height: 1.2;
+  }
+  .timeline-det {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.55;
+    align-self: center;
+  }
+  .timeline-det strong { color: var(--text-primary); font-weight: 700; }
+
+  .closing {
+    margin: 44px auto 0;
+    max-width: 1000px; padding: 0 56px;
+    position: relative; z-index: 2;
+  }
+  .closing-card {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--emerald);
+    border-radius: 12px;
+    padding: 26px 30px;
+  }
+  .closing-card p { color: var(--text-secondary); font-size: 16px; line-height: 1.65; }
+  .closing-card strong { color: var(--text-primary); font-weight: 700; }
+
+  /* help: people to talk to */
+  .help {
+    max-width: 1000px; margin: 60px auto 0;
+    padding: 36px 56px 12px;
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 2;
+  }
+  .help-head { margin-bottom: 22px; }
+  .help-eyebrow {
+    font-family: 'Caveat', cursive; font-size: 22px; color: var(--coral);
+    transform: rotate(-1deg); display: inline-block; margin-bottom: 4px;
+  }
+  .help-h2 {
+    font-size: 26px; font-weight: 700; line-height: 1.2;
+    color: var(--text-primary); margin-bottom: 6px;
+  }
+  .help-sub { color: var(--text-tertiary); font-size: 14px; line-height: 1.55; }
+  .help-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .help-card {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .help-card.us { border-color: rgba(40, 226, 145, 0.3); }
+  .help-cat {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-tertiary); margin-bottom: 12px; display: block;
+  }
+  .help-person { margin-bottom: 12px; }
+  .help-name { display: block; font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .help-role { display: block; font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+  .help-body { color: var(--text-secondary); font-size: 14px; line-height: 1.65; margin-bottom: 14px; }
+  .help-body strong { color: var(--text-primary); font-weight: 600; }
+  .help-links { display: flex; flex-direction: column; gap: 5px; }
+  .help-link {
+    font-size: 13px; font-weight: 600; color: var(--emerald);
+    text-decoration: none;
+  }
+  .help-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .help-pricing {
+    margin-top: 10px;
+    font-family: 'Caveat', cursive; font-size: 17px;
+    color: var(--text-tertiary);
+    display: inline-block;
+  }
+
+  .site-footer {
+    max-width: 1000px; margin: 60px auto 0;
+    padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px;
+    font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+    position: relative; z-index: 2;
+  }
+  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
+  .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
+  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta {
+    grid-column: 1 / -1; border-top: 1px solid var(--border);
+    margin-top: 22px; padding-top: 18px;
+    font-size: 13px; color: var(--text-tertiary);
+    display: flex; flex-wrap: wrap; gap: 14px;
+  }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta .sep { color: var(--text-tertiary); opacity: 0.5; }
+
+  @media (max-width: 820px) {
+    body { padding: 20px 14px; }
+    .section, .body, .facts, .closing, .help { padding-left: 24px; padding-right: 24px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pk-sub { display: none; }
+    .help-grid { grid-template-columns: 1fr; }
+    .timeline-row { grid-template-columns: 1fr; gap: 4px; }
+    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
+  }
+
+  #loader-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #262730;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.45s ease;
+  }
+  #loader-overlay.gone { opacity: 0; pointer-events: none; }
+  #loader-gem { width: 140px; height: 140px; }
+  @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
+</style>
+</head>
+<body>
+
+<div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+  (function () {
+    var o = document.getElementById('loader-overlay');
+    if (!o) return;
+    var anim;
+    try {
+      if (typeof lottie !== 'undefined') {
+        anim = lottie.loadAnimation({
+          container: document.getElementById('loader-gem'),
+          renderer: 'svg', loop: true, autoplay: true,
+          path: '/loading-gem.json'
+        });
+      }
+    } catch (e) {}
+    var shown = Date.now();
+    function hide() {
+      if (o.classList.contains('gone')) return;
+      o.classList.add('gone');
+      setTimeout(function () {
+        try { if (anim) anim.destroy(); } catch (e) {}
+        if (o.parentNode) o.parentNode.removeChild(o);
+      }, 500);
+    }
+    function maybeHide() { setTimeout(hide, Math.max(0, 400 - (Date.now() - shown))); }
+    if (document.readyState === 'complete') maybeHide();
+    else window.addEventListener('load', maybeHide);
+    setTimeout(hide, 4000);
+  })();
+</script>
+
+<span class="crop bl"></span><span class="crop br"></span>
+
+<header class="site-nav">
+  <a class="brand" href="/" aria-label="Indieformer home"><img src="/logo.png" alt="Indieformer" width="40" height="40"></a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular/">The Approach</a>
+    <a href="/notes/">Notes</a>
+    <a href="/scorchpot/">Scorchpot</a>
+  </nav>
+</header>
+
+<section class="section">
+  <div class="col">
+    <span class="eyebrow">a developer resource.</span>
+    <h1>Steam Marketing Guide<br>for <span class="em">Indie Devs.</span></h1>
+    <p class="page-intro">
+      Developing a good game is only half the battle. The second half: <strong>maximising visibility on the biggest storefront for PC gaming</strong> — Steam. With over 18,477 games released in 2024, 20,003 in 2025, and 69 million daily active users, competition is fierce. This guide will help you publish your page early and optimise it so gamers discover your hidden gem through the Steam algorithm.
+    </p>
+    <p class="page-intro">
+      Pair this with the <a href="/press-kit-guide/">Press Kit Guide</a> for everything you need to build a clean, downloadable press kit on top.
+    </p>
+  </div>
+</section>
+
+<div class="facts" aria-label="Steam facts">
+  <div class="fact"><span class="fact-k">Platform</span><span class="fact-v">Steam</span></div>
+  <div class="fact"><span class="fact-k">Daily users</span><span class="fact-v">69 million</span></div>
+  <div class="fact"><span class="fact-k">2024 releases</span><span class="fact-v">18,477</span></div>
+  <div class="fact"><span class="fact-k">2025 releases</span><span class="fact-v">20,003 <span class="up">↑</span></span></div>
+  <div class="fact"><span class="fact-k">Sections</span><span class="fact-v">9 steps</span></div>
+  <div class="fact"><span class="fact-k">By</span><span class="fact-v">Jake &amp; Indieformer</span></div>
+</div>
+
+<main class="body">
+
+  <!-- 1 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">1</div>
+      <span class="pk-title">Publish Your Page Early</span>
+      <span class="pk-sub">more time = more wishlists</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Compounding</span>
+        <p class="point-body">Publishing sooner gives you more time to accumulate wishlists.</p>
+        <p class="point-tip">Example: <strong>Dome Keeper</strong> launched their page ~9 months before release, gathering tens of thousands of wishlists before entering their demo into Next Fest.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Updating</span>
+        <p class="point-body">You can update the page at any time, so it doesn't need to be perfect.</p>
+        <p class="point-tip">→ Start with a simple trailer, four screenshots, and a short description.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Data</span>
+        <p class="point-body">Having a public Steam page early on lets you start gathering analytics on traffic sources and conversion rates much sooner.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">2</div>
+      <span class="pk-title">Optimise Your Capsule Art</span>
+      <span class="pk-sub">your first impression at any size</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Contrast</span>
+        <p class="point-body">High-contrast artwork grabs attention and increases click-through rates.</p>
+        <p class="point-tip">Example: <strong>UFO 50</strong> used a bold and legible capsule that stands out even at small sizes.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Legibility</span>
+        <p class="point-body">Your title text should be readable even when scaled down to 120×45px.</p>
+        <p class="point-tip">→ Read through <a href="https://partner.steamgames.com/doc/store/assets" target="_blank" rel="noopener">Steam's Graphical Assets Overview</a>.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Specificity</span>
+        <p class="point-body">The capsule should reflect your game's genre, tone, or setting. It doesn't need to use in-game graphics — stylised illustrations are often more effective than screenshots or pixel art.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">3</div>
+      <span class="pk-title">Write Your Short Description</span>
+      <span class="pk-sub">one sentence, doing the heavy lifting</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Template</span>
+        <p class="point-body">Use a clean, repeatable shape:</p>
+        <p class="template">A <em>[camera perspective]</em> <em>[genre/subgenre]</em> where you <em>[core gameplay loop]</em>.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Camera</span>
+        <p class="point-body">Is it first-person? Over-the-shoulder? Top-down? Sidescroller?</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Genre</span>
+        <p class="point-body">Be specific — Metroidvania, roguelike, management sim, bullet hell, etc.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Loop</span>
+        <p class="point-body">What will the player be doing? Fighting enemies? Solving puzzles? Building?</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Tone</span>
+        <p class="point-body">Use verbs and phrases that reflect your game's tone.</p>
+        <p class="point-tip">"Escape the fog" evokes tension and atmosphere, while "manage resources" or "collect upgrades" suits a more systems-driven experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">4</div>
+      <span class="pk-title">Upload Your Trailer Video</span>
+      <span class="pk-sub">hook them in the first 5 seconds</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Immediate</span>
+        <p class="point-body">Open with gameplay instead of logos.</p>
+        <p class="point-tip">Example: <strong>I Am Your Beast</strong> shows gameplay within the first five seconds.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Polished</span>
+        <p class="point-body">Use montages of short clips instead of long uncut footage.</p>
+        <p class="point-tip">Utilise fast music and pacing.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Concise</span>
+        <p class="point-body">Most viewers stop watching within the first 30 seconds.</p>
+        <p class="point-tip">Hook → Gameplay montage → Key features → Call to action.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">5</div>
+      <span class="pk-title">Add 20 Tags to Your Page</span>
+      <span class="pk-sub">the first 5 matter most</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Limitations</span>
+        <p class="point-body">Steam only looks at the first 20 tags.</p>
+        <p class="point-tip">→ Read the <a href="https://partner.steamgames.com/doc/store/tags" target="_blank" rel="noopener">Steam Tags Documentation</a>.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Weighting</span>
+        <p class="point-body">The first 5 tags are the most important.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Imitating</span>
+        <p class="point-body">Mimic the tags used by bestsellers in your genre.</p>
+        <div class="tags" aria-label="Example tags for a 2D roguelike deckbuilder">
+          <span class="tag-pill">Deckbuilding</span>
+          <span class="tag-pill">Roguelike</span>
+          <span class="tag-pill">Strategy</span>
+          <span class="tag-pill">2D</span>
+          <span class="tag-pill">Indie</span>
+          <span class="tag-pill">Card Game</span>
+          <span class="tag-pill">Replayability</span>
+          <span class="tag-pill">Procedural Generation</span>
+        </div>
+        <p class="point-tip">example tags for a 2D roguelike deckbuilder.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">6</div>
+      <span class="pk-title">Expand Your About Section</span>
+      <span class="pk-sub">where browsers become buyers</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Intro Paragraph</span>
+        <p class="point-body">Set the tone and quickly summarise the core gameplay loop.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Section Headers</span>
+        <p class="point-body">Use bold headers or custom banners to separate features.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Short Descriptions</span>
+        <p class="point-body">Have 1–2 lines under each header to explain the feature.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Bullet Points</span>
+        <p class="point-body">Add bullet lists with 2–4 feature-focused points per section.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">GIFs</span>
+        <p class="point-body">Use embedded GIFs or MP4s to visually reinforce what you're describing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">7</div>
+      <span class="pk-title">Select Languages for Localisation</span>
+      <span class="pk-sub">only 36% of Steam users speak English</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Priority</span>
+        <p class="point-body">Only 36% of Steam users speak English — focus on localising to <strong>Simplified Chinese</strong> (27% of users) and <strong>Russian</strong> (9% of users).</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Reach</span>
+        <p class="point-body">Games without localisation won't be shown to users browsing Steam in other languages.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Cost</span>
+        <p class="point-body">Can't afford translators? Build a translation team from your community.</p>
+        <p class="point-tip">Example: <strong>Balatro</strong> launched in English only and then added more languages post-launch using fan translators.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">8</div>
+      <span class="pk-title">Decide on Pricing Strategy</span>
+      <span class="pk-sub">price for discounts from day one</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Base</span>
+        <p class="point-body">Use $X.99 pricing tiers (e.g. $19.99) and avoid awkward pricing like $17.50.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Sales</span>
+        <p class="point-body">Most Steam users only buy new games at a discount.</p>
+        <p class="point-tip">Leave enough headroom for 20% to 50%+ discounts. Check the <a href="https://store.steampowered.com/sale/upcomingfests" target="_blank" rel="noopener">upcoming Steam events</a> page to see if there's a relevant one for you.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Regions</span>
+        <p class="point-body">Ensure regional prices are adjusted by -50% in China, Russia, and Brazil.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">9</div>
+      <span class="pk-title">Plan Your Launch Timing</span>
+      <span class="pk-sub">work backwards from your release date</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Next Fest</span>
+        <p class="point-body">Submit your demo to the Steam Next Fest closest to your release date.</p>
+        <p class="point-tip">Release the demo a month before Next Fest to leave time for bug fixes.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Steam Sales</span>
+        <p class="point-body">Avoid launching during seasonal sales or your game will get buried.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Release Date</span>
+        <p class="point-body">Games with no release date won't appear on Popular Upcoming.</p>
+      </div>
+      <div class="timeline" aria-label="Example launch timeline for a November release">
+        <div class="timeline-row">
+          <span class="timeline-act">Publish</span>
+          <span class="timeline-det"><strong>Steam page</strong> in January</span>
+        </div>
+        <div class="timeline-row">
+          <span class="timeline-act">Release</span>
+          <span class="timeline-det"><strong>Steam demo</strong> in September</span>
+        </div>
+        <div class="timeline-row">
+          <span class="timeline-act">Enter</span>
+          <span class="timeline-det"><strong>Steam Next Fest</strong> in October</span>
+        </div>
+        <div class="timeline-row">
+          <span class="timeline-act">Release</span>
+          <span class="timeline-det"><strong>Full game</strong> in November</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="closing">
+  <div class="closing-card">
+    <p><strong>An optimised Steam page isn't a luxury — it's a necessity</strong> to help others discover, support, and share your game.</p>
+  </div>
+</aside>
+
+<section class="help">
+  <div class="help-head">
+    <span class="help-eyebrow">need help?</span>
+    <h2 class="help-h2">Two people worth talking to.</h2>
+    <p class="help-sub">If you're looking for support along the way, here's where to start.</p>
+  </div>
+  <div class="help-grid">
+    <div class="help-card">
+      <span class="help-cat">Game Marketing</span>
+      <div class="help-person">
+        <span class="help-name">Jake Lizarraga</span>
+        <span class="help-role">Game Marketing Specialist</span>
+      </div>
+      <p class="help-body">A former Director of Content Marketing for a 7-figure tech startup who switched industries to help indie devs increase their success rate by adhering to Steam's best practices. <strong>Committed to providing zero-cost marketing support to indie developers</strong> with no upfront charges and revenue share agreements below 20%.</p>
+      <div class="help-links">
+        <a href="https://linkedin.com/in/jakelizarraga" target="_blank" rel="noopener" class="help-link">linkedin.com/in/jakelizarraga →</a>
+      </div>
+    </div>
+    <div class="help-card us">
+      <span class="help-cat">Press, Media &amp; Design</span>
+      <div class="help-person">
+        <span class="help-name">Josh — Indieformer</span>
+        <span class="help-role">Founder &amp; Publisher</span>
+      </div>
+      <p class="help-body">Helping indie devs get noticed through smart packaging, clean visual storytelling, and curated visibility across the right channels. Whether you need design feedback, media outreach, or a feature slot in the newsletter, Indieformer can help. <strong>Over a decade of experience in film, TV, and distribution.</strong></p>
+      <div class="help-links">
+        <a href="mailto:pr@indieformer.com" class="help-link">pr@indieformer.com →</a>
+        <a href="https://indieformer.com" class="help-link">indieformer.com →</a>
+        <a href="https://www.threads.net/@indieformer" target="_blank" rel="noopener" class="help-link">@indieformer →</a>
+      </div>
+      <span class="help-pricing">flexible pricing: upfront fee or 5% revenue share.</span>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-col brand-col">
+    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <li><a href="https://essay.indieformer.com">How to Really Make a Game</a></li>
+      <li><a href="/press-kit-guide/">Press Kit Guide</a></li>
+      <li><a href="/steam-marketing-guide/">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+      <li><a href="https://waypoint.indieformer.com">Waypoint archive</a></li>
+      <li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
+    </ul>
+  </div>
+  <p class="footer-meta">
+    <span>© 2026 Indieformer.</span>
+    <span class="sep">·</span>
+    <a href="/privacy/">Privacy</a>
+    <span class="sep">·</span>
+    <a href="/terms/">Terms</a>
+  </p>
+</footer>
+
+</body>
+</html>
