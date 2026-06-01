@@ -422,6 +422,29 @@
   #loader-overlay.gone { opacity: 0; pointer-events: none; }
   #loader-gem { width: 140px; height: 140px; }
   @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
+
+  /* ── background line — meanders down the left, scrubbed by scroll ── */
+  .bg-line {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .bg-line path {
+    fill: none;
+    stroke: var(--periwinkle);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.28;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bg-line path { stroke-dashoffset: 0; }
+  }
 </style>
 </head>
 <body>
@@ -458,6 +481,10 @@
   })();
 </script>
 
+<svg class="bg-line" aria-hidden="true" preserveAspectRatio="none">
+  <path id="bgPath" pathLength="1"></path>
+</svg>
+
 <span class="crop bl"></span><span class="crop br"></span>
 
 <header class="site-nav">
@@ -471,13 +498,16 @@
 
 <section class="section">
   <div class="col">
-    <span class="eyebrow">a developer resource.</span>
+    <span class="eyebrow">our notes on the storefront.</span>
     <h1>Steam Marketing Guide<br>for <span class="em">Indie Devs.</span></h1>
     <p class="page-intro">
-      Developing a good game is only half the battle. The second half: <strong>maximising visibility on the biggest storefront for PC gaming</strong> — Steam. With over 18,477 games released in 2024, 20,003 in 2025, and 69 million daily active users, competition is fierce. This guide will help you publish your page early and optimise it so gamers discover your hidden gem through the Steam algorithm.
+      Making the game is only half of it. The other half is harder, and most devs find out too late: <strong>getting it seen on Steam</strong>, where 18,477 games launched in 2024 and 20,003 in 2025. The algorithm is a wall. This is how to climb it.
     </p>
     <p class="page-intro">
-      Pair this with the <a href="/press-kit-guide/">Press Kit Guide</a> for everything you need to build a clean, downloadable press kit on top.
+      We wrote this with <a href="https://linkedin.com/in/jakelizarraga" target="_blank" rel="noopener">Jake Lizarraga</a>, who's been doing this for indies a lot longer than we have. Most of the tactical specifics are his. The framing and the <em>"here's why"</em> bits are ours.
+    </p>
+    <p class="page-intro">
+      Pair with the <a href="/press-kit-guide/">Press Kit Guide</a> for the assets side.
     </p>
   </div>
 </section>
@@ -594,7 +624,7 @@
     <div class="pk-head">
       <div class="pk-num" aria-hidden="true">4</div>
       <span class="pk-title">Upload Your Trailer Video</span>
-      <span class="pk-sub">hook them in the first 5 seconds</span>
+      <span class="pk-sub">they're gone in 5 seconds</span>
     </div>
     <div class="points">
       <div class="point">
@@ -659,7 +689,7 @@
     <div class="pk-head">
       <div class="pk-num" aria-hidden="true">6</div>
       <span class="pk-title">Expand Your About Section</span>
-      <span class="pk-sub">where browsers become buyers</span>
+      <span class="pk-sub">where the page does the selling</span>
     </div>
     <div class="points">
       <div class="point">
@@ -779,7 +809,7 @@
 
 <aside class="closing">
   <div class="closing-card">
-    <p><strong>An optimised Steam page isn't a luxury — it's a necessity</strong> to help others discover, support, and share your game.</p>
+    <p><strong>An optimised Steam page won't save a game nobody wants.</strong> But an un-optimised one will absolutely sink a great one. For most of the people who'll ever encounter your game, the store page <em>is</em> the game. Treat it like it.</p>
   </div>
 </aside>
 
@@ -846,6 +876,93 @@
     <a href="/terms/">Terms</a>
   </p>
 </footer>
+
+<script>
+  /* ── background line: meander + scroll-scrubbed reveal ── */
+  (function () {
+    var svg = document.querySelector('.bg-line');
+    var path = document.getElementById('bgPath');
+    if (!svg || !path) return;
+
+    function doodle(i, x, y) {
+      var t = i % 3, side = (i % 2 === 0) ? 1 : -1;
+      if (t === 0) {
+        var r = 17;
+        var d = ' C ' + (x + side * r * 1.7) + ' ' + (y - r * 0.2) +
+                ' ' + (x + side * r * 2.0) + ' ' + (y + r * 1.5) +
+                ' ' + x + ' ' + (y + r * 1.7) +
+                ' C ' + (x - side * r * 1.5) + ' ' + (y + r * 1.9) +
+                ' ' + (x - side * r * 0.5) + ' ' + (y + r * 0.3) +
+                ' ' + x + ' ' + (y + r * 2.7);
+        return { d: d, x: x, y: y + r * 2.7 };
+      }
+      if (t === 1) {
+        var d = '', cy = y, wd = 13;
+        for (var k = 0; k < 3; k++) {
+          cy += 11; d += ' L ' + (x + side * wd) + ' ' + cy;
+          cy += 11; d += ' L ' + x + ' ' + cy;
+        }
+        return { d: d, x: x, y: cy };
+      }
+      var s = 26, b = 36;
+      var d2 = ' Q ' + (x + side * s) + ' ' + (y + b * 0.4) +
+               ' ' + (x + side * s * 0.6) + ' ' + (y + b) +
+               ' Q ' + (x - side * s * 0.4) + ' ' + (y + b * 1.6) +
+               ' ' + x + ' ' + (y + b * 1.9);
+      return { d: d2, x: x, y: y + b * 1.9 };
+    }
+
+    function build() {
+      var w = window.innerWidth;
+      var h = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+      var baseX = Math.min(48, w * 0.055);
+      var amp = Math.min(24, w * 0.03);
+      var spacing = 470;
+      var anchors = [];
+      for (var ay = spacing; ay < h - 70; ay += spacing) anchors.push(ay);
+      var d = 'M ' + baseX + ' 0';
+      var cx = baseX, cy = 0, ai = 0, seg = 104;
+      while (cy < h) {
+        var ny = cy + seg;
+        if (ai < anchors.length && anchors[ai] <= ny) {
+          var aY = anchors[ai];
+          var aX = baseX + Math.sin(aY / 240) * amp;
+          var mx = (cx + aX) / 2, my = (cy + aY) / 2;
+          d += ' Q ' + cx + ' ' + cy + ' ' + mx + ' ' + my + ' T ' + aX + ' ' + aY;
+          cx = aX; cy = aY;
+          var res = doodle(ai, cx, cy);
+          d += res.d; cx = res.x; cy = res.y;
+          ai++;
+        } else {
+          var nx = baseX + Math.sin(ny / 240) * amp + Math.sin(ny / 72) * 5;
+          var mx2 = (cx + nx) / 2, my2 = (cy + ny) / 2;
+          d += ' Q ' + cx + ' ' + cy + ' ' + mx2 + ' ' + my2;
+          cx = nx; cy = ny;
+        }
+      }
+      d += ' T ' + cx + ' ' + h;
+      path.setAttribute('d', d);
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.style.height = h + 'px';
+      update();
+    }
+    function update() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p;
+      if (max <= 4) p = 0.32;
+      else { p = window.scrollY / max; if (p < 0) p = 0; if (p > 1) p = 1; }
+      path.style.strokeDashoffset = String(1 - p);
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(function () { update(); ticking = false; }); }
+    }, { passive: true });
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 150); });
+    window.addEventListener('load', build);
+    build();
+  })();
+</script>
 
 </body>
 </html>
