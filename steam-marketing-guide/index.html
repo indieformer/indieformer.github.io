@@ -217,13 +217,13 @@
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid var(--border);
-    background: var(--shadow-deep);
-  }
-  .embed.steam {
-    height: 190px;
+    /* no bg fill — let the iframe's own surface fill, no dark rect below */
+    display: block;
+    font-size: 0; /* kill the inline-iframe descender gap */
+    line-height: 0;
   }
   .embed.steam iframe {
-    width: 100%; height: 100%;
+    width: 100%; height: 190px;
     border: 0; display: block;
   }
   .embed.video {
@@ -245,8 +245,24 @@
     border-bottom: 1px solid rgba(40, 226, 145, 0.42);
   }
   .embed-link:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
-  @media (max-width: 600px) {
-    .embed.steam { height: 220px; }
+
+  /* in-body example images (UFO 50 etc. in section 2) */
+  .example-img {
+    margin-top: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--shadow-deep);
+    display: block;
+  }
+  .example-img img {
+    width: 100%; height: auto; display: block;
+  }
+  .example-cap {
+    display: block;
+    margin-top: 8px;
+    font-family: 'Caveat', cursive;
+    font-size: 17px; color: var(--text-tertiary);
   }
 
   /* tag pills (section 5) */
@@ -367,7 +383,7 @@
     position: relative; z-index: 2;
   }
   .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
-  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
+  .footer-logo { flex: 0 0 auto; height: 92px; margin-top: -18px; width: auto; display: block; }
   .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
   .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
   .footer-col ul { list-style: none; }
@@ -517,11 +533,17 @@
         <span class="point-label">Contrast</span>
         <p class="point-body">High-contrast artwork grabs attention and increases click-through rates.</p>
         <p class="point-tip">Example: <strong>UFO 50</strong> used a bold and legible capsule that stands out even at small sizes.</p>
+        <figure class="example-img">
+          <img src="/images/steam-ufo-50-capsule-art.jpg" alt="UFO 50 Steam capsule art" loading="lazy">
+        </figure>
       </div>
       <div class="point">
         <span class="point-label">Legibility</span>
         <p class="point-body">Your title text should be readable even when scaled down to 120×45px.</p>
         <p class="point-tip">→ Read through <a href="https://partner.steamgames.com/doc/store/assets" target="_blank" rel="noopener">Steam's Graphical Assets Overview</a>.</p>
+        <figure class="example-img">
+          <img src="/images/steam-ufo-50-title-legibility-example.jpg" alt="UFO 50 title text shown at small size for legibility comparison" loading="lazy">
+        </figure>
       </div>
       <div class="point">
         <span class="point-label">Specificity</span>
