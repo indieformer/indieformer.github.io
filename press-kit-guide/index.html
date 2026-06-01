@@ -330,6 +330,29 @@
     .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
   }
 
+  /* ── background line — meanders down the left, scrubbed by scroll ── */
+  .bg-line {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .bg-line path {
+    fill: none;
+    stroke: var(--periwinkle);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.28;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bg-line path { stroke-dashoffset: 0; }
+  }
+
   /* ── loading overlay (Lottie gem) ─────────────────────────── */
   #loader-overlay {
     position: fixed; inset: 0; z-index: 9999;
@@ -376,6 +399,10 @@
   })();
 </script>
 
+<svg class="bg-line" aria-hidden="true" preserveAspectRatio="none">
+  <path id="bgPath" pathLength="1"></path>
+</svg>
+
 <span class="crop bl"></span><span class="crop br"></span>
 
 <header class="site-nav">
@@ -389,13 +416,16 @@
 
 <section class="section">
   <div class="col">
-    <span class="eyebrow">a developer resource.</span>
+    <span class="eyebrow">the kind we wish we had.</span>
     <h1>Press Kit Guide<br>for <span class="em">Indie Games.</span></h1>
     <p class="page-intro">
-      A press kit isn't for your players. It's for the people who help <strong>share</strong> your game — creators, journalists, curators, event organisers, and platform reps. If someone wants to write about your game, make a video, or include it in a showcase, your press kit is what they'll look for. One-stop, high-quality, ready to use.
+      Your press kit isn't for your players. It's for the people who decide whether to <strong>share</strong> your game — reviewers, YouTubers, curators, festival organisers, platform reps. They've got 60 seconds and 50 other emails. The kit is what makes those 60 seconds easy.
     </p>
     <p class="page-intro">
-      Pair this with the <a href="/steam-marketing-guide/">Steam Marketing Guide</a> for the storefront side of things.
+      We're putting this together because the indie devs we love working with often don't have one ready when we ask. If your game has been out for two years and you still don't have a press kit, you're not behind. You're <em>normal</em>. Just start.
+    </p>
+    <p class="page-intro">
+      Pair this with the <a href="/steam-marketing-guide/">Steam Marketing Guide</a> for the storefront side.
     </p>
   </div>
 </section>
@@ -557,7 +587,7 @@
     <div class="pk-head">
       <div class="pk-num" aria-hidden="true">6</div>
       <span class="pk-title">Download Packs</span>
-      <span class="pk-sub">make sharing seamless</span>
+      <span class="pk-sub">for the lazy reviewer (us)</span>
     </div>
     <div class="pk-cols">
       <div>
@@ -625,7 +655,7 @@
 
 <aside class="closing">
   <div class="closing-card">
-    <p><strong>A press kit isn't just a folder — it's a force multiplier.</strong> You're not just saving someone time. You're making it easier for them to amplify your work, fast.</p>
+    <p><strong>This is one of those build-once-reap-forever things.</strong> Take a Sunday. Put it together. Park it somewhere everyone can find. Then every reviewer, YouTuber, and curator for the next three years will have what they need without asking. Not glamorous. Honestly one of the most-asked-for things from anyone on the press/creator side. Get it ready.</p>
   </div>
 </aside>
 
@@ -692,6 +722,93 @@
     <a href="/terms/">Terms</a>
   </p>
 </footer>
+
+<script>
+  /* ── background line: meander + scroll-scrubbed reveal ── */
+  (function () {
+    var svg = document.querySelector('.bg-line');
+    var path = document.getElementById('bgPath');
+    if (!svg || !path) return;
+
+    function doodle(i, x, y) {
+      var t = i % 3, side = (i % 2 === 0) ? 1 : -1;
+      if (t === 0) {
+        var r = 17;
+        var d = ' C ' + (x + side * r * 1.7) + ' ' + (y - r * 0.2) +
+                ' ' + (x + side * r * 2.0) + ' ' + (y + r * 1.5) +
+                ' ' + x + ' ' + (y + r * 1.7) +
+                ' C ' + (x - side * r * 1.5) + ' ' + (y + r * 1.9) +
+                ' ' + (x - side * r * 0.5) + ' ' + (y + r * 0.3) +
+                ' ' + x + ' ' + (y + r * 2.7);
+        return { d: d, x: x, y: y + r * 2.7 };
+      }
+      if (t === 1) {
+        var d = '', cy = y, wd = 13;
+        for (var k = 0; k < 3; k++) {
+          cy += 11; d += ' L ' + (x + side * wd) + ' ' + cy;
+          cy += 11; d += ' L ' + x + ' ' + cy;
+        }
+        return { d: d, x: x, y: cy };
+      }
+      var s = 26, b = 36;
+      var d2 = ' Q ' + (x + side * s) + ' ' + (y + b * 0.4) +
+               ' ' + (x + side * s * 0.6) + ' ' + (y + b) +
+               ' Q ' + (x - side * s * 0.4) + ' ' + (y + b * 1.6) +
+               ' ' + x + ' ' + (y + b * 1.9);
+      return { d: d2, x: x, y: y + b * 1.9 };
+    }
+
+    function build() {
+      var w = window.innerWidth;
+      var h = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+      var baseX = Math.min(48, w * 0.055);
+      var amp = Math.min(24, w * 0.03);
+      var spacing = 470;
+      var anchors = [];
+      for (var ay = spacing; ay < h - 70; ay += spacing) anchors.push(ay);
+      var d = 'M ' + baseX + ' 0';
+      var cx = baseX, cy = 0, ai = 0, seg = 104;
+      while (cy < h) {
+        var ny = cy + seg;
+        if (ai < anchors.length && anchors[ai] <= ny) {
+          var aY = anchors[ai];
+          var aX = baseX + Math.sin(aY / 240) * amp;
+          var mx = (cx + aX) / 2, my = (cy + aY) / 2;
+          d += ' Q ' + cx + ' ' + cy + ' ' + mx + ' ' + my + ' T ' + aX + ' ' + aY;
+          cx = aX; cy = aY;
+          var res = doodle(ai, cx, cy);
+          d += res.d; cx = res.x; cy = res.y;
+          ai++;
+        } else {
+          var nx = baseX + Math.sin(ny / 240) * amp + Math.sin(ny / 72) * 5;
+          var mx2 = (cx + nx) / 2, my2 = (cy + ny) / 2;
+          d += ' Q ' + cx + ' ' + cy + ' ' + mx2 + ' ' + my2;
+          cx = nx; cy = ny;
+        }
+      }
+      d += ' T ' + cx + ' ' + h;
+      path.setAttribute('d', d);
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.style.height = h + 'px';
+      update();
+    }
+    function update() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p;
+      if (max <= 4) p = 0.32;
+      else { p = window.scrollY / max; if (p < 0) p = 0; if (p > 1) p = 1; }
+      path.style.strokeDashoffset = String(1 - p);
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(function () { update(); ticking = false; }); }
+    }, { passive: true });
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 150); });
+    window.addEventListener('load', build);
+    build();
+  })();
+</script>
 
 </body>
 </html>
