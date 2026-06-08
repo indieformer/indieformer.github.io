@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#78 | We Cancelled a Funded Kickstarter — Indieformer</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- Warm up DNS+TLS for the origins every page hits — fonts + Beehiiv image CDN. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://media.beehiiv.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap">
+
+<meta name="description" content="Here&#x27;s what it cost us, and taught us.">
+<link rel="canonical" href="https://indieformer.com/notes/78-we-cancelled-a-funded-kickstarter/">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="#78 | We Cancelled a Funded Kickstarter">
+<meta property="og:description" content="Here&#x27;s what it cost us, and taught us.">
+<meta property="og:url" content="https://indieformer.com/notes/78-we-cancelled-a-funded-kickstarter/">
+<meta property="og:image" content="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/8d3d68f4-3fc1-4b43-bf1b-520ee16da494/publog0626-kickstarter_learnings_Thumbnail.png?t=1780896591">
+<meta property="article:published_time" content="2026-06-09">
+<meta property="article:section" content="publog">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="#78 | We Cancelled a Funded Kickstarter">
+<meta name="twitter:description" content="Here&#x27;s what it cost us, and taught us.">
+<meta name="twitter:image" content="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/8d3d68f4-3fc1-4b43-bf1b-520ee16da494/publog0626-kickstarter_learnings_Thumbnail.png?t=1780896591">
+
+<style>
+  :root {
+    --emerald: #28E291; --coral: #F78154; --periwinkle: #9381FF;
+    --shadow: #262730; --shadow-mid: #2F3040;
+    --text-primary: #F0EEE8; --text-secondary: #C9C7B8; --text-tertiary: #8B8970;
+    --border: rgba(255, 255, 255, 0.08); --border-mid: rgba(255, 255, 255, 0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    position: relative;
+    background: var(--shadow);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
+    background-size: 26px 26px;
+    font-family: 'Sora', Arial, sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 20px;
+    overflow-x: hidden;
+  }
+
+  .crop { position: absolute; width: 18px; height: 18px; opacity: 0; animation: fade 0.6s ease 0.2s forwards; z-index: 5; pointer-events: none; }
+  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
+  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+  .crop.bl { bottom: 20px; left: 20px; }
+  .crop.br { bottom: 20px; right: 20px; }
+
+  .site-nav { display: flex; align-items: center; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 14px 56px; position: relative; z-index: 4; }
+  a.brand { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s ease; }
+  a.brand img { display: block; height: 40px; width: 40px; }
+  a.brand:hover { opacity: 0.82; }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a { font-family: 'Sora'; font-size: 15px; font-weight: 500; color: var(--text-secondary); text-decoration: none; position: relative; transition: color 0.2s; }
+  .primary-nav a:hover { color: var(--text-primary); }
+  .primary-nav a.current { color: var(--text-primary); font-weight: 600; }
+  .primary-nav a.current::after { content: ''; position: absolute; left: 0; right: 0; bottom: -7px; height: 2px; background: var(--emerald); border-radius: 2px; }
+
+  /* ── Post header ───────────────────────────────────────── */
+  .post-header { max-width: 720px; margin: 0 auto; padding: 32px 56px 18px; position: relative; z-index: 2; }
+  .back-link { display: inline-block; margin-bottom: 22px; font-size: 14px; color: var(--text-tertiary); text-decoration: none; transition: color 0.2s; }
+  .back-link:hover { color: var(--text-primary); }
+  .post-meta {
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+    font-size: 13px; color: var(--text-tertiary);
+    border-top: 1px solid var(--border); padding-top: 14px; margin-top: 20px;
+  }
+  .post-tag { font-family: 'Caveat', cursive; font-size: 20px; color: var(--coral); transform: rotate(-1deg); display: inline-block; line-height: 1; }
+  .post-tag .dot { color: var(--text-tertiary); margin: 0 8px; font-family: 'Sora', sans-serif; font-size: 13px; vertical-align: 2px; }
+  .post-tag .num { color: var(--text-tertiary); font-family: 'Sora', sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .post-title { font-size: clamp(34px, 5vw, 50px); font-weight: 800; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 14px; }
+  .post-subtitle { font-size: 18px; line-height: 1.55; color: var(--text-secondary); margin-bottom: 18px; }
+  .post-hero {
+    margin: 22px 0 6px;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--shadow-mid);
+  }
+  .post-hero img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; }
+
+  /* ── Post body — scopes Beehiiv content to fit our design ── */
+  .post-content {
+    max-width: 720px; margin: 0 auto; padding: 24px 56px 8px;
+    font-family: 'Sora', Arial, sans-serif; color: var(--text-primary);
+    line-height: 1.7; font-size: 17px; position: relative; z-index: 2;
+  }
+  /* Beehiiv hardcodes 'DM Sans' as inline style on every paragraph & list
+     item, which beats our class-level rule. Force Sora with !important
+     across the elements Beehiiv touches. Embed-card text inherits Sora
+     from the card's own inline style so we don't need to touch .custom_html. */
+  .post-content .paragraph, .post-content p,
+  .post-content li, .post-content ul, .post-content ol,
+  .post-content figcaption, .post-content td, .post-content th {
+    font-family: 'Sora', Arial, sans-serif !important;
+  }
+  .post-content .paragraph, .post-content p {
+    margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7;
+  }
+  .post-content .heading, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+    font-family: 'Sora' !important; color: var(--text-primary); line-height: 1.25; letter-spacing: -0.01em; margin: 2em 0 0.6em;
+  }
+  .post-content h2, .post-content h2.heading { font-size: 28px; font-weight: 700; }
+  .post-content h3, .post-content h3.heading { font-size: 22px; font-weight: 700; }
+  .post-content h4, .post-content h4.heading { font-size: 18px; font-weight: 600; color: var(--periwinkle); text-transform: uppercase; letter-spacing: 0.06em; }
+  .post-content h6, .post-content h6.heading { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* Only restyle Beehiiv's inline-text links — embed cards keep their own styles */
+  .post-content .link { color: var(--coral) !important; text-decoration: none; border-bottom: 1px solid rgba(247, 129, 84, 0.35); transition: color 0.2s, border-color 0.2s; }
+  .post-content .link:hover { color: var(--text-primary) !important; border-bottom-color: var(--text-primary); }
+  .post-content em, .post-content i { color: var(--text-secondary); }
+
+  /* Images */
+  .post-content .image { margin: 28px 0; }
+  .post-content .image__image, .post-content img { max-width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--border); }
+  .post-content .image__source { display: block; margin-top: 8px; font-size: 13px; color: var(--text-tertiary); font-style: italic; }
+  .post-content .image__source_text p { margin: 0; color: var(--text-tertiary); font-style: italic; }
+
+  /* Blockquote — only style inner element so nested wrappers don't double up */
+  .post-content .blockquote { margin: 28px 0; padding: 0; border: none; background: none; }
+  .post-content blockquote, .post-content .blockquote__quote {
+    display: block; margin: 0; padding: 6px 0 6px 22px;
+    border-left: 3px solid var(--periwinkle);
+    color: var(--text-primary); font-family: 'Caveat', cursive;
+    font-size: 24px; line-height: 1.4; font-style: normal;
+  }
+
+  /* Dividers — handle both <hr class="content_break"> and <div class="content_break"> */
+  .post-content hr.content_break { border: none; border-top: 1px solid var(--border); height: 0; margin: 36px 0; }
+  .post-content div.content_break { height: 1px; background: var(--border); margin: 36px 0; }
+
+  /* Embed cards (link previews) */
+  .post-content .embed { display: block; border: 1px solid var(--border-mid); border-radius: 10px; overflow: hidden; margin: 28px 0; background: var(--shadow-mid); transition: border-color 0.2s; }
+  .post-content .embed:hover { border-color: var(--emerald); }
+  .post-content .embed__image { display: block; }
+  .post-content .embed__image img { border-radius: 0; border: none; }
+  .post-content .embed__content { padding: 14px 18px; }
+  .post-content .embed__title { font-weight: 700; margin-bottom: 4px; color: var(--text-primary); }
+  .post-content .embed__description { font-size: 14px; color: var(--text-secondary); margin-bottom: 6px; line-height: 1.5; }
+  .post-content .embed__url { font-size: 12px; color: var(--text-tertiary); }
+  .post-content .embed__link { display: block; color: inherit !important; border: none; text-decoration: none; }
+
+  /* Hide any Beehiiv footer leakage */
+  .post-content .beehiiv__footer { display: none !important; }
+
+  /* ── Footer ──────────────────────────────────────────────── */
+  .site-footer {
+    max-width: 1000px; margin: 60px auto 0; padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px;
+    font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+    position: relative; z-index: 2;
+  }
+  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
+  .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
+  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 22px; padding-top: 18px; font-size: 13px; color: var(--text-tertiary); }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 820px) {
+    body { padding: 20px 14px; }
+    .post-header, .post-content { padding-left: 24px; padding-right: 24px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
+    .post-content { font-size: 16px; }
+  }
+
+</style>
+</head>
+<body>
+
+<span class="crop bl"></span><span class="crop br"></span>
+
+<header class="site-nav">
+  <a class="brand" href="/" aria-label="Indieformer home">
+    <img src="/logo.png" alt="Indieformer" width="40" height="40">
+  </a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular/">The Approach</a>
+    <a href="/notes/" class="current">Notes</a>
+    <a href="/scorchpot/">Scorchpot</a>
+  </nav>
+</header>
+
+<section class="post-header">
+  <a href="/notes/" class="back-link">← All notes</a>
+  <h1 class="post-title">We Cancelled a Funded Kickstarter</h1>
+  <p class="post-subtitle">Here&#x27;s what it cost us, and taught us.</p>
+  <figure class="post-hero">
+    <img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/8d3d68f4-3fc1-4b43-bf1b-520ee16da494/publog0626-kickstarter_learnings_Thumbnail.png?t=1780896591" alt="We Cancelled a Funded Kickstarter" loading="eager" width="1200" height="630">
+  </figure>
+  <div class="post-meta">
+    <span class="post-tag">publog<span class="dot">·</span><span class="num">Issue #78</span></span>
+    <time datetime="2026-06-09">9 Jun 2026</time>
+  </div>
+</section>
+
+<article class="post-content">
+<style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We cancelled a Kickstarter campaign that had <i>already</i> hit its goal. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Blasphemy, I know. Stick with me. </p></div><div id="publog" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h6 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:14px;font-weight:Bold;line-height:0.875;margin:0;text-align:left;"><span style="color:rgb(147, 129, 255);"><b>PUBLOG</b></span></h6></div><div id="the-thing-nobody-tells-you-about" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;"><span style="color:#28E291;">The thing nobody tells you about</span></h2></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> What a world we live in, huh? Where running a Kickstarter — something <i>designed</i> to fund your project — can end up costing you more than it gives back. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Crazy. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> It&#39;s not always like this. But attention is <i>brutal</i> right now. Most of the time you either grind on content and social to drag an audience around with you, or you pay to put an audience in front of the campaign. We did the second one. We ran two successful campaigns for <a class="link" href="https://store.steampowered.com/app/4338170/Feed_the_Scorchpot_Demo/" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><i>Feed the Scorchpot</i></a> with no social following to lean on — just a strong Discord community (strong, as in, they’re awesome supporters — not a huge server). So we knew, going in, we&#39;d have to <i>buy</i> the awareness before launch. </p></div><div id="talk-is-cheap" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;"><span style="color:#28E291;">Talk is cheap</span></h2></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> I couldn&#39;t count how many people told us &quot;this looks like it&#39;ll do really well!&quot; or &quot;you&#39;ll smash your goal, no problem.&quot; </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Heed my warning: <b>ignore these comments.</b></p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Talk is cheap. &quot;Looks like it should do well&quot; means nothing for the preparation it really takes. Hours on custom art for the pages. More hours deciding rewards. More hours chasing suppliers for quotes. More hours building ad campaigns across networks. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> It&#39;s a lot. And doing all of it doesn&#39;t mean you&#39;ll &quot;smash it.&quot; We&#39;ve backed over 125 Kickstarter projects — every one of which we thought deserved to be funded. Some didn&#39;t. We are one of the lucky few who get to say <i>successfully funded.</i></p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> But not without costs. </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/c1b0b8e3-1f6e-4a9c-ac19-255ab4e05920/image.png?t=1780895759"/ loading="lazy" decoding="async"><div style="margin:0 auto 0 auto;padding:4px 0px 4px 0px;text-align:center;width:100%;"><small style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:12px;font-style:italic;text-decoration-color:#ffffff;text-decoration:none;"><p>Our Meta costs over the ad period</p></small></div></div></div><div id="the-real-number-a-1172122" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;"><span style="color:#28E291;">The real number: A$11,721.22</span></h2></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> The obvious cost is time — tweaking this, chasing that, fielding everyone&#39;s &quot; Kickstarter hacks.&quot; The less obvious one is cash. We spent <b>A$11,721.22</b> on marketing the first campaign. To the cent: </p></div><div style="padding-bottom:12px;padding-left:37px;padding-right:27px;padding-top:12px;"><ul style="color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:24px;list-style-type:disc;margin:0px 0px 0px 25px;padding:0;"><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"><b>A$5,600</b> — Ad management (we hired someone to run ads for two months; there&#39;s only so much capacity we have) </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"><b>A$4,397.44</b> — Meta Ads </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"><b>A$1,723.78</b> — Reddit Ads, creator video + fee for sourcing physical fulfilment </p></li></ul></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> That A$11,721 was the price of building an <i>audience</i> from zero (almost, shoutout to the Discord fam). </p></div><div id="where-it-went-wrong" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;"><span style="color:#28E291;">Where it went wrong</span></h2></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We treated the first Kickstarter as a &quot;marketing beat&quot;. A moment to make noise, as much as a way to fund things along the way. We did that on purpose: we had to know we could still make the game if the campaign <i>failed</i>, so we refused to make it our make-or-break. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> If we did it again: <b>scrap that thinking entirely</b>. There is too much work, time and money poured into a campaign for it to be a &quot;beat.&quot; Treat a campaign <b>LIKE A CAMPAIGN.</b></p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> The other mistake was momentum. 30 days is a <i>long</i> time to campaign, and every single day is an opportunity — we didn&#39;t seize most of them. Despite that, with a A$10,000 goal we were sitting at A$17,500 by around day 20. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"><a class="link" href="https://www.kickstarter.com/projects/indieformer/feed-the-scorchpot-videogame" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Success!</a></p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Not quite. </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><a href="https://www.kickstarter.com/projects/indieformer/feed-the-scorchpot-videogame" rel="nofollow noopener noreferrer" style="text-decoration: none;" target="_blank"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/08b2d07f-d9bd-4e26-bdf8-0eda69238879/image.png?t=1780895507"/ loading="lazy" decoding="async"></a></div></div><div id="why-we-canceled-a-funded-campaign" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;"><span style="color:#28E291;">Why we canceled a funded campaign</span></h2></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We&#39;d cleared the goal by a healthy margin. But there was an oversight… a big one. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We had physical reward tiers. And listening to enough people say &quot;you&#39;ll smash it&quot; had us believing we&#39;d pull enough backers to cover our manufacturing minimums. We weren&#39;t even close. Our minimum was 100 pieces (not a lot) and we were struggling to get past 50 backers for those tiers. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> If we&#39;d closed the campaign out, real money would&#39;ve gone toward inventory no-one ordered. Stock we&#39;d have to store and figure out what to do with. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> So we did the only responsible thing we could think of. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We cancelled a funded campaign. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We&#39;d rather kill a &quot;success&quot; than get in over our heads on a logistical nightmare of dead stock and global shipping. (For the record: cancel a Kickstarter and nobody gets charged — backers keep their money, we keep our sanity.) </p></div><div id="round-two-same-campaign-a-0-spent" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;"><span style="color:#28E291;">Round two: same campaign, A$0 spent</span></h2></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We paused for a week. Then Kickstarter reached out directly — they&#39;d seen what happened, and encouraged us to go again while it was all still fresh. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> So we tied the laces back up. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We relaunched a <a class="link" href="https://www.kickstarter.com/projects/indieformer/feed-the-scorchpot-a-digital-tabletop-roguelike" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">near-identical campaign</a> — but we stripped the physical rewards, made it fully digital, tightened the offering, and lowered the goal to A$5,000 (because <i>this</i> time we did the calculations). We reached just shy of <b>A$8,000 in 8 days.</b></p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We spent <b>A$0</b> marketing it. Not really by choice, but because we’d spent everything we had on the first one. So we just ran it again, told everyone what had happened and why we were back, and hope we’d done enough to get people coming back. </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><a href="https://www.kickstarter.com/projects/indieformer/feed-the-scorchpot-a-digital-tabletop-roguelike" rel="nofollow noopener noreferrer" style="text-decoration: none;" target="_blank"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/66a7608c-df2d-4916-b4dc-e97da63bb4b5/image.png?t=1780895462"/ loading="lazy" decoding="async"></a></div></div><div id="what-wed-tell-you-to-do" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;"><span style="color:#28E291;">What we&#39;d tell you to do</span></h2></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> A little wild from start to finish, but we got there. The takeaways that were worth the price: </p></div><div style="padding-bottom:12px;padding-left:37px;padding-right:27px;padding-top:12px;"><ul style="color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:24px;list-style-type:disc;margin:0px 0px 0px 25px;padding:0;"><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"><b>Test multiple ad creatives.</b> Find what performs well before you throw money at it. </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"><b>Reddit was great for wishlists. Meta was great for Kickstarter follows.</b> Pick the platform for the job you need done. </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"><b>Don&#39;t set an arbitrary launch date.</b> This is the big one. Gather your followers <i>first</i>, then launch. </p></li><li style="margin:10px 0px 0px 0px;"><p style="text-align:left;"><b>Know your conversion math before you pick a day.</b> Roughly 8–12% of your followers will convert. Work out how many followers you need to clear your <i>lowest</i> tier at that rate — and wait until you have them. </p></li></ul></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/7ff5ddff-6a6f-4194-af1b-b29e491d08a6/image.png?t=1780895232"/ loading="lazy" decoding="async"><div style="margin:0 auto 0 auto;padding:4px 0px 4px 0px;text-align:center;width:100%;"><small style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:12px;font-style:italic;text-decoration-color:#ffffff;text-decoration:none;"><p>Stats from campaign #1</p></small></div></div></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/b2aaef0a-a22a-4861-8406-2b6b5ec62cff/image.png?t=1780895273"/ loading="lazy" decoding="async"><div style="margin:0 auto 0 auto;padding:4px 0px 4px 0px;text-align:center;width:100%;"><small style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:12px;font-style:italic;text-decoration-color:#ffffff;text-decoration:none;"><p>Stats from campaign #2</p></small></div></div></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> You get one shot at launching a campaign. We were successful, and we <i>still</i> could&#39;ve done it better. Excellent learnings for next time. </p></div><div id="come-ask-us-anything" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;"><span style="color:#28E291;">Come ask us anything</span></h2></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> If you want advice, we&#39;re always up for a chat. Join the <a class="link" href="https://discord.gg/rztz9s2wb3" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Indieformer Discord</a> and ask away — no paywalls or doors to get through to our experience. </p></div><style>
+  p span[style*="font-size"] { line-height: 1.6; }
+</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Josh & Clem </p></div>
+</article>
+
+<footer class="site-footer">
+  <div class="footer-col brand-col">
+    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <li><a href="https://indieformer.com/essay/">How to Really Make a Game</a></li>
+      <li><a href="https://indieformer.beehiiv.com/press-kit-guide">Press Kit Guide</a></li>
+      <li><a href="https://indieformer.beehiiv.com/steam-marketing-guide">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+      <li><a href="/notes/">Notes</a></li>
+      <li><a href="/notes/archive/">Curator archive</a></li>
+    </ul>
+  </div>
+  <p class="footer-meta">© 2026 Indieformer. · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
+</footer>
+
+</body>
+</html>
