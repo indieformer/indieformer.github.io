@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 458.9 494.81">
-  <defs>
-    <style>
-      .cls-1 {
+<svg data-name="Layer 2" viewBox="0 0 459 495" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1 {
         fill: #f78154;
       }
 
@@ -12,22 +9,4 @@
 
       .cls-3 {
         fill: #9381ff;
-      }
-    </style>
-  </defs>
-  <g id="Waypoint_Logo" data-name="Waypoint Logo">
-    <g>
-      <polygon class="cls-1" points="294.16 107.62 162.85 114.89 234.93 222.18 294.16 107.62"/>
-      <polygon class="cls-2" points="240.25 239.57 233.91 493.62 362.96 296.6 240.25 239.57"/>
-      <polygon class="cls-3" points="376.6 288.26 458.9 272.45 406.58 143.81 376.6 288.26"/>
-      <polygon class="cls-3" points="223.98 494.81 230.34 239.37 94.23 295.56 223.98 494.81"/>
-      <polygon class="cls-1" points="51.1 143.91 0 270.01 80.45 286.86 51.1 143.91"/>
-      <polygon class="cls-1" points="210.14 11.76 71.19 118.84 150.88 105.89 210.14 11.76"/>
-      <polygon class="cls-2" points="293.67 97.73 229.26 0 163.18 104.95 293.67 97.73"/>
-      <polygon class="cls-2" points="228 229.62 155.18 121.25 95.35 284.38 228 229.62"/>
-      <polygon class="cls-1" points="258.32 474.45 450.7 284.11 373.23 298.99 258.32 474.45"/>
-      <polygon class="cls-3" points="146.31 116.67 58.55 130.93 88.17 275.2 146.31 116.67"/>
-      <polygon class="cls-2" points="399.21 130.57 310.24 109.15 369.01 276.09 399.21 130.57"/>
-    </g>
-  </g>
-</svg>
+      }</style></defs><g data-name="Waypoint Logo"><polygon class="cls-1" points="294 108 163 115 235 222"/><polygon class="cls-2" points="240 240 234 494 363 297"/><polygon class="cls-3" points="377 288 459 272 407 144"/><polygon class="cls-3" points="224 495 230 239 94.2 296"/><polygon class="cls-1" points="51.1 144 0 270 80.4 287"/><polygon class="cls-1" points="210 11.8 71.2 119 151 106"/><polygon class="cls-2" points="294 97.7 229 0 163 105"/><polygon class="cls-2" points="228 230 155 121 95.4 284"/><polygon class="cls-1" points="258 474 451 284 373 299"/><polygon class="cls-3" points="146 117 58.6 131 88.2 275"/><polygon class="cls-2" points="399 131 310 109 369 276"/></g></svg>
