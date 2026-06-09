@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Press Kit Guide for Indie Games | Indieformer</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta name="description" content="Make your game press-ready. A clean, complete press kit that makes it easy for creators, media, and platforms to share your game.">
+<link rel="canonical" href="https://indieformer.com/press-kit-guide/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="Press Kit Guide for Indie Games | Indieformer">
+<meta property="og:description" content="Make your game press-ready. Six core sections, five real-world references, written by indie devs for indie devs.">
+<meta property="og:url" content="https://indieformer.com/press-kit-guide/">
+<meta property="og:image" content="https://indieformer.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+  :root {
+    --emerald: #28E291; --coral: #F78154; --periwinkle: #9381FF;
+    --shadow: #262730; --shadow-mid: #2F3040; --shadow-deep: #1E1C28;
+    --text-primary: #F0EEE8; --text-secondary: #A8A6B8; --text-tertiary: #6B6980;
+    --border: rgba(255, 255, 255, 0.08); --border-mid: rgba(255, 255, 255, 0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; overscroll-behavior-y: none; }
+  body {
+    position: relative;
+    background: var(--shadow);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
+    background-size: 26px 26px;
+    font-family: 'Sora', Arial, sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 20px;
+    overflow-x: hidden;
+  }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+  /* registration marks (bottom-only, matching site) */
+  .crop {
+    position: absolute; width: 18px; height: 18px;
+    opacity: 0; animation: fade 0.6s ease 0.2s forwards;
+    z-index: 5; pointer-events: none;
+  }
+  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
+  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+  .crop.bl { bottom: 20px; left: 20px; }
+  .crop.br { bottom: 20px; right: 20px; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  /* nav */
+  .site-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1000px; margin: 0 auto; padding: 14px 56px;
+    position: relative; z-index: 4;
+  }
+  a.brand { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s ease; }
+  a.brand img { display: block; height: 40px; width: 40px; }
+  a.brand:hover { opacity: 0.82; }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a {
+    font-family: 'Sora'; font-size: 15px; font-weight: 500;
+    color: var(--text-secondary); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .primary-nav a:hover { color: var(--text-primary); }
+
+  /* hero */
+  .section {
+    position: relative;
+    width: 100%; max-width: 1000px; margin: 0 auto;
+    padding: 40px 56px 16px;
+    z-index: 1;
+  }
+  .col { max-width: 720px; position: relative; z-index: 2; }
+  .eyebrow {
+    font-family: 'Caveat', cursive; font-size: 22px; color: var(--coral);
+    transform: rotate(-1deg); display: inline-block; margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(38px, 6vw, 56px);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.025em;
+    margin-bottom: 18px;
+  }
+  h1 .em { color: var(--emerald); }
+  .page-intro { color: var(--text-secondary); line-height: 1.7; font-size: 17px; margin-bottom: 16px; max-width: 640px; }
+  .page-intro strong { color: var(--text-primary); font-weight: 600; }
+  .page-intro a { color: var(--emerald); border-bottom: 1px solid rgba(40, 226, 145, 0.42); text-decoration: none; }
+  .page-intro a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  /* fact strip — sits below the intro, runs full content width */
+  .facts {
+    max-width: 1000px; margin: 28px auto 0;
+    padding: 0 56px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+    position: relative; z-index: 2;
+  }
+  .fact {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .fact-k {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--text-tertiary); margin-bottom: 6px; display: block;
+  }
+  .fact-v { font-size: 14px; font-weight: 600; color: var(--text-primary); display: block; }
+  .fact-v a { color: var(--emerald); text-decoration: none; }
+  .fact-v a:hover { color: var(--text-primary); }
+
+  /* numbered sections */
+  .body {
+    max-width: 1000px; margin: 0 auto;
+    padding: 36px 56px 8px;
+    position: relative; z-index: 2;
+  }
+  .pk {
+    margin-top: 44px;
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+  }
+  .pk:first-of-type { border-top: none; padding-top: 0; margin-top: 14px; }
+  .pk-head {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 22px;
+  }
+  .pk-num {
+    flex: 0 0 auto;
+    width: 34px; height: 34px;
+    background: var(--emerald); color: var(--shadow);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 15px;
+  }
+  .pk-title { font-size: 22px; font-weight: 700; line-height: 1.2; color: var(--text-primary); }
+  .pk-sub {
+    margin-left: auto;
+    font-family: 'Caveat', cursive; font-size: 19px;
+    color: var(--text-tertiary);
+    transform: rotate(-0.5deg);
+  }
+
+  .pk-cols {
+    display: grid; grid-template-columns: 1fr 260px; gap: 32px;
+    align-items: start;
+  }
+  .pk-only { display: block; }
+
+  /* include list */
+  .label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-tertiary); margin-bottom: 12px; display: block;
+  }
+  .inc-list { list-style: none; padding: 0; }
+  .inc-list li {
+    color: var(--text-secondary);
+    line-height: 1.55; font-size: 15px;
+    padding: 6px 0 6px 22px; position: relative;
+  }
+  .inc-list li::before {
+    content: '✦'; position: absolute; left: 0; top: 9px;
+    color: var(--emerald); font-size: 11px;
+  }
+  .inc-list li strong { color: var(--text-primary); font-weight: 600; }
+  .exp-note {
+    margin-top: 16px;
+    font-family: 'Caveat', cursive; font-size: 20px;
+    color: var(--text-primary);
+    border-left: 3px solid var(--emerald);
+    padding: 4px 0 4px 14px;
+    line-height: 1.4;
+  }
+
+  /* folder block — mono code-style aside */
+  .folder {
+    background: var(--shadow-deep);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .folder-line {
+    font-family: 'Courier New', monospace; font-size: 12.5px;
+    color: var(--emerald); line-height: 1.85; display: block;
+  }
+  .folder-line.sub { padding-left: 18px; color: var(--periwinkle); }
+
+  /* reference cards (section 7) */
+  .refs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .ref {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    display: block;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .ref:hover { border-color: rgba(40, 226, 145, 0.42); transform: translateY(-2px); }
+  .ref-plat {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-tertiary); margin-bottom: 6px; display: block;
+  }
+  .ref-name { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; display: block; }
+  .ref-desc { font-size: 13px; color: var(--text-tertiary); line-height: 1.55; display: block; margin-bottom: 12px; }
+  .ref-arrow { font-size: 13px; color: var(--emerald); font-weight: 600; }
+
+  /* closing card */
+  .closing {
+    margin: 44px auto 0;
+    max-width: 1000px; padding: 0 56px;
+    position: relative; z-index: 2;
+  }
+  .closing-card {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--emerald);
+    border-radius: 12px;
+    padding: 26px 30px;
+  }
+  .closing-card p { color: var(--text-secondary); font-size: 16px; line-height: 1.65; }
+  .closing-card strong { color: var(--text-primary); font-weight: 700; }
+
+  /* help: people to talk to */
+  .help {
+    max-width: 1000px; margin: 60px auto 0;
+    padding: 36px 56px 12px;
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 2;
+  }
+  .help-head { margin-bottom: 22px; }
+  .help-eyebrow {
+    font-family: 'Caveat', cursive; font-size: 22px; color: var(--coral);
+    transform: rotate(-1deg); display: inline-block; margin-bottom: 4px;
+  }
+  .help-h2 {
+    font-size: 26px; font-weight: 700; line-height: 1.2;
+    color: var(--text-primary); margin-bottom: 6px;
+  }
+  .help-sub { color: var(--text-tertiary); font-size: 14px; line-height: 1.55; }
+  .help-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .help-card {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .help-card.us { border-color: rgba(40, 226, 145, 0.3); }
+  .help-cat {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-tertiary); margin-bottom: 12px; display: block;
+  }
+  .help-person { margin-bottom: 12px; }
+  .help-name { display: block; font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .help-role { display: block; font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+  .help-body { color: var(--text-secondary); font-size: 14px; line-height: 1.65; margin-bottom: 14px; }
+  .help-body strong { color: var(--text-primary); font-weight: 600; }
+  .help-links { display: flex; flex-direction: column; gap: 5px; }
+  .help-link {
+    font-size: 13px; font-weight: 600; color: var(--emerald);
+    text-decoration: none;
+  }
+  .help-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .help-pricing {
+    margin-top: 10px;
+    font-family: 'Caveat', cursive; font-size: 17px;
+    color: var(--text-tertiary);
+    display: inline-block;
+  }
+
+  /* footer */
+  .site-footer {
+    max-width: 1000px; margin: 60px auto 0;
+    padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px;
+    font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+    position: relative; z-index: 2;
+  }
+  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 92px; margin-top: -18px; width: auto; display: block; }
+  .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
+  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta {
+    grid-column: 1 / -1; border-top: 1px solid var(--border);
+    margin-top: 22px; padding-top: 18px;
+    font-size: 13px; color: var(--text-tertiary);
+    display: flex; flex-wrap: wrap; gap: 14px;
+  }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta .sep { color: var(--text-tertiary); opacity: 0.5; }
+
+  @media (max-width: 820px) {
+    body { padding: 20px 14px; }
+    .section, .body, .facts, .closing, .help { padding-left: 24px; padding-right: 24px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pk-cols { grid-template-columns: 1fr; gap: 18px; }
+    .pk-sub { display: none; }
+    .refs { grid-template-columns: 1fr; }
+    .help-grid { grid-template-columns: 1fr; }
+    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
+  }
+
+  /* ── background line — meanders down the left, scrubbed by scroll ── */
+  .bg-line {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .bg-line path {
+    fill: none;
+    stroke: var(--periwinkle);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.28;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bg-line path { stroke-dashoffset: 0; }
+  }
+
+  /* ── loading overlay (Lottie gem) ─────────────────────────── */
+  #loader-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #262730;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.45s ease;
+  }
+  #loader-overlay.gone { opacity: 0; pointer-events: none; }
+  #loader-gem { width: 140px; height: 140px; }
+  @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
+
+  .social-icons { display: flex; gap: 12px; align-items: center; margin-top: 2px; }
+  .social-icons a {
+    color: var(--text-tertiary) !important;
+    border: none !important;
+    border-bottom: none !important;
+    text-decoration: none !important;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .social-icons a:hover { color: var(--text-primary) !important; transform: translateY(-2px); }
+  .social-icons svg { display: block; }
+</style>
+</head>
+<body>
+
+<div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+  (function () {
+    var o = document.getElementById('loader-overlay');
+    if (!o) return;
+    var anim;
+    try {
+      if (typeof lottie !== 'undefined') {
+        anim = lottie.loadAnimation({
+          container: document.getElementById('loader-gem'),
+          renderer: 'svg', loop: true, autoplay: true,
+          path: '/loading-gem.json'
+        });
+      }
+    } catch (e) {}
+    var shown = Date.now();
+    function hide() {
+      if (o.classList.contains('gone')) return;
+      o.classList.add('gone');
+      setTimeout(function () {
+        try { if (anim) anim.destroy(); } catch (e) {}
+        if (o.parentNode) o.parentNode.removeChild(o);
+      }, 500);
+    }
+    function maybeHide() { setTimeout(hide, Math.max(0, 400 - (Date.now() - shown))); }
+    if (document.readyState === 'complete') maybeHide();
+    else window.addEventListener('load', maybeHide);
+    setTimeout(hide, 4000);
+  })();
+</script>
+
+<svg class="bg-line" aria-hidden="true" preserveAspectRatio="none">
+  <path id="bgPath" pathLength="1"></path>
+</svg>
+
+<span class="crop bl"></span><span class="crop br"></span>
+
+<header class="site-nav">
+  <a class="brand" href="/" aria-label="Indieformer home"><img src="/logo.png" alt="Indieformer" width="40" height="40"></a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular/">The Approach</a>
+    <a href="/notes/">Notes</a>
+    <a href="/scorchpot/">Scorchpot</a>
+  </nav>
+</header>
+
+<section class="section">
+  <div class="col">
+    <span class="eyebrow">the kind we wish we had.</span>
+    <h1>Press Kit Guide<br>for <span class="em">Indie Games.</span></h1>
+    <p class="page-intro">
+      Your press kit isn't for your players. It's for the people who decide whether to <strong>share</strong> your game — reviewers, YouTubers, curators, festival organisers, platform reps. They've got 60 seconds and 50 other emails. The kit is what makes those 60 seconds easy.
+    </p>
+    <p class="page-intro">
+      We're putting this together because the indie devs we love working with often don't have one ready when we ask. If your game has been out for two years and you still don't have a press kit, you're not behind. You're <em>normal</em>. Just start.
+    </p>
+    <p class="page-intro">
+      Pair this with the <a href="/steam-marketing-guide/">Steam Marketing Guide</a> for the storefront side.
+    </p>
+  </div>
+</section>
+
+<div class="facts" aria-label="Guide quick facts">
+  <div class="fact"><span class="fact-k">For</span><span class="fact-v">Indie developers</span></div>
+  <div class="fact"><span class="fact-k">Sections</span><span class="fact-v">6 core areas</span></div>
+  <div class="fact"><span class="fact-k">Examples</span><span class="fact-v">5 real press kits</span></div>
+  <div class="fact"><span class="fact-k">Also see</span><span class="fact-v"><a href="/steam-marketing-guide/">Steam Guide →</a></span></div>
+  <div class="fact"><span class="fact-k">By</span><span class="fact-v">Indieformer</span></div>
+</div>
+
+<main class="body">
+
+  <!-- 1 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">1</div>
+      <span class="pk-title">Factsheet / Overview</span>
+      <span class="pk-sub">the foundation</span>
+    </div>
+    <div class="pk-cols">
+      <div>
+        <span class="label">Include</span>
+        <ul class="inc-list">
+          <li>Game Art (portrait / landscape)</li>
+          <li>About the Game (short + long)</li>
+          <li>Key Features (2–4 bullets)</li>
+          <li>Developer Name + Studio (if any)</li>
+          <li>Publisher (if applicable)</li>
+          <li>Genre &amp; Steam Tags</li>
+          <li>Platforms (confirmed &amp; planned)</li>
+          <li>Price (USD + major currencies)</li>
+          <li>Release Date or Estimate</li>
+          <li>Website + Socials</li>
+          <li>Press Contact Email</li>
+        </ul>
+        <p class="exp-note">→ Export as PDF + .TXT and make downloadable.</p>
+      </div>
+      <aside class="folder" aria-label="Suggested folder structure">
+        <span class="label">Folder</span>
+        <span class="folder-line">/presskit/</span>
+        <span class="folder-line sub">factsheet.pdf</span>
+        <span class="folder-line sub">factsheet.txt</span>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">2</div>
+      <span class="pk-title">Videos &amp; Clips</span>
+      <span class="pk-sub">let others show your game</span>
+    </div>
+    <div class="pk-cols">
+      <div>
+        <span class="label">Include</span>
+        <ul class="inc-list">
+          <li>Trailers (.MP4, 1080p)</li>
+          <li>Short clips for social media (under 30s)</li>
+          <li>GIFs showing key gameplay or features</li>
+          <li><strong>Optional:</strong> Raw gameplay footage (clean UI)</li>
+        </ul>
+      </div>
+      <aside class="folder">
+        <span class="label">Folder</span>
+        <span class="folder-line">/presskit/video/</span>
+        <span class="folder-line sub">trailer/</span>
+        <span class="folder-line sub">gifs/</span>
+        <span class="folder-line sub">broll/</span>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">3</div>
+      <span class="pk-title">Screenshots &amp; Imagery</span>
+      <span class="pk-sub">high-res, ready to grab</span>
+    </div>
+    <div class="pk-cols">
+      <div>
+        <span class="label">Include</span>
+        <ul class="inc-list">
+          <li>6–10 screenshots (1920×1080+)</li>
+          <li>A mix of gameplay, combat, UI, and story</li>
+          <li>A few UI-free shots for flexibility</li>
+          <li>Concept art, character sheets, enemies</li>
+          <li><strong>Optional:</strong> Developer photos (great for press)</li>
+        </ul>
+      </div>
+      <aside class="folder">
+        <span class="label">Folder</span>
+        <span class="folder-line">/presskit/images/</span>
+        <span class="folder-line sub">screenshots/</span>
+        <span class="folder-line sub">concept/</span>
+        <span class="folder-line sub">characters/</span>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">4</div>
+      <span class="pk-title">Logos, Branding &amp; Graphic Assets</span>
+      <span class="pk-sub">flexible + share-ready</span>
+    </div>
+    <div class="pk-cols">
+      <div>
+        <span class="label">Include</span>
+        <ul class="inc-list">
+          <li>Logo (full colour + mono, PNG/SVG)</li>
+          <li>Fonts (TTF or license links)</li>
+          <li>Steam capsules, banners, thumbnails</li>
+          <li>Key Art</li>
+          <li>Icons (e.g. square formats)</li>
+          <li><strong>Heavily recommended:</strong> Working files (.AI, .PSD, or .SVG)</li>
+        </ul>
+      </div>
+      <aside class="folder">
+        <span class="label">Folder</span>
+        <span class="folder-line">/presskit/branding/</span>
+        <span class="folder-line sub">logos/</span>
+        <span class="folder-line sub">keyart/</span>
+        <span class="folder-line sub">fonts/</span>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">5</div>
+      <span class="pk-title">Press Releases</span>
+      <span class="pk-sub">past announcements + milestones</span>
+    </div>
+    <div class="pk-cols">
+      <div>
+        <span class="label">Include</span>
+        <ul class="inc-list">
+          <li>All press releases in PDF or TXT</li>
+          <li>Group by year or milestone</li>
+          <li>Link any media coverage if relevant</li>
+        </ul>
+      </div>
+      <aside class="folder">
+        <span class="label">Folder</span>
+        <span class="folder-line">/presskit/</span>
+        <span class="folder-line sub">pressreleases/</span>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">6</div>
+      <span class="pk-title">Download Packs</span>
+      <span class="pk-sub">for the lazy reviewer (us)</span>
+    </div>
+    <div class="pk-cols">
+      <div>
+        <span class="label">Include</span>
+        <ul class="inc-list">
+          <li>All assets zipped by type</li>
+          <li>A "complete press kit" zip</li>
+          <li><strong>Optional:</strong> Separate packs for creators, press, publishers</li>
+        </ul>
+      </div>
+      <aside class="folder">
+        <span class="label">Folder</span>
+        <span class="folder-line">/presskit/downloads/</span>
+        <span class="folder-line sub">creator-pack/</span>
+        <span class="folder-line sub">press-kit.zip</span>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 7 — references -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">7</div>
+      <span class="pk-title">Reference Examples</span>
+      <span class="pk-sub">studios who do this well</span>
+    </div>
+    <div class="pk-only">
+      <span class="label">Worth a look</span>
+      <div class="refs">
+        <a class="ref" href="https://piratepr.notion.site/ruffy-and-the-riverside" target="_blank" rel="noopener">
+          <span class="ref-plat">Notion</span>
+          <span class="ref-name">Ruffy and the Riverside</span>
+          <span class="ref-desc">Clean layout, smart branding, and easily downloadable assets.</span>
+          <span class="ref-arrow">View press kit →</span>
+        </a>
+        <a class="ref" href="https://drive.google.com/drive/folders/1SCeywbkRsBQEOc1k2nP3Nn7M3IuMwXsf" target="_blank" rel="noopener">
+          <span class="ref-plat">Google Drive</span>
+          <span class="ref-name">Reign Breaker</span>
+          <span class="ref-desc">Includes working files for full custom use by creators.</span>
+          <span class="ref-arrow">View press kit →</span>
+        </a>
+        <a class="ref" href="https://drive.google.com/drive/folders/1ZwLmwNElIru2mCynPeCLvv8TVxB1aXQF" target="_blank" rel="noopener">
+          <span class="ref-plat">Google Drive</span>
+          <span class="ref-name">PEAK</span>
+          <span class="ref-desc">Simple, direct, and about the minimum you should strive for.</span>
+          <span class="ref-arrow">View press kit →</span>
+        </a>
+        <a class="ref" href="https://drive.google.com/drive/u/1/folders/1ZTkoi9WZuM8_4V-rg3UiRSnD7D0A5O2C" target="_blank" rel="noopener">
+          <span class="ref-plat">Google Drive</span>
+          <span class="ref-name">Promise Mascot Agency</span>
+          <span class="ref-desc">A plethora of assets — everything you'd need and more.</span>
+          <span class="ref-arrow">View press kit →</span>
+        </a>
+        <a class="ref" href="https://www.thecrimsondiamond.com/press/" target="_blank" rel="noopener">
+          <span class="ref-plat">presskit()</span>
+          <span class="ref-name">The Crimson Diamond</span>
+          <span class="ref-desc">The standard presskit() format — use it free at dopresskit.com to build yours.</span>
+          <span class="ref-arrow">View press kit →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="closing">
+  <div class="closing-card">
+    <p><strong>This is one of those build-once-reap-forever things.</strong> Take a Sunday. Put it together. Park it somewhere everyone can find. Then every reviewer, YouTuber, and curator for the next three years will have what they need without asking. Not glamorous. Honestly one of the most-asked-for things from anyone on the press/creator side. Get it ready.</p>
+  </div>
+</aside>
+
+<section class="help">
+  <div class="help-head">
+    <span class="help-eyebrow">need help?</span>
+    <h2 class="help-h2">Two people worth talking to.</h2>
+    <p class="help-sub">If you're looking for support along the way, here's where to start.</p>
+  </div>
+  <div class="help-grid">
+    <div class="help-card">
+      <span class="help-cat">Game Marketing</span>
+      <div class="help-person">
+        <span class="help-name">Jake Lizarraga</span>
+        <span class="help-role">Game Marketing Specialist</span>
+      </div>
+      <p class="help-body">A former Director of Content Marketing for a 7-figure tech startup who switched industries to help indie devs increase their success rate by adhering to Steam's best practices. <strong>Committed to providing zero-cost marketing support to indie developers</strong> with no upfront charges and revenue share agreements below 20%.</p>
+      <div class="help-links">
+        <a href="https://linkedin.com/in/jakelizarraga" target="_blank" rel="noopener" class="help-link">linkedin.com/in/jakelizarraga →</a>
+      </div>
+    </div>
+    <div class="help-card us">
+      <span class="help-cat">Press, Media &amp; Design</span>
+      <div class="help-person">
+        <span class="help-name">Josh — Indieformer</span>
+        <span class="help-role">Founder &amp; Publisher</span>
+      </div>
+      <p class="help-body">Helping indie devs get noticed through smart packaging, clean visual storytelling, and curated visibility across the right channels. Whether you need design feedback, media outreach, or a feature slot in the newsletter, Indieformer can help. <strong>Over a decade of experience in film, TV, and distribution.</strong></p>
+      <div class="help-links">
+        <a href="mailto:pr@indieformer.com" class="help-link">pr@indieformer.com →</a>
+        <a href="https://indieformer.com" class="help-link">indieformer.com →</a>
+        <a href="https://www.threads.net/@indieformer" target="_blank" rel="noopener" class="help-link">@indieformer →</a>
+      </div>
+      <span class="help-pricing">flexible pricing: upfront fee or 5% revenue share.</span>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-col brand-col">
+    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <li><a href="https://essay.indieformer.com">How to Really Make a Game</a></li>
+      <li><a href="/press-kit-guide/">Press Kit Guide</a></li>
+      <li><a href="/steam-marketing-guide/">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+<li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Find us</p>
+    <div class="social-icons">
+      <a href="https://www.threads.com/@indieformer" target="_blank" rel="noopener" aria-label="Threads">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M17.79 11.4c-.09-.04-.18-.08-.27-.12-.16-2.93-1.76-4.6-4.44-4.62h-.04c-1.6 0-2.94.69-3.76 1.94l1.47.97c.61-.93 1.59-1.13 2.28-1.13h.03c.87.01 1.51.26 1.94.74.3.34.5.83.6 1.45-.74-.12-1.54-.16-2.39-.11-2.38.14-3.91 1.53-3.81 3.45.05.86.5 1.6 1.25 2.1.66.42 1.5.62 2.39.58 1.16-.05 2.06-.49 2.68-1.3.48-.62.77-1.41.91-2.39.55.34.96.78 1.19 1.31.39.91.42 2.4-.79 3.61-1.06 1.05-2.32 1.5-4.22 1.51-2.11-.02-3.7-.71-4.74-2.05-.97-1.25-1.48-3.05-1.5-5.35.02-2.31.53-4.11 1.5-5.36 1.04-1.34 2.63-2.03 4.74-2.05 2.13.02 3.75.71 4.81 2.06.52.66.93 1.49 1.18 2.46l1.71-.46c-.3-1.2-.79-2.21-1.44-3.04-1.39-1.74-3.39-2.62-5.95-2.64h-.02c-2.56.02-4.56.91-5.92 2.64-1.22 1.54-1.85 3.66-1.86 6.31v.01c.02 2.65.65 4.78 1.86 6.31 1.37 1.74 3.36 2.62 5.92 2.64h.02c2.27-.02 3.87-.62 5.2-1.96 1.73-1.75 1.68-3.94 1.11-5.29-.41-.96-1.19-1.75-2.24-2.3z"/></svg>
+      </a>
+      <a href="https://bsky.app/profile/indieformer.com" target="_blank" rel="noopener" aria-label="Bluesky">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M5.84 4.94c2.31 1.74 4.79 5.26 5.7 7.15.91-1.89 3.39-5.41 5.7-7.15 1.66-1.25 4.36-2.22 4.36 .89 0 .62-.36 5.22-.57 5.96-.73 2.59-3.37 3.25-5.71 2.85 4.1.7 5.15 3.04 2.89 5.39-4.3 4.46-6.18-1.12-6.66-2.55-.09-.26-.13-.38-.13-.28 0-.11-.04.02-.13.28-.48 1.43-2.36 7.01-6.66 2.55-2.26-2.34-1.22-4.69 2.89-5.39-2.34.4-4.99-.26-5.71-2.85-.21-.74-.57-5.34-.57-5.96 0-3.11 2.7-2.14 4.36-.89z"/></svg>
+      </a>
+      <a href="https://discord.gg/rztz9s2wb3" target="_blank" rel="noopener" aria-label="Discord">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M20.32 4.74A19.79 19.79 0 0 0 16.06 3a.07.07 0 0 0-.07.04 13.95 13.95 0 0 0-.61 1.27 18.31 18.31 0 0 0-5.48 0c-.16-.41-.4-.91-.62-1.27a.08.08 0 0 0-.08-.04A19.74 19.74 0 0 0 4.93 4.74a.07.07 0 0 0-.03.03A20.32 20.32 0 0 0 1.04 18.21a.08.08 0 0 0 .03.05 19.93 19.93 0 0 0 6.03 3.04.07.07 0 0 0 .08-.03c.46-.63.88-1.3 1.23-2a.07.07 0 0 0-.04-.1 13.07 13.07 0 0 1-1.88-.9.07.07 0 0 1 0-.13c.13-.1.25-.2.37-.3a.07.07 0 0 1 .07-.01c3.94 1.8 8.21 1.8 12.1 0a.07.07 0 0 1 .08.01c.12.1.24.2.37.3a.07.07 0 0 1 0 .13c-.6.35-1.23.65-1.88.9a.07.07 0 0 0-.04.1c.36.7.78 1.37 1.23 2a.07.07 0 0 0 .08.03 19.86 19.86 0 0 0 6.03-3.04.08.08 0 0 0 .03-.05 20.18 20.18 0 0 0-3.86-13.44.06.06 0 0 0-.03-.03zM8.52 15.27c-1.19 0-2.17-1.09-2.17-2.43 0-1.34.96-2.43 2.17-2.43 1.22 0 2.19 1.1 2.17 2.43 0 1.34-.96 2.43-2.17 2.43zm8.03 0c-1.19 0-2.17-1.09-2.17-2.43 0-1.34.96-2.43 2.17-2.43 1.22 0 2.19 1.1 2.17 2.43 0 1.34-.95 2.43-2.17 2.43z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <p class="footer-meta">
+    <span>© 2026 Indieformer.</span>
+    <span class="sep">·</span>
+    <a href="/privacy/">Privacy</a>
+    <span class="sep">·</span>
+    <a href="/terms/">Terms</a>
+  </p>
+</footer>
+
+<script>
+  /* ── background line: meander + scroll-scrubbed reveal ── */
+  (function () {
+    var svg = document.querySelector('.bg-line');
+    var path = document.getElementById('bgPath');
+    if (!svg || !path) return;
+
+    function doodle(i, x, y) {
+      var t = i % 3, side = (i % 2 === 0) ? 1 : -1;
+      if (t === 0) {
+        var r = 17;
+        var d = ' C ' + (x + side * r * 1.7) + ' ' + (y - r * 0.2) +
+                ' ' + (x + side * r * 2.0) + ' ' + (y + r * 1.5) +
+                ' ' + x + ' ' + (y + r * 1.7) +
+                ' C ' + (x - side * r * 1.5) + ' ' + (y + r * 1.9) +
+                ' ' + (x - side * r * 0.5) + ' ' + (y + r * 0.3) +
+                ' ' + x + ' ' + (y + r * 2.7);
+        return { d: d, x: x, y: y + r * 2.7 };
+      }
+      if (t === 1) {
+        var d = '', cy = y, wd = 13;
+        for (var k = 0; k < 3; k++) {
+          cy += 11; d += ' L ' + (x + side * wd) + ' ' + cy;
+          cy += 11; d += ' L ' + x + ' ' + cy;
+        }
+        return { d: d, x: x, y: cy };
+      }
+      var s = 26, b = 36;
+      var d2 = ' Q ' + (x + side * s) + ' ' + (y + b * 0.4) +
+               ' ' + (x + side * s * 0.6) + ' ' + (y + b) +
+               ' Q ' + (x - side * s * 0.4) + ' ' + (y + b * 1.6) +
+               ' ' + x + ' ' + (y + b * 1.9);
+      return { d: d2, x: x, y: y + b * 1.9 };
+    }
+
+    function build() {
+      var w = window.innerWidth;
+      var h = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+      var baseX = Math.min(48, w * 0.055);
+      var amp = Math.min(24, w * 0.03);
+      var spacing = 470;
+      var anchors = [];
+      for (var ay = spacing; ay < h - 70; ay += spacing) anchors.push(ay);
+      var d = 'M ' + baseX + ' 0';
+      var cx = baseX, cy = 0, ai = 0, seg = 104;
+      while (cy < h) {
+        var ny = cy + seg;
+        if (ai < anchors.length && anchors[ai] <= ny) {
+          var aY = anchors[ai];
+          var aX = baseX + Math.sin(aY / 240) * amp;
+          var mx = (cx + aX) / 2, my = (cy + aY) / 2;
+          d += ' Q ' + cx + ' ' + cy + ' ' + mx + ' ' + my + ' T ' + aX + ' ' + aY;
+          cx = aX; cy = aY;
+          var res = doodle(ai, cx, cy);
+          d += res.d; cx = res.x; cy = res.y;
+          ai++;
+        } else {
+          var nx = baseX + Math.sin(ny / 240) * amp + Math.sin(ny / 72) * 5;
+          var mx2 = (cx + nx) / 2, my2 = (cy + ny) / 2;
+          d += ' Q ' + cx + ' ' + cy + ' ' + mx2 + ' ' + my2;
+          cx = nx; cy = ny;
+        }
+      }
+      d += ' T ' + cx + ' ' + h;
+      path.setAttribute('d', d);
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.style.height = h + 'px';
+      update();
+    }
+    function update() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p;
+      if (max <= 4) p = 0.32;
+      else { p = window.scrollY / max; if (p < 0) p = 0; if (p > 1) p = 1; }
+      path.style.strokeDashoffset = String(1 - p);
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(function () { update(); ticking = false; }); }
+    }, { passive: true });
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 150); });
+    window.addEventListener('load', build);
+    build();
+  })();
+</script>
+
+</body>
+</html>

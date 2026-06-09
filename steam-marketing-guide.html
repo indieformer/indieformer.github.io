@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steam Marketing Guide for Indie Devs | Indieformer</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta name="description" content="A practical guide to optimizing your Steam page — build visibility, boost wishlists, and stand out in the world's biggest PC storefront.">
+<link rel="canonical" href="https://indieformer.com/steam-marketing-guide/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="Steam Marketing Guide for Indie Devs | Indieformer">
+<meta property="og:description" content="Nine practical steps to publish your Steam page early and optimize it so gamers discover your hidden gem through the Steam algorithm.">
+<meta property="og:url" content="https://indieformer.com/steam-marketing-guide/">
+<meta property="og:image" content="https://indieformer.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+  :root {
+    --emerald: #28E291; --coral: #F78154; --periwinkle: #9381FF;
+    --shadow: #262730; --shadow-mid: #2F3040; --shadow-deep: #1E1C28;
+    --text-primary: #F0EEE8; --text-secondary: #A8A6B8; --text-tertiary: #6B6980;
+    --border: rgba(255, 255, 255, 0.08); --border-mid: rgba(255, 255, 255, 0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; overscroll-behavior-y: none; }
+  body {
+    position: relative;
+    background: var(--shadow);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
+    background-size: 26px 26px;
+    font-family: 'Sora', Arial, sans-serif;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 20px;
+    overflow-x: hidden;
+  }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+  .crop {
+    position: absolute; width: 18px; height: 18px;
+    opacity: 0; animation: fade 0.6s ease 0.2s forwards;
+    z-index: 5; pointer-events: none;
+  }
+  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
+  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+  .crop.bl { bottom: 20px; left: 20px; }
+  .crop.br { bottom: 20px; right: 20px; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  .site-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1000px; margin: 0 auto; padding: 14px 56px;
+    position: relative; z-index: 4;
+  }
+  a.brand { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s ease; }
+  a.brand img { display: block; height: 40px; width: 40px; }
+  a.brand:hover { opacity: 0.82; }
+  .primary-nav { display: flex; gap: 26px; align-items: center; }
+  .primary-nav a {
+    font-family: 'Sora'; font-size: 15px; font-weight: 500;
+    color: var(--text-secondary); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .primary-nav a:hover { color: var(--text-primary); }
+
+  .section {
+    position: relative;
+    width: 100%; max-width: 1000px; margin: 0 auto;
+    padding: 40px 56px 16px;
+    z-index: 1;
+  }
+  .col { max-width: 720px; position: relative; z-index: 2; }
+  .eyebrow {
+    font-family: 'Caveat', cursive; font-size: 22px; color: var(--coral);
+    transform: rotate(-1deg); display: inline-block; margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(38px, 6vw, 56px);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.025em;
+    margin-bottom: 18px;
+  }
+  h1 .em { color: var(--emerald); }
+  .page-intro { color: var(--text-secondary); line-height: 1.7; font-size: 17px; margin-bottom: 16px; max-width: 640px; }
+  .page-intro strong { color: var(--text-primary); font-weight: 600; }
+  .page-intro a { color: var(--emerald); border-bottom: 1px solid rgba(40, 226, 145, 0.42); text-decoration: none; }
+  .page-intro a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  .facts {
+    max-width: 1000px; margin: 28px auto 0;
+    padding: 0 56px;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+    position: relative; z-index: 2;
+  }
+  .fact {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .fact-k {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--text-tertiary); margin-bottom: 6px; display: block;
+  }
+  .fact-v { font-size: 14px; font-weight: 600; color: var(--text-primary); display: block; }
+  .fact-v a { color: var(--emerald); text-decoration: none; }
+  .fact-v a:hover { color: var(--text-primary); }
+  .fact-v .up { color: var(--coral); }
+
+  .body {
+    max-width: 1000px; margin: 0 auto;
+    padding: 36px 56px 8px;
+    position: relative; z-index: 2;
+  }
+  .pk {
+    margin-top: 44px;
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+  }
+  .pk:first-of-type { border-top: none; padding-top: 0; margin-top: 14px; }
+  .pk-head {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 22px;
+  }
+  .pk-num {
+    flex: 0 0 auto;
+    width: 34px; height: 34px;
+    background: var(--emerald); color: var(--shadow);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 15px;
+  }
+  .pk-title { font-size: 22px; font-weight: 700; line-height: 1.2; color: var(--text-primary); }
+  .pk-sub {
+    margin-left: auto;
+    font-family: 'Caveat', cursive; font-size: 19px;
+    color: var(--text-tertiary);
+    transform: rotate(-0.5deg);
+  }
+
+  /* point cards — the main structural unit */
+  .points { display: flex; flex-direction: column; gap: 14px; }
+  .point {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .point-label {
+    display: block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--emerald);
+    margin-bottom: 10px;
+  }
+  .point-body {
+    color: var(--text-primary);
+    font-size: 15px; line-height: 1.65;
+  }
+  .point-body strong { font-weight: 700; }
+  .point-body a {
+    color: var(--emerald);
+    border-bottom: 1px solid rgba(40, 226, 145, 0.42);
+    text-decoration: none;
+  }
+  .point-body a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .point-tip {
+    display: block; margin-top: 12px;
+    font-family: 'Caveat', cursive;
+    font-size: 19px; line-height: 1.45;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--coral);
+    padding: 4px 0 4px 14px;
+  }
+  .point-tip strong { color: var(--text-primary); font-weight: 700; }
+  .point-tip a {
+    color: var(--coral);
+    border-bottom: 1px solid rgba(247, 129, 84, 0.42);
+    text-decoration: none;
+  }
+  .point-tip a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  /* template-text block (section 3) */
+  .template {
+    background: var(--shadow-deep);
+    border: 1px solid rgba(40, 226, 145, 0.22);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--emerald);
+    line-height: 1.65;
+  }
+  .template em { color: var(--periwinkle); font-style: italic; }
+  .template-example {
+    margin-top: 14px;
+    color: var(--text-secondary);
+    font-size: 15px; line-height: 1.65; font-style: italic;
+  }
+  .template-example strong { color: var(--text-primary); font-weight: 600; font-style: normal; }
+
+  /* embedded media — Steam widgets + YouTube */
+  .embed {
+    margin-top: 16px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    /* no bg fill — let the iframe's own surface fill, no dark rect below */
+    display: block;
+    font-size: 0; /* kill the inline-iframe descender gap */
+    line-height: 0;
+  }
+  .embed.steam iframe {
+    width: 100%; height: 190px;
+    border: 0; display: block;
+  }
+  .embed.video {
+    position: relative;
+    padding-top: 56.25%;
+    height: 0;
+  }
+  .embed.video iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0; display: block;
+  }
+  .embed-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px; font-weight: 600;
+    color: var(--emerald);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(40, 226, 145, 0.42);
+  }
+  .embed-link:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+  /* in-body example images (UFO 50 etc. in section 2) */
+  .example-img {
+    margin-top: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--shadow-deep);
+    display: block;
+  }
+  .example-img img {
+    width: 100%; height: auto; display: block;
+  }
+  .example-cap {
+    display: block;
+    margin-top: 8px;
+    font-family: 'Caveat', cursive;
+    font-size: 17px; color: var(--text-tertiary);
+  }
+
+  /* tag pills (section 5) */
+  .tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 12px;
+  }
+  .tag-pill {
+    background: var(--shadow-deep);
+    border: 1px solid var(--border-mid);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px; font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* timeline block (section 9) */
+  .timeline {
+    margin-top: 16px;
+    background: var(--shadow-deep);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 18px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .timeline-row:last-child { border-bottom: none; }
+  .timeline-act {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--emerald);
+    line-height: 1.2;
+  }
+  .timeline-det {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.55;
+    align-self: center;
+  }
+  .timeline-det strong { color: var(--text-primary); font-weight: 700; }
+
+  .closing {
+    margin: 44px auto 0;
+    max-width: 1000px; padding: 0 56px;
+    position: relative; z-index: 2;
+  }
+  .closing-card {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--emerald);
+    border-radius: 12px;
+    padding: 26px 30px;
+  }
+  .closing-card p { color: var(--text-secondary); font-size: 16px; line-height: 1.65; }
+  .closing-card strong { color: var(--text-primary); font-weight: 700; }
+
+  /* help: people to talk to */
+  .help {
+    max-width: 1000px; margin: 60px auto 0;
+    padding: 36px 56px 12px;
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 2;
+  }
+  .help-head { margin-bottom: 22px; }
+  .help-eyebrow {
+    font-family: 'Caveat', cursive; font-size: 22px; color: var(--coral);
+    transform: rotate(-1deg); display: inline-block; margin-bottom: 4px;
+  }
+  .help-h2 {
+    font-size: 26px; font-weight: 700; line-height: 1.2;
+    color: var(--text-primary); margin-bottom: 6px;
+  }
+  .help-sub { color: var(--text-tertiary); font-size: 14px; line-height: 1.55; }
+  .help-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .help-card {
+    background: var(--shadow-mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .help-card.us { border-color: rgba(40, 226, 145, 0.3); }
+  .help-cat {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-tertiary); margin-bottom: 12px; display: block;
+  }
+  .help-person { margin-bottom: 12px; }
+  .help-name { display: block; font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .help-role { display: block; font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+  .help-body { color: var(--text-secondary); font-size: 14px; line-height: 1.65; margin-bottom: 14px; }
+  .help-body strong { color: var(--text-primary); font-weight: 600; }
+  .help-links { display: flex; flex-direction: column; gap: 5px; }
+  .help-link {
+    font-size: 13px; font-weight: 600; color: var(--emerald);
+    text-decoration: none;
+  }
+  .help-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .help-pricing {
+    margin-top: 10px;
+    font-family: 'Caveat', cursive; font-size: 17px;
+    color: var(--text-tertiary);
+    display: inline-block;
+  }
+
+  .site-footer {
+    max-width: 1000px; margin: 60px auto 0;
+    padding: 44px 56px 28px;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px;
+    font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+    position: relative; z-index: 2;
+  }
+  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 92px; margin-top: -18px; width: auto; display: block; }
+  .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
+  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta {
+    grid-column: 1 / -1; border-top: 1px solid var(--border);
+    margin-top: 22px; padding-top: 18px;
+    font-size: 13px; color: var(--text-tertiary);
+    display: flex; flex-wrap: wrap; gap: 14px;
+  }
+  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
+  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-meta .sep { color: var(--text-tertiary); opacity: 0.5; }
+
+  @media (max-width: 820px) {
+    body { padding: 20px 14px; }
+    .section, .body, .facts, .closing, .help { padding-left: 24px; padding-right: 24px; }
+    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
+    .primary-nav { gap: 18px; }
+    .primary-nav a { font-size: 14px; }
+    .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pk-sub { display: none; }
+    .help-grid { grid-template-columns: 1fr; }
+    .timeline-row { grid-template-columns: 1fr; gap: 4px; }
+    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
+  }
+
+  #loader-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #262730;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.45s ease;
+  }
+  #loader-overlay.gone { opacity: 0; pointer-events: none; }
+  #loader-gem { width: 140px; height: 140px; }
+  @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
+
+  /* ── background line — meanders down the left, scrubbed by scroll ── */
+  .bg-line {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .bg-line path {
+    fill: none;
+    stroke: var(--periwinkle);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.28;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bg-line path { stroke-dashoffset: 0; }
+  }
+
+  .social-icons { display: flex; gap: 12px; align-items: center; margin-top: 2px; }
+  .social-icons a {
+    color: var(--text-tertiary) !important;
+    border: none !important;
+    border-bottom: none !important;
+    text-decoration: none !important;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .social-icons a:hover { color: var(--text-primary) !important; transform: translateY(-2px); }
+  .social-icons svg { display: block; }
+</style>
+</head>
+<body>
+
+<div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+  (function () {
+    var o = document.getElementById('loader-overlay');
+    if (!o) return;
+    var anim;
+    try {
+      if (typeof lottie !== 'undefined') {
+        anim = lottie.loadAnimation({
+          container: document.getElementById('loader-gem'),
+          renderer: 'svg', loop: true, autoplay: true,
+          path: '/loading-gem.json'
+        });
+      }
+    } catch (e) {}
+    var shown = Date.now();
+    function hide() {
+      if (o.classList.contains('gone')) return;
+      o.classList.add('gone');
+      setTimeout(function () {
+        try { if (anim) anim.destroy(); } catch (e) {}
+        if (o.parentNode) o.parentNode.removeChild(o);
+      }, 500);
+    }
+    function maybeHide() { setTimeout(hide, Math.max(0, 400 - (Date.now() - shown))); }
+    if (document.readyState === 'complete') maybeHide();
+    else window.addEventListener('load', maybeHide);
+    setTimeout(hide, 4000);
+  })();
+</script>
+
+<svg class="bg-line" aria-hidden="true" preserveAspectRatio="none">
+  <path id="bgPath" pathLength="1"></path>
+</svg>
+
+<span class="crop bl"></span><span class="crop br"></span>
+
+<header class="site-nav">
+  <a class="brand" href="/" aria-label="Indieformer home"><img src="/logo.png" alt="Indieformer" width="40" height="40"></a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href="/how-we-make-a-game-popular/">The Approach</a>
+    <a href="/notes/">Notes</a>
+    <a href="/scorchpot/">Scorchpot</a>
+  </nav>
+</header>
+
+<section class="section">
+  <div class="col">
+    <span class="eyebrow">our notes on the storefront.</span>
+    <h1>Steam Marketing Guide<br>for <span class="em">Indie Devs.</span></h1>
+    <p class="page-intro">
+      Making the game is only half of it. The other half is harder, and most devs find out too late: <strong>getting it seen on Steam</strong>, where 18,477 games launched in 2024 and 20,003 in 2025. The algorithm is a wall. This is how to climb it.
+    </p>
+    <p class="page-intro">
+      We wrote this with <a href="https://linkedin.com/in/jakelizarraga" target="_blank" rel="noopener">Jake Lizarraga</a>, who's been doing this for indies a lot longer than we have. Most of the tactical specifics are his. The framing and the <em>"here's why"</em> bits are ours.
+    </p>
+    <p class="page-intro">
+      Pair with the <a href="/press-kit-guide/">Press Kit Guide</a> for the assets side.
+    </p>
+  </div>
+</section>
+
+<div class="facts" aria-label="Steam facts">
+  <div class="fact"><span class="fact-k">Platform</span><span class="fact-v">Steam</span></div>
+  <div class="fact"><span class="fact-k">Daily users</span><span class="fact-v">69 million</span></div>
+  <div class="fact"><span class="fact-k">2024 releases</span><span class="fact-v">18,477</span></div>
+  <div class="fact"><span class="fact-k">2025 releases</span><span class="fact-v">20,003 <span class="up">↑</span></span></div>
+  <div class="fact"><span class="fact-k">Sections</span><span class="fact-v">9 steps</span></div>
+  <div class="fact"><span class="fact-k">By</span><span class="fact-v">Jake &amp; Indieformer</span></div>
+</div>
+
+<main class="body">
+
+  <!-- 1 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">1</div>
+      <span class="pk-title">Publish Your Page Early</span>
+      <span class="pk-sub">more time = more wishlists</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Compounding</span>
+        <p class="point-body">Publishing sooner gives you more time to accumulate wishlists.</p>
+        <p class="point-tip">Example: <strong>Dome Keeper</strong> launched their page ~9 months before release, gathering tens of thousands of wishlists before entering their demo into Next Fest.</p>
+        <div class="embed steam">
+          <iframe src="https://store.steampowered.com/widget/1637320/" frameborder="0" loading="lazy" title="Dome Keeper on Steam"></iframe>
+        </div>
+      </div>
+      <div class="point">
+        <span class="point-label">Updating</span>
+        <p class="point-body">You can update the page at any time, so it doesn't need to be perfect.</p>
+        <p class="point-tip">→ Start with a simple trailer, four screenshots, and a short description.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Data</span>
+        <p class="point-body">Having a public Steam page early on lets you start gathering analytics on traffic sources and conversion rates much sooner.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">2</div>
+      <span class="pk-title">Optimise Your Capsule Art</span>
+      <span class="pk-sub">your first impression at any size</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Contrast</span>
+        <p class="point-body">High-contrast artwork grabs attention and increases click-through rates.</p>
+        <p class="point-tip">Example: <strong>UFO 50</strong> used a bold and legible capsule that stands out even at small sizes.</p>
+        <figure class="example-img">
+          <img src="/images/steam-ufo-50-capsule-art.jpg" alt="UFO 50 Steam capsule art" loading="lazy">
+        </figure>
+      </div>
+      <div class="point">
+        <span class="point-label">Legibility</span>
+        <p class="point-body">Your title text should be readable even when scaled down to 120×45px.</p>
+        <p class="point-tip">→ Read through <a href="https://partner.steamgames.com/doc/store/assets" target="_blank" rel="noopener">Steam's Graphical Assets Overview</a>.</p>
+        <figure class="example-img">
+          <img src="/images/steam-ufo-50-title-legibility-example.jpg" alt="UFO 50 title text shown at small size for legibility comparison" loading="lazy">
+        </figure>
+      </div>
+      <div class="point">
+        <span class="point-label">Specificity</span>
+        <p class="point-body">The capsule should reflect your game's genre, tone, or setting. It doesn't need to use in-game graphics — stylised illustrations are often more effective than screenshots or pixel art.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">3</div>
+      <span class="pk-title">Write Your Short Description</span>
+      <span class="pk-sub">one sentence, doing the heavy lifting</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Template</span>
+        <p class="point-body">Use a clean, repeatable shape:</p>
+        <p class="template">A <em>[camera perspective]</em> <em>[genre/subgenre]</em> where you <em>[core gameplay loop]</em>.</p>
+        <p class="template-example">"A <strong>tough-as-nails 2D physics platformer</strong> where you swing to freedom as a plunger-wielding rooster. One wrong move sends you straight back to the pit. Cluck up, and it's a long way down."</p>
+        <div class="embed steam">
+          <iframe src="https://store.steampowered.com/widget/2826970/" frameborder="0" loading="lazy" title="Example game on Steam"></iframe>
+        </div>
+      </div>
+      <div class="point">
+        <span class="point-label">Camera</span>
+        <p class="point-body">Is it first-person? Over-the-shoulder? Top-down? Sidescroller?</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Genre</span>
+        <p class="point-body">Be specific — Metroidvania, roguelike, management sim, bullet hell, etc.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Loop</span>
+        <p class="point-body">What will the player be doing? Fighting enemies? Solving puzzles? Building?</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Tone</span>
+        <p class="point-body">Use verbs and phrases that reflect your game's tone.</p>
+        <p class="point-tip">"Escape the fog" evokes tension and atmosphere, while "manage resources" or "collect upgrades" suits a more systems-driven experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">4</div>
+      <span class="pk-title">Upload Your Trailer Video</span>
+      <span class="pk-sub">they're gone in 5 seconds</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Immediate</span>
+        <p class="point-body">Open with gameplay instead of logos.</p>
+        <p class="point-tip">Example: <strong>I Am Your Beast</strong> shows gameplay within the first five seconds.</p>
+        <div class="embed video">
+          <iframe src="https://www.youtube.com/embed/UR5swbsAtbo?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="I Am Your Beast trailer"></iframe>
+        </div>
+        <a class="embed-link" href="https://store.steampowered.com/app/1876590/I_Am_Your_Beast/" target="_blank" rel="noopener">View I Am Your Beast on Steam →</a>
+      </div>
+      <div class="point">
+        <span class="point-label">Polished</span>
+        <p class="point-body">Use montages of short clips instead of long uncut footage.</p>
+        <p class="point-tip">Utilise fast music and pacing.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Concise</span>
+        <p class="point-body">Most viewers stop watching within the first 30 seconds.</p>
+        <p class="point-tip">Hook → Gameplay montage → Key features → Call to action.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">5</div>
+      <span class="pk-title">Add 20 Tags to Your Page</span>
+      <span class="pk-sub">the first 5 matter most</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Limitations</span>
+        <p class="point-body">Steam only looks at the first 20 tags.</p>
+        <p class="point-tip">→ Read the <a href="https://partner.steamgames.com/doc/store/tags" target="_blank" rel="noopener">Steam Tags Documentation</a>.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Weighting</span>
+        <p class="point-body">The first 5 tags are the most important.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Imitating</span>
+        <p class="point-body">Mimic the tags used by bestsellers in your genre.</p>
+        <div class="tags" aria-label="Example tags for a 2D roguelike deckbuilder">
+          <span class="tag-pill">Deckbuilding</span>
+          <span class="tag-pill">Roguelike</span>
+          <span class="tag-pill">Strategy</span>
+          <span class="tag-pill">2D</span>
+          <span class="tag-pill">Indie</span>
+          <span class="tag-pill">Card Game</span>
+          <span class="tag-pill">Replayability</span>
+          <span class="tag-pill">Procedural Generation</span>
+        </div>
+        <p class="point-tip">example tags for a 2D roguelike deckbuilder.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">6</div>
+      <span class="pk-title">Expand Your About Section</span>
+      <span class="pk-sub">where the page does the selling</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Intro Paragraph</span>
+        <p class="point-body">Set the tone and quickly summarise the core gameplay loop.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Section Headers</span>
+        <p class="point-body">Use bold headers or custom banners to separate features.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Short Descriptions</span>
+        <p class="point-body">Have 1–2 lines under each header to explain the feature.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Bullet Points</span>
+        <p class="point-body">Add bullet lists with 2–4 feature-focused points per section.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">GIFs</span>
+        <p class="point-body">Use embedded GIFs or MP4s to visually reinforce what you're describing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">7</div>
+      <span class="pk-title">Select Languages for Localisation</span>
+      <span class="pk-sub">only 36% of Steam users speak English</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Priority</span>
+        <p class="point-body">Only 36% of Steam users speak English — focus on localising to <strong>Simplified Chinese</strong> (27% of users) and <strong>Russian</strong> (9% of users).</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Reach</span>
+        <p class="point-body">Games without localisation won't be shown to users browsing Steam in other languages.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Cost</span>
+        <p class="point-body">Can't afford translators? Build a translation team from your community.</p>
+        <p class="point-tip">Example: <strong>Balatro</strong> launched in English only and then added more languages post-launch using fan translators.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">8</div>
+      <span class="pk-title">Decide on Pricing Strategy</span>
+      <span class="pk-sub">price for discounts from day one</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Base</span>
+        <p class="point-body">Use $X.99 pricing tiers (e.g. $19.99) and avoid awkward pricing like $17.50.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Sales</span>
+        <p class="point-body">Most Steam users only buy new games at a discount.</p>
+        <p class="point-tip">Leave enough headroom for 20% to 50%+ discounts. Check the <a href="https://store.steampowered.com/sale/upcomingfests" target="_blank" rel="noopener">upcoming Steam events</a> page to see if there's a relevant one for you.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Regions</span>
+        <p class="point-body">Ensure regional prices are adjusted by -50% in China, Russia, and Brazil.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="pk">
+    <div class="pk-head">
+      <div class="pk-num" aria-hidden="true">9</div>
+      <span class="pk-title">Plan Your Launch Timing</span>
+      <span class="pk-sub">work backwards from your release date</span>
+    </div>
+    <div class="points">
+      <div class="point">
+        <span class="point-label">Next Fest</span>
+        <p class="point-body">Submit your demo to the Steam Next Fest closest to your release date.</p>
+        <p class="point-tip">Release the demo a month before Next Fest to leave time for bug fixes.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Steam Sales</span>
+        <p class="point-body">Avoid launching during seasonal sales or your game will get buried.</p>
+      </div>
+      <div class="point">
+        <span class="point-label">Release Date</span>
+        <p class="point-body">Games with no release date won't appear on Popular Upcoming.</p>
+      </div>
+      <div class="timeline" aria-label="Example launch timeline for a November release">
+        <div class="timeline-row">
+          <span class="timeline-act">Publish</span>
+          <span class="timeline-det"><strong>Steam page</strong> in January</span>
+        </div>
+        <div class="timeline-row">
+          <span class="timeline-act">Release</span>
+          <span class="timeline-det"><strong>Steam demo</strong> in September</span>
+        </div>
+        <div class="timeline-row">
+          <span class="timeline-act">Enter</span>
+          <span class="timeline-det"><strong>Steam Next Fest</strong> in October</span>
+        </div>
+        <div class="timeline-row">
+          <span class="timeline-act">Release</span>
+          <span class="timeline-det"><strong>Full game</strong> in November</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="closing">
+  <div class="closing-card">
+    <p><strong>An optimised Steam page won't save a game nobody wants.</strong> But an un-optimised one will absolutely sink a great one. For most of the people who'll ever encounter your game, the store page <em>is</em> the game. Treat it like it.</p>
+  </div>
+</aside>
+
+<section class="help">
+  <div class="help-head">
+    <span class="help-eyebrow">need help?</span>
+    <h2 class="help-h2">Two people worth talking to.</h2>
+    <p class="help-sub">If you're looking for support along the way, here's where to start.</p>
+  </div>
+  <div class="help-grid">
+    <div class="help-card">
+      <span class="help-cat">Game Marketing</span>
+      <div class="help-person">
+        <span class="help-name">Jake Lizarraga</span>
+        <span class="help-role">Game Marketing Specialist</span>
+      </div>
+      <p class="help-body">A former Director of Content Marketing for a 7-figure tech startup who switched industries to help indie devs increase their success rate by adhering to Steam's best practices. <strong>Committed to providing zero-cost marketing support to indie developers</strong> with no upfront charges and revenue share agreements below 20%.</p>
+      <div class="help-links">
+        <a href="https://linkedin.com/in/jakelizarraga" target="_blank" rel="noopener" class="help-link">linkedin.com/in/jakelizarraga →</a>
+      </div>
+    </div>
+    <div class="help-card us">
+      <span class="help-cat">Press, Media &amp; Design</span>
+      <div class="help-person">
+        <span class="help-name">Josh — Indieformer</span>
+        <span class="help-role">Founder &amp; Publisher</span>
+      </div>
+      <p class="help-body">Helping indie devs get noticed through smart packaging, clean visual storytelling, and curated visibility across the right channels. Whether you need design feedback, media outreach, or a feature slot in the newsletter, Indieformer can help. <strong>Over a decade of experience in film, TV, and distribution.</strong></p>
+      <div class="help-links">
+        <a href="mailto:pr@indieformer.com" class="help-link">pr@indieformer.com →</a>
+        <a href="https://indieformer.com" class="help-link">indieformer.com →</a>
+        <a href="https://www.threads.net/@indieformer" target="_blank" rel="noopener" class="help-link">@indieformer →</a>
+      </div>
+      <span class="help-pricing">flexible pricing: upfront fee or 5% revenue share.</span>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-col brand-col">
+    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
+    <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Guides &amp; reads</p>
+    <ul>
+      <li><a href="https://essay.indieformer.com">How to Really Make a Game</a></li>
+      <li><a href="/press-kit-guide/">Press Kit Guide</a></li>
+      <li><a href="/steam-marketing-guide/">Steam Marketing Guide</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Elsewhere</p>
+    <ul>
+<li><a href="https://indieformer.beehiiv.com">Newsletter archive</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <p class="footer-label">Find us</p>
+    <div class="social-icons">
+      <a href="https://www.threads.com/@indieformer" target="_blank" rel="noopener" aria-label="Threads">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M17.79 11.4c-.09-.04-.18-.08-.27-.12-.16-2.93-1.76-4.6-4.44-4.62h-.04c-1.6 0-2.94.69-3.76 1.94l1.47.97c.61-.93 1.59-1.13 2.28-1.13h.03c.87.01 1.51.26 1.94.74.3.34.5.83.6 1.45-.74-.12-1.54-.16-2.39-.11-2.38.14-3.91 1.53-3.81 3.45.05.86.5 1.6 1.25 2.1.66.42 1.5.62 2.39.58 1.16-.05 2.06-.49 2.68-1.3.48-.62.77-1.41.91-2.39.55.34.96.78 1.19 1.31.39.91.42 2.4-.79 3.61-1.06 1.05-2.32 1.5-4.22 1.51-2.11-.02-3.7-.71-4.74-2.05-.97-1.25-1.48-3.05-1.5-5.35.02-2.31.53-4.11 1.5-5.36 1.04-1.34 2.63-2.03 4.74-2.05 2.13.02 3.75.71 4.81 2.06.52.66.93 1.49 1.18 2.46l1.71-.46c-.3-1.2-.79-2.21-1.44-3.04-1.39-1.74-3.39-2.62-5.95-2.64h-.02c-2.56.02-4.56.91-5.92 2.64-1.22 1.54-1.85 3.66-1.86 6.31v.01c.02 2.65.65 4.78 1.86 6.31 1.37 1.74 3.36 2.62 5.92 2.64h.02c2.27-.02 3.87-.62 5.2-1.96 1.73-1.75 1.68-3.94 1.11-5.29-.41-.96-1.19-1.75-2.24-2.3z"/></svg>
+      </a>
+      <a href="https://bsky.app/profile/indieformer.com" target="_blank" rel="noopener" aria-label="Bluesky">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M5.84 4.94c2.31 1.74 4.79 5.26 5.7 7.15.91-1.89 3.39-5.41 5.7-7.15 1.66-1.25 4.36-2.22 4.36 .89 0 .62-.36 5.22-.57 5.96-.73 2.59-3.37 3.25-5.71 2.85 4.1.7 5.15 3.04 2.89 5.39-4.3 4.46-6.18-1.12-6.66-2.55-.09-.26-.13-.38-.13-.28 0-.11-.04.02-.13.28-.48 1.43-2.36 7.01-6.66 2.55-2.26-2.34-1.22-4.69 2.89-5.39-2.34.4-4.99-.26-5.71-2.85-.21-.74-.57-5.34-.57-5.96 0-3.11 2.7-2.14 4.36-.89z"/></svg>
+      </a>
+      <a href="https://discord.gg/rztz9s2wb3" target="_blank" rel="noopener" aria-label="Discord">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M20.32 4.74A19.79 19.79 0 0 0 16.06 3a.07.07 0 0 0-.07.04 13.95 13.95 0 0 0-.61 1.27 18.31 18.31 0 0 0-5.48 0c-.16-.41-.4-.91-.62-1.27a.08.08 0 0 0-.08-.04A19.74 19.74 0 0 0 4.93 4.74a.07.07 0 0 0-.03.03A20.32 20.32 0 0 0 1.04 18.21a.08.08 0 0 0 .03.05 19.93 19.93 0 0 0 6.03 3.04.07.07 0 0 0 .08-.03c.46-.63.88-1.3 1.23-2a.07.07 0 0 0-.04-.1 13.07 13.07 0 0 1-1.88-.9.07.07 0 0 1 0-.13c.13-.1.25-.2.37-.3a.07.07 0 0 1 .07-.01c3.94 1.8 8.21 1.8 12.1 0a.07.07 0 0 1 .08.01c.12.1.24.2.37.3a.07.07 0 0 1 0 .13c-.6.35-1.23.65-1.88.9a.07.07 0 0 0-.04.1c.36.7.78 1.37 1.23 2a.07.07 0 0 0 .08.03 19.86 19.86 0 0 0 6.03-3.04.08.08 0 0 0 .03-.05 20.18 20.18 0 0 0-3.86-13.44.06.06 0 0 0-.03-.03zM8.52 15.27c-1.19 0-2.17-1.09-2.17-2.43 0-1.34.96-2.43 2.17-2.43 1.22 0 2.19 1.1 2.17 2.43 0 1.34-.96 2.43-2.17 2.43zm8.03 0c-1.19 0-2.17-1.09-2.17-2.43 0-1.34.96-2.43 2.17-2.43 1.22 0 2.19 1.1 2.17 2.43 0 1.34-.95 2.43-2.17 2.43z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <p class="footer-meta">
+    <span>© 2026 Indieformer.</span>
+    <span class="sep">·</span>
+    <a href="/privacy/">Privacy</a>
+    <span class="sep">·</span>
+    <a href="/terms/">Terms</a>
+  </p>
+</footer>
+
+<script>
+  /* ── background line: meander + scroll-scrubbed reveal ── */
+  (function () {
+    var svg = document.querySelector('.bg-line');
+    var path = document.getElementById('bgPath');
+    if (!svg || !path) return;
+
+    function doodle(i, x, y) {
+      var t = i % 3, side = (i % 2 === 0) ? 1 : -1;
+      if (t === 0) {
+        var r = 17;
+        var d = ' C ' + (x + side * r * 1.7) + ' ' + (y - r * 0.2) +
+                ' ' + (x + side * r * 2.0) + ' ' + (y + r * 1.5) +
+                ' ' + x + ' ' + (y + r * 1.7) +
+                ' C ' + (x - side * r * 1.5) + ' ' + (y + r * 1.9) +
+                ' ' + (x - side * r * 0.5) + ' ' + (y + r * 0.3) +
+                ' ' + x + ' ' + (y + r * 2.7);
+        return { d: d, x: x, y: y + r * 2.7 };
+      }
+      if (t === 1) {
+        var d = '', cy = y, wd = 13;
+        for (var k = 0; k < 3; k++) {
+          cy += 11; d += ' L ' + (x + side * wd) + ' ' + cy;
+          cy += 11; d += ' L ' + x + ' ' + cy;
+        }
+        return { d: d, x: x, y: cy };
+      }
+      var s = 26, b = 36;
+      var d2 = ' Q ' + (x + side * s) + ' ' + (y + b * 0.4) +
+               ' ' + (x + side * s * 0.6) + ' ' + (y + b) +
+               ' Q ' + (x - side * s * 0.4) + ' ' + (y + b * 1.6) +
+               ' ' + x + ' ' + (y + b * 1.9);
+      return { d: d2, x: x, y: y + b * 1.9 };
+    }
+
+    function build() {
+      var w = window.innerWidth;
+      var h = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+      var baseX = Math.min(48, w * 0.055);
+      var amp = Math.min(24, w * 0.03);
+      var spacing = 470;
+      var anchors = [];
+      for (var ay = spacing; ay < h - 70; ay += spacing) anchors.push(ay);
+      var d = 'M ' + baseX + ' 0';
+      var cx = baseX, cy = 0, ai = 0, seg = 104;
+      while (cy < h) {
+        var ny = cy + seg;
+        if (ai < anchors.length && anchors[ai] <= ny) {
+          var aY = anchors[ai];
+          var aX = baseX + Math.sin(aY / 240) * amp;
+          var mx = (cx + aX) / 2, my = (cy + aY) / 2;
+          d += ' Q ' + cx + ' ' + cy + ' ' + mx + ' ' + my + ' T ' + aX + ' ' + aY;
+          cx = aX; cy = aY;
+          var res = doodle(ai, cx, cy);
+          d += res.d; cx = res.x; cy = res.y;
+          ai++;
+        } else {
+          var nx = baseX + Math.sin(ny / 240) * amp + Math.sin(ny / 72) * 5;
+          var mx2 = (cx + nx) / 2, my2 = (cy + ny) / 2;
+          d += ' Q ' + cx + ' ' + cy + ' ' + mx2 + ' ' + my2;
+          cx = nx; cy = ny;
+        }
+      }
+      d += ' T ' + cx + ' ' + h;
+      path.setAttribute('d', d);
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.style.height = h + 'px';
+      update();
+    }
+    function update() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p;
+      if (max <= 4) p = 0.32;
+      else { p = window.scrollY / max; if (p < 0) p = 0; if (p > 1) p = 1; }
+      path.style.strokeDashoffset = String(1 - p);
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(function () { update(); ticking = false; }); }
+    }, { passive: true });
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 150); });
+    window.addEventListener('load', build);
+    build();
+  })();
+</script>
+
+</body>
+</html>
