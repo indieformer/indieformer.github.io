@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abelina | Indieformer</title>
+  <meta name="description"
+    content="Abelina — a surreal, hand-crafted afterlife game by Gabe Askew, published by Indieformer. In development, with more revealed as it takes shape. Wishlist on Steam — Q1 2027.">
+  <link rel="canonical" href="https://indieformer.com/abelina/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Social cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Indieformer">
+  <meta property="og:title" content="Abelina — published by Indieformer">
+  <meta property="og:description"
+    content="You died a while ago. You woke up here. A surreal, hand-crafted afterlife game — in development, published by Indieformer. Q1 2027.">
+  <meta property="og:url" content="https://indieformer.com/abelina/">
+  <meta property="og:image" content="https://indieformer.com/images/abelina/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Abelina — published by Indieformer">
+  <meta name="twitter:description"
+    content="A surreal, hand-crafted afterlife game in development. Published by Indieformer. More revealed as it takes shape. Q1 2027.">
+  <meta name="twitter:image" content="https://indieformer.com/images/abelina/og.jpg">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Abelina palette — dusk wilderness lit by phosphorescent seeds.
+         Tune these once Gabe's key art lands (sampled placeholders for now). */
+      --void: #0E0F18;
+      /* deepest night */
+      --void-mid: #151722;
+      --void-lite: #1D2030;
+      --void-lighter: #2A2E42;
+      --phosphor: #5FE0A6;
+      /* the glow of a gourd seed */
+      --phosphor-bright: #93FFC9;
+      --phosphor-dim: #3FA67C;
+      --amber: #E8A24C;
+      /* gourd-light / warmth */
+      --amber-bright: #FFC069;
+      --lichen: #C9D6C0;
+      /* pale wall-lichen */
+      --bone: #ECE8DA;
+      --text-primary: #ECE8DA;
+      --text-secondary: #AEB6C2;
+      --text-tertiary: #6E7689;
+      --border: rgba(95, 224, 166, 0.14);
+      --border-mid: rgba(95, 224, 166, 0.30);
+    }
+
+    body {
+      background: var(--void) !important;
+      color: var(--text-primary) !important;
+      font-family: 'Sora', Arial, sans-serif !important;
+      -webkit-font-smoothing: antialiased;
+      text-align: left !important;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none !important;
+      color: inherit !important;
+    }
+
+    .divider {
+      border: none !important;
+      border-top: 1px solid var(--border) !important;
+      margin: 0 !important;
+    }
+
+    /* ── HERO BANNER ────────────────────────────── */
+    .hero-banner {
+      position: relative;
+      height: 260px;
+      overflow: hidden;
+      /* on-brand fallback before key art is dropped in */
+      background:
+        radial-gradient(120% 90% at 70% 10%, rgba(95, 224, 166, 0.10), transparent 60%),
+        radial-gradient(80% 70% at 15% 0%, rgba(232, 162, 76, 0.08), transparent 55%),
+        linear-gradient(160deg, #1a1d2c 0%, var(--void) 70%);
+    }
+
+    .hero-banner-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center 28%;
+      filter: brightness(0.78) saturate(1.05);
+    }
+
+    .hero-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 35%, var(--void) 100%);
+    }
+
+    /* ── HERO COLUMNS ────────────────────────────── */
+    .hero-columns {
+      max-width: 900px;
+      margin: -90px auto 0;
+      padding: 0 24px 52px;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-left {
+      flex-shrink: 0;
+      width: 230px;
+    }
+
+    .capsule-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid var(--border-mid);
+      box-shadow: 0 10px 44px rgba(0, 0, 0, 0.65), 0 0 40px rgba(95, 224, 166, 0.08);
+      /* placeholder fill if no capsule image yet */
+      background:
+        radial-gradient(90% 60% at 50% 20%, rgba(95, 224, 166, 0.18), transparent 70%),
+        linear-gradient(180deg, #20243a, #11131f);
+      aspect-ratio: 3 / 4;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .capsule-frame .ph-label {
+      width: 100%;
+      padding: 14px 16px;
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      color: var(--phosphor-bright);
+      transform: rotate(-1.5deg);
+      opacity: 0.85;
+    }
+
+    .vertical-capsule-img {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block !important;
+    }
+
+    .hero-right {
+      flex: 1;
+    }
+
+    .hero-badge {
+      display: inline-block !important;
+      font-family: 'Caveat', cursive !important;
+      font-size: 23px !important;
+      font-weight: 600 !important;
+      color: var(--phosphor-bright) !important;
+      transform: rotate(-1.5deg);
+      margin-bottom: 12px !important;
+    }
+
+    .hero-title {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 54px !important;
+      font-weight: 800 !important;
+      line-height: 1.0 !important;
+      letter-spacing: -0.02em !important;
+      color: var(--bone) !important;
+      margin-bottom: 12px !important;
+    }
+
+    .hero-genre {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.04em !important;
+      color: var(--phosphor) !important;
+      margin-bottom: 16px !important;
+    }
+
+    .hero-desc {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 14.5px !important;
+      font-weight: 400 !important;
+      line-height: 1.75 !important;
+      color: var(--text-secondary) !important;
+      margin-bottom: 22px !important;
+      max-width: 490px !important;
+    }
+
+    .hero-cred {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 13px !important;
+      font-weight: 400 !important;
+      line-height: 1.6 !important;
+      color: var(--text-secondary) !important;
+      margin-bottom: 22px !important;
+      max-width: 490px !important;
+      border-left: 2px solid var(--phosphor-dim) !important;
+      padding-left: 14px !important;
+    }
+
+    .hero-cred strong {
+      color: var(--lichen) !important;
+      font-weight: 600 !important;
+    }
+
+    .hero-meta {
+      display: flex !important;
+      gap: 26px !important;
+      margin-bottom: 24px !important;
+      flex-wrap: wrap !important;
+    }
+
+    .hero-meta-item {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 3px !important;
+    }
+
+    .hero-meta-label {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      color: var(--text-tertiary) !important;
+    }
+
+    .hero-meta-val {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      color: var(--text-primary) !important;
+    }
+
+    .hero-actions {
+      display: flex !important;
+      gap: 12px !important;
+      flex-wrap: wrap !important;
+    }
+
+    @media (max-width: 640px) {
+      .hero-banner {
+        height: 180px;
+      }
+
+      .hero-columns {
+        flex-direction: column;
+        gap: 22px;
+        margin-top: -56px;
+        padding: 0 16px 40px;
+        align-items: flex-start;
+      }
+
+      .hero-left {
+        width: 150px;
+      }
+
+      .hero-title {
+        font-size: 38px !important;
+      }
+    }
+
+    /* ── BUTTONS ────────────────────────────────── */
+    .btn-steam,
+    .btn-steam:link,
+    .btn-steam:visited {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      padding: 13px 26px !important;
+      border-radius: 8px !important;
+      background: var(--phosphor) !important;
+      color: var(--void) !important;
+      border: none !important;
+      cursor: pointer !important;
+      display: inline-block !important;
+      white-space: nowrap !important;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-steam:hover {
+      background: var(--phosphor-bright) !important;
+      box-shadow: 0 0 28px rgba(95, 224, 166, 0.30) !important;
+    }
+
+    .btn-ghost,
+    .btn-ghost:link,
+    .btn-ghost:visited {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      padding: 13px 26px !important;
+      border-radius: 8px !important;
+      background: transparent !important;
+      color: var(--bone) !important;
+      border: 2px solid var(--border-mid) !important;
+      cursor: pointer !important;
+      display: inline-block !important;
+      white-space: nowrap !important;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--phosphor) !important;
+      color: var(--phosphor-bright) !important;
+    }
+
+    /* ── SECTIONS ───────────────────────────────── */
+    .section {
+      padding: 56px 24px !important;
+      max-width: 900px !important;
+      margin: 0 auto !important;
+      text-align: left !important;
+    }
+
+    .section-label {
+      font-family: 'Caveat', cursive !important;
+      font-size: 23px !important;
+      font-weight: 600 !important;
+      color: var(--amber-bright) !important;
+      margin-bottom: 6px !important;
+      display: inline-block !important;
+      transform: rotate(-1.5deg);
+    }
+
+    .section h2 {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 28px !important;
+      font-weight: 700 !important;
+      line-height: 1.15 !important;
+      letter-spacing: -0.01em !important;
+      color: var(--text-primary) !important;
+      margin-bottom: 8px !important;
+    }
+
+    .section-sub {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 15px !important;
+      font-weight: 400 !important;
+      line-height: 1.7 !important;
+      color: var(--text-secondary) !important;
+      margin-bottom: 24px !important;
+    }
+
+    /* ── VIDEO / TRAILER ────────────────────────── */
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-mid);
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+      border: none !important;
+    }
+
+    .trailer-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background:
+        radial-gradient(70% 60% at 50% 40%, rgba(95, 224, 166, 0.10), transparent 70%),
+        linear-gradient(160deg, #1a1d2c, #0f111a);
+      text-align: center;
+      padding: 24px;
+    }
+
+    .trailer-placeholder .tp-mark {
+      font-size: 30px;
+      opacity: 0.7;
+    }
+
+    .trailer-placeholder .tp-text {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--phosphor-bright);
+      transform: rotate(-1deg);
+    }
+
+    /* ── STORY / QUOTE ──────────────────────────── */
+    .quote-section {
+      background: var(--void-mid) !important;
+      border-top: 1px solid var(--border) !important;
+      border-bottom: 1px solid var(--border) !important;
+      padding: 56px 24px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 48px !important;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .quote-img-frame {
+      flex-shrink: 0;
+      width: 300px;
+      aspect-ratio: 4 / 5;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border-mid);
+      background:
+        radial-gradient(80% 60% at 50% 30%, rgba(95, 224, 166, 0.16), transparent 70%),
+        linear-gradient(180deg, #20243a, #11131f);
+    }
+
+    .quote-img-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .quote-text-wrap {
+      max-width: 480px;
+    }
+
+    .quote-eyebrow {
+      font-family: 'Caveat', cursive !important;
+      font-size: 23px !important;
+      font-weight: 600 !important;
+      color: var(--amber-bright) !important;
+      margin-bottom: 10px !important;
+      display: inline-block !important;
+      transform: rotate(-1.5deg);
+    }
+
+    .quote-text-wrap p {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 16px !important;
+      font-weight: 400 !important;
+      line-height: 1.85 !important;
+      color: var(--text-secondary) !important;
+      margin-bottom: 18px !important;
+    }
+
+    .quote-text-wrap p strong {
+      color: var(--bone) !important;
+      font-weight: 600 !important;
+    }
+
+    /* ── FEATURES ───────────────────────────────── */
+    .features-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 12px !important;
+      margin-top: 8px !important;
+    }
+
+    .feature-card {
+      background: var(--void-mid) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 12px !important;
+      padding: 22px 24px !important;
+      text-align: left !important;
+      transition: transform 0.25s cubic-bezier(.16, 1, .3, 1), box-shadow 0.25s, border-color 0.2s !important;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 12px 38px rgba(0, 0, 0, 0.45) !important;
+      border-color: var(--border-mid) !important;
+    }
+
+    .feature-icon {
+      font-size: 22px !important;
+      margin-bottom: 12px !important;
+      display: block !important;
+    }
+
+    .feature-title {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      color: var(--bone) !important;
+      margin-bottom: 6px !important;
+      display: block !important;
+    }
+
+    .feature-body {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 13.5px !important;
+      font-weight: 400 !important;
+      line-height: 1.65 !important;
+      color: var(--text-secondary) !important;
+      display: block !important;
+    }
+
+    /* ── SCREENSHOT CAROUSEL ────────────────────── */
+    .carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--border-mid);
+      background: var(--void-mid);
+      aspect-ratio: 16/9;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 100%;
+    }
+
+    .carousel-slide {
+      flex-shrink: 0;
+      width: 100%;
+      aspect-ratio: 16/9;
+      /* on-brand fill behind a missing screenshot */
+      background:
+        radial-gradient(60% 80% at 30% 20%, rgba(95, 224, 166, 0.12), transparent 70%),
+        linear-gradient(160deg, #1a1d2c, #0f111a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-slide .cs-ph {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--phosphor-bright);
+      opacity: 0.8;
+      transform: rotate(-1deg);
+    }
+
+    .carousel-slide img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block !important;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(14, 15, 24, 0.85) !important;
+      border: 1px solid var(--border-mid) !important;
+      border-radius: 8px !important;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 18px;
+      color: var(--bone) !important;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(95, 224, 166, 0.18) !important;
+      border-color: var(--phosphor) !important;
+    }
+
+    .carousel-btn.prev {
+      left: 12px;
+    }
+
+    .carousel-btn.next {
+      right: 12px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--void-lighter) !important;
+      border: 1px solid var(--border-mid) !important;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .carousel-dot.active {
+      background: var(--phosphor) !important;
+      border-color: var(--phosphor) !important;
+    }
+
+    /* ── FOOTER CTA ─────────────────────────────── */
+    .footer-cta {
+      background: var(--void-mid) !important;
+      border-top: 1px solid var(--border) !important;
+      padding: 56px 24px 64px !important;
+      text-align: center !important;
+    }
+
+    .footer-cta h2 {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 32px !important;
+      font-weight: 700 !important;
+      color: var(--text-primary) !important;
+      margin-bottom: 12px !important;
+    }
+
+    .footer-cta p {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 15px !important;
+      color: var(--text-secondary) !important;
+      margin: 0 auto 28px !important;
+      max-width: 480px !important;
+      line-height: 1.7 !important;
+    }
+
+    .footer-cta-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-link,
+    .footer-link:link,
+    .footer-link:visited {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 13px !important;
+      color: var(--text-tertiary) !important;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--phosphor) !important;
+    }
+
+    /* ── BACK LINK ──────────────────────────────── */
+    .if-back {
+      position: fixed;
+      top: 18px;
+      left: 22px;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--phosphor-bright);
+      z-index: 100;
+      transform: rotate(-2deg);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .if-back:hover {
+      color: var(--bone) !important;
+      transform: rotate(-2deg) translateX(-4px);
+    }
+
+    @media (max-width: 640px) {
+      .if-back {
+        font-size: 19px;
+        top: 14px;
+        left: 16px;
+      }
+
+      .quote-section {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .quote-img-frame {
+        width: 220px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .footer-cta h2 {
+        font-size: 24px !important;
+      }
+    }
+
+    /* ── ENTRANCE ANIMATIONS ────────────────────── */
+    @keyframes abHeroUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .js-ready .hero-badge {
+      animation: abHeroUp 0.7s 0.05s cubic-bezier(.16, 1, .3, 1) both !important;
+    }
+
+    .js-ready .hero-title {
+      animation: abHeroUp 0.85s 0.15s cubic-bezier(.16, 1, .3, 1) both !important;
+    }
+
+    .js-ready .hero-genre {
+      animation: abHeroUp 0.7s 0.28s cubic-bezier(.16, 1, .3, 1) both !important;
+    }
+
+    .js-ready .hero-desc {
+      animation: abHeroUp 0.7s 0.38s cubic-bezier(.16, 1, .3, 1) both !important;
+    }
+
+    .js-ready .hero-meta {
+      animation: abHeroUp 0.7s 0.47s cubic-bezier(.16, 1, .3, 1) both !important;
+    }
+
+    .js-ready .hero-actions {
+      animation: abHeroUp 0.7s 0.55s cubic-bezier(.16, 1, .3, 1) both !important;
+    }
+
+    .js-ready .feature-card {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(.16, 1, .3, 1), transform 0.65s cubic-bezier(.16, 1, .3, 1),
+        box-shadow 0.25s, border-color 0.2s !important;
+    }
+
+    .js-ready .feature-card.ab-in {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    /* ── LOADING OVERLAY (Lottie gem — site-wide) ─── */
+    #loader-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--void);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.45s ease;
+    }
+
+    #loader-overlay.gone {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #loader-gem {
+      width: 140px;
+      height: 140px;
+    }
+
+    @media (max-width: 600px) {
+      #loader-gem {
+        width: 110px;
+        height: 110px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="loader-overlay" aria-hidden="true">
+    <div id="loader-gem"></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script>
+    (function () {
+      var o = document.getElementById('loader-overlay');
+      if (!o) return;
+      var anim;
+      try {
+        if (typeof lottie !== 'undefined') {
+          anim = lottie.loadAnimation({
+            container: document.getElementById('loader-gem'),
+            renderer: 'svg', loop: true, autoplay: true,
+            path: '/loading-gem.json'
+          });
+        }
+      } catch (e) { }
+      var shown = Date.now();
+      function hide() {
+        if (o.classList.contains('gone')) return;
+        o.classList.add('gone');
+        setTimeout(function () {
+          try { if (anim) anim.destroy(); } catch (e) { }
+          if (o.parentNode) o.parentNode.removeChild(o);
+        }, 500);
+      }
+      function maybeHide() { setTimeout(hide, Math.max(0, 400 - (Date.now() - shown))); }
+      if (document.readyState === 'complete') maybeHide();
+      else window.addEventListener('load', maybeHide);
+      setTimeout(hide, 4000);
+    })();
+  </script>
+
+  <a class="if-back" href="/" aria-label="Back to Indieformer">← Indieformer</a>
+
+  <!-- ── HERO ─────────────────────────────────────────────────────── -->
+  <div class="hero-banner">
+    <div class="hero-banner-bg" id="hero-bg"></div>
+    <div class="hero-banner-overlay"></div>
+  </div>
+
+  <div class="hero-columns">
+    <div class="hero-left">
+      <div class="capsule-frame">
+        <img id="vertical-capsule" src="/images/abelina/capsule.jpg" alt="Abelina key art"
+          class="vertical-capsule-img" onerror="this.style.display='none'">
+        <span class="ph-label"></span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-badge">✦ Published by Indieformer</div>
+      <h1 class="hero-title">Abelina</h1>
+      <p class="hero-genre">Surreal afterlife platformer · Hand-crafted · In development</p>
+      <p class="hero-desc">You died a while ago. You're Vasily, and you woke up here — in Abelina, a strange,
+        hand-crafted afterlife, and a mature story about life and death told through who you meet along the way.
+        We're early in building it with Gabe, and we'll show more as it takes shape.</p>
+      <p class="hero-cred">Made solo by a <strong>cinematics veteran</strong> — Valorant, League of Legends,
+        Netflix's <em>Love, Death + Robots</em> — with a <strong>Webby-winning composer</strong> on the score.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Developer</span><span class="hero-meta-val">Gabe Askew</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Publisher</span><span class="hero-meta-val">Indieformer</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Target release</span><span class="hero-meta-val">Q1 2027</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="https://store.steampowered.com/app/3682900/Abelina/" target="_blank" rel="noopener"
+          class="btn-steam">✦ Wishlist on Steam</a>
+        <a href="https://discord.gg/xE9eTQNJT4" target="_blank" rel="noopener" class="btn-ghost">Watch it in our Discord</a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── WHERE ABELINA STANDS — transparency tracker (hand-updated) ─── -->
+  <style>
+    .ab-ts-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 44px 24px 12px;
+    }
+
+    .ab-ts {
+      background: var(--void-mid);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ab-ts::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--phosphor-bright), var(--amber), var(--phosphor));
+    }
+
+    .ab-ts-eyebrow {
+      font-family: 'Caveat', cursive !important;
+      font-size: 22px !important;
+      font-weight: 600 !important;
+      color: var(--phosphor-bright) !important;
+      display: inline-block !important;
+      transform: rotate(-1.5deg);
+    }
+
+    .ab-ts-title {
+      font-family: 'Caveat', cursive !important;
+      font-size: 30px !important;
+      font-weight: 700 !important;
+      color: var(--phosphor-bright) !important;
+      margin: 0 0 18px !important;
+      display: inline-block !important;
+      transform: rotate(-1.5deg);
+    }
+
+    .ab-ts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+
+    .ab-ts-tile {
+      background: var(--void);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      text-align: left;
+    }
+
+    .ab-ts-label {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      color: var(--text-tertiary) !important;
+      margin-bottom: 8px !important;
+      display: block !important;
+    }
+
+    .ab-ts-num {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 28px !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.02em !important;
+      color: var(--bone) !important;
+      line-height: 1 !important;
+      display: block !important;
+      margin-bottom: 4px !important;
+    }
+
+    .ab-ts-num.phosphor {
+      color: var(--phosphor-bright) !important;
+    }
+
+    .ab-ts-num.amber {
+      color: var(--amber-bright) !important;
+    }
+
+    .ab-ts-sub {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 12px !important;
+      color: var(--text-secondary) !important;
+      display: block !important;
+    }
+
+    .ab-ts-footer {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 12px !important;
+      color: var(--text-tertiary) !important;
+      margin-top: 16px !important;
+      padding-top: 14px !important;
+      border-top: 1px solid var(--border) !important;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .ab-ts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="ab-ts-wrap" style="padding-bottom:44px;">
+    <div class="ab-ts">
+      <h3 class="ab-ts-title">Where Abelina stands.</h3>
+      <div class="ab-ts-grid">
+        <div class="ab-ts-tile">
+          <span class="ab-ts-label">Stage</span>
+          <span class="ab-ts-num phosphor">In development</span>
+          <span class="ab-ts-sub">Signed to Indieformer</span>
+        </div>
+        <div class="ab-ts-tile">
+          <span class="ab-ts-label">Target launch</span>
+          <span class="ab-ts-num amber">Q1 2027</span>
+          <span class="ab-ts-sub">on Steam · firms up closer in</span>
+        </div>
+      </div>
+      <div class="ab-ts-footer">
+        Updated by hand, on purpose. We'll reveal more about the game as it takes shape — not before. When
+        something changes, we change it here.
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── STORY / QUOTE ─────────────────────────────────────────────── -->
+  <div class="quote-section">
+    <div class="quote-img-frame">
+      <img src="/images/abelina/story.png" alt="Vasily, over the shoulder, in Abelina"
+        style="object-position:center 30%;" onerror="this.style.display='none'">
+    </div>
+    <div class="quote-text-wrap">
+      <span class="quote-eyebrow">The premise</span>
+      <p><strong>You died.</strong> And you woke up here — in Abelina, alongside a few other after-lifers whose
+        ideas about the universe have just been badly shaken. You're Vasily, and now you're trying to work out what
+        this place actually is.</p>
+      <p>It's a mature, hand-crafted story about life and death, told through who you meet and what they tell you.
+        That's as much as we'll say for now. We're still shaping it with Gabe, and we'll show more — the world, how
+        it plays, the people in it — when it's ready.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="https://store.steampowered.com/app/3682900/Abelina/" target="_blank" rel="noopener"
+          class="btn-ghost">Wishlist on Steam</a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── THE MAKERS ────────────────────────────────────────────────── -->
+  <style>
+    .makers-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    .makers-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    .maker-card {
+      background: var(--void-mid);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px 28px;
+      text-align: left;
+    }
+
+    .maker-role {
+      font-family: 'Caveat', cursive !important;
+      font-size: 21px !important;
+      font-weight: 600 !important;
+      color: var(--amber-bright) !important;
+      display: inline-block !important;
+      transform: rotate(-1.5deg);
+      margin-bottom: 6px !important;
+    }
+
+    .maker-name {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 20px !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.01em !important;
+      color: var(--bone) !important;
+      margin: 0 0 2px !important;
+    }
+
+    .maker-sub {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 12.5px !important;
+      font-weight: 500 !important;
+      color: var(--phosphor) !important;
+      margin-bottom: 14px !important;
+    }
+
+    .maker-body {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      line-height: 1.72 !important;
+      color: var(--text-secondary) !important;
+      margin-bottom: 16px !important;
+    }
+
+    .maker-body em {
+      font-style: italic;
+      color: var(--lichen);
+    }
+
+    .maker-creds {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .maker-creds span {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 11.5px !important;
+      font-weight: 500 !important;
+      color: var(--lichen) !important;
+      background: rgba(95, 224, 166, 0.06) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 999px !important;
+      padding: 5px 11px !important;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .makers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="makers-wrap">
+    <span class="section-label">who's making it</span>
+    <h2 style="font-family:'Sora',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.01em;color:var(--text-primary);margin-bottom:8px;line-height:1.15;">
+      Hand-crafted — by people who've done this at the top.</h2>
+    <p class="section-sub" style="max-width:640px;">Abelina is built by hand, frame by frame. "Hand-crafted" here
+      doesn't mean first-timer — it means a CG-animation veteran and a Webby-winning composer choosing to build every
+      shot and every sound themselves.</p>
+
+    <div class="makers-grid">
+      <div class="maker-card">
+        <span class="maker-role">The whole game</span>
+        <h3 class="maker-name">Gabe Askew</h3>
+        <p class="maker-sub">Solo developer · art, animation, design</p>
+        <p class="maker-body">A career in CG animation — nine years at Hornet directing campaigns for Dolby, Purina
+          and Campbell's, then supervising cinematics at Blur Studio. Abelina is all of that pointed at one strange,
+          personal world: <em>hand-crafted, solo.</em></p>
+        <div class="maker-creds">
+          <span>Valorant</span><span>League of Legends</span><span>Love, Death + Robots</span><span>Hornet</span><span>Blur Studio</span>
+        </div>
+      </div>
+      <div class="maker-card">
+        <span class="maker-role">The sound</span>
+        <h3 class="maker-name">Ryan Holladay</h3>
+        <p class="maker-sub">Composer &amp; sound design</p>
+        <p class="maker-body">Gabe's longtime musical partner and a Webby Award-winning composer. VP of Music at
+          WaitWhat and a Senior TED Fellow, known for scoring the podcast <em>Meditative Story</em> and co-composing
+          (with his brother Hays Holladay) the 2025 film <em>Weapons</em> — and now scoring Zach Cregger's upcoming
+          <em>Resident Evil</em>. He and Gabe have collaborated for years.</p>
+        <div class="maker-creds">
+          <span>Webby Award</span><span>Senior TED Fellow</span><span>WaitWhat</span><span>Weapons (2025)</span><span>Resident Evil (2026)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── FOOTER CTA ────────────────────────────────────────────────── -->
+  <div class="footer-cta">
+    <h2>Follow Abelina as we build it.</h2>
+    <p>It's early days. Wishlisting on Steam is the one small thing that helps tremendously — and it's how you'll
+      know the moment it's playable. Want to watch it come together? Our dev-chat Discord is open: read along as we
+      shape the game in the open.</p>
+    <div class="footer-cta-actions">
+      <a href="https://store.steampowered.com/app/3682900/Abelina/" target="_blank" rel="noopener"
+        class="btn-steam">✦ Wishlist on Steam</a>
+      <a href="https://discord.gg/xE9eTQNJT4" target="_blank" rel="noopener" class="btn-ghost">Open the dev-chat Discord</a>
+    </div>
+    <div class="footer-links">
+      <a href="https://gabeaskew.com/abelina" target="_blank" rel="noopener" class="footer-link">Dev site</a>
+      <a href="https://bsky.app/profile/abelinagame.bsky.social" target="_blank" rel="noopener"
+        class="footer-link">Bluesky</a>
+      <a href="https://threads.net/@glabe_raskew" target="_blank" rel="noopener" class="footer-link">Threads</a>
+      <a href="https://www.instagram.com/glabe_raskew" target="_blank" rel="noopener"
+        class="footer-link">Instagram</a>
+      <a href="https://www.tiktok.com/@glabe_raskew" target="_blank" rel="noopener" class="footer-link">TikTok</a>
+      <a href="https://www.youtube.com/@AbelinaTheGame" target="_blank" rel="noopener"
+        class="footer-link">YouTube</a>
+      <a href="https://www.indieformer.com" class="footer-link">Indieformer</a>
+      <a href="https://www.indieformer.com/privacy/" class="footer-link">Privacy</a>
+      <a href="https://www.indieformer.com/terms/" class="footer-link">Terms</a>
+    </div>
+  </div>
+
+  <!-- ── SCRIPTS ───────────────────────────────────────────────────── -->
+  <script>
+    (function () {
+      // ── HERO BACKGROUND ──────────────────────────
+      // Point this at the wide key art once it's in /images/abelina/.
+      // If the file is missing it 404s silently and the CSS gradient shows.
+      var heroBg = document.getElementById('hero-bg');
+      if (heroBg) {
+        var img = new Image();
+        img.onload = function () { heroBg.style.backgroundImage = 'url(/images/abelina/hero-bg.jpg)'; };
+        img.src = '/images/abelina/hero-bg.jpg';
+      }
+
+      // ── CAROUSEL ─────────────────────────────────
+      var track = document.getElementById('carousel-track');
+      var dotsEl = document.getElementById('carousel-dots');
+      var slides = track ? track.querySelectorAll('.carousel-slide') : [];
+      var current = 0;
+      var total = slides.length;
+
+      if (total > 0 && dotsEl) {
+        for (var i = 0; i < total; i++) {
+          var dot = document.createElement('div');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('data-index', i);
+          dot.addEventListener('click', function () { goTo(parseInt(this.getAttribute('data-index'))); });
+          dotsEl.appendChild(dot);
+        }
+        function goTo(n) {
+          current = (n + total) % total;
+          track.style.transform = 'translateX(-' + (current * 100) + '%)';
+          var dots = dotsEl.querySelectorAll('.carousel-dot');
+          dots.forEach(function (d, idx) { d.className = 'carousel-dot' + (idx === current ? ' active' : ''); });
+        }
+        var prevBtn = document.getElementById('carousel-prev');
+        var nextBtn = document.getElementById('carousel-next');
+        if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+        setInterval(function () { goTo(current + 1); }, 5000);
+        var touchStartX = 0;
+        track.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', function (e) {
+          var diff = touchStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+        }, { passive: true });
+      }
+
+      // ── ENTRANCE ANIMATIONS ──────────────────────
+      document.documentElement.classList.add('js-ready');
+      var fcards = document.querySelectorAll('.feature-card');
+      if (fcards.length > 0 && 'IntersectionObserver' in window) {
+        var cardObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('ab-in'); cardObs.unobserve(e.target); }
+          });
+        }, { threshold: 0.12 });
+        fcards.forEach(function (card) { cardObs.observe(card); });
+      } else {
+        fcards.forEach(function (card) { card.classList.add('ab-in'); });
+      }
+    })();
+  </script>
+
+</body>
+
+</html>
