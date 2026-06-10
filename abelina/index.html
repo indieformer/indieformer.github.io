@@ -195,6 +195,7 @@
     @media (max-width: 640px) {
       .hero-logo {
         max-width: 188px !important;
+        display: inline-block !important;
       }
     }
 
@@ -282,6 +283,11 @@
         float: left;
         width: 104px;
         margin: 0 16px 10px 0;
+      }
+
+      .hero-head {
+        display: flow-root;
+        text-align: center;
       }
 
       .hero-title {
@@ -865,9 +871,11 @@
       </div>
     </div>
     <div class="hero-right">
-      <div class="hero-badge">✦ Published by Indieformer</div>
-      <h1 class="hero-title" style="margin-bottom:14px;"><img src="/images/abelina/logo.png" alt="Abelina" class="hero-logo"></h1>
-      <p class="hero-genre">Surreal afterlife platformer · Hand-crafted · In development</p>
+      <div class="hero-head">
+        <div class="hero-badge">✦ Published by Indieformer</div>
+        <h1 class="hero-title" style="margin-bottom:14px;"><img src="/images/abelina/logo.png" alt="Abelina" class="hero-logo"></h1>
+        <p class="hero-genre">Surreal afterlife platformer · Hand-crafted · In development</p>
+      </div>
       <p class="hero-desc">You died a while ago. You're Vasily, and you woke up here — in Abelina, a strange,
         hand-crafted afterlife, and a mature story about life and death told through who you meet along the way.
         We're early in building it with Gabe, and we'll show more as it takes shape.</p>
