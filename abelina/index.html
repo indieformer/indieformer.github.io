@@ -408,12 +408,15 @@
       border-top: 1px solid var(--border) !important;
       border-bottom: 1px solid var(--border) !important;
       padding: 56px 24px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 48px !important;
-      max-width: 1000px;
+    }
+
+    .quote-inner {
+      max-width: 900px;
       margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
     }
 
     .quote-img-frame {
@@ -625,7 +628,7 @@
       font-size: 15px !important;
       color: var(--text-secondary) !important;
       margin: 0 auto 28px !important;
-      max-width: 480px !important;
+      max-width: 820px !important;
       line-height: 1.7 !important;
     }
 
@@ -683,7 +686,7 @@
         left: 16px;
       }
 
-      .quote-section {
+      .quote-inner {
         flex-direction: column;
         gap: 24px;
       }
@@ -1001,6 +1004,7 @@
 
   <!-- ── STORY / QUOTE ─────────────────────────────────────────────── -->
   <div class="quote-section">
+    <div class="quote-inner">
     <div class="quote-img-frame">
       <img src="/images/abelina/story.png" alt="Vasily, over the shoulder, in Abelina"
         onerror="this.style.display='none'">
@@ -1017,6 +1021,7 @@
         <a href="https://store.steampowered.com/app/3682900/Abelina/" target="_blank" rel="noopener"
           class="btn-ghost">Wishlist on Steam</a>
       </div>
+    </div>
     </div>
   </div>
 
@@ -1115,7 +1120,7 @@
     <span class="section-label">who's making it</span>
     <h2 style="font-family:'Sora',sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.01em;color:var(--text-primary);margin-bottom:8px;line-height:1.15;">
       Hand-crafted — by people who've done this at the top.</h2>
-    <p class="section-sub" style="max-width:640px;">Abelina is built by hand, frame by frame. "Hand-crafted" here
+    <p class="section-sub">Abelina is built by hand, frame by frame. "Hand-crafted" here
       doesn't mean first-timer — it means a CG-animation veteran and a Webby-winning composer choosing to build every
       shot and every sound themselves.</p>
 
