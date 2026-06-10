@@ -585,6 +585,14 @@
   }
   .social-icons a:hover { color: var(--text-primary) !important; transform: translateY(-2px); }
   .social-icons svg { display: block; }
+  /* ── founders duo (Josh & Clem) ─────────────────── */
+  .photo.duo { display:flex; gap:16px; align-items:flex-start; width:auto; height:auto; flex:0 0 auto; }
+  .duo-card { display:flex; flex-direction:column; align-items:center; gap:9px; }
+  .duo-frame { position:relative; width:112px; height:112px; flex:0 0 112px; }
+  .duo-frame img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:3px; display:block; }
+  .duo-frame .sketch { position:absolute; inset:-11px; width:calc(100% + 22px); height:calc(100% + 22px); overflow:visible; pointer-events:none; }
+  .duo-name { font-family:'Caveat',cursive; font-size:23px; font-weight:600; color:var(--text-primary); transform:rotate(-1deg); line-height:1; }
+  @media (max-width: 640px) { .photo.duo { justify-content:center; gap:22px; } }
 </style>
 </head>
 <body>
@@ -683,20 +691,32 @@
 
   </div>
 
-  <div class="photo">
-    <svg class="ink frame" viewBox="0 0 280 344" aria-hidden="true">
-      <path class="draw" pathLength="1" d="M30 28 C 110 20 196 22 256 30 C 260 110 262 232 254 314 C 176 322 92 320 26 310 C 20 220 18 112 30 28"
-        fill="none" stroke="#6B6980" stroke-width="2.4" stroke-linecap="round" style="animation-delay:0.7s"/>
-      <path class="draw" pathLength="1" d="M14 14 L 14 40 M14 14 L 40 14" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round" style="animation-delay:1.5s"/>
-      <path class="draw" pathLength="1" d="M266 14 L 266 40 M266 14 L 240 14" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round" style="animation-delay:1.5s"/>
-      <path class="draw" pathLength="1" d="M14 330 L 14 304 M14 330 L 40 330" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round" style="animation-delay:1.5s"/>
-      <path class="draw" pathLength="1" d="M266 330 L 266 304 M266 330 L 240 330" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round" style="animation-delay:1.5s"/>
-    </svg>
-    <!-- real photo: add a src to the img below and the placeholder hides itself -->
-    <img class="frame-img" src="" alt="Josh and Clem">
-    <div class="place-label">
-      <span class="pl-1">A photo of us</span>
-      <span class="pl-2">dropping soon</span>
+    <div class="photo duo">
+    <div class="duo-card">
+      <div class="duo-frame">
+        <svg class="sketch" viewBox="0 0 124 124" aria-hidden="true">
+          <path d="M16 14 C 50 10 92 11 110 15 C 114 50 114 92 110 110 C 80 115 40 114 16 109 C 11 80 10 46 16 14" fill="none" stroke="#6B6980" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M7 7 L 7 20 M7 7 L 20 7" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round"/>
+          <path d="M117 7 L 117 20 M117 7 L 104 7" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7 117 L 7 104 M7 117 L 20 117" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round"/>
+          <path d="M117 117 L 117 104 M117 117 L 104 117" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <img src="/images/team/josh.jpg" alt="Josh" onerror="this.style.display='none'">
+      </div>
+      <span class="duo-name">Josh</span>
+    </div>
+    <div class="duo-card">
+      <div class="duo-frame">
+        <svg class="sketch" viewBox="0 0 124 124" aria-hidden="true">
+          <path d="M14 15 C 48 11 90 10 109 14 C 113 48 115 90 110 109 C 82 114 42 115 15 110 C 10 82 9 45 14 15" fill="none" stroke="#6B6980" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M7 7 L 7 20 M7 7 L 20 7" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round"/>
+          <path d="M117 7 L 117 20 M117 7 L 104 7" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7 117 L 7 104 M7 117 L 20 117" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round"/>
+          <path d="M117 117 L 117 104 M117 117 L 104 117" fill="none" stroke="#6B6980" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <img src="/images/team/clem.jpg" alt="Clem" onerror="this.style.display='none'">
+      </div>
+      <span class="duo-name">Clem</span>
     </div>
   </div>
 
