@@ -12,6 +12,7 @@ The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a 
 - [The Approach](https://indieformer.com/how-we-make-a-game-popular/): How we make a game popular. Our publishing philosophy, including The Sauce (the pasta-sauce metaphor for what makes a game memorable), The Slow Burn, The Boring List, and Your Half.
 - [Notes](https://indieformer.com/notes/): The Indieformer newsletter index, refreshed daily from the beehiiv RSS feed. ~77 issues. Free. No paywall.
 - [Feed the Scorchpot](https://indieformer.com/scorchpot/): Page for the first game on our publishing slate.
+- [Abelina](https://indieformer.com/abelina/): Our second signed game — a surreal, hand-crafted afterlife game by solo developer Gabe Askew, in development for a Q1 2027 Steam release.
 
 ## Related properties
 
