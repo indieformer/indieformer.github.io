@@ -184,6 +184,19 @@
       margin-bottom: 12px !important;
     }
 
+    .hero-logo {
+      display: block !important;
+      width: auto !important;
+      max-width: 330px !important;
+      height: auto !important;
+    }
+
+    @media (max-width: 640px) {
+      .hero-logo {
+        max-width: 240px !important;
+      }
+    }
+
     .hero-genre {
       font-family: 'Sora', Arial, sans-serif !important;
       font-size: 12px !important;
@@ -838,7 +851,7 @@
     </div>
     <div class="hero-right">
       <div class="hero-badge">✦ Published by Indieformer</div>
-      <h1 class="hero-title">Abelina</h1>
+      <h1 class="hero-title" style="margin-bottom:14px;"><img src="/images/abelina/logo.png" alt="Abelina" class="hero-logo"></h1>
       <p class="hero-genre">Surreal afterlife platformer · Hand-crafted · In development</p>
       <p class="hero-desc">You died a while ago. You're Vasily, and you woke up here — in Abelina, a strange,
         hand-crafted afterlife, and a mature story about life and death told through who you meet along the way.
@@ -1022,6 +1035,33 @@
           class="btn-ghost">Wishlist on Steam</a>
       </div>
     </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── A GLIMPSE (screenshots for vibe) ──────────────────────────── -->
+  <style>
+    .ss-feature { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); margin-top: 8px; }
+    .ss-feature img { width: 100%; height: auto; display: block; }
+    .ss-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .ss-row figure { margin: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); }
+    .ss-row img { width: 100%; height: auto; display: block; }
+    @media (max-width: 640px) { .ss-row { grid-template-columns: 1fr; } }
+  </style>
+  <div class="section">
+    <span class="section-label">a glimpse</span>
+    <h2>Early shots from the world.</h2>
+    <p class="section-sub">In progress, and still moving — but this is the feel: Vasily, the after-lifers, and the
+      strange places in between.</p>
+    <div class="ss-feature"><img src="/images/abelina/shot-1.jpg"
+        alt="Vasily beneath floating lantern-worlds in Abelina" loading="lazy"
+        onerror="this.parentNode.style.display='none'"></div>
+    <div class="ss-row">
+      <figure><img src="/images/abelina/shot-2.jpg" alt="Abelina — a glowing coral pool" loading="lazy"
+          onerror="this.closest('figure').style.display='none'"></figure>
+      <figure><img src="/images/abelina/shot-3.jpg" alt="Abelina — the after-lifers around a campfire" loading="lazy"
+          onerror="this.closest('figure').style.display='none'"></figure>
     </div>
   </div>
 
