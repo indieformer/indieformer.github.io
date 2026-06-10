@@ -586,13 +586,17 @@
   .social-icons a:hover { color: var(--text-primary) !important; transform: translateY(-2px); }
   .social-icons svg { display: block; }
   /* ── founders duo (Josh & Clem) ─────────────────── */
-  .photo.duo { display:flex; gap:16px; align-items:flex-start; width:auto; height:auto; flex:0 0 auto; }
-  .duo-card { display:flex; flex-direction:column; align-items:center; gap:9px; }
-  .duo-frame { position:relative; width:112px; height:112px; flex:0 0 112px; }
+  .photo.duo { display:flex; flex-direction:column; align-items:center; gap:18px; width:auto; height:auto; flex:0 0 auto; }
+  .duo-card { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .duo-frame { position:relative; width:168px; height:168px; flex:0 0 168px; }
   .duo-frame img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:3px; display:block; }
-  .duo-frame .sketch { position:absolute; inset:-11px; width:calc(100% + 22px); height:calc(100% + 22px); overflow:visible; pointer-events:none; }
-  .duo-name { font-family:'Caveat',cursive; font-size:23px; font-weight:600; color:var(--text-primary); transform:rotate(-1deg); line-height:1; }
-  @media (max-width: 640px) { .photo.duo { justify-content:center; gap:22px; } }
+  .duo-frame .sketch { position:absolute; inset:-12px; width:calc(100% + 24px); height:calc(100% + 24px); overflow:visible; pointer-events:none; }
+  .duo-name { font-family:'Caveat',cursive; font-size:26px; font-weight:600; color:var(--text-primary); transform:rotate(-1deg); line-height:1; }
+  @media (max-width: 640px) {
+    .photo.duo { flex-direction:row; justify-content:center; gap:22px; }
+    .duo-frame { width:112px; height:112px; flex:0 0 112px; }
+    .duo-name { font-size:23px; }
+  }
 </style>
 </head>
 <body>
