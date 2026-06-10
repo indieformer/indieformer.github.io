@@ -200,14 +200,15 @@
       }
 
       .hero-columns {
-        gap: 16px;
+        display: block;
         margin-top: -40px;
         padding: 0 16px 40px;
-        align-items: flex-start;
       }
 
       .hero-left {
+        float: left;
         width: 104px;
+        margin: 0 16px 10px 0;
       }
 
       .hero-right {
@@ -223,17 +224,14 @@
       }
 
       .hero-actions {
-        flex-wrap: nowrap !important;
-        gap: 8px !important;
+        gap: 10px !important;
+        margin-top: 18px !important;
       }
 
       .hero-actions .btn-steam {
-        flex: 1 1 0 !important;
-        text-align: center !important;
-        padding: 10px 10px !important;
-        font-size: 12.5px !important;
-        line-height: 1.25 !important;
-        white-space: normal !important;
+        padding: 11px 16px !important;
+        font-size: 13px !important;
+        white-space: nowrap !important;
       }
     }
 
