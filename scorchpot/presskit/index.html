@@ -73,24 +73,24 @@
 
     /* ── HERO ── */
     .pk-hero {
-      position: relative; min-height: 58vh;
+      position: relative; min-height: 56vh;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: space-between;
-      text-align: center; padding: 76px 24px 46px;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 84px 24px 52px;
       overflow: hidden;
     }
     .pk-hero-bg {
       position: absolute; inset: 0; z-index: 0;
-      background-image: url('/images/scorchpot/presskit/hero.jpg');
-      background-size: cover; background-position: 34% 40%;
-      filter: brightness(0.64) saturate(1.04);
+      background-image: url('/images/scorchpot/presskit/hero.jpg?v=2');
+      background-size: cover; background-position: center center;
+      filter: brightness(0.56) saturate(1.05);
     }
     .pk-hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(26,20,16,0.34) 0%, rgba(26,20,16,0.1) 36%, rgba(26,20,16,0.86) 86%, var(--ash) 100%);
+      background:
+        radial-gradient(58% 66% at 50% 46%, rgba(26,20,16,0.52), transparent 72%),
+        linear-gradient(to bottom, rgba(26,20,16,0.42) 0%, rgba(26,20,16,0.22) 40%, rgba(26,20,16,0.9) 88%, var(--ash) 100%);
     }
-    .pk-hero > .pk-eyebrow, .pk-hero-foot { position: relative; z-index: 2; }
-    .pk-hero-foot { max-width: 620px; }
     .pk-hero-inner { position: relative; z-index: 2; max-width: 760px; }
     .pk-eyebrow {
       font-family: 'Caveat', cursive; font-size: 24px; font-weight: 600;
@@ -283,8 +283,9 @@
   <!-- ── HERO ── -->
   <header class="pk-hero">
     <div class="pk-hero-bg"></div>
-    <span class="pk-eyebrow">Press Kit</span>
-    <div class="pk-hero-foot">
+    <div class="pk-hero-inner">
+      <span class="pk-eyebrow">Press Kit</span>
+      <img class="pk-hero-logo" src="/images/scorchpot/logo.png" alt="Feed the Scorchpot">
       <p class="pk-hero-tag">A dice roguelike about feeding a dragon for twenty years. Roll ingredients, build your
         island, and fuse absurd recipes into combos that break the score wide open.</p>
       <div class="pk-hero-actions">
@@ -375,12 +376,15 @@
         <h2 class="pk-h2">Screenshots</h2>
         <p>Click to enlarge. Full-resolution screenshots, key art and logos are in the <a href="https://drive.google.com/drive/folders/13hfH1I9sGzxhJgHxj5E1AXK_-O7eQ3Wv?usp=sharing" target="_blank" rel="noopener" style="color:var(--gold-bright);">downloadable asset pack →</a></p>
         <div class="pk-gallery" id="pk-gallery">
-          <div class="pk-shot"><span class="ph">Early game</span><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/b1874f87-4422-486e-9b2b-83c00adfa93f/Early_Game_-_Snarky_Dragon.png" alt="Feed the Scorchpot — early game, snarky dragon" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="pk-shot"><span class="ph">The shop</span><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/5c06691d-aa72-4499-81bb-8fa13f84ba6e/Shop.png" alt="Feed the Scorchpot — the shop" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="pk-shot"><span class="ph">Cooking</span><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/42861017-8b1a-40d4-8748-4bc6d196af17/Cooking.png" alt="Feed the Scorchpot — cooking" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="pk-shot"><span class="ph">Hangry dragon</span><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/dabf2015-1447-4f50-a3b3-17c6d5aa587e/Dragon_Hangry.png" alt="Feed the Scorchpot — hangry dragon" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Big hunger</span><img src="/images/scorchpot/presskit/big-hunger.jpg" alt="Feed the Scorchpot — big hunger, the Emperor" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Dice &amp; recipes</span><img src="/images/scorchpot/presskit/dice-recipes.jpg" alt="Feed the Scorchpot — dice and recipes" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">The Duchess</span><img src="/images/scorchpot/presskit/duchess.jpg" alt="Feed the Scorchpot — the Duchess" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Recipes</span><img src="/images/scorchpot/presskit/recipes.jpg" alt="Feed the Scorchpot — recipes" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Harvest</span><img src="/images/scorchpot/presskit/harvest.jpg" alt="Feed the Scorchpot — in-game harvest" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">The shop</span><img src="/images/scorchpot/presskit/shop2.jpg" alt="Feed the Scorchpot — the shop" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Snarky dragon</span><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/b1874f87-4422-486e-9b2b-83c00adfa93f/Early_Game_-_Snarky_Dragon.png" alt="Feed the Scorchpot — early game, snarky dragon" loading="lazy" onerror="this.style.display='none'"></div>
           <div class="pk-shot"><span class="ph">Mid-game board</span><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/05f57b14-9174-4959-928e-61770129cf5a/Mid-Game_Board.png" alt="Feed the Scorchpot — mid-game board" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="pk-shot"><span class="ph">Very late game</span><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/9803f7a2-ca1b-480e-93bd-ab1096dc5a69/Very_Late_Game_Board.png" alt="Feed the Scorchpot — very late game board" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Late game</span><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/9803f7a2-ca1b-480e-93bd-ab1096dc5a69/Very_Late_Game_Board.png" alt="Feed the Scorchpot — very late game board" loading="lazy" onerror="this.style.display='none'"></div>
         </div>
       </section>
 
