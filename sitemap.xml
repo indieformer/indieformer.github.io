@@ -37,6 +37,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://indieformer.com/abelina/presskit/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://indieformer.com/press-kit-guide/</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
