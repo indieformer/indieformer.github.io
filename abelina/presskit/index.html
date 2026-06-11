@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abelina — Press Kit | Indieformer</title>
+  <meta name="description"
+    content="Press kit for Abelina — a hand-crafted afterlife adventure by Gabe Askew, published by Indieformer. Factsheet, screenshots, dev story, logos and contact for press.">
+  <link rel="canonical" href="https://indieformer.com/abelina/presskit/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Indieformer">
+  <meta property="og:title" content="Abelina — Press Kit">
+  <meta property="og:description"
+    content="You died. And you woke up here. A hand-crafted afterlife adventure. Factsheet, screenshots, dev story, logos and press contact.">
+  <meta property="og:url" content="https://indieformer.com/abelina/presskit/">
+  <meta property="og:image" content="https://indieformer.com/images/abelina/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Abelina — Press Kit">
+  <meta name="twitter:description" content="A hand-crafted afterlife adventure. Press kit by Indieformer.">
+  <meta name="twitter:image" content="https://indieformer.com/images/abelina/og.jpg">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --void: #0E0F18;
+      --void-mid: #151722;
+      --void-lite: #1D2030;
+      --void-lighter: #2A2E42;
+      --phosphor: #5FE0A6;
+      --phosphor-bright: #93FFC9;
+      --phosphor-dim: #3FA67C;
+      --amber: #E8A24C;
+      --amber-bright: #FFC069;
+      --lichen: #C9D6C0;
+      --bone: #ECE8DA;
+      --text-primary: #ECE8DA;
+      --text-secondary: #AEB6C2;
+      --text-tertiary: #6E7689;
+      --border: rgba(95, 224, 166, 0.14);
+      --border-mid: rgba(95, 224, 166, 0.30);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--void) !important;
+      color: var(--text-primary) !important;
+      font-family: 'Sora', Arial, sans-serif !important;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6; overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .pk-back {
+      position: fixed; top: 16px; left: 20px; z-index: 200;
+      font-family: 'Caveat', cursive; font-size: 21px;
+      color: var(--phosphor-bright); transform: rotate(-2deg);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8); transition: transform .2s, color .2s;
+    }
+    .pk-back:hover { color: var(--bone); transform: rotate(-2deg) translateX(-4px); }
+
+    /* HERO */
+    .pk-hero {
+      position: relative; min-height: 56vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 84px 24px 52px; overflow: hidden;
+    }
+    .pk-hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: url('/images/abelina/hero-bg.jpg');
+      background-size: cover; background-position: center center;
+      filter: brightness(0.6) saturate(1.04);
+    }
+    .pk-hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(58% 66% at 50% 46%, rgba(14,15,24,0.5), transparent 72%),
+        linear-gradient(to bottom, rgba(14,15,24,0.4) 0%, rgba(14,15,24,0.2) 40%, rgba(14,15,24,0.92) 88%, var(--void) 100%);
+    }
+    .pk-hero-inner { position: relative; z-index: 2; max-width: 760px; }
+    .pk-eyebrow {
+      font-family: 'Caveat', cursive; font-size: 24px; font-weight: 600;
+      color: var(--phosphor-bright); transform: rotate(-1.5deg);
+      display: inline-block; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    }
+    .pk-hero-logo { width: 100%; max-width: 380px; height: auto; display: block; margin: 0 auto 16px;
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,0.6)); }
+    .pk-hero-tag {
+      font-size: 16px; color: var(--bone); font-weight: 500;
+      max-width: 560px; margin: 0 auto 26px; text-shadow: 0 2px 14px rgba(0,0,0,0.8);
+    }
+    .pk-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+    .btn {
+      font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700;
+      padding: 12px 22px; border-radius: 8px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+      border: 2px solid transparent; transition: all .2s;
+    }
+    .btn-primary { background: var(--phosphor); color: var(--void); border-color: var(--phosphor); }
+    .btn-primary:hover { background: var(--phosphor-bright); border-color: var(--phosphor-bright); box-shadow: 0 0 26px rgba(95,224,166,.35); }
+    .btn-ghost { background: transparent; color: var(--bone); border-color: var(--border-mid); }
+    .btn-ghost:hover { border-color: var(--phosphor); color: var(--phosphor-bright); }
+
+    /* NAV */
+    .pk-nav { position: sticky; top: 0; z-index: 100; background: rgba(14,15,24,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .pk-nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 16px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+    .pk-nav-inner::-webkit-scrollbar { display: none; }
+    .pk-nav a { flex: 0 0 auto; padding: 14px 14px; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-tertiary); border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; white-space: nowrap; }
+    .pk-nav a:hover { color: var(--text-secondary); }
+    .pk-nav a.active { color: var(--phosphor-bright); border-bottom-color: var(--phosphor-bright); }
+
+    /* LAYOUT */
+    .pk-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+
+    /* FACTSHEET */
+    .pk-fact { position: sticky; top: 64px; padding-top: 48px; }
+    .pk-fact-card { background: var(--void-mid); border: 1px solid var(--border); border-radius: 14px; padding: 24px 26px; position: relative; overflow: hidden; }
+    .pk-fact-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--phosphor-bright), var(--amber), var(--phosphor)); }
+    .pk-fact-eyebrow { font-family: 'Caveat', cursive; font-size: 26px; font-weight: 700; color: var(--phosphor-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 16px; }
+    .pk-fact-row { padding: 10px 0; border-top: 1px solid var(--border); }
+    .pk-fact-row:first-of-type { border-top: none; }
+    .pk-fact-label { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-tertiary); display: block; margin-bottom: 3px; }
+    .pk-fact-val { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+    .pk-fact-val a { color: var(--phosphor-bright); }
+    .pk-fact-val a:hover { color: var(--phosphor); }
+
+    /* CONTENT */
+    .pk-main { padding-top: 48px; min-width: 0; }
+    .pk-section { padding-bottom: 56px; scroll-margin-top: 72px; }
+    .pk-h2 { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--phosphor-bright); margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
+    .pk-h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .pk-section h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); margin-bottom: 12px; line-height: 1.2; }
+    .pk-section p { color: var(--text-secondary); margin-bottom: 14px; font-size: 15px; }
+    .pk-section p strong { color: var(--bone); font-weight: 600; }
+    .pk-section em { color: var(--lichen); font-style: italic; }
+
+    .pk-desc-block { margin-bottom: 16px; }
+    .pk-desc-block .k { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 5px; }
+    .btn-copy { font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 7px; background: transparent; border: 1px solid var(--border-mid); color: var(--text-secondary); cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-copy:hover { border-color: var(--phosphor); color: var(--bone); }
+    .btn-copy.done { color: var(--phosphor-bright); border-color: var(--phosphor-bright); }
+
+    .pk-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pk-feature { background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+    .pk-feature .ic { font-size: 22px; display: block; margin-bottom: 8px; }
+    .pk-feature b { color: var(--bone); font-size: 14.5px; display: block; margin-bottom: 4px; }
+    .pk-feature span { color: var(--text-secondary); font-size: 13px; line-height: 1.55; }
+
+    .pk-quote { border-left: 3px solid var(--amber); padding: 4px 0 4px 20px; margin: 0 0 16px; }
+    .pk-quote p { color: var(--bone); font-size: 17px; font-style: italic; margin-bottom: 6px; }
+    .pk-quote cite { color: var(--text-tertiary); font-size: 13px; font-style: normal; }
+
+    .pk-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pk-shot { position: relative; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid var(--border); background: radial-gradient(60% 80% at 30% 20%, rgba(95,224,166,0.12), transparent 70%), linear-gradient(160deg, #1a1d2c, #0f111a); display: flex; align-items: center; justify-content: center; }
+    .pk-shot .ph { font-family: 'Caveat', cursive; font-size: 18px; color: var(--phosphor-bright); opacity: .8; }
+    .pk-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s; }
+    .pk-shot:hover img { transform: scale(1.05); }
+
+    .pk-team { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pk-team-card { background: var(--void-mid); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+    .pk-team-card .role { font-family: 'Caveat', cursive; font-size: 20px; color: var(--phosphor-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 4px; }
+    .pk-team-card h4 { font-size: 18px; font-weight: 700; color: var(--bone); margin-bottom: 8px; }
+    .pk-team-card p { font-size: 13.5px; margin-bottom: 0; }
+    .pk-team-card .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .pk-team-card .pills span { font-size: 11px; color: var(--lichen); background: rgba(95,224,166,0.06); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; }
+
+    .pk-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pk-specs-card { background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px; }
+    .pk-specs-card b { color: var(--phosphor-bright); font-size: 13px; letter-spacing: .05em; text-transform: uppercase; display: block; margin-bottom: 10px; }
+    .pk-specs-card ul { list-style: none; }
+    .pk-specs-card li { font-size: 13px; color: var(--text-secondary); padding: 3px 0; }
+    .pk-specs-card li span { color: var(--text-tertiary); }
+
+    .pk-dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pk-dl a { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; transition: all .2s; }
+    .pk-dl a:hover { border-color: var(--phosphor); background: var(--void-lite); }
+    .pk-dl .ic { font-size: 22px; }
+    .pk-dl b { display: block; font-size: 14px; color: var(--bone); }
+    .pk-dl span { font-size: 12px; color: var(--text-tertiary); }
+
+    .pk-perm { background: var(--void-mid); border: 1px solid var(--border-mid); border-radius: 12px; padding: 20px 24px; }
+    .pk-perm p { margin-bottom: 0; color: var(--text-secondary); }
+    .pk-perm strong { color: var(--phosphor-bright); }
+
+    .pk-contact a { color: var(--phosphor-bright); }
+    .pk-contact a:hover { color: var(--phosphor); }
+
+    .pk-footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--text-tertiary); font-size: 13px; }
+    .pk-footer a { color: var(--text-secondary); }
+    .pk-footer a:hover { color: var(--phosphor-bright); }
+
+    #lb { position: fixed; inset: 0; z-index: 500; background: rgba(6,7,12,0.94); display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
+    #lb.on { display: flex; }
+    #lb img { max-width: 96%; max-height: 92%; border-radius: 8px; box-shadow: 0 20px 80px rgba(0,0,0,.6); }
+
+    @media (max-width: 860px) {
+      .pk-wrap { grid-template-columns: 1fr; gap: 0; }
+      .pk-fact { position: static; padding-top: 36px; }
+      .pk-main { padding-top: 28px; }
+      .pk-features, .pk-team, .pk-specs, .pk-dl { grid-template-columns: 1fr; }
+      .pk-hero-logo { max-width: 280px; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="pk-back" href="/abelina/">← Abelina</a>
+
+  <header class="pk-hero">
+    <div class="pk-hero-bg"></div>
+    <div class="pk-hero-inner">
+      <span class="pk-eyebrow">Press Kit</span>
+      <img class="pk-hero-logo" src="/images/abelina/logo.png" alt="Abelina">
+      <p class="pk-hero-tag">You died. And you woke up here — in Abelina, a strange, hand-crafted afterlife, and a
+        mature story about life and death told through who you meet along the way.</p>
+      <div class="pk-hero-actions">
+        <a class="btn btn-primary" href="https://store.steampowered.com/app/3682900/Abelina/" target="_blank" rel="noopener">✦ Wishlist on Steam</a>
+        <a class="btn btn-ghost" href="https://drive.google.com/drive/folders/1XYnkhu3OXU8AwyNQAkSqUZVFMwEmHRro?usp=sharing" target="_blank" rel="noopener">⤓ Full asset pack</a>
+        <a class="btn btn-ghost" href="https://discord.gg/xE9eTQNJT4" target="_blank" rel="noopener">Join the Discord</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="pk-nav">
+    <div class="pk-nav-inner" id="pk-nav">
+      <a href="#description">Description</a>
+      <a href="#about">What it is</a>
+      <a href="#story">Dev's note</a>
+      <a href="#media">Media</a>
+      <a href="#team">Team</a>
+      <a href="#specs">Specs</a>
+      <a href="#streaming">Streaming</a>
+      <a href="#downloads">Downloads</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="pk-wrap">
+    <aside class="pk-fact">
+      <div class="pk-fact-card">
+        <span class="pk-fact-eyebrow">Factsheet</span>
+        <div class="pk-fact-row"><span class="pk-fact-label">Title</span><span class="pk-fact-val">Abelina</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Developer</span><span class="pk-fact-val">Gabe Askew (solo)</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Music &amp; sound</span><span class="pk-fact-val">Ryan Holladay</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Publisher</span><span class="pk-fact-val">Indieformer</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Based in</span><span class="pk-fact-val">California, USA (dev) · Melbourne, Australia (publisher)</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Release date</span><span class="pk-fact-val">Targeting Q1 2027</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Platforms</span><span class="pk-fact-val">PC (Steam)</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Genre</span><span class="pk-fact-val">Adventure platformer · story-rich · atmospheric · stylized</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Players</span><span class="pk-fact-val">Single-player</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Price</span><span class="pk-fact-val">TBA</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Steam</span><span class="pk-fact-val"><a href="https://store.steampowered.com/app/3682900/Abelina/" target="_blank" rel="noopener">Store page →</a></span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Dev site</span><span class="pk-fact-val"><a href="https://gabeaskew.com/abelina" target="_blank" rel="noopener">gabeaskew.com/abelina</a></span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Discord</span><span class="pk-fact-val"><a href="https://discord.gg/xE9eTQNJT4" target="_blank" rel="noopener">discord.gg/xE9eTQNJT4</a></span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Press contact</span><span class="pk-fact-val"><a href="mailto:abelina@indieformer.com">abelina@indieformer.com</a></span></div>
+      </div>
+    </aside>
+
+    <main class="pk-main">
+
+      <section class="pk-section" id="description">
+        <h2 class="pk-h2">Description</h2>
+        <div class="pk-desc-block">
+          <span class="k">One-liner</span>
+          <p id="d-one">Abelina is a hand-crafted afterlife adventure — you died, and you woke up here, in a strange world you're only beginning to understand.</p>
+        </div>
+        <div class="pk-desc-block">
+          <span class="k">Short</span>
+          <p id="d-short">You're Vasily. You died a while ago, and you woke up in Abelina, alongside a few other after-lifers whose ideas about the universe have just been badly shaken. There's no combat here — you move forward by exploring, and by working out what this place is through the people you meet and what they tell you.</p>
+        </div>
+        <div class="pk-desc-block">
+          <span class="k">Long</span>
+          <p id="d-long">Abelina is a mature, hand-crafted story about life, death and transformation, set in a surreal afterlife that slowly gives up its meaning the further you travel. As your memories reform and the settlers around you change, the game asks a quiet question: if you were free of everything you feel stuck to in life, what would you find on the other side of the wall? It's the first game from CG-animation veteran Gabe Askew, with music and sound by Webby-winning composer Ryan Holladay, and it's published by Indieformer. It's still in development — more is revealed as it takes shape.</p>
+          <button class="btn-copy" data-copy="d-long">⧉ Copy long description</button>
+        </div>
+      </section>
+
+      <section class="pk-section" id="about">
+        <h2 class="pk-h2">What it is</h2>
+        <div class="pk-features">
+          <div class="pk-feature"><span class="ic">🪦</span><b>An afterlife to wander</b><span>You died — now you explore Abelina, a strange world of biomes and settlers, piecing together what this place actually is.</span></div>
+          <div class="pk-feature"><span class="ic">🕯️</span><b>A story about transformation</b><span>Memory, purpose and self — told through who you meet and what they tell you, as your own past slowly reforms.</span></div>
+          <div class="pk-feature"><span class="ic">🤝</span><b>No combat — discovery instead</b><span>Progress comes from exploring and understanding, not fighting. Quiet where most adventures are loud.</span></div>
+          <div class="pk-feature"><span class="ic">✋</span><b>Hand-crafted by a veteran</b><span>Built by a CG-animation veteran (Valorant, League of Legends, Love, Death + Robots) with a Webby-winning composer on the score.</span></div>
+        </div>
+      </section>
+
+      <section class="pk-section" id="story">
+        <h2 class="pk-h2">A note from the developer</h2>
+        <div class="pk-quote">
+          <p>"Life is most beautiful in transformation. It's the cocoon opening; the rollercoaster tilting over the first drop. What I want to share through Abelina is a question: if you were utterly free from everything you feel stuck to in life, what would you discover?"</p>
+          <cite>— Gabe Askew</cite>
+        </div>
+        <p>Gabe spent decades in animation telling other people's messages — nine years at Hornet, then supervising cinematics at Blur Studio. When he left Blur in 2024, instead of chasing another animation job he set out to make something visually and thematically his own. Abelina is the result: his first game, drawn from a lifetime of craft and pointed at one strange, personal world.</p>
+      </section>
+
+      <section class="pk-section" id="media">
+        <h2 class="pk-h2">Screenshots</h2>
+        <p>Click to enlarge. Full-resolution screenshots, key art and logos are in the <a href="https://drive.google.com/drive/folders/1XYnkhu3OXU8AwyNQAkSqUZVFMwEmHRro?usp=sharing" target="_blank" rel="noopener" style="color:var(--phosphor-bright);">downloadable asset pack →</a></p>
+        <div class="pk-gallery" id="pk-gallery">
+          <div class="pk-shot"><span class="ph">Abelina</span><img src="/images/abelina/shot-1.jpg" alt="Abelina — beneath floating lantern-worlds" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Abelina</span><img src="/images/abelina/shot-4.jpg" alt="Abelina — a waterfall grove of luminous flora" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Abelina</span><img src="/images/abelina/shot-2.jpg" alt="Abelina — a glowing coral pool" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Abelina</span><img src="/images/abelina/shot-3.jpg" alt="Abelina — the after-lifers around a campfire" loading="lazy" onerror="this.style.display='none'"></div>
+        </div>
+      </section>
+
+      <section class="pk-section" id="team">
+        <h2 class="pk-h2">The Team</h2>
+        <div class="pk-team">
+          <div class="pk-team-card">
+            <span class="role">the whole game</span>
+            <h4>Gabe Askew</h4>
+            <p>Solo developer — art, animation, design. A career in CG animation: nine years at Hornet directing campaigns for Dolby, Purina and Campbell's, then supervising cinematics at Blur Studio. Abelina is all of that pointed at one strange, personal world.</p>
+            <div class="pills"><span>Valorant</span><span>League of Legends</span><span>Love, Death + Robots</span><span>Hornet</span><span>Blur Studio</span></div>
+          </div>
+          <div class="pk-team-card">
+            <span class="role">music &amp; sound</span>
+            <h4>Ryan Holladay</h4>
+            <p>Gabe's longtime musical partner and a Webby Award-winning composer. VP of Music at WaitWhat and a Senior TED Fellow, who co-composed the 2025 film <em>Weapons</em> and is scoring Zach Cregger's upcoming <em>Resident Evil</em>.</p>
+            <div class="pills"><span>Webby Award</span><span>Senior TED Fellow</span><span>WaitWhat</span><span>Weapons (2025)</span><span>Resident Evil (2026)</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pk-section" id="specs">
+        <h2 class="pk-h2">System Requirements</h2>
+        <div class="pk-specs">
+          <div class="pk-specs-card">
+            <b>Minimum</b>
+            <ul>
+              <li><span>OS:</span> Windows 10</li>
+              <li><span>CPU:</span> Intel Core i5-2300 / AMD FX-4350</li>
+              <li><span>RAM:</span> 12 GB</li>
+              <li><span>GPU:</span> AMD RX 580 / Nvidia GTX 1050</li>
+              <li><span>DirectX:</span> 12</li>
+              <li><span>Storage:</span> 4 GB</li>
+            </ul>
+          </div>
+          <div class="pk-specs-card">
+            <b>Recommended</b>
+            <ul>
+              <li><span>OS:</span> Windows 11</li>
+              <li><span>CPU:</span> Intel Core i7-6700 / AMD Ryzen 7 1800X</li>
+              <li><span>RAM:</span> 14 GB</li>
+              <li><span>GPU:</span> AMD RX 6600 / Nvidia RTX 2050</li>
+              <li><span>DirectX:</span> 12</li>
+              <li><span>Storage:</span> 4 GB</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="pk-section" id="streaming">
+        <h2 class="pk-h2">Video &amp; Streaming Permission</h2>
+        <div class="pk-perm">
+          <p><strong>Yes — go for it.</strong> Indieformer and Gabe Askew grant everyone the right to record, stream and monetize video content of Abelina, including on YouTube, Twitch and any other platform. No prior permission needed.</p>
+        </div>
+      </section>
+
+      <section class="pk-section" id="downloads">
+        <h2 class="pk-h2">Downloads</h2>
+        <div class="pk-dl">
+          <a href="https://drive.google.com/drive/folders/1XYnkhu3OXU8AwyNQAkSqUZVFMwEmHRro?usp=sharing" target="_blank" rel="noopener"><span class="ic">📦</span><span><b>Full press kit</b><span>Screenshots, key art, logos (Google Drive)</span></span></a>
+          <a href="/images/abelina/logo.png" target="_blank" rel="noopener"><span class="ic">🅰️</span><span><b>Game logo</b><span>PNG, transparent</span></span></a>
+          <a href="/images/abelina/hero-bg.jpg" target="_blank" rel="noopener"><span class="ic">🖼️</span><span><b>Key art</b><span>JPG</span></span></a>
+          <a href="https://gabeaskew.com/abelina" target="_blank" rel="noopener"><span class="ic">🌐</span><span><b>Dev site</b><span>gabeaskew.com/abelina</span></span></a>
+        </div>
+      </section>
+
+      <section class="pk-section" id="contact">
+        <h2 class="pk-h2">Contact</h2>
+        <div class="pk-contact">
+          <p><strong>Press &amp; inquiries:</strong> <a href="mailto:abelina@indieformer.com">abelina@indieformer.com</a></p>
+          <p><strong>Discord:</strong> <a href="https://discord.gg/xE9eTQNJT4" target="_blank" rel="noopener">discord.gg/xE9eTQNJT4</a></p>
+          <p><strong>Web:</strong> <a href="https://indieformer.com/abelina/" target="_blank" rel="noopener">indieformer.com/abelina</a></p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="pk-footer">
+    Abelina is developed by Gabe Askew and published by <a href="https://indieformer.com/">Indieformer</a>.
+    &nbsp;·&nbsp; <a href="https://indieformer.com/abelina/">Game page</a> &nbsp;·&nbsp; <a href="https://indieformer.com/privacy/">Privacy</a>
+  </footer>
+
+  <div id="lb"><img src="" alt=""></div>
+
+  <script>
+    document.querySelectorAll('.btn-copy').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var el = document.getElementById(b.getAttribute('data-copy')); if (!el) return;
+        navigator.clipboard.writeText(el.textContent.trim()).then(function () {
+          var t = b.textContent; b.textContent = '✓ Copied'; b.classList.add('done');
+          setTimeout(function () { b.textContent = t; b.classList.remove('done'); }, 1600);
+        });
+      });
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('#pk-nav a')), map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (ents) {
+        ents.forEach(function (e) {
+          if (e.isIntersecting) {
+            links.forEach(function (l) { l.classList.remove('active'); });
+            if (map[e.target.id]) { map[e.target.id].classList.add('active'); map[e.target.id].scrollIntoView({ block: 'nearest', inline: 'center' }); }
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      document.querySelectorAll('.pk-section').forEach(function (s) { obs.observe(s); });
+    }
+    var lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+    document.getElementById('pk-gallery').addEventListener('click', function (e) {
+      var sh = e.target.closest('.pk-shot'); var img = sh && sh.querySelector('img');
+      if (img && img.style.display !== 'none' && img.complete && img.naturalWidth) { lbImg.src = img.src; lb.classList.add('on'); }
+    });
+    lb.addEventListener('click', function () { lb.classList.remove('on'); lbImg.src = ''; });
+  </script>
+</body>
+
+</html>
