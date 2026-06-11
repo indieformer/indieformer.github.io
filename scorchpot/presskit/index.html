@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feed the Scorchpot — Press Kit | Indieformer</title>
+  <meta name="description"
+    content="Press kit for Feed the Scorchpot — a dice roguelike about feeding a dragon for twenty years. Developed by Moravian, published by Indieformer. Factsheet, screenshots, trailer, logos and contact for press.">
+  <link rel="canonical" href="https://indieformer.com/scorchpot/presskit/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Indieformer">
+  <meta property="og:title" content="Feed the Scorchpot — Press Kit">
+  <meta property="og:description"
+    content="A dice roguelike about feeding a dragon for twenty years. Factsheet, screenshots, trailer, logos and press contact.">
+  <meta property="og:url" content="https://indieformer.com/scorchpot/presskit/">
+  <meta property="og:image" content="https://indieformer.com/images/scorchpot/presskit/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Feed the Scorchpot — Press Kit">
+  <meta name="twitter:description"
+    content="A dice roguelike about feeding a dragon for twenty years. Press kit by Indieformer.">
+  <meta name="twitter:image" content="https://indieformer.com/images/scorchpot/presskit/og.jpg">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --parchment: #F5EDD8;
+      --parchment-dk: #C9B48A;
+      --ember: #C0392B;
+      --ember-bright: #E74C3C;
+      --gold: #D4AC0D;
+      --gold-bright: #F1C40F;
+      --ash: #1A1410;
+      --ash-mid: #261E17;
+      --ash-lite: #332A22;
+      --ash-lighter: #4A3D32;
+      --text-primary: #F5EDD8;
+      --text-secondary: #C4AF8E;
+      --text-tertiary: #8C7B63;
+      --border: rgba(212, 172, 13, 0.15);
+      --border-mid: rgba(212, 172, 13, 0.30);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ash) !important;
+      color: var(--text-primary) !important;
+      font-family: 'Sora', Arial, sans-serif !important;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── back link ── */
+    .pk-back {
+      position: fixed; top: 16px; left: 20px; z-index: 200;
+      font-family: 'Caveat', cursive; font-size: 21px;
+      color: var(--gold-bright); transform: rotate(-2deg);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+      transition: transform .2s, color .2s;
+    }
+    .pk-back:hover { color: var(--parchment); transform: rotate(-2deg) translateX(-4px); }
+
+    /* ── HERO ── */
+    .pk-hero {
+      position: relative; min-height: 62vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 90px 24px 56px;
+      overflow: hidden;
+    }
+    .pk-hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: url('/images/scorchpot/presskit/hero.jpg');
+      background-size: cover; background-position: center 42%;
+      filter: brightness(0.5) saturate(1.05);
+    }
+    .pk-hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(26,20,16,0.35) 0%, rgba(26,20,16,0.2) 45%, rgba(26,20,16,0.92) 90%, var(--ash) 100%);
+    }
+    .pk-hero-inner { position: relative; z-index: 2; max-width: 760px; }
+    .pk-eyebrow {
+      font-family: 'Caveat', cursive; font-size: 24px; font-weight: 600;
+      color: var(--gold-bright); transform: rotate(-1.5deg);
+      display: inline-block; margin-bottom: 10px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    }
+    .pk-hero-logo { width: 100%; max-width: 440px; height: auto; display: block; margin: 0 auto 14px;
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,0.6)); }
+    .pk-hero-tag {
+      font-size: 16px; color: var(--parchment); font-weight: 500;
+      max-width: 540px; margin: 0 auto 26px; text-shadow: 0 2px 14px rgba(0,0,0,0.8);
+    }
+    .pk-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+    .btn {
+      font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700;
+      padding: 12px 22px; border-radius: 8px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+      border: 2px solid transparent; transition: all .2s;
+    }
+    .btn-primary { background: var(--ember); color: #fff; border-color: var(--ember); }
+    .btn-primary:hover { background: var(--ember-bright); border-color: var(--ember-bright); box-shadow: 0 0 26px rgba(192,57,43,.4); }
+    .btn-ghost { background: transparent; color: var(--parchment); border-color: var(--parchment-dk); }
+    .btn-ghost:hover { border-color: var(--gold-bright); color: var(--gold-bright); }
+
+    /* ── STICKY NAV ── */
+    .pk-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26,20,16,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .pk-nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 16px;
+      display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
+    }
+    .pk-nav-inner::-webkit-scrollbar { display: none; }
+    .pk-nav a {
+      flex: 0 0 auto; padding: 14px 14px; font-size: 12px; font-weight: 600;
+      letter-spacing: .04em; text-transform: uppercase; color: var(--text-tertiary);
+      border-bottom: 2px solid transparent; transition: color .2s, border-color .2s;
+      white-space: nowrap;
+    }
+    .pk-nav a:hover { color: var(--text-secondary); }
+    .pk-nav a.active { color: var(--gold-bright); border-bottom-color: var(--gold-bright); }
+
+    /* ── LAYOUT ── */
+    .pk-wrap {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px 80px;
+      display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start;
+    }
+
+    /* ── FACTSHEET ── */
+    .pk-fact { position: sticky; top: 64px; padding-top: 48px; }
+    .pk-fact-card {
+      background: var(--ash-mid); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px 26px; position: relative; overflow: hidden;
+    }
+    .pk-fact-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold-bright), var(--ember-bright), var(--gold));
+    }
+    .pk-fact-eyebrow {
+      font-family: 'Caveat', cursive; font-size: 26px; font-weight: 700;
+      color: var(--gold-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 16px;
+    }
+    .pk-fact-row { padding: 10px 0; border-top: 1px solid var(--border); }
+    .pk-fact-row:first-of-type { border-top: none; }
+    .pk-fact-label {
+      font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--text-tertiary); display: block; margin-bottom: 3px;
+    }
+    .pk-fact-val { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+    .pk-fact-val a { color: var(--gold-bright); }
+    .pk-fact-val a:hover { color: var(--gold); }
+
+    /* ── CONTENT ── */
+    .pk-main { padding-top: 48px; min-width: 0; }
+    .pk-section { padding-bottom: 56px; scroll-margin-top: 72px; }
+    .pk-h2 {
+      font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold-bright); margin-bottom: 18px; display: flex; align-items: center; gap: 14px;
+    }
+    .pk-h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .pk-section h3 {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary);
+      margin-bottom: 12px; line-height: 1.2;
+    }
+    .pk-section p { color: var(--text-secondary); margin-bottom: 14px; font-size: 15px; }
+    .pk-section p strong, .pk-lead strong { color: var(--parchment); font-weight: 600; }
+    .pk-section em { color: var(--parchment); font-style: italic; }
+
+    .pk-desc-block { margin-bottom: 16px; }
+    .pk-desc-block .k {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 5px;
+    }
+    .btn-copy {
+      font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 7px;
+      background: transparent; border: 1px solid var(--border-mid); color: var(--text-secondary);
+      cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-copy:hover { border-color: var(--gold); color: var(--parchment); }
+    .btn-copy.done { color: var(--gold-bright); border-color: var(--gold-bright); }
+
+    /* features */
+    .pk-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pk-feature { background: var(--ash-mid); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+    .pk-feature .ic { font-size: 22px; display: block; margin-bottom: 8px; }
+    .pk-feature b { color: var(--parchment); font-size: 14.5px; display: block; margin-bottom: 4px; }
+    .pk-feature span { color: var(--text-secondary); font-size: 13px; line-height: 1.55; }
+
+    /* quote */
+    .pk-quote {
+      border-left: 3px solid var(--ember); padding: 4px 0 4px 20px; margin: 0 0 16px;
+    }
+    .pk-quote p { color: var(--parchment); font-size: 17px; font-style: italic; margin-bottom: 6px; }
+    .pk-quote cite { color: var(--text-tertiary); font-size: 13px; font-style: normal; }
+
+    /* trailer */
+    .pk-video { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); }
+    .pk-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+
+    /* gallery */
+    .pk-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .pk-shot {
+      position: relative; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; cursor: pointer;
+      border: 1px solid var(--border); background:
+        radial-gradient(60% 80% at 30% 20%, rgba(212,172,13,0.12), transparent 70%),
+        linear-gradient(160deg, #2a2017, #15100b);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pk-shot .ph { font-family: 'Caveat', cursive; font-size: 18px; color: var(--gold-bright); opacity: .8; padding: 8px; text-align: center; }
+    .pk-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s; }
+    .pk-shot:hover img { transform: scale(1.05); }
+
+    /* team */
+    .pk-team { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pk-team-card { background: var(--ash-mid); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+    .pk-team-card .role { font-family: 'Caveat', cursive; font-size: 20px; color: var(--gold-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 4px; }
+    .pk-team-card h4 { font-size: 18px; font-weight: 700; color: var(--parchment); margin-bottom: 8px; }
+    .pk-team-card p { font-size: 13.5px; margin-bottom: 0; }
+
+    /* downloads */
+    .pk-dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pk-dl a {
+      display: flex; align-items: center; gap: 12px; padding: 16px 18px;
+      background: var(--ash-mid); border: 1px solid var(--border); border-radius: 12px; transition: all .2s;
+    }
+    .pk-dl a:hover { border-color: var(--gold); background: var(--ash-lite); }
+    .pk-dl .ic { font-size: 22px; }
+    .pk-dl b { display: block; font-size: 14px; color: var(--parchment); }
+    .pk-dl span { font-size: 12px; color: var(--text-tertiary); }
+
+    /* permission box */
+    .pk-perm {
+      background: var(--ash-mid); border: 1px solid var(--border-mid); border-radius: 12px; padding: 20px 24px;
+    }
+    .pk-perm p { margin-bottom: 0; color: var(--text-secondary); }
+    .pk-perm strong { color: var(--gold-bright); }
+
+    /* contact */
+    .pk-contact a { color: var(--gold-bright); }
+    .pk-contact a:hover { color: var(--gold); }
+
+    /* footer */
+    .pk-footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--text-tertiary); font-size: 13px; }
+    .pk-footer a { color: var(--text-secondary); }
+    .pk-footer a:hover { color: var(--gold-bright); }
+
+    /* lightbox */
+    #lb { position: fixed; inset: 0; z-index: 500; background: rgba(10,8,6,0.94); display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
+    #lb.on { display: flex; }
+    #lb img { max-width: 96%; max-height: 92%; border-radius: 8px; box-shadow: 0 20px 80px rgba(0,0,0,.6); }
+
+    @media (max-width: 860px) {
+      .pk-wrap { grid-template-columns: 1fr; gap: 0; }
+      .pk-fact { position: static; padding-top: 36px; }
+      .pk-main { padding-top: 28px; }
+      .pk-features, .pk-team, .pk-dl { grid-template-columns: 1fr; }
+      .pk-gallery { grid-template-columns: 1fr 1fr; }
+      .pk-hero-logo { max-width: 320px; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="pk-back" href="/scorchpot/">← Feed the Scorchpot</a>
+
+  <!-- ── HERO ── -->
+  <header class="pk-hero">
+    <div class="pk-hero-bg"></div>
+    <div class="pk-hero-inner">
+      <span class="pk-eyebrow">Press Kit</span>
+      <img class="pk-hero-logo" src="/images/scorchpot/logo.png" alt="Feed the Scorchpot">
+      <p class="pk-hero-tag">A dice roguelike about feeding a dragon for twenty years. Roll ingredients, build your
+        island, and fuse absurd recipes into combos that break the score wide open.</p>
+      <div class="pk-hero-actions">
+        <a class="btn btn-primary" href="https://store.steampowered.com/app/3966510/Feed_the_Scorchpot/" target="_blank" rel="noopener">✦ Wishlist on Steam</a>
+        <a class="btn btn-ghost" href="https://drive.google.com/drive/folders/13hfH1I9sGzxhJgHxj5E1AXK_-O7eQ3Wv?usp=sharing" target="_blank" rel="noopener">⤓ Full asset pack</a>
+        <a class="btn btn-ghost" href="#trailer">▶ Trailer</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── NAV ── -->
+  <nav class="pk-nav">
+    <div class="pk-nav-inner" id="pk-nav">
+      <a href="#description">Description</a>
+      <a href="#features">Features</a>
+      <a href="#story">Story</a>
+      <a href="#media">Media</a>
+      <a href="#trailer">Trailer</a>
+      <a href="#quotes">Quotes</a>
+      <a href="#team">Team</a>
+      <a href="#streaming">Streaming</a>
+      <a href="#downloads">Downloads</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="pk-wrap">
+    <!-- ── FACTSHEET ── -->
+    <aside class="pk-fact">
+      <div class="pk-fact-card">
+        <span class="pk-fact-eyebrow">Factsheet</span>
+        <div class="pk-fact-row"><span class="pk-fact-label">Title</span><span class="pk-fact-val">Feed the Scorchpot</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Developer</span><span class="pk-fact-val">Moravian — Jakub &amp; Daniela</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Publisher</span><span class="pk-fact-val">Indieformer</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Based in</span><span class="pk-fact-val">Czech Republic (dev) · Melbourne, Australia (publisher)</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Release date</span><span class="pk-fact-val">Targeting August 2026</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Platforms</span><span class="pk-fact-val">PC (Steam)</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Genre</span><span class="pk-fact-val">Dice roguelike · roguelite · board-game</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Players</span><span class="pk-fact-val">Single-player</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Price</span><span class="pk-fact-val">TBA</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Demo</span><span class="pk-fact-val"><a href="https://store.steampowered.com/app/4338170/Feed_the_Scorchpot_Demo/" target="_blank" rel="noopener">Free demo on Steam</a></span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Steam</span><span class="pk-fact-val"><a href="https://store.steampowered.com/app/3966510/Feed_the_Scorchpot/" target="_blank" rel="noopener">Store page →</a></span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Discord</span><span class="pk-fact-val"><a href="https://discord.gg/KZgxrn3Kpv" target="_blank" rel="noopener">discord.gg/KZgxrn3Kpv</a></span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Press contact</span><span class="pk-fact-val"><a href="mailto:pr@indieformer.com">pr@indieformer.com</a></span></div>
+      </div>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="pk-main">
+
+      <section class="pk-section" id="description">
+        <h2 class="pk-h2">Description</h2>
+        <div class="pk-desc-block">
+          <span class="k">One-liner</span>
+          <p id="d-one">Feed the Scorchpot is a dice roguelike about feeding a dragon for twenty years — roll ingredients, build your island, and fuse absurd recipes into combos that break the score wide open. Miss a meal and you're next on the menu.</p>
+        </div>
+        <div class="pk-desc-block">
+          <span class="k">Short</span>
+          <p id="d-short">You struck a deal with a dragon: twenty years of protection for twenty years of dinner service. Every year the dragon wakes hungrier. Roll dice to work your hex-grid island, harvest ingredients, fuse them into recipes, and cook them down in the Scorchpot — the pot you keep full or end up in.</p>
+        </div>
+        <div class="pk-desc-block">
+          <span class="k">Long</span>
+          <p id="d-long">Feed the Scorchpot is a cozy-chaotic tabletop roguelike. Build farmsteads, shrines, and harbors across your island, each one changing how the board pays out, then fuse ingredients through the signature <strong>Fodder × Flavor × Essence</strong> system to multiply a handful of tiles into board-breaking numbers. The best runs end with a machine that buries the dragon in food — right before the odds tighten, the dragon turns picky, and you tear the whole thing down and rebuild while it's on fire. Cozy on top, ruthless underneath. And yes, you can pet the dragon.</p>
+          <button class="btn-copy" data-copy="d-long">⧉ Copy long description</button>
+        </div>
+      </section>
+
+      <section class="pk-section" id="features">
+        <h2 class="pk-h2">Key Features</h2>
+        <div class="pk-features">
+          <div class="pk-feature"><span class="ic">🏗️</span><b>Build a scoring engine</b><span>Place farms, shrines and harbors so they feed each other. 50+ buildings and 80+ recipes, until a handful of tiles becomes board-breaking numbers.</span></div>
+          <div class="pk-feature"><span class="ic">🍲</span><b>Every meal is a math puzzle</b><span>Fuse ingredients into recipes that boost Flavor and Essence, multiplying your Fodder score into absurd, screen-shaking totals.</span></div>
+          <div class="pk-feature"><span class="ic">🎲</span><b>Build your dice</b><span>20+ dice types: odd, even, colored, even dice carved into six sixes. Tune your tray and pray the dragon's merciful.</span></div>
+          <div class="pk-feature"><span class="ic">🔥</span><b>Press your luck</b><span>Win in fewer years for a bigger payoff — but each year raises the stakes: harsher odds, hungrier dragons, the odd tantrum that torches your board.</span></div>
+          <div class="pk-feature"><span class="ic">🧩</span><b>Broken combos, on purpose</b><span>Bend the rules, break the math, and rebuild when everything catches fire.</span></div>
+          <div class="pk-feature"><span class="ic">✍️</span><b>Hand-drawn, every inch</b><span>Every dragon, building and meal drawn by Daniela, the artist half of the married duo who made the game.</span></div>
+        </div>
+      </section>
+
+      <section class="pk-section" id="story">
+        <h2 class="pk-h2">The Story</h2>
+        <h3>A 20-year deal with a dragon.</h3>
+        <p>You struck a deal: twenty years of protection for twenty years of dinner service. The island thrives under the beast's watchful eye — as long as the meals keep coming. Every year it wakes up hungrier, pickier, and more dangerous. Get the meal right and you prosper. Get it wrong and you're smoke.</p>
+        <p>Feed the Scorchpot is the first game Moravian — Czech married duo Jakub and Daniela — have put out into the world, and the first Indieformer has put its name on as publisher. It sits comfortably alongside <em>Balatro</em> and <em>Slay the Spire</em>: a fresh spin on the roguelike where dice rolls fuel both chaos and creativity.</p>
+      </section>
+
+      <section class="pk-section" id="media">
+        <h2 class="pk-h2">Screenshots</h2>
+        <p>Click to enlarge. Full-resolution screenshots, key art and logos are in the <a href="https://drive.google.com/drive/folders/13hfH1I9sGzxhJgHxj5E1AXK_-O7eQ3Wv?usp=sharing" target="_blank" rel="noopener" style="color:var(--gold-bright);">downloadable asset pack →</a></p>
+        <div class="pk-gallery" id="pk-gallery">
+          <div class="pk-shot"><span class="ph">screenshot 1</span><img src="/images/scorchpot/presskit/shot-1.jpg" alt="Feed the Scorchpot screenshot 1" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">screenshot 2</span><img src="/images/scorchpot/presskit/shot-2.jpg" alt="Feed the Scorchpot screenshot 2" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">screenshot 3</span><img src="/images/scorchpot/presskit/shot-3.jpg" alt="Feed the Scorchpot screenshot 3" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">screenshot 4</span><img src="/images/scorchpot/presskit/shot-4.jpg" alt="Feed the Scorchpot screenshot 4" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">screenshot 5</span><img src="/images/scorchpot/presskit/shot-5.jpg" alt="Feed the Scorchpot screenshot 5" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">screenshot 6</span><img src="/images/scorchpot/presskit/shot-6.jpg" alt="Feed the Scorchpot screenshot 6" loading="lazy" onerror="this.style.display='none'"></div>
+        </div>
+      </section>
+
+      <section class="pk-section" id="trailer">
+        <h2 class="pk-h2">Trailer</h2>
+        <div class="pk-video">
+          <iframe src="https://www.youtube.com/embed/S4EvsfuWJk8?rel=0&modestbranding=1" title="Feed the Scorchpot — Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </section>
+
+      <section class="pk-section" id="quotes">
+        <h2 class="pk-h2">Quotes</h2>
+        <div class="pk-quote">
+          <p>"Roguelite board game with arty medieval swagger."</p>
+          <cite>— Rogueliker</cite>
+        </div>
+        <div class="pk-quote">
+          <p>"We wanted to make something that feels cozy on the surface but gets completely out of hand once you start stacking systems. It's part farming sim, part roguelike, and part panic attack."</p>
+          <cite>— Jakub Pernes, designer</cite>
+        </div>
+      </section>
+
+      <section class="pk-section" id="team">
+        <h2 class="pk-h2">The Team</h2>
+        <div class="pk-team">
+          <div class="pk-team-card">
+            <span class="role">the developer</span>
+            <h4>Moravian</h4>
+            <p>The creative partnership of husband-and-wife team <strong>Jakub and Daniela</strong>, based in the Czech Republic. Jakub does design and code; Daniela hand-draws every dragon, building and meal. Feed the Scorchpot is their first commercial release.</p>
+          </div>
+          <div class="pk-team-card">
+            <span class="role">the publisher</span>
+            <h4>Indieformer</h4>
+            <p>A small, creator-led publisher run by <strong>Josh &amp; Clem</strong> in Melbourne, Australia. Twelve years writing about indie games; now we publish them — and write about that too, mistakes included.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="pk-section" id="streaming">
+        <h2 class="pk-h2">Video &amp; Streaming Permission</h2>
+        <div class="pk-perm">
+          <p><strong>Yes — go for it.</strong> Indieformer and Moravian grant everyone the right to record, stream and monetize video content of Feed the Scorchpot (the full game and the demo), including on YouTube, Twitch and any other platform. No prior permission needed. Have fun, and tell the dragon we said hi.</p>
+        </div>
+      </section>
+
+      <section class="pk-section" id="downloads">
+        <h2 class="pk-h2">Downloads</h2>
+        <div class="pk-dl">
+          <a href="https://drive.google.com/drive/folders/13hfH1I9sGzxhJgHxj5E1AXK_-O7eQ3Wv?usp=sharing" target="_blank" rel="noopener"><span class="ic">📦</span><span><b>Full press kit</b><span>Screenshots, key art, logos, GIFs (Google Drive)</span></span></a>
+          <a href="/images/scorchpot/logo.png" target="_blank" rel="noopener"><span class="ic">🅰️</span><span><b>Game logo</b><span>PNG, transparent</span></span></a>
+          <a href="/images/scorchpot/presskit/hero.jpg" target="_blank" rel="noopener"><span class="ic">🖼️</span><span><b>Key art</b><span>JPG</span></span></a>
+          <a href="https://youtu.be/S4EvsfuWJk8" target="_blank" rel="noopener"><span class="ic">🎬</span><span><b>Trailer</b><span>YouTube</span></span></a>
+        </div>
+      </section>
+
+      <section class="pk-section" id="contact">
+        <h2 class="pk-h2">Contact</h2>
+        <div class="pk-contact">
+          <p><strong>Press &amp; inquiries:</strong> <a href="mailto:pr@indieformer.com">pr@indieformer.com</a></p>
+          <p><strong>Discord:</strong> <a href="https://discord.gg/KZgxrn3Kpv" target="_blank" rel="noopener">discord.gg/KZgxrn3Kpv</a></p>
+          <p><strong>Web:</strong> <a href="https://indieformer.com/scorchpot/" target="_blank" rel="noopener">indieformer.com/scorchpot</a></p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="pk-footer">
+    Feed the Scorchpot is developed by Moravian and published by <a href="https://indieformer.com/">Indieformer</a>.
+    &nbsp;·&nbsp; <a href="https://indieformer.com/scorchpot/">Game page</a> &nbsp;·&nbsp; <a href="https://indieformer.com/privacy/">Privacy</a>
+  </footer>
+
+  <div id="lb"><img src="" alt=""></div>
+
+  <script>
+    // copy-to-clipboard
+    document.querySelectorAll('.btn-copy').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var el = document.getElementById(b.getAttribute('data-copy'));
+        if (!el) return;
+        navigator.clipboard.writeText(el.textContent.trim()).then(function () {
+          var t = b.textContent; b.textContent = '✓ Copied'; b.classList.add('done');
+          setTimeout(function () { b.textContent = t; b.classList.remove('done'); }, 1600);
+        });
+      });
+    });
+    // sticky nav active state
+    var links = Array.prototype.slice.call(document.querySelectorAll('#pk-nav a'));
+    var map = {};
+    links.forEach(function (a) { var id = a.getAttribute('href').slice(1); map[id] = a; });
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (ents) {
+        ents.forEach(function (e) {
+          if (e.isIntersecting) {
+            links.forEach(function (l) { l.classList.remove('active'); });
+            if (map[e.target.id]) {
+              map[e.target.id].classList.add('active');
+              map[e.target.id].scrollIntoView({ block: 'nearest', inline: 'center' });
+            }
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      document.querySelectorAll('.pk-section').forEach(function (s) { obs.observe(s); });
+    }
+    // lightbox
+    var lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+    document.getElementById('pk-gallery').addEventListener('click', function (e) {
+      var img = e.target.closest('.pk-shot') && e.target.closest('.pk-shot').querySelector('img');
+      if (img && img.style.display !== 'none' && img.complete && img.naturalWidth) {
+        lbImg.src = img.src; lb.classList.add('on');
+      }
+    });
+    lb.addEventListener('click', function () { lb.classList.remove('on'); lbImg.src = ''; });
+  </script>
+</body>
+
+</html>
