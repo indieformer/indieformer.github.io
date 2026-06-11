@@ -637,6 +637,13 @@ def main() -> int:
             "category":    category,
         })
 
+    # Exclude posts dated in the future (scheduled / not yet released — never show these)
+    now_iso = datetime.now(timezone.utc).isoformat()
+    _before = len(posts)
+    posts = [p for p in posts if not p["date_iso"] or p["date_iso"] <= now_iso]
+    if len(posts) != _before:
+        print(f"  dropped {_before - len(posts)} future-dated posts", file=sys.stderr)
+
     # Sort newest-first for the index pages
     posts.sort(key=lambda x: x["date_iso"] or "", reverse=True)
 
