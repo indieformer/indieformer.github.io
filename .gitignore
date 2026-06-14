@@ -28,3 +28,7 @@ brand-overview.md
 design-prototype-*.html
 home-hero.html
 home-body.html
+
+# python bytecode
+__pycache__/
+*.pyc
