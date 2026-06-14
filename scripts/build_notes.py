@@ -446,6 +446,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
     <a href="/how-we-make-a-game-popular/">The Approach</a>
     <a href="/notes/" class="current">Notes</a>
     <a href="/scorchpot/">Scorchpot</a>
+    <a href="/abelina/">Abelina</a>
   </nav>
 </header>
 
