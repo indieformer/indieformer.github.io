@@ -129,7 +129,8 @@
     margin: 26px 0 8px;
     max-width: 560px;
   }
-  .subscribe-inline iframe { max-width: 100% !important; }
+  .subscribe-inline iframe { max-width: 100% !important; opacity: 0; transition: opacity .5s ease; }
+  .subscribe-inline.form-ready iframe { opacity: 1; }
 
   /* ── site navigation ────────────────────────────────── */
   .site-nav {
@@ -627,35 +628,13 @@
         if (o.parentNode) o.parentNode.removeChild(o);
       }, 500);
     }
-    function reveal() {
+    function maybeHide() {
       // small minimum dwell so it doesn't flash on instant loads
       setTimeout(hide, Math.max(0, 400 - (Date.now() - shown)));
     }
-    // Hold the loader until the Beehiiv signup form has actually rendered,
-    // so it doesn't visibly pop in after the page loads. On pages without
-    // the form (or if it never loads) the safety timeout reveals anyway.
-    var sub = document.getElementById('subscribe');
-    function formIn() {
-      if (!sub) return null;
-      return sub.querySelector('iframe') ||
-        Array.prototype.slice.call(sub.children)
-          .filter(function (c) { return c.tagName !== 'SCRIPT'; })[0];
-    }
-    function revealSoon() {
-      var f = formIn();
-      if (f && f.tagName === 'IFRAME') { try { f.addEventListener('load', reveal); } catch (e) {} }
-      setTimeout(reveal, 500); // let the injected form paint first
-    }
-    function whenReady() {
-      if (!sub || formIn()) { revealSoon(); return; }
-      var obs = new MutationObserver(function () {
-        if (formIn()) { obs.disconnect(); revealSoon(); }
-      });
-      obs.observe(sub, { childList: true, subtree: true });
-    }
-    if (document.readyState === 'complete') whenReady();
-    else window.addEventListener('load', whenReady);
-    setTimeout(hide, 5000); // safety: never block UI more than 5s
+    if (document.readyState === 'complete') maybeHide();
+    else window.addEventListener('load', maybeHide);
+    setTimeout(hide, 4000); // safety: never block UI more than 4s
   })();
 </script>
 
@@ -1119,6 +1098,27 @@
 
     window.addEventListener('load', build);
     build();
+  })();
+</script>
+
+<!-- Fade the Beehiiv signup form in once it loads, so it doesn't pop in. -->
+<script>
+  (function () {
+    var sub = document.querySelector('.subscribe-inline');
+    if (!sub) return;
+    function reveal() { sub.classList.add('form-ready'); }
+    function check() {
+      var f = sub.querySelector('iframe');
+      if (!f) return false;
+      try { f.addEventListener('load', reveal); } catch (e) {}
+      setTimeout(reveal, 1200); // fallback if load already fired
+      return true;
+    }
+    if (!check()) {
+      var obs = new MutationObserver(function () { if (check()) obs.disconnect(); });
+      obs.observe(sub, { childList: true, subtree: true });
+    }
+    setTimeout(reveal, 6000); // safety: never leave the form hidden
   })();
 </script>
 

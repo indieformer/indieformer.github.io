@@ -314,7 +314,8 @@ INDEX_CSS = """  :root {
   .page-lede { font-family: 'Caveat', cursive; font-size: 26px; color: var(--coral); transform: rotate(-1deg); display: inline-block; margin-bottom: 18px; }
   .page-desc { color: var(--text-secondary); line-height: 1.65; font-size: 16px; max-width: 560px; }
   .subscribe-inline { margin: 22px 0 4px; max-width: 560px; }
-  .subscribe-inline iframe { max-width: 100% !important; }
+  .subscribe-inline iframe { max-width: 100% !important; opacity: 0; transition: opacity .5s ease; }
+  .subscribe-inline.form-ready iframe { opacity: 1; }
 
   /* ── Tabs ──────────────────────────────────────────── */
   .notes-tabs {
@@ -503,6 +504,27 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
   </div>
   <p class="footer-meta">© {year} Indieformer. · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
 </footer>
+
+<!-- Fade the Beehiiv signup form in once it loads, so it doesn't pop in. -->
+<script>
+  (function () {{
+    var sub = document.querySelector('.subscribe-inline');
+    if (!sub) return;
+    function reveal() {{ sub.classList.add('form-ready'); }}
+    function check() {{
+      var f = sub.querySelector('iframe');
+      if (!f) return false;
+      try {{ f.addEventListener('load', reveal); }} catch (e) {{}}
+      setTimeout(reveal, 1200);
+      return true;
+    }}
+    if (!check()) {{
+      var obs = new MutationObserver(function () {{ if (check()) obs.disconnect(); }});
+      obs.observe(sub, {{ childList: true, subtree: true }});
+    }}
+    setTimeout(reveal, 6000);
+  }})();
+</script>
 
 </body>
 </html>
