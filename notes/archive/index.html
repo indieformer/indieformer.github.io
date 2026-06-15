@@ -887,19 +887,30 @@
   (function () {
     var sub = document.querySelector('.subscribe-inline');
     if (!sub) return;
-    function reveal() { sub.classList.add('form-ready'); }
+    var done = false;
+    function reveal() { if (done) return; done = true; sub.classList.add('form-ready'); }
+    function watch(f) {
+      try { f.addEventListener('load', reveal); } catch (e) {}
+      if (window.ResizeObserver) {
+        try {
+          var ro = new ResizeObserver(function () {
+            if (f.offsetHeight > 40) { ro.disconnect(); reveal(); }
+          });
+          ro.observe(f);
+        } catch (e) {}
+      }
+    }
     function check() {
       var f = sub.querySelector('iframe');
       if (!f) return false;
-      try { f.addEventListener('load', reveal); } catch (e) {}
-      setTimeout(reveal, 1200);
+      watch(f);
       return true;
     }
     if (!check()) {
       var obs = new MutationObserver(function () { if (check()) obs.disconnect(); });
       obs.observe(sub, { childList: true, subtree: true });
     }
-    setTimeout(reveal, 6000);
+    setTimeout(reveal, 8000);
   })();
 </script>
 
