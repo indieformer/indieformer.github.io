@@ -325,6 +325,11 @@ def sanitize_body(content_html: str) -> str:
                                      # so the Waypoint block-strip doesn't trip on
                                      # any shared parent container)
     body = _lazy_load_images(body)
+    # Beehiiv repeats this <style> once per font-size span (20-40x/page);
+    # the rule is hoisted into the shared stylesheet, so drop them all here.
+    body = re.sub(
+        r'<style>\s*p span\[style\*="font-size"\]\s*\{\s*line-height:\s*1\.6;?\s*\}\s*</style>',
+        "", body)
     # collapse runs of blank lines
     body = re.sub(r"\n\s*\n\s*\n+", "\n\n", body)
     return body.strip()
@@ -507,6 +512,9 @@ PAGE_CSS = """  :root {
   }
   .social-icons a:hover { color: var(--text-primary) !important; transform: translateY(-2px); }
   .social-icons svg { display: block; }
+
+  /* hoisted from per-post Beehiiv content (it repeated this inline 20-40x/page) */
+  p span[style*="font-size"] { line-height: 1.6; }
 """
 
 PAGE_TEMPLATE = """<!DOCTYPE html>
@@ -542,9 +550,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="twitter:description" content="{description}">
 <meta name="twitter:image" content="{og_image}">
 
-<style>
-{css}
-</style>
+<link rel="stylesheet" href="/notes-post.css">
 </head>
 <body>
 
@@ -688,6 +694,11 @@ def build_post_page(
         css=PAGE_CSS,
         year=datetime.now(timezone.utc).year,
     )
+
+    # shared per-post stylesheet — identical for every post, written once,
+    # cached by the browser across all notes pages (was ~10KB inline per page).
+    with open(os.path.join(out_root, "notes-post.css"), "w", encoding="utf-8") as f:
+        f.write(PAGE_CSS)
 
     out_dir = os.path.join(out_root, "notes", slug)
     os.makedirs(out_dir, exist_ok=True)

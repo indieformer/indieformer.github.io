@@ -31,176 +31,7 @@
 <meta name="twitter:description" content="Years into his dev career, Sean Young stumbled into the monster-collecting genre — and it changed everything. Monsterpatch is the game he didn’t grow up dreaming about, but one he felt he had to make.">
 <meta name="twitter:image" content="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/0f7a8dbd-e02f-48dd-9b85-c33561fe7c39/frontline0525_Thumbnail.jpg?t=1746685773">
 
-<style>
-  :root {
-    --emerald: #28E291; --coral: #F78154; --periwinkle: #9381FF;
-    --shadow: #262730; --shadow-mid: #2F3040;
-    --text-primary: #F0EEE8; --text-secondary: #C9C7B8; --text-tertiary: #8B8970;
-    --border: rgba(255, 255, 255, 0.08); --border-mid: rgba(255, 255, 255, 0.16);
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { min-height: 100%; }
-  body {
-    position: relative;
-    background: var(--shadow);
-    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1.4px);
-    background-size: 26px 26px;
-    font-family: 'Sora', Arial, sans-serif;
-    color: var(--text-primary);
-    -webkit-font-smoothing: antialiased;
-    padding: 28px 20px;
-    overflow-x: hidden;
-  }
-
-  .crop { position: absolute; width: 18px; height: 18px; opacity: 0; animation: fade 0.6s ease 0.2s forwards; z-index: 5; pointer-events: none; }
-  .crop::before, .crop::after { content: ''; position: absolute; background: var(--text-tertiary); }
-  .crop::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
-  .crop::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
-  .crop.bl { bottom: 20px; left: 20px; }
-  .crop.br { bottom: 20px; right: 20px; }
-
-  .site-nav { display: flex; align-items: center; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 14px 56px; position: relative; z-index: 4; }
-  a.brand { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s ease; }
-  a.brand img { display: block; height: 40px; width: 40px; }
-  a.brand:hover { opacity: 0.82; }
-  .primary-nav { display: flex; gap: 26px; align-items: center; }
-  .primary-nav a { font-family: 'Sora'; font-size: 15px; font-weight: 500; color: var(--text-secondary); text-decoration: none; position: relative; transition: color 0.2s; }
-  .primary-nav a:hover { color: var(--text-primary); }
-  .primary-nav a.current { color: var(--text-primary); font-weight: 600; }
-  .primary-nav a.current::after { content: ''; position: absolute; left: 0; right: 0; bottom: -7px; height: 2px; background: var(--emerald); border-radius: 2px; }
-
-  /* ── Post header ───────────────────────────────────────── */
-  .post-header { max-width: 720px; margin: 0 auto; padding: 32px 56px 18px; position: relative; z-index: 2; }
-  .back-link { display: inline-block; margin-bottom: 22px; font-size: 14px; color: var(--text-tertiary); text-decoration: none; transition: color 0.2s; }
-  .back-link:hover { color: var(--text-primary); }
-  .post-meta {
-    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
-    font-size: 13px; color: var(--text-tertiary);
-    border-top: 1px solid var(--border); padding-top: 14px; margin-top: 20px;
-  }
-  .post-tag { font-family: 'Caveat', cursive; font-size: 20px; color: var(--coral); transform: rotate(-1deg); display: inline-block; line-height: 1; }
-  .post-tag .dot { color: var(--text-tertiary); margin: 0 8px; font-family: 'Sora', sans-serif; font-size: 13px; vertical-align: 2px; }
-  .post-tag .num { color: var(--text-tertiary); font-family: 'Sora', sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
-  .post-title { font-size: clamp(34px, 5vw, 50px); font-weight: 800; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 14px; }
-  .post-subtitle { font-size: 18px; line-height: 1.55; color: var(--text-secondary); margin-bottom: 18px; }
-  .post-hero {
-    margin: 22px 0 6px;
-    border-radius: 8px; overflow: hidden;
-    border: 1px solid var(--border);
-    background: var(--shadow-mid);
-  }
-  .post-hero img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; }
-
-  /* ── Post body — scopes Beehiiv content to fit our design ── */
-  .post-content {
-    max-width: 720px; margin: 0 auto; padding: 24px 56px 8px;
-    font-family: 'Sora', Arial, sans-serif; color: var(--text-primary);
-    line-height: 1.7; font-size: 17px; position: relative; z-index: 2;
-  }
-  /* Beehiiv hardcodes 'DM Sans' as inline style on every paragraph & list
-     item, which beats our class-level rule. Force Sora with !important
-     across the elements Beehiiv touches. Embed-card text inherits Sora
-     from the card's own inline style so we don't need to touch .custom_html. */
-  .post-content .paragraph, .post-content p,
-  .post-content li, .post-content ul, .post-content ol,
-  .post-content figcaption, .post-content td, .post-content th {
-    font-family: 'Sora', Arial, sans-serif !important;
-  }
-  .post-content .paragraph, .post-content p {
-    margin: 0 0 1.1em; color: var(--text-secondary); line-height: 1.7;
-  }
-  .post-content .heading, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
-    font-family: 'Sora' !important; color: var(--text-primary); line-height: 1.25; letter-spacing: -0.01em; margin: 2em 0 0.6em;
-  }
-  .post-content h2, .post-content h2.heading { font-size: 28px; font-weight: 700; }
-  .post-content h3, .post-content h3.heading { font-size: 22px; font-weight: 700; }
-  .post-content h4, .post-content h4.heading { font-size: 18px; font-weight: 600; color: var(--periwinkle); text-transform: uppercase; letter-spacing: 0.06em; }
-  .post-content h6, .post-content h6.heading { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
-
-  /* Only restyle Beehiiv's inline-text links — embed cards keep their own styles */
-  .post-content .link { color: var(--coral) !important; text-decoration: none; border-bottom: 1px solid rgba(247, 129, 84, 0.35); transition: color 0.2s, border-color 0.2s; }
-  .post-content .link:hover { color: var(--text-primary) !important; border-bottom-color: var(--text-primary); }
-  .post-content em, .post-content i { color: var(--text-secondary); }
-
-  /* Images */
-  .post-content .image { margin: 28px 0; }
-  .post-content .image__image, .post-content img { max-width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--border); }
-  .post-content .image__source { display: block; margin-top: 8px; font-size: 13px; color: var(--text-tertiary); font-style: italic; }
-  .post-content .image__source_text p { margin: 0; color: var(--text-tertiary); font-style: italic; }
-
-  /* Blockquote — only style inner element so nested wrappers don't double up */
-  .post-content .blockquote { margin: 28px 0; padding: 0; border: none; background: none; }
-  .post-content blockquote, .post-content .blockquote__quote {
-    display: block; margin: 0; padding: 6px 0 6px 22px;
-    border-left: 3px solid var(--periwinkle);
-    color: var(--text-primary); font-family: 'Caveat', cursive;
-    font-size: 24px; line-height: 1.4; font-style: normal;
-  }
-
-  /* Dividers — handle both <hr class="content_break"> and <div class="content_break"> */
-  .post-content hr.content_break { border: none; border-top: 1px solid var(--border); height: 0; margin: 36px 0; }
-  .post-content div.content_break { height: 1px; background: var(--border); margin: 36px 0; }
-
-  /* Embed cards (link previews) */
-  .post-content .embed { display: block; border: 1px solid var(--border-mid); border-radius: 10px; overflow: hidden; margin: 28px 0; background: var(--shadow-mid); transition: border-color 0.2s; }
-  .post-content .embed:hover { border-color: var(--emerald); }
-  .post-content .embed__image { display: block; }
-  .post-content .embed__image img { border-radius: 0; border: none; }
-  .post-content .embed__content { padding: 14px 18px; }
-  .post-content .embed__title { font-weight: 700; margin-bottom: 4px; color: var(--text-primary); }
-  .post-content .embed__description { font-size: 14px; color: var(--text-secondary); margin-bottom: 6px; line-height: 1.5; }
-  .post-content .embed__url { font-size: 12px; color: var(--text-tertiary); }
-  .post-content .embed__link { display: block; color: inherit !important; border: none; text-decoration: none; }
-
-  /* Hide any Beehiiv footer leakage */
-  .post-content .beehiiv__footer { display: none !important; }
-
-  /* ── Footer ──────────────────────────────────────────────── */
-  .site-footer {
-    max-width: 1000px; margin: 60px auto 0; padding: 44px 56px 28px;
-    border-top: 1px solid var(--border);
-    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px;
-    font-size: 14px; line-height: 1.65; color: var(--text-secondary);
-    position: relative; z-index: 2;
-  }
-  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
-  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
-  .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
-  .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
-  .footer-col ul { list-style: none; }
-  .footer-col li { margin-bottom: 6px; }
-  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
-  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
-  .footer-meta { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 22px; padding-top: 18px; font-size: 13px; color: var(--text-tertiary); }
-  .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
-  .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
-
-  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-
-  @media (max-width: 820px) {
-    body { padding: 20px 14px; }
-    .post-header, .post-content { padding-left: 24px; padding-right: 24px; }
-    .site-nav { padding: 10px 24px; flex-wrap: wrap; gap: 12px 18px; }
-    .primary-nav { gap: 18px; }
-    .primary-nav a { font-size: 14px; }
-    .site-footer { grid-template-columns: 1fr; gap: 28px; padding: 36px 24px 24px; margin-top: 48px; }
-    .post-content { font-size: 16px; }
-  }
-
-  .social-icons { display: flex; gap: 12px; align-items: center; margin-top: 2px; }
-  .social-icons a {
-    color: var(--text-tertiary) !important;
-    border: none !important;
-    border-bottom: none !important;
-    text-decoration: none !important;
-    display: inline-flex; align-items: center; justify-content: center;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-  .social-icons a:hover { color: var(--text-primary) !important; transform: translateY(-2px); }
-  .social-icons svg { display: block; }
-
-</style>
+<link rel="stylesheet" href="/notes-post.css">
 </head>
 <body>
 
@@ -231,27 +62,7 @@
 </section>
 
 <article class="post-content">
-<div id="frontline" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h6 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:14px;font-weight:Bold;line-height:21px;margin:0;text-align:left;"><span style="color:rgb(147, 129, 255);"><b>FRONTLINE</b></span></h6></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Sean Young didn’t grow up obsessed with Pokémon. He wasn’t sketching evolutions on schoolbooks or dreaming of monster-filled adventures. But somehow, decades after the original craze, <i>Emerald</i> and <i>Crystal</i> found their way to him — and it changed everything. </p></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> “I finally played them,” he told me. “And it completely changed what kind of game I wanted to make next.” </p></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> That revelation didn’t come during some nostalgic trip down memory lane. It came <i>mid-development</i>. Sean had been building a roguelike monster battler — very different from what we now know as <i>Monsterpatch</i>. But something clicked. The tone, the structure, the emotional weight of those old Pokémon titles stirred something unexpected. He scrapped the direction, reworked the art, redesigned the systems — and quietly set out to make <i>his</i> version of a monster-collecting RPG. </p></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> It’s not a copy. The aesthetic nods to the past, sure — but that’s where the similarities taper off. Combat is entirely new. There’s a full town-building layer woven into the core of progression. The game flows city to city, with Archwizards and MoN Champions, but the details — the treasure system, the team dynamics, the way stats and abilities function — they’re all Sean’s. </p></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> And through it all, he’s chasing one thing: creativity. </p></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> “I want <i>Monsterpatch</i> to encourage expression. Whether it’s your team, your town, or how you play… it should feel like yours.” </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/22b8795a-4859-4a89-b979-ea0cc58cfd72/placeHouse2.gif?t=1746252798"/ loading="lazy" decoding="async"></div></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> The tone? Cozy. Not in a throwaway way, but in the deliberate, crafted sense. A place to switch off, unwind, and feel a little more in control than the outside world usually allows. “Relaxing, satisfying, and rewarding,” he says — three words that don’t usually sit beside monster battles and stat sheets. But <i>Monsterpatch</i> isn’t about dominance. It’s about expression. You don’t grind to survive. You play to belong. </p></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> And yet, the market clearly wanted this. Badly. Sean set a goal. Secretly hoped to maybe hit $150k if things aligned. Instead, he crossed $400,000 in just a few days — blowing past his previous campaigns and sending a wave of fan art and excitement his way. “It was mind-blowing,” he admits. “And now, the pressure is on.” </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/77e61824-b537-4059-aae8-f76526c96814/1e79513cde649ceb25b1d45372d933b9_original__3_.gif?t=1746252812"/ loading="lazy" decoding="async"></div></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Still, he’s not treating it like a franchise-in-the-making. There’s no talk of transmedia empires or merch deals. Just a clear commitment to building a great game, and launching it — now on both PC and Switch — with the polish it deserves. </p></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> The kid version of Sean — the one who missed the Pokémon era entirely — would probably love <i>Monsterpatch</i>. When I asked what younger him would say seeing this all unfold, he didn’t hesitate: </p></div><div style="padding-bottom:12px;padding-left:19px;padding-right:19px;padding-top:12px;"><div style="background-color:#262730;padding-bottom:10px;padding-left:40px;padding-right:40px;padding-top:14px;"><div style="-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;color:#9381ff;font-family:Poppins;font-size:36px;line-height:1;margin-bottom:6px;text-align:center;user-select:none;"> ❝ </div><div style="center"><p style="color:#ffffff;font-family:Helvetica;font-size:24px;line-height:More;margin:0;padding-bottom:12px;padding-top:12px;text-align:center;">“This game looks super awesome. Now make sure it’s fun and don’t disappoint anyone.”</p></div><div style="padding-top:12;text-align:center;"><small style="color:#f78154;font-size:12px;"></small></div></div></div><style type="text/css">
+<div id="frontline" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h6 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:14px;font-weight:Bold;line-height:21px;margin:0;text-align:left;"><span style="color:rgb(147, 129, 255);"><b>FRONTLINE</b></span></h6></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Sean Young didn’t grow up obsessed with Pokémon. He wasn’t sketching evolutions on schoolbooks or dreaming of monster-filled adventures. But somehow, decades after the original craze, <i>Emerald</i> and <i>Crystal</i> found their way to him — and it changed everything. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> “I finally played them,” he told me. “And it completely changed what kind of game I wanted to make next.” </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> That revelation didn’t come during some nostalgic trip down memory lane. It came <i>mid-development</i>. Sean had been building a roguelike monster battler — very different from what we now know as <i>Monsterpatch</i>. But something clicked. The tone, the structure, the emotional weight of those old Pokémon titles stirred something unexpected. He scrapped the direction, reworked the art, redesigned the systems — and quietly set out to make <i>his</i> version of a monster-collecting RPG. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> It’s not a copy. The aesthetic nods to the past, sure — but that’s where the similarities taper off. Combat is entirely new. There’s a full town-building layer woven into the core of progression. The game flows city to city, with Archwizards and MoN Champions, but the details — the treasure system, the team dynamics, the way stats and abilities function — they’re all Sean’s. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> And through it all, he’s chasing one thing: creativity. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> “I want <i>Monsterpatch</i> to encourage expression. Whether it’s your team, your town, or how you play… it should feel like yours.” </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/22b8795a-4859-4a89-b979-ea0cc58cfd72/placeHouse2.gif?t=1746252798"/ loading="lazy" decoding="async"></div></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> The tone? Cozy. Not in a throwaway way, but in the deliberate, crafted sense. A place to switch off, unwind, and feel a little more in control than the outside world usually allows. “Relaxing, satisfying, and rewarding,” he says — three words that don’t usually sit beside monster battles and stat sheets. But <i>Monsterpatch</i> isn’t about dominance. It’s about expression. You don’t grind to survive. You play to belong. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> And yet, the market clearly wanted this. Badly. Sean set a goal. Secretly hoped to maybe hit $150k if things aligned. Instead, he crossed $400,000 in just a few days — blowing past his previous campaigns and sending a wave of fan art and excitement his way. “It was mind-blowing,” he admits. “And now, the pressure is on.” </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/77e61824-b537-4059-aae8-f76526c96814/1e79513cde649ceb25b1d45372d933b9_original__3_.gif?t=1746252812"/ loading="lazy" decoding="async"></div></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Still, he’s not treating it like a franchise-in-the-making. There’s no talk of transmedia empires or merch deals. Just a clear commitment to building a great game, and launching it — now on both PC and Switch — with the polish it deserves. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> The kid version of Sean — the one who missed the Pokémon era entirely — would probably love <i>Monsterpatch</i>. When I asked what younger him would say seeing this all unfold, he didn’t hesitate: </p></div><div style="padding-bottom:12px;padding-left:19px;padding-right:19px;padding-top:12px;"><div style="background-color:#262730;padding-bottom:10px;padding-left:40px;padding-right:40px;padding-top:14px;"><div style="-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;color:#9381ff;font-family:Poppins;font-size:36px;line-height:1;margin-bottom:6px;text-align:center;user-select:none;"> ❝ </div><div style="center"><p style="color:#ffffff;font-family:Helvetica;font-size:24px;line-height:More;margin:0;padding-bottom:12px;padding-top:12px;text-align:center;">“This game looks super awesome. Now make sure it’s fun and don’t disappoint anyone.”</p></div><div style="padding-top:12;text-align:center;"><small style="color:#f78154;font-size:12px;"></small></div></div></div><style type="text/css">
   .generic-embed--root {
     padding: 6px 19px 6px 19px;
   }
@@ -361,19 +172,7 @@
       flex-direction: column;
     }
   }
-</style><div class="generic-embed--root"><a href="https://store.steampowered.com/app/2495320/Monsterpatch/" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2495320/0a239e5eff6f267ebbd5e4fb3d719d36e5c172b5/capsule_616x353.jpg?t=1744514336" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Wishlist it on Steam</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">Add it to your radar — and make sure you don’t miss launch day.</p></div></div></div></div></a></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"><a target="_blank" rel="noopener nofollow noreferrer" href="https://discord.gg/XUJrzwf9W8"><button style="background-color:#28e291;border-radius:8px;color:#222222;cursor:pointer;font-family:'Poppins',Helvetica,sans-serif;font-size:18px;font-weight:normal;line-height:20px;padding:18px 28px;width:fit-content;" type="button"> Join the Monsterpatch Discord </button></a></div><div id="follow-sean-on-socials" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h3 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:20px;font-weight:Bold;line-height:30px;margin:0;text-align:left;">📱 <b>Follow Sean on Socials</b></h3></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"><i>For dev updates, sneak peeks, and maybe the occasional Skyfarer doodle.</i></p></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"><a class="link" href="https://x.com/SeanYoungSG" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">X (Twitter)</a>, <a class="link" href="https://bsky.app/profile/seanyoungsg.bsky.social" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">BlueSky</a>, <a class="link" href="https://www.instagram.com/seanyoungsg/" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Instagram</a>, <a class="link" href="https://www.threads.com/@seanyoungsg" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Threads</a></p></div><div style="padding:30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"><a target="_blank" rel="noopener nofollow noreferrer" href="https://discord.gg/rztz9s2wb3"><button style="background-color:#28e291;border-radius:8px;color:#222222;cursor:pointer;font-family:'Poppins',Helvetica,sans-serif;font-size:18px;font-weight:normal;line-height:20px;padding:18px 28px;width:fit-content;" type="button"> Join the Indieformer Discord for More Discussion </button></a></div><div style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h3 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:20px;font-weight:Bold;line-height:30px;margin:0;text-align:left;">Seeking impartial news? Meet 1440.</h3></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Every day, 3.5 million readers turn to <a class="link" href="https://l.join1440.com/bh?_bhiiv=opp_6c22729a-5657-4596-8f8c-2c4240245271_1b75ca79&bhcl_id=6d4fcfbc-4b5f-436b-b11b-3520b5551b8e_SUBSCRIBER_ID_{{email_address_id}}" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">1440</a> for their factual news. We sift through 100+ sources to bring you a complete summary of politics, global events, business, and culture, all in a brief 5-minute email. Enjoy an impartial news experience. </p></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"><a class="link" href="https://l.join1440.com/bh?_bhiiv=opp_6c22729a-5657-4596-8f8c-2c4240245271_1b75ca79&bhcl_id=6d4fcfbc-4b5f-436b-b11b-3520b5551b8e_SUBSCRIBER_ID_{{email_address_id}}" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Join for free today!</a></p></div><div style="padding:30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Happy gaming! </p></div><div id="the-indieformer-team" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h5 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:16px;font-weight:Bold;line-height:24px;margin:0;text-align:left;"><span style="color:rgb(40, 226, 145);">The Indieformer Team</span></h5></div><style>
-  p span[style*="font-size"] { line-height: 1.6; }
-</style><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"><i>P.S. Don’t forget to share your thoughts and favourite discoveries with us via the comments, </i><a class="link" href="https://x.com/indieformer" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><i>X (Twitter)</i></a><i>, </i><a class="link" href="https://bsky.app/profile/indieformer.com" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><i>BlueSky</i></a><i>, </i><a class="link" href="https://www.threads.net/@indieformer" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><i>Threads</i></a><i>, or reach us at </i><a class="link" href="mailto:pr@indieformer.com" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;" data-skip-tracking="true"><i>pr@indieformer.com</i></a></p>
+</style><div class="generic-embed--root"><a href="https://store.steampowered.com/app/2495320/Monsterpatch/" rel="nofollow noopener noreferrer" target="_blank"><div class="generic-embed" style="padding:8px 12px;"><div class="generic-embed--wrapper"><div class="generic-embed--image" style="padding:0px 8px 0px 0px;width:40%;display:flex;align-items:center;vertical-align:top;"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2495320/0a239e5eff6f267ebbd5e4fb3d719d36e5c172b5/capsule_616x353.jpg?t=1744514336" style="width:100%;height:auto;object-fit:cover;"/ loading="lazy" decoding="async"></div><div style="flex:1;"><div class="generic-embed--title" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif"><p style="font-size:20px;line-height:28px;margin:0;">Wishlist it on Steam</p></div><div class="generic-embed--description" style="font-family: &#39;Poppins&#39;,Helvetica,sans-serif;"><p style="font-size:16px;line-height:24px;margin:0;">Add it to your radar — and make sure you don’t miss launch day.</p></div></div></div></div></a></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"><a target="_blank" rel="noopener nofollow noreferrer" href="https://discord.gg/XUJrzwf9W8"><button style="background-color:#28e291;border-radius:8px;color:#222222;cursor:pointer;font-family:'Poppins',Helvetica,sans-serif;font-size:18px;font-weight:normal;line-height:20px;padding:18px 28px;width:fit-content;" type="button"> Join the Monsterpatch Discord </button></a></div><div id="follow-sean-on-socials" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h3 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:20px;font-weight:Bold;line-height:30px;margin:0;text-align:left;">📱 <b>Follow Sean on Socials</b></h3></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"><i>For dev updates, sneak peeks, and maybe the occasional Skyfarer doodle.</i></p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"><a class="link" href="https://x.com/SeanYoungSG" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">X (Twitter)</a>, <a class="link" href="https://bsky.app/profile/seanyoungsg.bsky.social" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">BlueSky</a>, <a class="link" href="https://www.instagram.com/seanyoungsg/" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Instagram</a>, <a class="link" href="https://www.threads.com/@seanyoungsg" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Threads</a></p></div><div style="padding:30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><div style="padding-bottom:14px;padding-left:15px;padding-right:15px;padding-top:14px;text-align:center;width:100%;word-break:break-word;"><a target="_blank" rel="noopener nofollow noreferrer" href="https://discord.gg/rztz9s2wb3"><button style="background-color:#28e291;border-radius:8px;color:#222222;cursor:pointer;font-family:'Poppins',Helvetica,sans-serif;font-size:18px;font-weight:normal;line-height:20px;padding:18px 28px;width:fit-content;" type="button"> Join the Indieformer Discord for More Discussion </button></a></div><div style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h3 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:20px;font-weight:Bold;line-height:30px;margin:0;text-align:left;">Seeking impartial news? Meet 1440.</h3></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Every day, 3.5 million readers turn to <a class="link" href="https://l.join1440.com/bh?_bhiiv=opp_6c22729a-5657-4596-8f8c-2c4240245271_1b75ca79&bhcl_id=6d4fcfbc-4b5f-436b-b11b-3520b5551b8e_SUBSCRIBER_ID_{{email_address_id}}" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">1440</a> for their factual news. We sift through 100+ sources to bring you a complete summary of politics, global events, business, and culture, all in a brief 5-minute email. Enjoy an impartial news experience. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"><a class="link" href="https://l.join1440.com/bh?_bhiiv=opp_6c22729a-5657-4596-8f8c-2c4240245271_1b75ca79&bhcl_id=6d4fcfbc-4b5f-436b-b11b-3520b5551b8e_SUBSCRIBER_ID_{{email_address_id}}" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Join for free today!</a></p></div><div style="padding:30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"> Happy gaming! </p></div><div id="the-indieformer-team" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h5 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:16px;font-weight:Bold;line-height:24px;margin:0;text-align:left;"><span style="color:rgb(40, 226, 145);">The Indieformer Team</span></h5></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'Helvetica',Arial,sans-serif;font-size:16px;line-height:24px;text-align:left;"><i>P.S. Don’t forget to share your thoughts and favourite discoveries with us via the comments, </i><a class="link" href="https://x.com/indieformer" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><i>X (Twitter)</i></a><i>, </i><a class="link" href="https://bsky.app/profile/indieformer.com" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><i>BlueSky</i></a><i>, </i><a class="link" href="https://www.threads.net/@indieformer" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;"><i>Threads</i></a><i>, or reach us at </i><a class="link" href="mailto:pr@indieformer.com" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;" data-skip-tracking="true"><i>pr@indieformer.com</i></a></p>
 </article>
 
 <footer class="site-footer">
