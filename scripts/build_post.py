@@ -325,11 +325,21 @@ def sanitize_body(content_html: str) -> str:
                                      # so the Waypoint block-strip doesn't trip on
                                      # any shared parent container)
     body = _lazy_load_images(body)
-    # Beehiiv repeats this <style> once per font-size span (20-40x/page);
-    # the rule is hoisted into the shared stylesheet, so drop them all here.
+    # The 'line-height:1.6' rule is hoisted into the shared stylesheet — drop it.
     body = re.sub(
         r'<style>\s*p span\[style\*="font-size"\]\s*\{\s*line-height:\s*1\.6;?\s*\}\s*</style>',
         "", body)
+    # Beehiiv re-emits the SAME <style> block (embed widgets etc.) once per
+    # element — 20-40x/page. Keep the first copy of each unique block, drop
+    # the identical repeats (declarative CSS, so collapsing is behaviour-safe).
+    _seen = set()
+    def _dedup_style(m):
+        key = re.sub(r"\s+", " ", m.group(1)).strip()
+        if key in _seen:
+            return ""
+        _seen.add(key)
+        return m.group(0)
+    body = re.sub(r"<style[^>]*>(.*?)</style>", _dedup_style, body, flags=re.DOTALL)
     # collapse runs of blank lines
     body = re.sub(r"\n\s*\n\s*\n+", "\n\n", body)
     return body.strip()
