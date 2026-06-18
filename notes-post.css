@@ -130,8 +130,8 @@
     font-size: 14px; line-height: 1.65; color: var(--text-secondary);
     position: relative; z-index: 2;
   }
-  .footer-col.brand-col { display: flex; gap: 18px; align-items: flex-start; }
-  .footer-logo { flex: 0 0 auto; height: 92px; width: auto; display: block; }
+  .footer-col.brand-col { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 32px; width: auto; display: block; }
   .footer-col.brand-col p { flex: 1; margin: 0; line-height: 1.65; color: var(--text-secondary); }
   .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
   .footer-col ul { list-style: none; }

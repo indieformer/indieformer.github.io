@@ -188,8 +188,8 @@
     z-index: 2;
   }
   /* footer brand column — stacked logo on the left, descriptor stacked on the right */
-  .footer-col.brand-col { display: flex; gap: 20px; align-items: center; }
-  .footer-logo { flex: 0 0 auto; height: 92px; margin-top: -18px; width: auto; display: block; }
+  .footer-col.brand-col { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .footer-logo { flex: 0 0 auto; height: 32px; width: auto; display: block; }
   .footer-col.brand-col p {
     flex: 1; margin: 0;
     line-height: 1.65; color: var(--text-secondary);
@@ -945,7 +945,7 @@
 <!-- ════ FOOTER ════ -->
 <footer class="site-footer">
   <div class="footer-col brand-col">
-    <img class="footer-logo" src="/logo-stacked.png" alt="Indieformer">
+    <img class="footer-logo" src="/logo-lockup.svg" alt="Indieformer">
     <p>A small indie game publisher. Run by Josh &amp; Clem in Melbourne, Australia.</p>
   </div>
   <div class="footer-col">
