@@ -547,6 +547,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <link rel="canonical" href="{canonical_url}">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">{blogposting_jsonld}</script>
+<script type="application/ld+json">{breadcrumb_jsonld}</script>
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Indieformer">
@@ -702,8 +703,19 @@ def build_post_page(
                       "logo": {"@type": "ImageObject", "url": "https://indieformer.com/logo.png"}},
     }, ensure_ascii=False)
 
+    breadcrumb_jsonld = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://indieformer.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://indieformer.com/notes/"},
+            {"@type": "ListItem", "position": 3, "name": post_title, "item": canonical_url},
+        ],
+    }, ensure_ascii=False)
+
     page = PAGE_TEMPLATE.format(
         blogposting_jsonld=blogposting_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
         title_html_escaped=html_lib.escape(title_for_tab),
         post_title_html_escaped=html_lib.escape(post_title),
         subtitle_html_escaped=html_lib.escape(subtitle),

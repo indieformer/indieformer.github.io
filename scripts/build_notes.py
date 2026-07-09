@@ -422,6 +422,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
 <link rel="canonical" href="https://indieformer.com{path}">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">{blog_jsonld}</script>
+<script type="application/ld+json">{breadcrumb_jsonld}</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Indieformer">
 <meta property="og:title" content="{og_title}">
@@ -630,8 +631,20 @@ def render_index_page(category: str, posts_in_cat: list[dict]) -> str:
                       "logo": {"@type": "ImageObject", "url": "https://indieformer.com/logo.png"}},
     }, ensure_ascii=False)
 
+    crumbs = [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://indieformer.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://indieformer.com/notes/"},
+    ]
+    if category != "publog":
+        crumbs.append({"@type": "ListItem", "position": 3,
+                       "name": cfg["title"].rstrip("."), "item": "https://indieformer.com" + cfg["url"]})
+    breadcrumb_jsonld = json.dumps({
+        "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": crumbs,
+    }, ensure_ascii=False)
+
     return INDEX_TEMPLATE.format(
         blog_jsonld=blog_jsonld,
+        breadcrumb_jsonld=breadcrumb_jsonld,
         title=cfg["title"].rstrip("."),
         og_title=cfg["title"].rstrip("."),
         heading=cfg["title"],
