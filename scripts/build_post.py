@@ -11,6 +11,7 @@ notes/index.html so editorial styling decisions only happen in one place.
 """
 import os
 import re
+import json
 import html as html_lib
 from datetime import datetime, timezone
 
@@ -545,6 +546,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="{description}">
 <link rel="canonical" href="{canonical_url}">
 <meta name="robots" content="index, follow">
+<script type="application/ld+json">{blogposting_jsonld}</script>
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Indieformer">
@@ -686,7 +688,22 @@ def build_post_page(
     og_title = f"{issue_label} | {post_title}" if issue_label and issue_label != "—" else post_title
     title_for_tab = og_title
 
+    blogposting_jsonld = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": og_title,
+        "description": description,
+        "image": og_image,
+        "datePublished": date_iso_norm,
+        "url": canonical_url,
+        "mainEntityOfPage": canonical_url,
+        "author": {"@type": "Organization", "name": "Indieformer", "url": "https://indieformer.com/"},
+        "publisher": {"@type": "Organization", "name": "Indieformer",
+                      "logo": {"@type": "ImageObject", "url": "https://indieformer.com/logo.png"}},
+    }, ensure_ascii=False)
+
     page = PAGE_TEMPLATE.format(
+        blogposting_jsonld=blogposting_jsonld,
         title_html_escaped=html_lib.escape(title_for_tab),
         post_title_html_escaped=html_lib.escape(post_title),
         subtitle_html_escaped=html_lib.escape(subtitle),
