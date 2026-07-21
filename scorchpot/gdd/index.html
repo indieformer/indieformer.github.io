@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Feed the Scorchpot — Game Design Document | Indieformer</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --parchment: #F5EDD8;
+      --parchment-dk: #C9B48A;
+      --ember: #C0392B;
+      --ember-bright: #E74C3C;
+      --gold: #D4AC0D;
+      --gold-bright: #F1C40F;
+      --ash: #1A1410;
+      --ash-mid: #261E17;
+      --ash-lite: #332A22;
+      --ash-lighter: #4A3D32;
+      --text-primary: #F5EDD8;
+      --text-secondary: #C4AF8E;
+      --text-tertiary: #8C7B63;
+      --border: rgba(212, 172, 13, 0.15);
+      --border-mid: rgba(212, 172, 13, 0.30);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ash);
+      color: var(--text-primary);
+      font-family: 'Sora', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── confidentiality strip ── */
+    .gdd-conf {
+      background: var(--ember); color: #fff; text-align: center;
+      font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 8px 16px;
+    }
+
+    /* ── header ── */
+    .gdd-hero {
+      max-width: 1100px; margin: 0 auto; padding: 44px 24px 28px;
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+    }
+    .gdd-eyebrow {
+      font-family: 'Caveat', cursive; font-size: 24px; font-weight: 600;
+      color: var(--gold-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 6px;
+    }
+    .gdd-hero h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+    .gdd-hero .sub { color: var(--text-secondary); font-size: 15px; margin-top: 8px; max-width: 560px; }
+    .gdd-hero-logo { max-width: 220px; height: auto; filter: drop-shadow(0 6px 22px rgba(0,0,0,0.55)); }
+
+    /* ── STICKY NAV ── */
+    .gdd-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26,20,16,0.94); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .gdd-nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 16px;
+      display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none;
+    }
+    .gdd-nav-inner::-webkit-scrollbar { display: none; }
+    .gdd-nav a {
+      flex: 0 0 auto; padding: 13px 11px; font-size: 11.5px; font-weight: 600;
+      letter-spacing: .04em; text-transform: uppercase; color: var(--text-tertiary);
+      border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; white-space: nowrap;
+    }
+    .gdd-nav a:hover { color: var(--text-secondary); }
+    .gdd-nav a.active { color: var(--gold-bright); border-bottom-color: var(--gold-bright); }
+
+    /* ── LAYOUT ── */
+    .gdd-wrap {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px 80px;
+      display: grid; grid-template-columns: 290px 1fr; gap: 44px; align-items: start;
+    }
+
+    /* ── SIDEBAR ── */
+    .gdd-side { position: sticky; top: 58px; padding-top: 40px; max-height: calc(100vh - 58px); overflow-y: auto; }
+    .gdd-meta-card {
+      background: var(--ash-mid); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 24px; position: relative; overflow: hidden; margin-bottom: 16px;
+    }
+    .gdd-meta-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold-bright), var(--ember-bright), var(--gold));
+    }
+    .gdd-meta-eyebrow {
+      font-family: 'Caveat', cursive; font-size: 25px; font-weight: 700;
+      color: var(--gold-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 14px;
+    }
+    .gdd-meta-row { padding: 9px 0; border-top: 1px solid var(--border); }
+    .gdd-meta-row:first-of-type { border-top: none; }
+    .gdd-meta-label {
+      font-size: 10.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--text-tertiary); display: block; margin-bottom: 2px;
+    }
+    .gdd-meta-val { font-size: 13.5px; color: var(--text-primary); font-weight: 500; }
+
+    /* ── CONTENT ── */
+    .gdd-main { padding-top: 40px; min-width: 0; }
+    .gdd-section { padding-bottom: 52px; scroll-margin-top: 64px; }
+    .gdd-h2 {
+      font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold-bright); margin-bottom: 18px; display: flex; align-items: center; gap: 14px;
+    }
+    .gdd-h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .gdd-section h3 {
+      font-size: 21px; font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary);
+      margin: 22px 0 10px; line-height: 1.2;
+    }
+    .gdd-section h3:first-of-type { margin-top: 0; }
+    .gdd-section h4 { font-size: 15px; font-weight: 700; color: var(--parchment); margin: 18px 0 8px; }
+    .gdd-section p { color: var(--text-secondary); margin-bottom: 13px; font-size: 14.5px; }
+    .gdd-section p strong { color: var(--parchment); font-weight: 600; }
+    .gdd-section em { color: var(--parchment); font-style: italic; }
+    .gdd-section ul, .gdd-section ol { margin: 0 0 14px 22px; color: var(--text-secondary); font-size: 14.5px; }
+    .gdd-section li { margin-bottom: 6px; }
+    .gdd-section li strong { color: var(--parchment); }
+
+    /* blocks */
+    .blk {
+      background: var(--ash-mid); border: 1px solid var(--border); border-radius: 12px;
+      padding: 18px 20px; margin-bottom: 14px;
+    }
+    .blk-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .blk-head b { color: var(--parchment); font-size: 14.5px; }
+    .blk p:last-child, .blk ul:last-child { margin-bottom: 0; }
+
+    /* tables */
+    .gdd-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 13.5px; }
+    .gdd-table th {
+      text-align: left; font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--text-tertiary); padding: 8px 12px; border-bottom: 1px solid var(--border-mid);
+    }
+    .gdd-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+    .gdd-table td:first-child { color: var(--parchment); font-weight: 600; }
+
+    /* core loop */
+    .loop { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; margin-bottom: 14px; }
+    .loop-step {
+      flex: 1 1 130px; background: var(--ash-mid); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 14px 12px; position: relative;
+    }
+    .loop-step .num {
+      font-family: 'Caveat', cursive; font-size: 20px; font-weight: 700; color: var(--gold-bright); display: block;
+    }
+    .loop-step b { color: var(--parchment); font-size: 13px; display: block; margin-bottom: 3px; }
+    .loop-step span { color: var(--text-secondary); font-size: 12px; line-height: 1.5; display: block; }
+
+    /* collapsible sub-blocks */
+    details.sys { background: var(--ash-mid); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; overflow: hidden; }
+    details.sys summary {
+      cursor: pointer; list-style: none; padding: 16px 20px;
+      display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--parchment); font-size: 15px;
+    }
+    details.sys summary::-webkit-details-marker { display: none; }
+    details.sys summary::before { content: '▸'; color: var(--gold-bright); transition: transform .2s; font-size: 13px; }
+    details.sys[open] summary::before { transform: rotate(90deg); }
+    details.sys .sys-body { padding: 0 20px 18px; border-top: 1px solid var(--border); padding-top: 14px; }
+    details.sys .sys-body p:last-child, details.sys .sys-body ul:last-child { margin-bottom: 0; }
+
+    /* footer */
+    .gdd-footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; color: var(--text-tertiary); font-size: 12.5px; }
+
+    @media (max-width: 880px) {
+      .gdd-wrap { grid-template-columns: 1fr; gap: 0; }
+      .gdd-side { position: static; max-height: none; padding-top: 32px; }
+      .gdd-main { padding-top: 24px; }
+      .gdd-hero h1 { font-size: 27px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="gdd-conf">Working document · Unlisted — shared by link, not indexed</div>
+
+  <!-- ── HEADER ── -->
+  <header class="gdd-hero">
+    <div>
+      <span class="gdd-eyebrow">Game Design Document</span>
+      <h1>Feed the Scorchpot</h1>
+      <p class="sub">The shared reference for Moravian &amp; Indieformer. Not exhaustive — the full data lives in the build. This is how the game works.</p>
+    </div>
+    <img class="gdd-hero-logo" src="/images/scorchpot/logo.png" alt="Feed the Scorchpot" onerror="this.style.display='none'">
+  </header>
+
+  <!-- ── NAV ── -->
+  <nav class="gdd-nav">
+    <div class="gdd-nav-inner" id="gdd-nav">
+      <a href="#overview">Overview</a>
+      <a href="#loop">Core Loop</a>
+      <a href="#systems">Systems</a>
+      <a href="#progression">Progression</a>
+      <a href="#narrative">Narrative</a>
+      <a href="#art">Art</a>
+      <a href="#audio">Audio</a>
+      <a href="#ux">UX / UI</a>
+      <a href="#tech">Tech</a>
+      <a href="#milestones">Milestones</a>
+      <a href="#publishing">Publishing</a>
+    </div>
+  </nav>
+
+  <div class="gdd-wrap">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="gdd-side">
+      <div class="gdd-meta-card">
+        <span class="gdd-meta-eyebrow">Doc status</span>
+        <div class="gdd-meta-row"><span class="gdd-meta-label">Version</span><span class="gdd-meta-val">1.0 — July 2026</span></div>
+        <div class="gdd-meta-row"><span class="gdd-meta-label">Maintained by</span><span class="gdd-meta-val">Josh (Indieformer)</span></div>
+        <div class="gdd-meta-row"><span class="gdd-meta-label">Design &amp; code</span><span class="gdd-meta-val">Jakub Pernes (Moravian)</span></div>
+        <div class="gdd-meta-row"><span class="gdd-meta-label">Art</span><span class="gdd-meta-val">Daniela (Moravian)</span></div>
+        <div class="gdd-meta-row"><span class="gdd-meta-label">Music</span><span class="gdd-meta-val">Dragos</span></div>
+        <div class="gdd-meta-row"><span class="gdd-meta-label">Tutorial VO</span><span class="gdd-meta-val">Rick</span></div>
+        <div class="gdd-meta-row"><span class="gdd-meta-label">Platforms</span><span class="gdd-meta-val">PC (Steam) · mobile late 2026</span></div>
+        <div class="gdd-meta-row"><span class="gdd-meta-label">Release date</span><span class="gdd-meta-val">August 20, 2026 (announced)</span></div>
+        <div class="gdd-meta-row"><span class="gdd-meta-label">Price</span><span class="gdd-meta-val">$14.99 USD</span></div>
+      </div>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="gdd-main">
+
+      <!-- 1 · OVERVIEW -->
+      <section class="gdd-section" id="overview">
+        <h2 class="gdd-h2">1 · Overview</h2>
+
+        <div class="blk">
+          <div class="blk-head"><b>One-liner</b></div>
+          <p>A dice roguelike about feeding a dragon for twenty years. Build an island, roll dice, harvest ingredients, cook recipes, feed the dragon. Miss a meal and the run ends.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Design pillars</b></div>
+          <ul>
+            <li><strong>Cozy on top, ruthless underneath.</strong> The surface is warm and hand-drawn; the systems punish sloppy play.</li>
+            <li><strong>Balatro-style math, but with strategy.</strong> Multiplicative scoring, but placement and planning matter as much as the roll.</li>
+            <li><strong>Broken combos, on purpose.</strong> Designed for dopamine hits and screen-shaking numbers.</li>
+            <li><strong>Press your luck.</strong> The dice are the greed mechanic — winning earlier pays more, and every roll is a chance to overreach.</li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Genre &amp; comps</b></div>
+          <p>Dice roguelike · roguelite · board-game. Nearest comps: <em>Balatro</em>, <em>Slay the Spire</em>. Single-player. PC (Steam) at launch; mobile (iOS/Android) late 2026.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Target player</b></div>
+          <p>Board game lovers and roguelike/lite players — people who've played <em>Balatro</em> or <em>Slay the Spire</em>. They want depth and replayability, like unlocking things, and enjoy humor and meta references. Comfortable with casual sessions, and drawn to hand-made games.</p>
+        </div>
+      </section>
+
+      <!-- 2 · CORE LOOP -->
+      <section class="gdd-section" id="loop">
+        <h2 class="gdd-h2">2 · Core Loop</h2>
+
+        <h3>The loop</h3>
+        <div class="loop">
+          <div class="loop-step"><span class="num">1.</span><b>Build</b><span>Place and rearrange buildings on the island.</span></div>
+          <div class="loop-step"><span class="num">2.</span><b>Roll</b><span>Roll the dice.</span></div>
+          <div class="loop-step"><span class="num">3.</span><b>Harvest</b><span>Collect ingredients.</span></div>
+          <div class="loop-step"><span class="num">4.</span><b>Cook</b><span>Cook with recipes — leads automatically into feeding.</span></div>
+          <div class="loop-step"><span class="num">5.</span><b>Feed</b><span>Feed the dragon. Meet the hunger target or the run ends.</span></div>
+        </div>
+        <p>The loop is not strictly sequential. After harvesting there's still an option to go back to the shop before cooking. Cooking is the one hard transition — it leads automatically into feeding.</p>
+
+        <div class="blk">
+          <div class="blk-head"><b>Seasons</b></div>
+          <p>Each year contains multiple seasons. The player gets multiple tries at rolling and harvesting the board within the year to reach the dragon's number — a season is one of those tries. The shop does not reset on seasons. Unused seasons pay out as Prosperity (see Scoring).</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Between years &amp; during seasons</b></div>
+          <p>The shop is the dragon's hoard: tools, recipes, buildings, and dice, for a price. It opens between years and during seasons. Between years is also where building and rearranging the island happens — it's part of the core loop, not a separate phase.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Run structure</b></div>
+          <p>A completed run is 20 years, with each year getting more difficult to pass as the dragon's hunger increases. 20 years is the base — the player can continue forever after that. Depending on the difficulty, the dragon may have a tantrum that affects the board.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Meta-loop</b></div>
+          <p>Full meta-progression and unlock system for recipes, dice, and buildings, plus achievements. Ascension difficulty detailed in §4.</p>
+        </div>
+      </section>
+
+      <!-- 3 · SYSTEMS -->
+      <section class="gdd-section" id="systems">
+        <h2 class="gdd-h2">3 · Systems &amp; Mechanics</h2>
+
+        <details class="sys" open>
+          <summary>Dice</summary>
+          <div class="sys-body">
+            <p>Standard 6-sided dice. Some are colored, giving more yield. All dice can be fixed with tools that change the numbered faces. Special dice grant a permanent bonus when a certain number is rolled.</p>
+            <p>All dice are purchased through the shop, and can be sold later to replace with another. The dice tray grows with the number of harbors built on the board — starting at 3 dice and going up to 6.</p>
+          </div>
+        </details>
+
+        <details class="sys" open>
+          <summary>The island (board)</summary>
+          <div class="sys-body">
+            <p>Hex tiles are each a random food type that the player harvests from. Buildings are placed at the intersections of tiles:</p>
+            <ul>
+              <li><strong>Farmsteads</strong> yield from adjacent tiles.</li>
+              <li><strong>Shrines</strong> give bonuses to neighbouring buildings.</li>
+              <li><strong>Trade posts</strong> are more independent, but still work with buildings next to them.</li>
+              <li><strong>Harbors</strong> get bonuses from adjacent tiles; harbor upgrades affect tools, recipes, and the shop — and each harbor grows the dice tray.</li>
+            </ul>
+            <p>50+ buildings total.</p>
+          </div>
+        </details>
+
+        <details class="sys" open>
+          <summary>Scoring — Fodder × Flavor × Essence × Prosperity</summary>
+          <div class="sys-body">
+            <p><strong>Fodder</strong> is what the player harvests from the board. <strong>Flavor</strong> comes from certain buildings and recipes; so does <strong>Essence</strong>. Recipes are activated to make all of these stronger. <strong>Prosperity</strong> — the number reward for not using all of your seasons — multiplies everything last, as a final bonus.</p>
+            <p>The board can be played in many ways: maximising fodder, or not collecting any harvest at all. 80+ recipes.</p>
+          </div>
+        </details>
+
+        <details class="sys" open>
+          <summary>The dragon</summary>
+          <div class="sys-body">
+            <p>Sets the hunger target each year; hunger increases every year. There are multiple dragons, each with 10 ascension levels (see §4). Snarky in tone. Can be petted.</p>
+            <p><strong>Tantrums</strong> occur depending on difficulty and interfere with the run directly. They can: destroy buildings, lock the shop, lock a face on a die, scorch a number, scorch an ingredient making it useless — and many more hanger tantrums.</p>
+          </div>
+        </details>
+
+        <details class="sys" open>
+          <summary>Economy — ducats, the hoard &amp; tools</summary>
+          <div class="sys-body">
+            <p><strong>Ducats</strong> are the currency, earned primarily through buildings — though some dice and some recipes give gold too.</p>
+            <p>The shop is the dragon's hoard: sells tools, recipes, buildings, and dice. Opens between years and during seasons; stock does not reset on season change. Dice can be sold back to fund replacements.</p>
+            <p><strong>Tools</strong> are one-off tasks: changing the face of a die, adding a number to a hex tile, or skipping forward a season for extra gold.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- 4 · PROGRESSION -->
+      <section class="gdd-section" id="progression">
+        <h2 class="gdd-h2">4 · Progression &amp; Difficulty</h2>
+
+        <div class="blk">
+          <div class="blk-head"><b>In-run escalation</b></div>
+          <p>Each year is harder to pass as the dragon's hunger increases. On higher difficulties, tantrums interfere with the board directly (see §3, The dragon).</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Difficulty design</b></div>
+          <p><strong>10 ascension levels per dragon.</strong> Beating an ascension level unlocks the next one for <em>all</em> dragons. Run length is anywhere from 10 minutes to multiple hours depending how far the player pushes — 20 years is just the base; continuing forever is allowed.</p>
+          <p>No fixed win-rate targets: outcomes depend on how well the player understands the systems. The tutorial carries the learning load, and playtest feedback says it does that job well.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Unlocks &amp; meta-progression</b></div>
+          <p>Full meta-progression and unlock system for recipes, dice, and buildings. Achievements on top.</p>
+        </div>
+      </section>
+
+      <!-- 5 · NARRATIVE -->
+      <section class="gdd-section" id="narrative">
+        <h2 class="gdd-h2">5 · Narrative &amp; World</h2>
+
+        <div class="blk">
+          <div class="blk-head"><b>Premise</b></div>
+          <p>You struck a deal with a dragon: twenty years of protection for twenty years of dinner service. The island thrives under the beast's watchful eye — as long as the meals keep coming.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Tone</b></div>
+          <p>Casual, medieval, hand-drawn, warm but with teeth. Humor lives in the dragon's dialogue and the absurdity of the recipes. Multitudes of depth available for anyone willing to dig deep.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Story delivery</b></div>
+          <p>Story really only exists in the tutorial. Reaching 20 years gives a "you win" with a stat screen and the option to continue or go back to menu. Beyond that, the dragon's lines are sometimes tied to being fed too little or too much, plus random quips.</p>
+        </div>
+      </section>
+
+      <!-- 6 · ART -->
+      <section class="gdd-section" id="art">
+        <h2 class="gdd-h2">6 · Art Direction</h2>
+
+        <div class="blk">
+          <div class="blk-head"><b>Direction</b></div>
+          <p>Everything hand-drawn by Daniela. Classic medieval — biblical wall-art sort of territory (illuminated manuscripts, church frescoes). Parchment-and-ember palette (this page borrows it). Reference assets held by Josh; Daniela owns the style.</p>
+        </div>
+      </section>
+
+      <!-- 7 · AUDIO -->
+      <section class="gdd-section" id="audio">
+        <h2 class="gdd-h2">7 · Audio</h2>
+
+        <div class="blk">
+          <div class="blk-head"><b>Music</b></div>
+          <p>Composed by <strong>Dragos</strong>. One main-menu track, plus an in-game track with four major sections — intro, mid, final (up to year 20), then a looping track for continued gameplay. Dynamic as the game progresses.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Sound design</b></div>
+          <p>All created by Jakub.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Voice</b></div>
+          <p>Tutorial VO by <strong>Rick</strong>. The tutorial is fully voiced.</p>
+        </div>
+      </section>
+
+      <!-- 8 · UX / UI -->
+      <section class="gdd-section" id="ux">
+        <h2 class="gdd-h2">8 · UX / UI</h2>
+
+        <div class="blk">
+          <div class="blk-head"><b>Onboarding</b></div>
+          <p>Fully-voiced tutorial with a custom introduction: the UI is revealed slowly to the player, explaining all the aspects needed to play. Playtest feedback on it has been good.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Input &amp; Steam Deck</b></div>
+          <p>Basic Steam Deck support and controller support both in. Could do better with testing coverage before launch.</p>
+        </div>
+      </section>
+
+      <!-- 9 · TECH -->
+      <section class="gdd-section" id="tech">
+        <h2 class="gdd-h2">9 · Tech</h2>
+
+        <div class="blk">
+          <div class="blk-head"><b>Platforms</b></div>
+          <p>PC (Steam) at launch; free demo live. Mobile — iOS and Android — late 2026. Single-player.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Saves</b></div>
+          <p>Game saves automatically after main sections of the core loop.</p>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Localization</b></div>
+          <p>Done: English, Japanese, Korean, Chinese, Russian, Spanish, French.</p>
+        </div>
+      </section>
+
+      <!-- 10 · MILESTONES -->
+      <section class="gdd-section" id="milestones">
+        <h2 class="gdd-h2">10 · Scope &amp; Milestones</h2>
+
+        <table class="gdd-table">
+          <thead><tr><th>Milestone</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Steam page live</td><td>2025–26</td><td>Done</td></tr>
+            <tr><td>Free demo live</td><td>2026</td><td>Done</td></tr>
+            <tr><td>Kickstarter completed</td><td>May 2026</td><td>Done</td></tr>
+            <tr><td>Steam Next Fest</td><td>June 2026</td><td>Done</td></tr>
+            <tr><td>Content complete</td><td>July 2026</td><td>In progress</td></tr>
+            <tr><td>Release candidate (fully done, blocker-bugs-only)</td><td>Early August 2026</td><td>Planned</td></tr>
+            <tr><td>Launch</td><td><strong>August 20, 2026</strong></td><td>Announced</td></tr>
+            <tr><td>Mobile (iOS / Android)</td><td>Late 2026</td><td>Planned</td></tr>
+          </tbody>
+        </table>
+
+        <div class="blk">
+          <div class="blk-head"><b>Post-launch: 1.1</b></div>
+          <p>Challenge mode, plus Kickstarter rewards: new dragon skins, recipes, and buildings. All explicitly post-launch — not blocking August 20. The 1.1 reward content is public knowledge (Kickstarter completed May 2026), so it can be referenced in marketing.</p>
+        </div>
+      </section>
+
+      <!-- 11 · PUBLISHING -->
+      <section class="gdd-section" id="publishing">
+        <h2 class="gdd-h2">11 · Publishing &amp; Marketing</h2>
+
+        <div class="blk">
+          <div class="blk-head"><b>Live now</b></div>
+          <ul>
+            <li><strong>Steam:</strong> store page + free demo (wishlist driver).</li>
+            <li><strong>Discord:</strong> discord.gg/KZgxrn3Kpv — community home.</li>
+            <li><strong>Press kit:</strong> indieformer.com/scorchpot/presskit/ — full asset pack on Drive.</li>
+            <li><strong>Streaming permission:</strong> blanket yes, monetization included.</li>
+            <li><strong>Press contact:</strong> scorchpot@indieformer.com.</li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <div class="blk-head"><b>Plan</b></div>
+          <ul>
+            <li><strong>Price:</strong> $14.99 USD.</li>
+            <li><strong>Festivals:</strong> Steam Next Fest June 2026 done; more festival applications going out after launch.</li>
+            <li><strong>Wishlist target:</strong> 10k before launch (August 20).</li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="gdd-footer">
+    Feed the Scorchpot — GDD v1.0 · Moravian × Indieformer
+  </footer>
+
+  <script>
+    // nav active state
+    var links = Array.prototype.slice.call(document.querySelectorAll('#gdd-nav a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (ents) {
+        ents.forEach(function (e) {
+          if (e.isIntersecting) {
+            links.forEach(function (l) { l.classList.remove('active'); });
+            if (map[e.target.id]) {
+              map[e.target.id].classList.add('active');
+              map[e.target.id].scrollIntoView({ block: 'nearest', inline: 'center' });
+            }
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+      document.querySelectorAll('.gdd-section').forEach(function (s) { obs.observe(s); });
+    }
+  </script>
+</body>
+
+</html>
