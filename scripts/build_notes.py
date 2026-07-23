@@ -448,6 +448,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
     <a href="/notes/" class="current">Notes</a>
     <a href="/scorchpot/">Scorchpot</a>
     <a href="/abelina/">Abelina</a>
+    <a href="/slots-slaughter/">Slots</a>
   </nav>
 </header>
 

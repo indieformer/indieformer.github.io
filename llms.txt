@@ -13,6 +13,7 @@ The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a 
 - [Notes](https://indieformer.com/notes/): The Indieformer newsletter index, refreshed daily from the beehiiv RSS feed. ~77 issues. Free. No paywall.
 - [Feed the Scorchpot](https://indieformer.com/scorchpot/): Page for the first game on our publishing slate.
 - [Abelina](https://indieformer.com/abelina/): Our second signed game — a surreal, hand-crafted afterlife game by solo developer Gabe Askew, in development for a Q1 2027 Steam release.
+- [Slots & Slaughter](https://indieformer.com/slots-slaughter/): Our third signed game — a roguelike deck-builder where your gear is your deck and a slot machine decides what you fight with, by Taiwan-based solo developer Laser Castle. In development.
 
 ## Related properties
 

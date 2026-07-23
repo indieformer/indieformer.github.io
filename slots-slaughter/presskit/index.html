@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slots &amp; Slaughter — Press Kit | Indieformer</title>
+  <meta name="description"
+    content="Press kit for Slots & Slaughter — a roguelike deck-builder where your loadout is a slot machine. Developed by Laser Castle, published by Indieformer. Factsheet, screenshots, logos and press contact.">
+  <link rel="canonical" href="https://indieformer.com/slots-slaughter/presskit/">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Indieformer">
+  <meta property="og:title" content="Slots & Slaughter — Press Kit">
+  <meta property="og:description"
+    content="A roguelike deck-builder where your loadout is a slot machine. Factsheet, screenshots, logos and press contact.">
+  <meta property="og:url" content="https://indieformer.com/slots-slaughter/presskit/">
+  <meta property="og:image" content="https://indieformer.com/images/slots-slaughter/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Slots & Slaughter — Press Kit">
+  <meta name="twitter:description" content="A roguelike deck-builder where your loadout is a slot machine. Press kit by Indieformer.">
+  <meta name="twitter:image" content="https://indieformer.com/images/slots-slaughter/og.jpg">
+
+  <style>
+    @import url('/fonts/fonts.css');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Slots & Slaughter — sampled from the key art: cool charcoal, coin-gold, sword-red, shield-steel. */
+      --void: #0E1013;
+      --void-mid: #15181C;
+      --void-lite: #1D2127;
+      --void-lighter: #282D35;
+      --gold: #E3AE3F;
+      --gold-bright: #FFC95E;
+      --gold-dim: #A6802F;
+      --blood: #D5342A;
+      --blood-bright: #F35A4B;
+      --steel: #6FA0BE;
+      --steel-bright: #93C0DC;
+      --ash: #AEC1CE;
+      --bone: #ECF1F4;
+      --text-primary: #ECF1F4;
+      --text-secondary: #A8B4BE;
+      --text-tertiary: #6C7680;
+      --border: rgba(190, 205, 216, 0.10);
+      --border-mid: rgba(190, 205, 216, 0.20);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--void) !important;
+      color: var(--text-primary) !important;
+      font-family: 'Sora', Arial, sans-serif !important;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6; overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .pk-back {
+      position: fixed; top: 16px; left: 20px; z-index: 200;
+      font-family: 'Caveat', cursive; font-size: 21px;
+      color: var(--blood-bright); transform: rotate(-2deg);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8); transition: transform .2s, color .2s;
+    }
+    .pk-back:hover { color: var(--bone); transform: rotate(-2deg) translateX(-4px); }
+
+    /* HERO */
+    .pk-hero {
+      position: relative; min-height: 52vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 84px 24px 52px; overflow: hidden;
+      /* on-brand fill until key art lands */
+      background:
+        radial-gradient(80% 70% at 50% 8%, rgba(126,151,168,0.14), transparent 60%),
+        radial-gradient(70% 60% at 20% 100%, rgba(200,55,44,0.14), transparent 60%),
+        linear-gradient(160deg, #141820 0%, var(--void) 78%);
+    }
+    .pk-hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: url('/images/slots-slaughter/hero.jpg');
+      background-size: cover; background-position: center center;
+      filter: brightness(0.6) saturate(1.04);
+    }
+    .pk-hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(58% 66% at 50% 46%, rgba(19,10,12,0.5), transparent 72%),
+        linear-gradient(to bottom, rgba(19,10,12,0.4) 0%, rgba(19,10,12,0.2) 40%, rgba(19,10,12,0.92) 88%, var(--void) 100%);
+    }
+    .pk-hero-inner { position: relative; z-index: 2; max-width: 760px; }
+    .pk-eyebrow {
+      font-family: 'Caveat', cursive; font-size: 24px; font-weight: 600;
+      color: var(--blood-bright); transform: rotate(-1.5deg);
+      display: inline-block; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    }
+    .pk-hero-logo {
+      width: 100%; max-width: 290px; height: auto; display: block; margin: 0 auto 16px;
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,0.6));
+    }
+    .pk-hero-tag {
+      font-size: 16px; color: var(--bone); font-weight: 500;
+      max-width: 580px; margin: 0 auto 26px; text-shadow: 0 2px 14px rgba(0,0,0,0.8);
+    }
+    .pk-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+    .btn {
+      font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700;
+      padding: 12px 22px; border-radius: 8px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+      border: 2px solid transparent; transition: all .2s;
+    }
+    .btn-primary { background: var(--gold); color: #1a0d0f; border-color: var(--gold); }
+    .btn-primary:hover { background: var(--gold-bright); border-color: var(--blood-bright); box-shadow: 0 0 26px rgba(229,169,60,.35); }
+    .btn-ghost { background: transparent; color: var(--bone); border-color: var(--border-mid); }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--blood-bright); }
+
+    /* NAV */
+    .pk-nav { position: sticky; top: 0; z-index: 100; background: rgba(19,10,12,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .pk-nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 16px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+    .pk-nav-inner::-webkit-scrollbar { display: none; }
+    .pk-nav a { flex: 0 0 auto; padding: 14px 14px; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-tertiary); border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; white-space: nowrap; }
+    .pk-nav a:hover { color: var(--text-secondary); }
+    .pk-nav a.active { color: var(--blood-bright); border-bottom-color: var(--blood-bright); }
+
+    /* LAYOUT */
+    .pk-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+
+    /* FACTSHEET */
+    .pk-fact { position: sticky; top: 64px; padding-top: 48px; }
+    .pk-fact-card { background: var(--void-mid); border: 1px solid var(--border); border-radius: 14px; padding: 24px 26px; position: relative; overflow: hidden; }
+    .pk-fact-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--blood), var(--steel)); }
+    .pk-fact-eyebrow { font-family: 'Caveat', cursive; font-size: 26px; font-weight: 700; color: var(--blood-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 16px; }
+    .pk-fact-row { padding: 10px 0; border-top: 1px solid var(--border); }
+    .pk-fact-row:first-of-type { border-top: none; }
+    .pk-fact-label { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-tertiary); display: block; margin-bottom: 3px; }
+    .pk-fact-val { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+    .pk-fact-val a { color: var(--blood-bright); }
+    .pk-fact-val a:hover { color: var(--gold); }
+    .pk-fact-val .tbc { color: var(--blood-bright); font-style: italic; font-weight: 500; }
+
+    /* CONTENT */
+    .pk-main { padding-top: 48px; min-width: 0; }
+    .pk-section { padding-bottom: 56px; scroll-margin-top: 72px; }
+    .pk-h2 { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--blood-bright); margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
+    .pk-h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .pk-section h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); margin-bottom: 12px; line-height: 1.2; }
+    .pk-section p { color: var(--text-secondary); margin-bottom: 14px; font-size: 15px; }
+    .pk-section p strong { color: var(--bone); font-weight: 600; }
+    .pk-section em { color: var(--ash); font-style: italic; }
+
+    .pk-desc-block { margin-bottom: 16px; }
+    .pk-desc-block .k { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 5px; }
+    .btn-copy { font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 7px; background: transparent; border: 1px solid var(--border-mid); color: var(--text-secondary); cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-copy:hover { border-color: var(--gold); color: var(--bone); }
+    .btn-copy.done { color: var(--blood-bright); border-color: var(--blood-bright); }
+
+    .pk-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pk-feature { background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+    .pk-feature .ic { font-size: 22px; display: block; margin-bottom: 8px; }
+    .pk-feature b { color: var(--bone); font-size: 14.5px; display: block; margin-bottom: 4px; }
+    .pk-feature span { color: var(--text-secondary); font-size: 13px; line-height: 1.55; }
+
+    .pk-quote { border-left: 3px solid var(--blood); padding: 4px 0 4px 20px; margin: 0 0 16px; }
+    .pk-quote p { color: var(--bone); font-size: 17px; font-style: italic; margin-bottom: 6px; }
+    .pk-quote cite { color: var(--text-tertiary); font-size: 13px; font-style: normal; }
+
+    .pk-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pk-shot { position: relative; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid var(--border); background: radial-gradient(60% 80% at 30% 20%, rgba(229,169,60,0.14), transparent 70%), linear-gradient(160deg, #2a151a, #140b0d); display: flex; align-items: center; justify-content: center; }
+    .pk-shot .ph { font-family: 'Caveat', cursive; font-size: 18px; color: var(--blood-bright); opacity: .8; }
+    .pk-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s; }
+    .pk-shot:hover img { transform: scale(1.05); }
+
+    .pk-team { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pk-team-card { background: var(--void-mid); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+    .pk-team-card .role { font-family: 'Caveat', cursive; font-size: 20px; color: var(--blood-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 4px; }
+    .pk-team-card h4 { font-size: 18px; font-weight: 700; color: var(--bone); margin-bottom: 8px; }
+    .pk-team-card p { font-size: 13.5px; margin-bottom: 0; }
+    .pk-team-card .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .pk-team-card .pills span { font-size: 11px; color: var(--ash); background: rgba(229,169,60,0.06); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; }
+
+    .pk-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pk-specs-card { background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px; }
+    .pk-specs-card b { color: var(--blood-bright); font-size: 13px; letter-spacing: .05em; text-transform: uppercase; display: block; margin-bottom: 10px; }
+    .pk-specs-card ul { list-style: none; }
+    .pk-specs-card li { font-size: 13px; color: var(--text-secondary); padding: 3px 0; }
+    .pk-specs-card li span { color: var(--text-tertiary); }
+
+    .pk-dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pk-dl a { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; transition: all .2s; }
+    .pk-dl a:hover { border-color: var(--gold); background: var(--void-lite); }
+    .pk-dl .ic { font-size: 22px; }
+    .pk-dl b { display: block; font-size: 14px; color: var(--bone); }
+    .pk-dl span { font-size: 12px; color: var(--text-tertiary); }
+
+    .pk-perm { background: var(--void-mid); border: 1px solid var(--border-mid); border-radius: 12px; padding: 20px 24px; }
+    .pk-perm p { margin-bottom: 0; color: var(--text-secondary); }
+    .pk-perm strong { color: var(--blood-bright); }
+
+    .pk-contact a { color: var(--blood-bright); }
+    .pk-contact a:hover { color: var(--gold); }
+
+    .pk-footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--text-tertiary); font-size: 13px; }
+    .pk-footer a { color: var(--text-secondary); }
+    .pk-footer a:hover { color: var(--blood-bright); }
+
+    #lb { position: fixed; inset: 0; z-index: 500; background: rgba(6,4,5,0.94); display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
+    #lb.on { display: flex; }
+    #lb img { max-width: 96%; max-height: 92%; border-radius: 8px; box-shadow: 0 20px 80px rgba(0,0,0,.6); }
+
+    @media (max-width: 860px) {
+      .pk-wrap { grid-template-columns: 1fr; gap: 0; }
+      .pk-fact { position: static; padding-top: 36px; }
+      .pk-main { padding-top: 28px; }
+      .pk-features, .pk-team, .pk-specs, .pk-dl { grid-template-columns: 1fr; }
+      .pk-hero-logo { max-width: 210px; }
+    }
+  </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indieformer.com/"},{"@type":"ListItem","position":2,"name":"Slots & Slaughter","item":"https://indieformer.com/slots-slaughter/"},{"@type":"ListItem","position":3,"name":"Press Kit","item":"https://indieformer.com/slots-slaughter/presskit/"}]}</script>
+</head>
+
+<body>
+  <a class="pk-back" href="/slots-slaughter/">← Slots &amp; Slaughter</a>
+
+  <header class="pk-hero">
+    <div class="pk-hero-bg"></div>
+    <div class="pk-hero-inner">
+      <span class="pk-eyebrow">Press Kit</span>
+      <img class="pk-hero-logo" src="/images/slots-slaughter/logo.png" alt="Slots & Slaughter">
+      <p class="pk-hero-tag">You're a gladiator, and your gear's stuck inside a slot machine. Spin to load up, gamble
+        on the reroll, win your way out. Or go out swinging.</p>
+      <div class="pk-hero-actions">
+        <a class="btn btn-primary" href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank" rel="noopener">✦ Wishlist on Steam</a>
+        <a class="btn btn-ghost" href="https://drive.google.com/drive/folders/1Oyu8hB36oPboH7C_eCgc4eWyofaRoOU0?usp=sharing" target="_blank" rel="noopener">⤓ Full asset pack</a>
+        <a class="btn btn-ghost" href="/slots-slaughter/">Game page</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="pk-nav">
+    <div class="pk-nav-inner" id="pk-nav">
+      <a href="#description">Description</a>
+      <a href="#about">How it plays</a>
+      <a href="#media">Media</a>
+      <a href="#team">Team</a>
+      <a href="#streaming">Streaming</a>
+      <a href="#downloads">Downloads</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="pk-wrap">
+    <aside class="pk-fact">
+      <div class="pk-fact-card">
+        <span class="pk-fact-eyebrow">Factsheet</span>
+        <div class="pk-fact-row"><span class="pk-fact-label">Title</span><span class="pk-fact-val">Slots &amp; Slaughter</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Developer</span><span class="pk-fact-val">Laser Castle</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Publisher</span><span class="pk-fact-val">Indieformer</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Based in</span><span class="pk-fact-val">Taiwan (developer) · Melbourne, Australia (publisher)</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Release date</span><span class="pk-fact-val">Coming soon</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Platforms</span><span class="pk-fact-val">PC · Windows, macOS (Steam)</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Genre</span><span class="pk-fact-val">Roguelike deck-builder · dark humour · 2.5D · card battler · stylized</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Players</span><span class="pk-fact-val">Single-player</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Price</span><span class="pk-fact-val">TBA</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Steam</span><span class="pk-fact-val"><a href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank" rel="noopener">Store page →</a></span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Discord</span><span class="pk-fact-val"><a href="https://discord.gg/3UUVNXey4V" target="_blank" rel="noopener">discord.gg/3UUVNXey4V</a></span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Press contact</span><span class="pk-fact-val"><a href="mailto:slots@indieformer.com">slots@indieformer.com</a></span></div>
+      </div>
+    </aside>
+
+    <main class="pk-main">
+
+      <section class="pk-section" id="description">
+        <h2 class="pk-h2">Description</h2>
+        <div class="pk-desc-block">
+          <span class="k">One-liner</span>
+          <p id="d-one">Slots &amp; Slaughter is a roguelike deck-builder where your items are your deck, and a slot machine is how you ready them for the fight.</p>
+        </div>
+        <div class="pk-desc-block">
+          <span class="k">Short</span>
+          <p id="d-short">Fight for survival as a desperate gladiator in a roguelike deck-builder where every spin can change your fate. Spin the slot machine to ready your gear, gamble on rerolls that grow more expensive, then roll a d20 and watch the fight play out. Earn gold, upgrade your deck, and buy your freedom, or die a legend who gambled it all away.</p>
+        </div>
+        <div class="pk-desc-block">
+          <span class="k">Long</span>
+          <p id="d-long">Slots &amp; Slaughter is a deck-building roguelike where your items are your deck. Each turn, spin the slot machine to ready your gear for battle. Don't like the result? Pull the lever again, but beware: every reroll grows more expensive. Once you're ready, roll a d20 to determine who goes first, then watch the action unfold in the arena. Even gladiators don't fight every day: between fights, spend your hard-earned gold to heal, upgrade, or buy new items for your deck. Defeat your opponents and earn enough glory to buy your freedom, or die a legend who gambled it all away. Developed by Laser Castle and published by Indieformer; in development, coming to Steam.</p>
+          <button class="btn-copy" data-copy="d-long">⧉ Copy long description</button>
+        </div>
+      </section>
+
+      <section class="pk-section" id="about">
+        <h2 class="pk-h2">How it plays</h2>
+        <div class="pk-features">
+          <div class="pk-feature"><span class="ic">🎰</span><b>Your gear's in the machine</b><span>Your items are the deck. Spin at the top of the turn to see which ones are loaded and ready to swing.</span></div>
+          <div class="pk-feature"><span class="ic">🎲</span><b>Spin again (it'll cost you)</b><span>Hate the pull? Go again. It just gets more expensive every time. At some point you take what you're given and hope.</span></div>
+          <div class="pk-feature"><span class="ic">⚔️</span><b>Then you fight</b><span>Roll a d20 to see who goes first, then it plays out in the arena. You set the fight up; it does the swinging.</span></div>
+          <div class="pk-feature"><span class="ic">🩸</span><b>Buy your freedom, or don't</b><span>Between fights, spend gold to heal, upgrade and re-stock. Enough wins and you walk free. Otherwise, you were great while it lasted.</span></div>
+        </div>
+      </section>
+
+      <section class="pk-section" id="media">
+        <h2 class="pk-h2">Screenshots</h2>
+        <p>Click any shot to enlarge. Full-res screenshots, key art and logos are in the <a href="https://drive.google.com/drive/folders/1Oyu8hB36oPboH7C_eCgc4eWyofaRoOU0?usp=sharing" target="_blank" rel="noopener" style="color:var(--gold-bright);">downloadable asset pack →</a></p>
+        <div class="pk-gallery" id="pk-gallery">
+          <div class="pk-shot"><span class="ph">Coming soon</span><img src="/images/slots-slaughter/shot-attack.jpg" alt="Slots & Slaughter combat board" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Coming soon</span><img src="/images/slots-slaughter/shot-sanitarium.jpg" alt="The Sanitarium heal screen in Slots & Slaughter" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Coming soon</span><img src="/images/slots-slaughter/shot-merchant.jpg" alt="The Merchant shop in Slots & Slaughter" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pk-shot"><span class="ph">Coming soon</span><img src="/images/slots-slaughter/shot-board.jpg" alt="Fighting Medusa in Slots & Slaughter" loading="lazy" onerror="this.style.display='none'"></div>
+        </div>
+      </section>
+
+      <section class="pk-section" id="team">
+        <h2 class="pk-h2">The Team</h2>
+        <div class="pk-team">
+          <div class="pk-team-card">
+            <span class="role">the game</span>
+            <h4>Laser Castle</h4>
+            <p>A Slovak-born, Taiwan-based front-end developer by day and gamer by night. Passionate about board games and turn-based video games, he's finally trying to make one of his own.</p>
+            <div class="pills"><span>Developer</span><span>Roguelike</span><span>Deck-builder</span></div>
+          </div>
+          <div class="pk-team-card">
+            <span class="role">the publisher</span>
+            <h4>Indieformer</h4>
+            <p>Josh &amp; Clem, out of Melbourne. Two of us, plus a network we lean on. We get in early on the design, the loop and the marketing, and stick around from idea to release. Part of the team, not something sitting above it.</p>
+            <div class="pills"><span>Melbourne</span><span>Publisher</span><span>Scorchpot</span><span>Abelina</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pk-section" id="streaming">
+        <h2 class="pk-h2">Video &amp; Streaming Permission</h2>
+        <div class="pk-perm">
+          <p><strong>Yes, go for it.</strong> Indieformer and Laser Castle grant everyone the right to record, stream and monetize video content of Slots &amp; Slaughter, including on YouTube, Twitch and any other platform. No prior permission needed.</p>
+        </div>
+      </section>
+
+      <section class="pk-section" id="downloads">
+        <h2 class="pk-h2">Downloads</h2>
+        <div class="pk-dl">
+          <a href="https://drive.google.com/drive/folders/1Oyu8hB36oPboH7C_eCgc4eWyofaRoOU0?usp=sharing" target="_blank" rel="noopener"><span class="ic">📦</span><span><b>Full asset pack</b><span>Key art, capsules, logos (Google Drive)</span></span></a>
+          <a href="/images/slots-slaughter/presskit/logo.png" target="_blank" rel="noopener"><span class="ic">🅰️</span><span><b>Game logo</b><span>PNG, transparent</span></span></a>
+          <a href="/images/slots-slaughter/presskit/key-art.png" target="_blank" rel="noopener"><span class="ic">🖼️</span><span><b>Key art</b><span>PNG</span></span></a>
+          <a href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank" rel="noopener"><span class="ic">🎮</span><span><b>Steam page</b><span>store.steampowered.com</span></span></a>
+        </div>
+      </section>
+
+      <section class="pk-section" id="contact">
+        <h2 class="pk-h2">Contact</h2>
+        <div class="pk-contact">
+          <p><strong>Press &amp; inquiries:</strong> <a href="mailto:slots@indieformer.com">slots@indieformer.com</a></p>
+          <p><strong>Discord:</strong> <a href="https://discord.gg/3UUVNXey4V" target="_blank" rel="noopener">discord.gg/3UUVNXey4V</a></p>
+          <p><strong>Web:</strong> <a href="https://indieformer.com/slots-slaughter/" target="_blank" rel="noopener">indieformer.com/slots-slaughter</a></p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="pk-footer">
+    <img src="/logo.png" alt="Indieformer" style="height:30px;display:block;margin:0 auto 8px;opacity:.92;">
+    <div style="font-family:'Caveat',cursive;font-size:20px;color:var(--gold-bright);transform:rotate(-1deg);margin-bottom:10px;">an Indieformer press kit</div>
+    Slots &amp; Slaughter is developed by Laser Castle and published by <a href="https://indieformer.com/">Indieformer</a>.
+    &nbsp;·&nbsp; <a href="https://indieformer.com/slots-slaughter/">Game page</a> &nbsp;·&nbsp; <a href="https://indieformer.com/privacy/">Privacy</a>
+  </footer>
+
+  <div id="lb"><img src="" alt=""></div>
+
+  <script>
+    document.querySelectorAll('.btn-copy').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var el = document.getElementById(b.getAttribute('data-copy')); if (!el) return;
+        navigator.clipboard.writeText(el.textContent.trim()).then(function () {
+          var t = b.textContent; b.textContent = '✓ Copied'; b.classList.add('done');
+          setTimeout(function () { b.textContent = t; b.classList.remove('done'); }, 1600);
+        });
+      });
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('#pk-nav a')), map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (ents) {
+        ents.forEach(function (e) {
+          if (e.isIntersecting) {
+            links.forEach(function (l) { l.classList.remove('active'); });
+            if (map[e.target.id]) { map[e.target.id].classList.add('active'); map[e.target.id].scrollIntoView({ block: 'nearest', inline: 'center' }); }
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      document.querySelectorAll('.pk-section').forEach(function (s) { obs.observe(s); });
+    }
+    var lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+    document.getElementById('pk-gallery').addEventListener('click', function (e) {
+      var sh = e.target.closest('.pk-shot'); var img = sh && sh.querySelector('img');
+      if (img && img.style.display !== 'none' && img.complete && img.naturalWidth) { lbImg.src = img.src; lb.classList.add('on'); }
+    });
+    lb.addEventListener('click', function () { lb.classList.remove('on'); lbImg.src = ''; });
+  </script>
+</body>
+
+</html>

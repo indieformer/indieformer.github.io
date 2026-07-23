@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slots &amp; Slaughter | Indieformer</title>
+  <meta name="description"
+    content="Slots & Slaughter — a roguelike deck-builder where your gear is your deck and a slot machine decides what you fight with. Developed by Laser Castle, published by Indieformer. In development. Wishlist on Steam.">
+  <link rel="canonical" href="https://indieformer.com/slots-slaughter/">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Indieformer">
+  <meta property="og:title" content="Slots & Slaughter — published by Indieformer">
+  <meta property="og:description"
+    content="A broke gladiator whose whole kit is locked inside a slot machine. Spin to gear up, gamble on the reroll, win your freedom — or go out swinging. In development, published by Indieformer.">
+  <meta property="og:url" content="https://indieformer.com/slots-slaughter/">
+  <meta property="og:image" content="https://indieformer.com/images/slots-slaughter/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Slots & Slaughter — published by Indieformer">
+  <meta name="twitter:description" content="Your gear is your deck. A slot machine decides what shows up. In development, published by Indieformer.">
+  <meta name="twitter:image" content="https://indieformer.com/images/slots-slaughter/og.jpg">
+
+  <style>
+    @import url('/fonts/fonts.css');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Slots & Slaughter — sampled from the key art: cool charcoal + the reel triad (gold / red / steel). */
+      --void: #0E1013;
+      --void-mid: #15181C;
+      --void-lite: #1D2127;
+      --void-lighter: #282D35;
+      --gold: #E3AE3F;
+      --gold-bright: #FFC95E;
+      --gold-dim: #A6802F;
+      --blood: #D5342A;
+      --blood-bright: #F35A4B;
+      --steel: #6FA0BE;
+      --steel-bright: #93C0DC;
+      --ash: #AEC1CE;
+      --bone: #ECF1F4;
+      --text-primary: #ECF1F4;
+      --text-secondary: #A8B4BE;
+      --text-tertiary: #6C7680;
+      --border: rgba(190, 205, 216, 0.10);
+      --border-mid: rgba(190, 205, 216, 0.20);
+    }
+
+    body {
+      background: var(--void) !important;
+      color: var(--text-primary) !important;
+      font-family: 'Sora', Arial, sans-serif !important;
+      -webkit-font-smoothing: antialiased;
+      text-align: left !important;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none !important; color: inherit !important; }
+    .divider { border: none !important; border-top: 1px solid var(--border) !important; margin: 0 !important; }
+
+    /* ── HERO BANNER ────────────────────────────── */
+    .hero-banner {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+      background:
+        radial-gradient(120% 90% at 78% 12%, rgba(227, 174, 63, 0.10), transparent 60%),
+        linear-gradient(160deg, #161A1F 0%, var(--void) 74%);
+    }
+
+    .hero-banner-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center 34%;
+      filter: brightness(0.82) saturate(1.04);
+    }
+
+    .hero-banner-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(14, 16, 19, 0.15) 0%, transparent 28%, var(--void) 100%);
+    }
+
+    /* ── HERO CONTENT (two columns — capsule + copy, per Abelina) ── */
+    .hero-columns {
+      max-width: 900px;
+      margin: -90px auto 0;
+      padding: 0 24px 52px;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-left { flex-shrink: 0; width: 230px; }
+
+    .capsule-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid var(--border-mid);
+      box-shadow: 0 12px 44px rgba(0, 0, 0, 0.65), 0 0 30px rgba(227, 174, 63, 0.07);
+      aspect-ratio: 748 / 896;
+      background: var(--void-lite);
+    }
+
+    .capsule-frame img {
+      position: absolute; inset: 0;
+      width: 100% !important; height: 100% !important;
+      object-fit: cover !important; display: block !important;
+    }
+
+    .hero-right { flex: 1; min-width: 0; }
+
+    .hero-badge {
+      display: inline-block !important;
+      font-family: 'Caveat', cursive !important;
+      font-size: 23px !important; font-weight: 600 !important;
+      color: var(--blood-bright) !important;
+      transform: rotate(-1.5deg);
+      margin-bottom: 12px !important;
+    }
+
+    .hero-logo {
+      display: block !important; width: auto !important;
+      max-width: 210px !important; height: auto !important;
+      margin-bottom: 16px !important;
+    }
+
+    .hero-genre {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 12px !important; font-weight: 600 !important;
+      letter-spacing: 0.04em !important;
+      color: var(--gold) !important;
+      margin-bottom: 16px !important;
+    }
+
+    .hero-desc {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 15px !important; font-weight: 400 !important;
+      line-height: 1.7 !important;
+      color: var(--text-secondary) !important;
+      margin-bottom: 22px !important; max-width: 480px !important;
+    }
+
+    .hero-meta { display: flex !important; gap: 26px !important; margin-bottom: 24px !important; flex-wrap: wrap !important; }
+    .hero-meta-item { display: flex !important; flex-direction: column !important; gap: 3px !important; }
+    .hero-meta-label { font-size: 12px !important; font-weight: 500 !important; color: var(--text-tertiary) !important; }
+    .hero-meta-val { font-size: 13px !important; font-weight: 600 !important; color: var(--text-primary) !important; }
+
+    .hero-actions { display: flex !important; gap: 12px !important; flex-wrap: wrap !important; }
+
+    @media (max-width: 640px) {
+      .hero-banner { height: 200px; }
+      .hero-columns { display: block; margin-top: -56px; padding: 0 16px 40px; }
+      .hero-left { float: left; width: 104px; margin: 0 16px 10px 0; }
+      .hero-head { display: flow-root; }
+      .hero-logo { max-width: 150px !important; }
+      .hero-genre { clear: both; }
+      .hero-desc { clear: both; }
+      .hero-actions { gap: 10px !important; margin-top: 18px !important; }
+      .hero-actions .btn-steam, .hero-actions .btn-ghost {
+        flex: 1 1 0 !important; text-align: center !important;
+        padding: 11px 12px !important; font-size: 13px !important; white-space: nowrap !important;
+      }
+      .hero-meta { gap: 18px !important; }
+    }
+
+    /* ── BUTTONS ────────────────────────────────── */
+    .btn-steam, .btn-steam:link, .btn-steam:visited {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 14px !important; font-weight: 700 !important;
+      padding: 13px 26px !important; border-radius: 8px !important;
+      background: var(--gold) !important; color: #1c110c !important;
+      border: none !important; cursor: pointer !important;
+      display: inline-block !important; white-space: nowrap !important;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-steam:hover { background: var(--gold-bright) !important; box-shadow: 0 0 28px rgba(227, 174, 63, 0.34) !important; }
+
+    .btn-ghost, .btn-ghost:link, .btn-ghost:visited {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 14px !important; font-weight: 700 !important;
+      padding: 13px 26px !important; border-radius: 8px !important;
+      background: transparent !important; color: var(--bone) !important;
+      border: 2px solid var(--border-mid) !important; cursor: pointer !important;
+      display: inline-block !important; white-space: nowrap !important;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold) !important; color: var(--gold-bright) !important; }
+
+    /* ── SECTIONS ───────────────────────────────── */
+    .section { padding: 54px 24px !important; max-width: 900px !important; margin: 0 auto !important; text-align: left !important; }
+    .section-label {
+      font-family: 'Caveat', cursive !important;
+      font-size: 23px !important; font-weight: 600 !important;
+      color: var(--blood-bright) !important; margin-bottom: 6px !important;
+      display: inline-block !important; transform: rotate(-1.5deg);
+    }
+    .section h2 {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 27px !important; font-weight: 700 !important;
+      line-height: 1.15 !important; letter-spacing: -0.01em !important;
+      color: var(--text-primary) !important; margin-bottom: 8px !important;
+    }
+    .section-sub {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 15px !important; font-weight: 400 !important;
+      line-height: 1.65 !important; color: var(--text-secondary) !important;
+      margin-bottom: 4px !important; max-width: 640px !important;
+    }
+
+    /* ── PREMISE (SirClankalot fades into the section colour) ── */
+    .quote-section {
+      background: var(--void-mid) !important;
+      border-top: 1px solid var(--border) !important;
+      border-bottom: 1px solid var(--border) !important;
+      padding: 48px 24px !important;
+    }
+    .quote-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 44px; }
+
+    .quote-img-frame { flex-shrink: 0; width: 340px; position: relative; }
+    .quote-img-frame img { width: 100%; height: auto; display: block; }
+    /* fade the character into the section background colour at the bottom */
+    .quote-img-frame::after {
+      content: ''; position: absolute; left: -4%; right: -4%; bottom: -1px; height: 40%;
+      background: linear-gradient(to bottom, transparent 0%, var(--void-mid) 90%);
+      pointer-events: none;
+    }
+
+    .quote-text-wrap { max-width: 460px; }
+    .quote-eyebrow {
+      font-family: 'Caveat', cursive !important;
+      font-size: 23px !important; font-weight: 600 !important;
+      color: var(--blood-bright) !important; margin-bottom: 10px !important;
+      display: inline-block !important; transform: rotate(-1.5deg);
+    }
+    .quote-text-wrap p {
+      font-family: 'Sora', Arial, sans-serif !important;
+      font-size: 16px !important; line-height: 1.8 !important;
+      color: var(--text-secondary) !important; margin-bottom: 18px !important;
+    }
+    .quote-text-wrap p strong { color: var(--bone) !important; font-weight: 600 !important; }
+
+    /* ── HOW IT PLAYS — compact chips, no essays ── */
+    .play-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .play-chip {
+      display: flex; align-items: center; gap: 9px;
+      background: var(--void-mid); border: 1px solid var(--border);
+      border-radius: 999px; padding: 10px 17px;
+    }
+    .play-chip .ic { font-size: 16px; }
+    .play-chip span { font-family: 'Sora', sans-serif; font-size: 13.5px; font-weight: 600; color: var(--bone); }
+
+    /* ── A GLIMPSE ── */
+    .ss-feature { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); margin-top: 18px; }
+    .ss-feature img { width: 100%; height: auto; display: block; }
+    .ss-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .ss-row .cell { aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); }
+    .ss-row .cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media (max-width: 640px) { .ss-row { grid-template-columns: 1fr; } }
+
+    /* ── FOOTER CTA ── */
+    .footer-cta { background: var(--void-mid) !important; border-top: 1px solid var(--border) !important; padding: 54px 24px 60px !important; text-align: center !important; }
+    .footer-cta h2 { font-family: 'Sora', Arial, sans-serif !important; font-size: 30px !important; font-weight: 700 !important; color: var(--text-primary) !important; margin-bottom: 12px !important; }
+    .footer-cta p { font-size: 15px !important; color: var(--text-secondary) !important; margin: 0 auto 26px !important; max-width: 640px !important; line-height: 1.65 !important; }
+    .footer-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
+    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .footer-link, .footer-link:link, .footer-link:visited { font-size: 13px !important; color: var(--text-tertiary) !important; transition: color 0.2s; }
+    .footer-link:hover { color: var(--gold) !important; }
+
+    /* ── TRACKER ── */
+    .ss-ts-wrap { max-width: 800px; margin: 0 auto; padding: 44px 24px; }
+    .ss-ts { background: var(--void-mid); border: 1px solid var(--border); border-radius: 14px; padding: 26px 28px; position: relative; overflow: hidden; }
+    .ss-ts::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--blood), var(--steel)); }
+    .ss-ts-title { font-family: 'Caveat', cursive !important; font-size: 30px !important; font-weight: 700 !important; color: var(--blood-bright) !important; margin: 0 0 18px !important; display: inline-block !important; transform: rotate(-1.5deg); }
+    .ss-ts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+    .ss-ts-tile { background: var(--void); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+    .ss-ts-label { font-size: 12px !important; font-weight: 500 !important; color: var(--text-tertiary) !important; margin-bottom: 8px !important; display: block !important; }
+    .ss-ts-num { font-size: 26px !important; font-weight: 800 !important; letter-spacing: -0.02em !important; color: var(--bone) !important; line-height: 1.05 !important; display: block !important; margin-bottom: 4px !important; }
+    .ss-ts-num.steel { color: var(--steel-bright) !important; }
+    .ss-ts-num.blood { color: var(--blood-bright) !important; }
+    .ss-ts-sub { font-size: 12px !important; color: var(--text-secondary) !important; display: block !important; }
+    .ss-ts-footer { font-size: 12px !important; color: var(--text-tertiary) !important; margin-top: 16px !important; padding-top: 14px !important; border-top: 1px solid var(--border) !important; line-height: 1.6; }
+    @media (max-width: 640px) { .ss-ts-grid { grid-template-columns: 1fr; } }
+
+    /* ── BACK LINK ── */
+    .if-back { position: fixed; top: 18px; left: 22px; font-family: 'Caveat', cursive; font-size: 22px; color: var(--blood-bright); z-index: 100; transform: rotate(-2deg); text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7); transition: transform 0.2s ease, color 0.2s ease; }
+    .if-back:hover { color: var(--bone) !important; transform: rotate(-2deg) translateX(-4px); }
+    @media (max-width: 640px) { .if-back { font-size: 19px; top: 14px; left: 16px; } .quote-inner { flex-direction: column; gap: 18px; } .quote-img-frame { width: 240px; } .footer-cta h2 { font-size: 24px !important; } }
+
+    /* ── LOADING OVERLAY ── */
+    #loader-overlay { position: fixed; inset: 0; z-index: 9999; background: var(--void); display: flex; align-items: center; justify-content: center; transition: opacity 0.45s ease; }
+    #loader-overlay.gone { opacity: 0; pointer-events: none; }
+    #loader-gem { width: 140px; height: 140px; }
+    @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
+  </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Slots & Slaughter","description":"A roguelike deck-builder where your gear is your deck and a slot machine decides what you fight with. Spin to load your loadout, gamble on the reroll, and fight your way to freedom.","image":"https://indieformer.com/images/slots-slaughter/og.jpg","url":"https://indieformer.com/slots-slaughter/","genre":["Roguelike","Deck-building","Card Battler","Strategy"],"gamePlatform":"PC","operatingSystem":["Windows","macOS"],"author":{"@type":"Organization","name":"Laser Castle"},"publisher":{"@type":"Organization","name":"Indieformer","url":"https://indieformer.com/"},"sameAs":"https://store.steampowered.com/app/4504900/Slots__Slaughter/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indieformer.com/"},{"@type":"ListItem","position":2,"name":"Slots & Slaughter","item":"https://indieformer.com/slots-slaughter/"}]}</script>
+</head>
+
+<body>
+
+  <div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script>
+    (function () {
+      var o = document.getElementById('loader-overlay'); if (!o) return;
+      var anim;
+      try { if (typeof lottie !== 'undefined') { anim = lottie.loadAnimation({ container: document.getElementById('loader-gem'), renderer: 'svg', loop: true, autoplay: true, path: '/loading-gem.json' }); } } catch (e) { }
+      var shown = Date.now();
+      function hide() { if (o.classList.contains('gone')) return; o.classList.add('gone'); setTimeout(function () { try { if (anim) anim.destroy(); } catch (e) { } if (o.parentNode) o.parentNode.removeChild(o); }, 500); }
+      function maybeHide() { setTimeout(hide, Math.max(0, 400 - (Date.now() - shown))); }
+      if (document.readyState === 'complete') maybeHide(); else window.addEventListener('load', maybeHide);
+      setTimeout(hide, 4000);
+    })();
+  </script>
+
+  <a class="if-back" href="/" aria-label="Back to Indieformer">← Indieformer</a>
+
+  <!-- ── HERO ── art: library_hero.png (banner) + library_capsule.png (box art) + library_logo_transparent.png -->
+  <div class="hero-banner">
+    <div class="hero-banner-bg" style="background-image:url('/images/slots-slaughter/hero.jpg');"></div>
+    <div class="hero-banner-overlay"></div>
+  </div>
+
+  <div class="hero-columns">
+    <div class="hero-left">
+      <div class="capsule-frame">
+        <img src="/images/slots-slaughter/capsule.jpg" alt="Slots & Slaughter box art">
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-head">
+        <div class="hero-badge">✦ Published by Indieformer</div>
+        <img class="hero-logo" src="/images/slots-slaughter/logo.png" alt="Slots & Slaughter">
+      </div>
+      <p class="hero-genre">Roguelike deck-builder · dark humour · single-player</p>
+      <p class="hero-desc">You're a broke gladiator whose entire kit is locked inside a slot machine. Spin to gear up,
+        gamble on the reroll, and win your freedom. Or die a legend who gambled it all away.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><span class="hero-meta-label">Developer</span><span class="hero-meta-val">Laser Castle</span></div>
+        <div class="hero-meta-item"><span class="hero-meta-label">Publisher</span><span class="hero-meta-val">Indieformer</span></div>
+        <div class="hero-meta-item"><span class="hero-meta-label">Release</span><span class="hero-meta-val">Coming soon</span></div>
+      </div>
+      <div class="hero-actions">
+        <a href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank" rel="noopener" class="btn-steam">✦ Wishlist on Steam</a>
+        <a href="https://discord.gg/3UUVNXey4V" target="_blank" rel="noopener" class="btn-ghost">Join the Discord</a>
+        <a href="/slots-slaughter/presskit/" class="btn-ghost">Press kit</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TRACKER ── -->
+  <div class="ss-ts-wrap">
+    <div class="ss-ts">
+      <h3 class="ss-ts-title">Where Slots &amp; Slaughter's at.</h3>
+      <div class="ss-ts-grid">
+        <div class="ss-ts-tile"><span class="ss-ts-label">Stage</span><span class="ss-ts-num steel">In development</span><span class="ss-ts-sub">Signed to Indieformer</span></div>
+        <div class="ss-ts-tile"><span class="ss-ts-label">Beta</span><span class="ss-ts-num blood">On the way</span><span class="ss-ts-sub">wishlist on Steam to hear when it opens</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── PREMISE (SirClankalot) ── -->
+  <div class="quote-section">
+    <div class="quote-inner">
+      <div class="quote-img-frame">
+        <img src="/images/slots-slaughter/sirclankalot.png" alt="Sir Clankalot, a Slots & Slaughter gladiator">
+      </div>
+      <div class="quote-text-wrap">
+        <span class="quote-eyebrow">The premise</span>
+        <p>You're a broke gladiator, and every fight starts at the slot machine. Spin to load your gear, then roll a
+          d20 and let it play out. Between fights, you build the run: heal up at the Sanitarium, buy new gear from the
+          Merchant, and stack your deck for what's next. Win enough to buy your freedom. <strong>Or go out swinging.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── HOW IT PLAYS (compact) ── -->
+  <div class="section">
+    <span class="section-label">how it plays</span>
+    <h2>It's a card game that runs on a slot machine.</h2>
+    <p class="section-sub">Your items are the deck; the machine decides what you play with. Every reroll costs more than
+      the last. This is both a slots and combat game at the same time.</p>
+    <div class="play-chips">
+      <div class="play-chip"><span class="ic">🎰</span><span>Spin to gear up</span></div>
+      <div class="play-chip"><span class="ic">🔁</span><span>Reroll (costs more)</span></div>
+      <div class="play-chip"><span class="ic">🎲</span><span>Roll a d20</span></div>
+      <div class="play-chip"><span class="ic">🩸</span><span>Buy your freedom, or don't</span></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── A GLIMPSE ── -->
+  <div class="section">
+    <span class="section-label">a glimpse</span>
+    <h2>See it in action.</h2>
+    <div class="ss-feature"><img src="/images/slots-slaughter/shot-attack.jpg" alt="Slots & Slaughter combat board" loading="lazy"></div>
+    <div class="ss-row">
+      <div class="cell"><img src="/images/slots-slaughter/shot-sanitarium.jpg" alt="The Sanitarium heal screen in Slots & Slaughter" loading="lazy"></div>
+      <div class="cell"><img src="/images/slots-slaughter/shot-merchant.jpg" alt="The Merchant shop in Slots & Slaughter" loading="lazy"></div>
+      <div class="cell"><img src="/images/slots-slaughter/shot-board.jpg" alt="Fighting Medusa in Slots & Slaughter" loading="lazy"></div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER CTA ── -->
+  <div class="footer-cta">
+    <h2>Follow along as we build it.</h2>
+    <p>It's early. We'd love a wishlist on Steam, and joining the Discord is how you'll hear the second it has a date.</p>
+    <div class="footer-cta-actions">
+      <a href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank" rel="noopener" class="btn-steam">✦ Wishlist on Steam</a>
+      <a href="https://discord.gg/3UUVNXey4V" target="_blank" rel="noopener" class="btn-ghost">Join the Discord</a>
+      <a href="/slots-slaughter/presskit/" class="btn-ghost">Press kit</a>
+    </div>
+    <div class="footer-links">
+      <a href="https://discord.gg/3UUVNXey4V" target="_blank" rel="noopener" class="footer-link">Join the Discord</a>
+      <a href="https://www.indieformer.com" class="footer-link">Indieformer</a>
+      <a href="https://x.com/indieformer" target="_blank" rel="noopener" class="footer-link">Twitter / X</a>
+      <a href="/slots-slaughter/presskit/" class="footer-link">Press kit</a>
+      <a href="https://www.indieformer.com/privacy/" class="footer-link">Privacy</a>
+      <a href="https://www.indieformer.com/terms/" class="footer-link">Terms</a>
+    </div>
+  </div>
+
+</body>
+
+</html>
