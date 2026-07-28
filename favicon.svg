@@ -1,12 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg data-name="Layer 2" viewBox="0 0 459 495" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1 {
-        fill: #f78154;
-      }
-
-      .cls-2 {
-        fill: #28e291;
-      }
-
-      .cls-3 {
-        fill: #9381ff;
-      }</style></defs><g data-name="Waypoint Logo"><polygon class="cls-1" points="294 108 163 115 235 222"/><polygon class="cls-2" points="240 240 234 494 363 297"/><polygon class="cls-3" points="377 288 459 272 407 144"/><polygon class="cls-3" points="224 495 230 239 94.2 296"/><polygon class="cls-1" points="51.1 144 0 270 80.4 287"/><polygon class="cls-1" points="210 11.8 71.2 119 151 106"/><polygon class="cls-2" points="294 97.7 229 0 163 105"/><polygon class="cls-2" points="228 230 155 121 95.4 284"/><polygon class="cls-1" points="258 474 451 284 373 299"/><polygon class="cls-3" points="146 117 58.6 131 88.2 275"/><polygon class="cls-2" points="399 131 310 109 369 276"/></g></svg>
+<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="#262730"/><svg x="12.66" y="10.00" width="74.68" height="80.00" viewBox="0 0 11.22 12.02">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 7 2 L 11.21875 2 L 11.21875 10 L 7 10 Z M 7 2 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 2 0 L 9 0 L 9 12.019531 L 2 12.019531 Z M 2 0 "/>
+</clipPath>
+</defs>
+<path fill-rule="nonzero" fill="#9381FF" fill-opacity="1" d="M 3.222656 2.398438 L 3.25 2.324219 L 3.292969 2.253906 L 3.984375 1.160156 L 1.386719 3.210938 L 0 6.636719 L 1.542969 6.976562 L 1.632812 6.738281 L 3.222656 2.398438 "/>
+<g clip-path="url(#clip-0)">
+<path fill-rule="nonzero" fill="#F78154" fill-opacity="1" d="M 9.71875 7.09375 L 9.511719 7.40625 L 7.921875 9.847656 L 11.21875 6.636719 L 9.832031 3.210938 L 8.09375 2.660156 L 9.589844 6.738281 L 9.71875 7.09375 "/>
+</g>
+<g clip-path="url(#clip-1)">
+<path fill-rule="nonzero" fill="#28E291" fill-opacity="1" d="M 7.292969 2.65625 L 5.609375 -0.00390625 L 3.929688 2.65625 L 2.335938 6.996094 L 5.609375 12.019531 L 8.882812 6.996094 L 7.292969 2.65625 "/>
+</g>
+</svg></svg>
