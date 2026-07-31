@@ -300,6 +300,8 @@
     #loader-overlay.gone { opacity: 0; pointer-events: none; }
     #loader-gem { width: 140px; height: 140px; }
     @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
+    .video-wrap { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); margin-bottom: 20px; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
   </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Slots & Slaughter","description":"A roguelike deck-builder where your gear is your deck and a slot machine decides what you fight with. Spin to load your loadout, gamble on the reroll, and fight your way to freedom.","image":"https://indieformer.com/images/slots-slaughter/og.jpg","url":"https://indieformer.com/slots-slaughter/","genre":["Roguelike","Deck-building","Card Battler","Strategy"],"gamePlatform":"PC","operatingSystem":["Windows","macOS"],"author":{"@type":"Organization","name":"Laser Castle"},"publisher":{"@type":"Organization","name":"Indieformer","url":"https://indieformer.com/"},"sameAs":"https://store.steampowered.com/app/4504900/Slots__Slaughter/"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indieformer.com/"},{"@type":"ListItem","position":2,"name":"Slots & Slaughter","item":"https://indieformer.com/slots-slaughter/"}]}</script>
@@ -408,6 +410,14 @@
   <div class="section">
     <span class="section-label">a glimpse</span>
     <h2>See it in action.</h2>
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/uvk66cGkHoM?rel=0&modestbranding=1&autoplay=1&mute=1&loop=1&playlist=uvk66cGkHoM"
+        title="Slots &amp; Slaughter — Trailer"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
     <div class="ss-feature"><img src="/images/slots-slaughter/shot-attack.jpg" alt="Slots & Slaughter combat board" loading="lazy"></div>
     <div class="ss-row">
       <div class="cell"><img src="/images/slots-slaughter/shot-sanitarium.jpg" alt="The Sanitarium heal screen in Slots & Slaughter" loading="lazy"></div>
