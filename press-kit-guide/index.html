@@ -83,7 +83,7 @@
     padding: 40px 56px 16px;
     z-index: 1;
   }
-  .col { max-width: 720px; position: relative; z-index: 2; }
+  .col { max-width: 960px; position: relative; z-index: 2; }
   .eyebrow {
     font-family: 'Caveat', cursive; font-size: 22px; color: var(--coral);
     transform: rotate(-1deg); display: inline-block; margin-bottom: 10px;
@@ -94,7 +94,7 @@
     margin-bottom: 18px;
   }
   h1 .em { color: var(--emerald); }
-  .page-intro { color: var(--text-secondary); line-height: 1.7; font-size: 17px; margin-bottom: 16px; max-width: 640px; }
+  .page-intro { color: var(--text-secondary); line-height: 1.7; font-size: 17px; margin-bottom: 16px; }
   .page-intro strong { color: var(--text-primary); font-weight: 600; }
   .page-intro a { color: var(--emerald); border-bottom: 1px solid rgba(40, 226, 145, 0.42); text-decoration: none; }
   .page-intro a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
@@ -230,14 +230,17 @@
     position: relative; z-index: 2;
   }
   .closing-card {
-    background: var(--shadow-mid);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--emerald);
-    border-radius: 12px;
-    padding: 26px 30px;
+    background:
+      radial-gradient(130% 150% at 50% 0%, rgba(40,226,145,0.10), transparent 55%),
+      var(--shadow-mid);
+    border: 1px solid var(--border-mid);
+    border-radius: 16px;
+    padding: 40px 40px;
+    text-align: center;
   }
-  .closing-card p { color: var(--text-secondary); font-size: 16px; line-height: 1.65; }
+  .closing-card p { color: var(--text-secondary); font-size: 19px; line-height: 1.6; max-width: 620px; margin: 0 auto; }
   .closing-card strong { color: var(--text-primary); font-weight: 700; }
+  .closing-card em { color: var(--text-primary); font-style: italic; }
 
   /* help: people to talk to */
   .help {
@@ -375,6 +378,49 @@
   }
   .social-icons a:hover { color: var(--text-primary) !important; transform: translateY(-2px); }
   .social-icons svg { display: block; }
+
+    /* ── guide redesign: presskit-style hero + two-column contents ── */
+    .guide-hero-bg {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 100vw; height: 660px; z-index: 0; pointer-events: none;
+      background: url('/images/guide-banner.jpg') center top / cover no-repeat;
+    }
+    .guide-hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(65% 60% at 50% 22%, rgba(38,39,48,0) 0%, rgba(38,39,48,0.45) 100%),
+        linear-gradient(to bottom, rgba(38,39,48,0.5) 0%, rgba(38,39,48,0.22) 42%, var(--shadow) 100%);
+    }
+    .site-nav, .section, .facts { position: relative; z-index: 2; }
+    .guide-wrap {
+      max-width: 1000px; margin: 48px auto 0; padding: 0 24px;
+      display: grid; grid-template-columns: 210px 1fr; gap: 44px; align-items: start;
+      position: relative; z-index: 2;
+    }
+    .guide-wrap .body { max-width: none; margin: 0; }
+    .guide-side { position: sticky; top: 24px; }
+    .guide-contents { background: var(--shadow-mid); border: 1px solid var(--border); border-radius: 14px; padding: 16px 14px; display: flex; flex-direction: column; gap: 1px; }
+    .guide-contents-title { font-family: 'Caveat', cursive; font-size: 22px; color: var(--emerald); transform: rotate(-1.5deg); display: inline-block; margin: 2px 6px 10px; }
+    .guide-contents a { display: flex; gap: 9px; align-items: baseline; padding: 8px 10px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: var(--text-secondary); text-decoration: none; line-height: 1.3; transition: background .15s, color .15s; }
+    .guide-contents a .n { color: var(--text-tertiary); font-weight: 700; font-size: 12px; min-width: 14px; }
+    .guide-contents a:hover { background: var(--shadow); color: var(--text-primary); }
+    .guide-contents a.active { background: rgba(40,226,145,0.12); color: var(--emerald); }
+    .guide-contents a.active .n { color: var(--emerald); }
+    .pk[id] { scroll-margin-top: 24px; }
+    @media (max-width: 820px) { .guide-wrap { grid-template-columns: 1fr; gap: 0; } .guide-side { position: static; margin-bottom: 28px; } }
+    .about-if { max-width: 1000px; margin: 72px auto 0; padding: 44px 24px 0; border-top: 1px solid var(--border); position: relative; z-index: 2; }
+    .about-if .eyebrow2 { font-family: 'Caveat', cursive; font-size: 24px; color: var(--coral); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 6px; }
+    .about-if h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.01em; color: var(--text-primary); margin-bottom: 14px; }
+    .about-if p { color: var(--text-secondary); line-height: 1.75; font-size: 16px; max-width: 760px; margin-bottom: 14px; }
+    .about-if p a { color: var(--emerald); text-decoration: none; border-bottom: 1px solid rgba(40,226,145,0.42); }
+    .about-if .about-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+    .about-if .about-cta a { border: 1px solid var(--border-mid); border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: var(--text-primary); text-decoration: none; }
+    .about-if .about-cta a:hover { border-color: var(--emerald); color: var(--emerald); }
+    .about-jake { margin-top: 30px; background: var(--shadow-mid); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; max-width: 760px; }
+    .about-jake-role { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); display: block; margin-bottom: 8px; }
+    .about-jake h3 { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .about-jake p { color: var(--text-secondary); font-size: 15px; line-height: 1.65; margin: 0; max-width: none; }
+    .about-jake a { color: var(--emerald); text-decoration: none; border-bottom: 1px solid rgba(40,226,145,0.42); }
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Press Kit Guide for Indie Games", "description": "Make your game press-ready. A clean, complete press kit that makes it easy for creators, media, and platforms to share your game.", "image": "https://indieformer.com/og-image.png", "url": "https://indieformer.com/press-kit-guide/", "mainEntityOfPage": "https://indieformer.com/press-kit-guide/", "author": {"@type": "Organization", "name": "Indieformer", "url": "https://indieformer.com/"}, "publisher": {"@type": "Organization", "name": "Indieformer", "logo": {"@type": "ImageObject", "url": "https://indieformer.com/logo.png"}}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://indieformer.com/"}, {"@type": "ListItem", "position": 2, "name": "Press Kit Guide", "item": "https://indieformer.com/press-kit-guide/"}]}</script>
@@ -419,6 +465,7 @@
 
 <span class="crop bl"></span><span class="crop br"></span>
 
+<div class="guide-hero-bg" aria-hidden="true"></div>
 <header class="site-nav" data-shared-nav></header>
 
 <section class="section">
@@ -439,16 +486,28 @@
 
 <div class="facts" aria-label="Guide quick facts">
   <div class="fact"><span class="fact-k">For</span><span class="fact-v">Indie developers</span></div>
-  <div class="fact"><span class="fact-k">Sections</span><span class="fact-v">6 core areas</span></div>
   <div class="fact"><span class="fact-k">Examples</span><span class="fact-v">5 real press kits</span></div>
-  <div class="fact"><span class="fact-k">Also see</span><span class="fact-v"><a href="/steam-marketing-guide/">Steam Guide →</a></span></div>
-  <div class="fact"><span class="fact-k">By</span><span class="fact-v">Indieformer</span></div>
+  <div class="fact"><span class="fact-k">Also see</span><span class="fact-v"><a href="/steam-marketing-guide/">Steam Guide &rarr;</a></span></div>
 </div>
 
-<main class="body">
+<div class="guide-wrap">
+  <aside class="guide-side">
+    <nav class="guide-contents" aria-label="Contents">
+      <span class="guide-contents-title">Contents</span>
+      <a href="#s1"><span class="n">1</span>Factsheet</a>
+      <a href="#s2"><span class="n">2</span>Videos &amp; clips</a>
+      <a href="#s3"><span class="n">3</span>Screenshots</a>
+      <a href="#s4"><span class="n">4</span>Logos &amp; branding</a>
+      <a href="#s5"><span class="n">5</span>Press releases</a>
+      <a href="#s6"><span class="n">6</span>Download packs</a>
+      <a href="#s7"><span class="n">7</span>Reference examples</a>
+    </nav>
+  </aside>
+
+  <main class="body">
 
   <!-- 1 -->
-  <section class="pk">
+  <section class="pk" id="s1">
     <div class="pk-head">
       <div class="pk-num" aria-hidden="true">1</div>
       <span class="pk-title">Factsheet / Overview</span>
@@ -482,7 +541,7 @@
   </section>
 
   <!-- 2 -->
-  <section class="pk">
+  <section class="pk" id="s2">
     <div class="pk-head">
       <div class="pk-num" aria-hidden="true">2</div>
       <span class="pk-title">Videos &amp; Clips</span>
@@ -509,7 +568,7 @@
   </section>
 
   <!-- 3 -->
-  <section class="pk">
+  <section class="pk" id="s3">
     <div class="pk-head">
       <div class="pk-num" aria-hidden="true">3</div>
       <span class="pk-title">Screenshots &amp; Imagery</span>
@@ -537,7 +596,7 @@
   </section>
 
   <!-- 4 -->
-  <section class="pk">
+  <section class="pk" id="s4">
     <div class="pk-head">
       <div class="pk-num" aria-hidden="true">4</div>
       <span class="pk-title">Logos, Branding &amp; Graphic Assets</span>
@@ -566,7 +625,7 @@
   </section>
 
   <!-- 5 -->
-  <section class="pk">
+  <section class="pk" id="s5">
     <div class="pk-head">
       <div class="pk-num" aria-hidden="true">5</div>
       <span class="pk-title">Press Releases</span>
@@ -590,7 +649,7 @@
   </section>
 
   <!-- 6 -->
-  <section class="pk">
+  <section class="pk" id="s6">
     <div class="pk-head">
       <div class="pk-num" aria-hidden="true">6</div>
       <span class="pk-title">Download Packs</span>
@@ -615,7 +674,7 @@
   </section>
 
   <!-- 7 — references -->
-  <section class="pk">
+  <section class="pk" id="s7">
     <div class="pk-head">
       <div class="pk-num" aria-hidden="true">7</div>
       <span class="pk-title">Reference Examples</span>
@@ -659,6 +718,7 @@
   </section>
 
 </main>
+</div>
 
 <aside class="closing">
   <div class="closing-card">
@@ -666,38 +726,20 @@
   </div>
 </aside>
 
-<section class="help">
-  <div class="help-head">
-    <span class="help-eyebrow">need help?</span>
-    <h2 class="help-h2">Two people worth talking to.</h2>
-    <p class="help-sub">If you're looking for support along the way, here's where to start.</p>
+<section class="about-if">
+  <span class="eyebrow2">who's behind this.</span>
+  <h2>Indieformer, the publisher.</h2>
+  <p>Indieformer is a small, creator-led publisher run by Josh and Clem out of Melbourne, backed by a wider network. We work from the first idea through to release, close to the design and the marketing, and we stay through the messy parts.</p>
+  <p>You make a great game, and we help it find players. There's more on how we do that in <a href="/how-we-make-a-game-popular/">How We Make a Game Popular</a>.</p>
+  <div class="about-cta">
+    <a href="https://indieformer.com/">indieformer.com</a>
+    <a href="mailto:pr@indieformer.com">pr@indieformer.com</a>
+    <a href="/steam-marketing-guide/">Steam Marketing Guide</a>
   </div>
-  <div class="help-grid">
-    <div class="help-card">
-      <span class="help-cat">Game Marketing</span>
-      <div class="help-person">
-        <span class="help-name">Jake Lizarraga</span>
-        <span class="help-role">Game Marketing Specialist</span>
-      </div>
-      <p class="help-body">A former Director of Content Marketing for a 7-figure tech startup who switched industries to help indie devs increase their success rate by adhering to Steam's best practices. <strong>Committed to providing zero-cost marketing support to indie developers</strong> with no upfront charges and revenue share agreements below 20%.</p>
-      <div class="help-links">
-        <a href="https://linkedin.com/in/jakelizarraga" target="_blank" rel="noopener" class="help-link">linkedin.com/in/jakelizarraga →</a>
-      </div>
-    </div>
-    <div class="help-card us">
-      <span class="help-cat">Press, Media &amp; Design</span>
-      <div class="help-person">
-        <span class="help-name">Josh — Indieformer</span>
-        <span class="help-role">Founder &amp; Publisher</span>
-      </div>
-      <p class="help-body">Helping indie devs get noticed through smart packaging and curated visibility across the right channels. Whether you need design feedback, media outreach, or a feature slot in the newsletter, Indieformer can help. <strong>Over a decade of experience in film, TV, and distribution.</strong></p>
-      <div class="help-links">
-        <a href="mailto:pr@indieformer.com" class="help-link">pr@indieformer.com →</a>
-        <a href="https://indieformer.com" class="help-link">indieformer.com →</a>
-        <a href="https://www.threads.net/@indieformer" target="_blank" rel="noopener" class="help-link">@indieformer →</a>
-      </div>
-      <span class="help-pricing">flexible pricing: upfront fee or 5% revenue share.</span>
-    </div>
+  <div class="about-jake">
+    <span class="about-jake-role">Also worth talking to</span>
+    <h3>Jake Lizarraga</h3>
+    <p>A former Director of Content Marketing for a 7-figure tech startup who switched industries to help indie devs get seen on Steam. <a href="https://linkedin.com/in/jakelizarraga" target="_blank" rel="noopener">linkedin.com/in/jakelizarraga &rarr;</a></p>
   </div>
 </section>
 
@@ -791,5 +833,20 @@
 </script>
 
 <script src="/site-chrome.js" defer></script>
+<script>
+  (function () {
+    var links = [].slice.call(document.querySelectorAll('.guide-contents a'));
+    var map = {}; links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          var a = map[e.target.id]; if (a) { a.classList.add('active'); a.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+        }
+      });
+    }, { rootMargin: '-60px 0px -70% 0px' });
+    document.querySelectorAll('.pk[id]').forEach(function (sec) { obs.observe(sec); });
+  })();
+</script>
 </body>
 </html>
