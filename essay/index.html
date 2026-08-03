@@ -287,7 +287,7 @@ body{font-family:'Sora',system-ui,-apple-system,sans-serif;background:var(--bg);
   border:1px solid rgba(255,255,255,.05);
 }
 .js-ready .disc-item{
-  opacity:0;transform:translateX(40px) scale(.96);
+  opacity:0;transform:translateX(18px);
   transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1),background .2s;
 }
 .disc-item.in{opacity:1;transform:translateX(0);animation:none;}
@@ -347,7 +347,7 @@ body{font-family:'Sora',system-ui,-apple-system,sans-serif;background:var(--bg);
 ══════════════════════════════════════════════════ */
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0;}
 .stat-cell{background:rgba(26,28,36,0.7);padding:28px 20px;text-align:center;transition:background .3s,border-color .3s;border:1px solid rgba(255,255,255,.07);border-radius:14px;}
-.js-ready .stat-cell{opacity:0;transform:scale(.8) translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),background .3s;}
+.js-ready .stat-cell{opacity:0;transform:scale(.94) translateY(12px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),background .3s;}
 .js-ready .stat-cell.in{opacity:1;transform:scale(1) translateY(0);}
 .stat-cell:hover{background:rgba(40,42,58,.9);border-color:rgba(255,255,255,.12);}
 .stat-n{font-size:clamp(24px,3.2vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1;margin-bottom:12px;display:block;color:var(--green);white-space:nowrap;}
@@ -425,19 +425,19 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
 .ai,.al,.ar,.as{opacity:1;transform:none;}
 
 /* When JS confirms it's running, enable the hidden-until-scroll state */
-.js-ready .ai{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.js-ready .ai{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
 .js-ready .ai.in{opacity:1;transform:translateY(0);}
 .js-ready .ai.d1{transition-delay:.12s;}
 .js-ready .ai.d2{transition-delay:.26s;}
 .js-ready .ai.d3{transition-delay:.4s;}
 
-.js-ready .al{opacity:0;transform:translateX(-44px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);}
+.js-ready .al{opacity:0;transform:translateX(-18px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);}
 .js-ready .al.in{opacity:1;transform:translateX(0);}
 
-.js-ready .ar{opacity:0;transform:translateX(44px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);}
+.js-ready .ar{opacity:0;transform:translateX(18px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);}
 .js-ready .ar.in{opacity:1;transform:translateX(0);}
 
-.js-ready .as{opacity:0;transform:scale(.88) translateY(16px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.js-ready .as{opacity:0;transform:scale(.96) translateY(10px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
 .js-ready .as.in{opacity:1;transform:scale(1) translateY(0);}
 
 /* ══════════════════════════════════════════════════
@@ -1665,7 +1665,7 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
       <div style="background:var(--bg2);padding:36px 32px;position:relative;overflow:hidden;border-radius:12px;">
         <span class="disc-ghost-num" data-target="86" data-suffix="%" style="font-size:5rem;font-weight:900;color:var(--purple);opacity:.12;position:absolute;top:14px;right:18px;line-height:1;pointer-events:none;letter-spacing:-.03em;">86%</span>
         <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--purple);margin-bottom:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Word of Mouth &nbsp;·&nbsp; <a href="https://investgame.net/wp-content/uploads/2025/03/0794a269-d5c4-4994-9bcf-8c5730d0815e_2025_GDC_State_of_the_Game_Industry_report-1.pdf" target="_blank" style="color:var(--purple);text-decoration:none;">86% of devs use it ↗</a></div>
-        <div style="font-size:clamp(1.1rem,2vw,1.35rem);font-weight:800;color:var(--fg);margin-bottom:12px;line-height:1.25;">Content before launch.</div>
+        <div style="font-size:clamp(1.1rem,2vw,1.35rem);font-weight:800;color:var(--cream);margin-bottom:12px;line-height:1.25;">Content before launch.</div>
         <div style="font-size:clamp(0.85rem,1.3vw,0.95rem);color:var(--mid);line-height:1.65;"><a href="https://www.tiktok.com" target="_blank" style="color:var(--green);text-decoration:underline;">TikTok</a> and <a href="https://www.youtube.com/shorts" target="_blank" style="color:var(--green);text-decoration:underline;">YouTube Shorts</a> are where breakouts happen. A 30-second clip of something unexpected reaches more people than three months of press releases. <em><a href="https://store.steampowered.com/app/3241660/REPO/" target="_blank" style="color:var(--green);text-decoration:underline;">R.E.P.O.</a></em>, <em><a href="https://store.steampowered.com/app/1966720/Lethal_Company/" target="_blank" style="color:var(--green);text-decoration:underline;">Lethal Company</a></em>, <em><a href="https://store.steampowered.com/app/2379780/Balatro/" target="_blank" style="color:var(--green);text-decoration:underline;">Balatro</a></em>: all content before they were launches. You're not marketing a game. You're making content that happens to be about one.</div>
       </div>
 
@@ -1673,7 +1673,7 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
       <div style="background:var(--bg2);padding:36px 32px;position:relative;overflow:hidden;border-radius:12px;">
         <span class="disc-ghost-num" data-target="26" data-suffix="%" style="font-size:5rem;font-weight:900;color:var(--gold);opacity:.12;position:absolute;top:14px;right:18px;line-height:1;pointer-events:none;letter-spacing:-.03em;">26%</span>
         <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Live Streamers &nbsp;·&nbsp; <a href="https://investgame.net/wp-content/uploads/2025/03/0794a269-d5c4-4994-9bcf-8c5730d0815e_2025_GDC_State_of_the_Game_Industry_report-1.pdf" target="_blank" style="color:var(--gold);text-decoration:none;">26% most-used channel ↗</a></div>
-        <div style="font-size:clamp(1.1rem,2vw,1.35rem);font-weight:800;color:var(--fg);margin-bottom:12px;line-height:1.25;">Fit over follower count.</div>
+        <div style="font-size:clamp(1.1rem,2vw,1.35rem);font-weight:800;color:var(--cream);margin-bottom:12px;line-height:1.25;">Fit over follower count.</div>
         <div style="font-size:clamp(0.85rem,1.3vw,0.95rem);color:var(--mid);line-height:1.65;">A streamer with 500 dedicated viewers in your genre is worth more than 50,000 who aren't interested. Give keys 3–4 weeks early, no pressure. The best coverage comes from streamers who <em>discovered</em> you, not ones who were briefed. Target by library, not audience size.</div>
       </div>
 
@@ -1681,7 +1681,7 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
       <div style="background:var(--bg2);padding:36px 32px;position:relative;overflow:hidden;border-radius:12px;">
         <span class="disc-ghost-num" data-target="74" data-suffix="%" style="font-size:5rem;font-weight:900;color:var(--green);opacity:.12;position:absolute;top:14px;right:18px;line-height:1;pointer-events:none;letter-spacing:-.03em;">74%</span>
         <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Real-Time Community &nbsp;·&nbsp; <span style="color:var(--green);opacity:.8;">74% use <a href="https://discord.com" target="_blank" style="color:var(--green);text-decoration:none;">Discord</a> / Slack</span></div>
-        <div style="font-size:clamp(1.1rem,2vw,1.35rem);font-weight:800;color:var(--fg);margin-bottom:12px;line-height:1.25;">Your early players are already advocates.</div>
+        <div style="font-size:clamp(1.1rem,2vw,1.35rem);font-weight:800;color:var(--cream);margin-bottom:12px;line-height:1.25;">Your early players are already advocates.</div>
         <div style="font-size:clamp(0.85rem,1.3vw,0.95rem);color:var(--mid);line-height:1.65;">A <a href="https://discord.com" target="_blank" style="color:var(--green);text-decoration:underline;">Discord</a> with 200 people who love your game before launch is worth more than any press hit. They post clips, bring friends, defend it in comment sections. Build the community during production, not after launch. The third-most used developer marketing channel in 2025 for exactly this reason.</div>
       </div>
 
@@ -1689,7 +1689,7 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
       <div style="background:var(--bg2);padding:36px 32px;position:relative;overflow:hidden;border-radius:12px;">
         <span style="font-size:4rem;font-weight:900;color:var(--coral);opacity:.12;position:absolute;top:12px;right:20px;line-height:1;pointer-events:none;">⚠</span>
         <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--coral);margin-bottom:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Inbound Offers &nbsp;·&nbsp; <span style="color:var(--coral);opacity:.8;">Mostly predatory</span></div>
-        <div style="font-size:clamp(1.1rem,2vw,1.35rem);font-weight:800;color:var(--fg);margin-bottom:12px;line-height:1.25;">Slow down when they come to you.</div>
+        <div style="font-size:clamp(1.1rem,2vw,1.35rem);font-weight:800;color:var(--cream);margin-bottom:12px;line-height:1.25;">Slow down when they come to you.</div>
         <div style="font-size:clamp(0.85rem,1.3vw,0.95rem);color:var(--mid);line-height:1.65;">Key aggregator sites charge for "visibility" to audiences that don't buy. Any offer where you pay to reach an audience you could reach yourself with a good trailer isn't a deal worth taking. Genuine publishing interest comes with advance money on the table. Everything else is the appearance of momentum.</div>
       </div>
 
@@ -2069,8 +2069,8 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
         <div style="position:absolute;bottom:-10px;right:20px;font-size:clamp(5rem,10vw,8rem);font-weight:900;color:var(--green);opacity:.1;line-height:1;pointer-events:none;letter-spacing:-.05em;font-feature-settings:'tnum';user-select:none;">01</div>
         <div style="position:relative;z-index:1;">
           <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--green);margin-bottom:14px;">Industry Signal</div>
-          <div style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:800;color:var(--fg);margin-bottom:16px;line-height:1.25;">The signals point forward.</div>
-          <div style="font-size:clamp(0.9rem,1.4vw,1.05rem);color:var(--mid);line-height:1.75;">Indie now represents 48% of all Steam revenue, equal to AA and AAA for the first time ever. That's a structural rebalancing of an entire industry. The layoffs at major studios, the consolidation, the record Steam revenues, all the same story: the old model contracting, the new model still finding its shape. <strong style="color:var(--fg);">You get to be part of finding it.</strong></div>
+          <div style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:800;color:var(--cream);margin-bottom:16px;line-height:1.25;">The signals point forward.</div>
+          <div style="font-size:clamp(0.9rem,1.4vw,1.05rem);color:var(--mid);line-height:1.75;">Indie now represents 48% of all Steam revenue, equal to AA and AAA for the first time ever. That's a structural rebalancing of an entire industry. The layoffs at major studios, the consolidation, the record Steam revenues, all the same story: the old model contracting, the new model still finding its shape. <strong style="color:var(--cream);">You get to be part of finding it.</strong></div>
         </div>
       </div>
 
@@ -2078,8 +2078,8 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
         <div style="position:absolute;bottom:-10px;right:20px;font-size:clamp(5rem,10vw,8rem);font-weight:900;color:var(--gold);opacity:.1;line-height:1;pointer-events:none;letter-spacing:-.05em;font-feature-settings:'tnum';user-select:none;">02</div>
         <div style="position:relative;z-index:1;">
           <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:14px;">The Only Variable You Control</div>
-          <div style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:800;color:var(--fg);margin-bottom:16px;line-height:1.25;">Persistence is the lever.</div>
-          <div style="font-size:clamp(0.9rem,1.4vw,1.05rem);color:var(--mid);line-height:1.75;">Second games earn 40% more than first games. Third-plus games earn 24% more again. <a href="https://store.steampowered.com/app/1966720/Lethal_Company/" target="_blank" style="color:var(--green);text-decoration:underline;">Lethal Company</a> came after three games that earned under $1M combined. <a href="https://store.steampowered.com/app/1623730/Palworld/" target="_blank" style="color:var(--green);text-decoration:underline;">Palworld</a> came after four. These are the compound interest of craft, audience and iteration, not lottery tickets. The industry rewards people who stay long enough to learn from their misses. <strong style="color:var(--fg);">The barrier to entry is not talent. It's endurance.</strong></div>
+          <div style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:800;color:var(--cream);margin-bottom:16px;line-height:1.25;">Persistence is the lever.</div>
+          <div style="font-size:clamp(0.9rem,1.4vw,1.05rem);color:var(--mid);line-height:1.75;">Second games earn 40% more than first games. Third-plus games earn 24% more again. <a href="https://store.steampowered.com/app/1966720/Lethal_Company/" target="_blank" style="color:var(--green);text-decoration:underline;">Lethal Company</a> came after three games that earned under $1M combined. <a href="https://store.steampowered.com/app/1623730/Palworld/" target="_blank" style="color:var(--green);text-decoration:underline;">Palworld</a> came after four. These are the compound interest of craft, audience and iteration, not lottery tickets. The industry rewards people who stay long enough to learn from their misses. <strong style="color:var(--cream);">The barrier to entry is not talent. It's endurance.</strong></div>
         </div>
       </div>
 
@@ -2087,8 +2087,8 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
         <div style="position:absolute;bottom:-10px;right:20px;font-size:clamp(5rem,10vw,8rem);font-weight:900;color:var(--purple);opacity:.1;line-height:1;pointer-events:none;letter-spacing:-.05em;font-feature-settings:'tnum';user-select:none;">03</div>
         <div style="position:relative;z-index:1;">
           <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--purple);margin-bottom:14px;">The Invitation</div>
-          <div style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:800;color:var(--fg);margin-bottom:16px;line-height:1.25;">The hardest thing is also the most meaningful.</div>
-          <div style="font-size:clamp(0.9rem,1.4vw,1.05rem);color:var(--mid);line-height:1.75;">You've seen the disciplines. The trough. The reality of the market. None of it is hidden from you now. Being part of this industry, making things that didn't exist before, is both the hardest creative act there is and the most singular. You build the world and the person who inhabits it. No other medium does that. <strong style="color:var(--fg);">The data doesn't make it impossible. It makes it meaningful.</strong></div>
+          <div style="font-size:clamp(1.2rem,2.2vw,1.65rem);font-weight:800;color:var(--cream);margin-bottom:16px;line-height:1.25;">The hardest thing is also the most meaningful.</div>
+          <div style="font-size:clamp(0.9rem,1.4vw,1.05rem);color:var(--mid);line-height:1.75;">You've seen the disciplines. The trough. The reality of the market. None of it is hidden from you now. Being part of this industry, making things that didn't exist before, is both the hardest creative act there is and the most singular. You build the world and the person who inhabits it. No other medium does that. <strong style="color:var(--cream);">The data doesn't make it impossible. It makes it meaningful.</strong></div>
         </div>
       </div>
 
