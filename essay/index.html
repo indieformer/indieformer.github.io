@@ -359,14 +359,14 @@ body{font-family:'Sora',system-ui,-apple-system,sans-serif;background:var(--bg);
 /* ══════════════════════════════════════════════════
    CALLOUTS, QUOTES, ETC.
 ══════════════════════════════════════════════════ */
-.callout{padding:18px 22px;margin:20px 0;background:rgba(47,48,64,.5);border:1px solid var(--rule);border-left:3px solid var(--coral);border-radius:0 12px 12px 0;font-size:15px;font-weight:600;color:var(--coral);line-height:1.65;backdrop-filter:blur(8px);}
-.callout.g{border-left-color:rgba(40,226,145,.4);color:var(--mid);font-weight:400;}
+.callout{padding:20px 24px;margin:20px 0;background:rgba(247,129,84,.06);border:1px solid rgba(247,129,84,.22);border-radius:14px;font-size:15px;font-weight:600;color:var(--coral);line-height:1.65;backdrop-filter:blur(8px);}
+.callout.g{background:rgba(40,226,145,.05);border-color:rgba(40,226,145,.2);color:var(--mid);font-weight:400;}
+.callout.p{background:rgba(147,129,255,.06);border-color:rgba(147,129,255,.22);color:var(--mid);font-weight:400;}
+.callout.p strong{color:var(--cream);font-weight:600;}
 .callout.g strong{color:var(--cream);font-weight:600;}
 
-.pq{margin:36px 0;padding:28px 32px;background:rgba(26,28,36,.8);border-left:3px solid var(--green);border-radius:0 14px 14px 0;backdrop-filter:blur(12px);}
-.pq blockquote{font-size:20px;font-weight:600;color:var(--cream);line-height:1.6;margin-bottom:12px;letter-spacing:-.01em;}
-.pq cite{font-size:12px;color:var(--dim);font-style:italic;}
-.pq cite a{color:var(--dim);text-decoration:underline;text-underline-offset:2px;}
+.qr{position:relative;background:rgba(26,28,36,.9);border:1px solid var(--rule);border-radius:16px;padding:30px 34px 30px 62px;backdrop-filter:blur(12px);}
+.qr::before{content:'\201C';position:absolute;top:18px;left:22px;font-size:56px;line-height:1;color:var(--accent,var(--green));opacity:.4;font-family:Georgia,serif;pointer-events:none;}
 
 .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0;}
 .tc{background:rgba(47,48,64,.6);border:1px solid var(--rule);border-radius:14px;overflow:hidden;transition:border-color .25s,transform .25s;backdrop-filter:blur(8px);}
@@ -390,7 +390,7 @@ body{font-family:'Sora',system-ui,-apple-system,sans-serif;background:var(--bg);
 .game-card img{width:100%;aspect-ratio:616/353;object-fit:cover;display:block;}
 .game-badge{position:absolute;bottom:0;right:0;padding:6px 12px;background:rgba(0,0,0,.75);font-size:11px;font-weight:700;color:var(--green);backdrop-filter:blur(8px);}
 
-.payoff-card{margin:28px 0;padding:32px 36px;background:rgba(26,28,36,.9);border:1px solid rgba(40,226,145,.12);border-radius:16px;border-left:3px solid var(--green);backdrop-filter:blur(12px);}
+.payoff-card{margin:28px 0;padding:34px 38px;background:rgba(26,28,36,.9);border:1px solid rgba(40,226,145,.18);border-radius:16px;backdrop-filter:blur(12px);}
 .payoff-card p{font-size:17px;font-weight:600;color:var(--cream);line-height:1.7;margin-bottom:16px;letter-spacing:-.005em;}
 .payoff-card p:last-child{margin-bottom:0;}
 
@@ -409,7 +409,7 @@ body{font-family:'Sora',system-ui,-apple-system,sans-serif;background:var(--bg);
 .split-img-duo .duo-img-wrap{flex:1;min-height:0;border-radius:14px;overflow:hidden;}
 .split-img-duo .duo-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;}
 
-.closing{margin:56px 0 0;padding:32px 36px;background:var(--bg2);border:1px solid var(--rule);border-left:3px solid var(--green);border-radius:0 16px 16px 0;}
+.closing{margin:56px 0 0;padding:30px 34px;background:var(--bg2);border:1px solid var(--rule);border-radius:14px;}
 .closing p{font-size:15px;line-height:1.7;color:var(--mid);margin-bottom:14px;}
 .closing p:last-of-type{margin-bottom:0;}
 .closing p strong{color:var(--cream);font-weight:700;}
@@ -528,7 +528,6 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
 .payoff-card p { font-size:19px; }
 
 /* Quote blocks larger */
-.pq blockquote { font-size:22px; }
 
 /* ══════════════════════════════════════════════════
    ACT-WRAP — sticky chapter backdrop system
@@ -1383,7 +1382,7 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
         <span class="pt-lbl">Rules & Systems</span>
         <span class="pt-body">Every game is fundamentally a ruleset. The rules define what's possible and what's interesting. <strong>Bad rules create exploits</strong>. Players find the path of least resistance, and the whole thing collapses. Good rules feel inevitable, like they couldn't have been any other way. See <a href="https://www.amazon.com/Theory-Fun-Game-Design/dp/1449363210" target="_blank">Koster, A Theory of Fun</a>.</span>
         <!-- Word-by-word Soren Johnson quote reveal -->
-        <div style="background:rgba(26,28,36,.9);border-left:3px solid var(--coral);border-radius:0 16px 16px 0;padding:32px 36px;margin:20px 0 4px;backdrop-filter:blur(12px);">
+        <div class="qr" style="--accent:var(--coral);margin:20px 0 4px;">
           <p class="word-reveal" id="soren-quote" style="font-size:20px;font-weight:600;line-height:1.6;margin-bottom:14px;letter-spacing:-.01em;"></p>
           <p id="soren-cite" style="font-size:12px;color:var(--dim);font-style:italic;opacity:0;"><a href="https://www.gdcvault.com/play/1012040/Interesting-Decisions" target="_blank" style="color:var(--dim);text-decoration:underline;">Soren Johnson, Lead Designer, Civilization IV</a></p>
         </div>
@@ -1417,7 +1416,7 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
     </figure>
 
     <!-- Word-by-word Koster quote reveal -->
-    <div style="background:rgba(26,28,36,.9);border-left:3px solid var(--green);border-radius:0 16px 16px 0;padding:32px 36px;margin-bottom:20px;backdrop-filter:blur(12px);">
+    <div class="qr" style="--accent:var(--green);margin-bottom:20px;">
       <p class="word-reveal" id="koster-quote" style="font-size:20px;font-weight:600;line-height:1.6;margin-bottom:14px;letter-spacing:-.01em;"></p>
       <p id="koster-cite" style="font-size:12px;color:var(--dim);font-style:italic;opacity:1;"><a href="https://www.amazon.com/Theory-Fun-Game-Design/dp/1449363210" target="_blank" style="color:var(--dim);text-decoration:underline;">Raph Koster, A Theory of Fun</a></p>
     </div>
@@ -1696,7 +1695,7 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:0;}
 
     </div>
 
-    <div class="callout" style="border-left-color:var(--purple);color:var(--mid);font-weight:400;">The gap between a great prototype and a shippable game is where most projects die. It's the underestimated distance between the two, not the ideas.</div>
+    <div class="callout p">The gap between a great prototype and a shippable game is where most projects die. It's the underestimated distance between the two, not the ideas.</div>
   </div>
 </div>
 
