@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
   <meta name="description" content="Feed the Scorchpot is a tabletop roguelike about keeping a very opinionated dragon fed for twenty years without going bankrupt. Published by Indieformer.">
   <link rel="canonical" href="https://indieformer.com/scorchpot/">
   <meta name="robots" content="index, follow">
@@ -21,1493 +19,280 @@
   <meta name="twitter:title" content="Feed the Scorchpot, published by Indieformer">
   <meta name="twitter:description" content="A tabletop roguelike about keeping a very opinionated dragon fed for twenty years without going bankrupt.">
   <meta name="twitter:image" content="https://indieformer.com/images/scorchpot/presskit/og.jpg">
-
-  <style>
-    @import url('/fonts/fonts.css');
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      /* Game palette — warm medieval, pulled from the art */
-      --parchment: #F5EDD8;
-      --parchment-mid: #E8D9B8;
-      --parchment-dk: #C9B48A;
-      --ember: #C0392B;
-      /* dragon red */
-      --ember-bright: #E74C3C;
-      --gold: #D4AC0D;
-      --gold-bright: #F1C40F;
-      --ash: #1A1410;
-      /* near-black warm */
-      --ash-mid: #261E17;
-      --ash-lite: #332A22;
-      --ash-lighter: #4A3D32;
-      --text-primary: #F5EDD8;
-      --text-secondary: #C4AF8E;
-      --text-tertiary: #8C7B63;
-      --border: rgba(212, 172, 13, 0.15);
-      --border-mid: rgba(212, 172, 13, 0.3);
-    }
-
-    body {
-      background: var(--ash) !important;
-      color: var(--text-primary) !important;
-      font-family: 'Sora', Arial, sans-serif !important;
-      -webkit-font-smoothing: antialiased;
-      text-align: left !important;
-      overflow-x: hidden;
-    }
-
-    a {
-      text-decoration: none !important;
-      color: inherit !important;
-    }
-
-    .divider {
-      border: none !important;
-      border-top: 1px solid var(--border) !important;
-      margin: 0 !important;
-    }
-
-    /* ── HERO BANNER ────────────────────────────── */
-    .hero-banner {
-      position: relative;
-      height: 280px;
-      overflow: hidden;
-    }
-
-    .hero-banner-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center 30%;
-      filter: brightness(0.56) saturate(1.05);
-    }
-
-    .hero-banner-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(58% 66% at 50% 46%, rgba(26,20,16,0.52), transparent 72%),
-        linear-gradient(to bottom, rgba(26,20,16,0.42) 0%, rgba(26,20,16,0.22) 40%, rgba(26,20,16,0.9) 88%, var(--ash) 100%);
-    }
-
-    /* ── HERO COLUMNS ────────────────────────────── */
-    .hero-columns {
-      max-width: 900px;
-      margin: -80px auto 0;
-      padding: 0 24px 52px;
-      display: flex;
-      gap: 40px;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-left {
-      flex-shrink: 0;
-      width: 220px;
-    }
-
-    .vertical-capsule-img {
-      width: 100% !important;
-      height: auto !important;
-      display: block !important;
-      border-radius: 10px !important;
-      border: 2px solid rgba(212, 172, 13, 0.3) !important;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6) !important;
-    }
-
-    .hero-right {
-      flex: 1;
-      min-width: 0;
-      padding-top: 0;
-    }
-
-    .hero-badge {
-      display: inline-block !important;
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.07em !important;
-      text-transform: uppercase !important;
-      color: var(--ash) !important;
-      background: var(--gold-bright) !important;
-      background-color: var(--gold-bright) !important;
-      padding: 4px 11px !important;
-      border-radius: 6px !important;
-      margin-bottom: 14px !important;
-    }
-
-    .hero-title {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 48px !important;
-      font-weight: 700 !important;
-      line-height: 1.05 !important;
-      letter-spacing: -0.02em !important;
-      color: var(--parchment) !important;
-      margin-bottom: 10px !important;
-    }
-
-    .hero-genre {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 12px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.05em !important;
-      text-transform: uppercase !important;
-      color: var(--gold) !important;
-      margin-bottom: 16px !important;
-    }
-
-    .hero-desc {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 14px !important;
-      font-weight: 400 !important;
-      line-height: 1.75 !important;
-      color: var(--text-secondary) !important;
-      margin-bottom: 20px !important;
-      max-width: 480px !important;
-    }
-
-    .hero-meta {
-      display: flex !important;
-      gap: 24px !important;
-      margin-bottom: 24px !important;
-      flex-wrap: wrap !important;
-    }
-
-    .hero-meta-item {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 2px !important;
-    }
-
-    .hero-meta-label {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 10px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.07em !important;
-      text-transform: uppercase !important;
-      color: var(--text-tertiary) !important;
-    }
-
-    .hero-meta-val {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 13px !important;
-      font-weight: 600 !important;
-      color: var(--text-primary) !important;
-    }
-
-    .hero-actions {
-      display: flex !important;
-      gap: 12px !important;
-      flex-wrap: wrap !important;
-    }
-
-    @media (max-width: 640px) {
-      .hero-banner {
-        height: 160px;
-      }
-
-      .hero-columns {
-        display: block;
-        margin-top: -40px;
-        padding: 0 16px 40px;
-      }
-
-      .hero-left {
-        float: left;
-        width: 104px;
-        margin: 0 16px 10px 0;
-      }
-
-      .hero-head {
-        display: flow-root;
-        text-align: center;
-      }
-
-      .hero-genre {
-        clear: both;
-        text-align: justify !important;
-        text-align-last: center !important;
-      }
-
-      .hero-right {
-        padding-top: 0;
-      }
-
-      .hero-title {
-        font-size: 32px !important;
-      }
-
-      .hero-logo {
-        max-width: 188px !important;
-        display: inline-block !important;
-      }
-
-      .genre-tt {
-        display: none !important;
-      }
-
-      .hero-actions {
-        gap: 10px !important;
-        margin-top: 18px !important;
-      }
-
-      .hero-actions .btn-steam {
-        flex: 1 1 0 !important;
-        text-align: center !important;
-        padding: 11px 12px !important;
-        font-size: 13px !important;
-        white-space: nowrap !important;
-      }
-
-      .hero-desc {
-        clear: both;
-      }
-
-      .hero-cred {
-        text-align: justify !important;
-        text-align-last: center !important;
-        border-left: none !important;
-        padding-left: 0 !important;
-      }
-
-      .hero-meta {
-        justify-content: space-between !important;
-        gap: 12px !important;
-      }
-    }
-
-    /* ── BUTTONS ────────────────────────────────── */
-    .btn-kickstarter,
-    .btn-kickstarter:link,
-    .btn-kickstarter:visited {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 14px !important;
-      font-weight: 700 !important;
-      padding: 13px 28px !important;
-      border-radius: 8px !important;
-      background: var(--ember) !important;
-      background-color: var(--ember) !important;
-      color: #FFFFFF !important;
-      border: none !important;
-      cursor: pointer !important;
-      display: inline-block !important;
-      white-space: nowrap !important;
-      text-decoration: none !important;
-      transition: background 0.2s;
-    }
-
-    .btn-kickstarter:hover {
-      background: var(--ember-bright) !important;
-      background-color: var(--ember-bright) !important;
-    }
-
-    .btn-steam,
-    .btn-steam:link,
-    .btn-steam:visited {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 14px !important;
-      font-weight: 700 !important;
-      padding: 13px 28px !important;
-      border-radius: 8px !important;
-      background: transparent !important;
-      background-color: transparent !important;
-      color: var(--parchment) !important;
-      border: 2px solid var(--parchment-dk) !important;
-      cursor: pointer !important;
-      display: inline-block !important;
-      white-space: nowrap !important;
-      text-decoration: none !important;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .btn-steam:hover {
-      border-color: var(--gold-bright) !important;
-      color: var(--gold-bright) !important;
-    }
-
-    .btn-secondary,
-    .btn-secondary:link,
-    .btn-secondary:visited {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 13px !important;
-      font-weight: 400 !important;
-      padding: 9px 18px !important;
-      border-radius: 8px !important;
-      background: transparent !important;
-      background-color: transparent !important;
-      color: var(--text-secondary) !important;
-      border: 1px solid rgba(212, 172, 13, 0.3) !important;
-      cursor: pointer !important;
-      display: inline-block !important;
-      white-space: nowrap !important;
-      text-decoration: none !important;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--gold) !important;
-      color: var(--parchment) !important;
-    }
-
-    /* ── COUNTDOWN ──────────────────────────────── */
-    .countdown-wrap {
-      background: var(--ash-mid) !important;
-      border-top: 1px solid var(--border) !important;
-      border-bottom: 1px solid var(--border) !important;
-      padding: 24px !important;
-      text-align: center !important;
-    }
-
-    .countdown-label {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.07em !important;
-      text-transform: uppercase !important;
-      color: var(--gold) !important;
-      margin-bottom: 14px !important;
-      display: block !important;
-    }
-
-    .countdown-units {
-      display: flex !important;
-      gap: 20px !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-    .countdown-unit {
-      text-align: center !important;
-    }
-
-    .countdown-num {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 40px !important;
-      font-weight: 700 !important;
-      color: var(--parchment) !important;
-      line-height: 1 !important;
-      display: block !important;
-      min-width: 64px !important;
-    }
-
-    .countdown-unit-label {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.06em !important;
-      text-transform: uppercase !important;
-      color: var(--text-tertiary) !important;
-      margin-top: 4px !important;
-      display: block !important;
-    }
-
-    .countdown-sep {
-      font-size: 28px !important;
-      font-weight: 700 !important;
-      color: var(--gold) !important;
-      opacity: 0.4 !important;
-      margin-bottom: 18px !important;
-    }
-
-    /* ── VIDEO ──────────────────────────────────── */
-    .section {
-      padding: 56px 24px !important;
-      max-width: 900px !important;
-      margin: 0 auto !important;
-      text-align: left !important;
-    }
-
-    .section-label {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.07em !important;
-      text-transform: uppercase !important;
-      color: var(--gold) !important;
-      margin-bottom: 16px !important;
-      display: block !important;
-    }
-
-    .section h2 {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 28px !important;
-      font-weight: 700 !important;
-      line-height: 1.15 !important;
-      letter-spacing: -0.01em !important;
-      color: var(--text-primary) !important;
-      margin-bottom: 8px !important;
-    }
-
-    .section-sub {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 15px !important;
-      font-weight: 400 !important;
-      line-height: 1.7 !important;
-      color: var(--text-secondary) !important;
-      margin-bottom: 24px !important;
-    }
-
-    .video-wrap {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      /* 16:9 */
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border-mid);
-    }
-
-    .video-wrap iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100% !important;
-      height: 100% !important;
-      border: none !important;
-    }
-
-    /* ── DRAGON QUOTE ───────────────────────────── */
-    .quote-section {
-      background: var(--ash-mid) !important;
-      border-top: 1px solid var(--border) !important;
-      border-bottom: 1px solid var(--border) !important;
-      padding: 52px 24px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 48px !important;
-    }
-
-    .quote-img {
-      flex-shrink: 0;
-      width: 300px;
-      height: auto;
-      display: block;
-    }
-
-    .quote-text-wrap {
-      max-width: 480px;
-    }
-
-    .quote-eyebrow {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.07em !important;
-      text-transform: uppercase !important;
-      color: var(--gold) !important;
-      margin-bottom: 16px !important;
-      display: block !important;
-    }
-
-    /* ── ABOUT / FEATURES ───────────────────────── */
-    .features-grid {
-      display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      gap: 12px !important;
-      margin-top: 8px !important;
-    }
-
-    .feature-card {
-      background: var(--ash-mid) !important;
-      background-color: var(--ash-mid) !important;
-      border: 1px solid var(--border) !important;
-      border-radius: 12px !important;
-      padding: 20px 22px !important;
-      text-align: left !important;
-    }
-
-    .feature-icon {
-      font-size: 22px !important;
-      margin-bottom: 10px !important;
-      display: block !important;
-    }
-
-    .feature-title {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 14px !important;
-      font-weight: 600 !important;
-      color: var(--parchment) !important;
-      margin-bottom: 6px !important;
-      display: block !important;
-      text-align: left !important;
-    }
-
-    .feature-body {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 13px !important;
-      font-weight: 400 !important;
-      line-height: 1.6 !important;
-      color: var(--text-secondary) !important;
-      text-align: left !important;
-    }
-
-    /* ── SCREENSHOT CAROUSEL ────────────────────── */
-    .carousel-wrap {
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
-      border: 1px solid var(--border-mid);
-      background: var(--ash-mid);
-      aspect-ratio: 16/9;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .carousel-slide {
-      flex-shrink: 0;
-      width: 100%;
-      aspect-ratio: 16/9;
-    }
-
-    .carousel-slide img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-      display: block !important;
-    }
-
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(26, 20, 16, 0.85) !important;
-      background-color: rgba(26, 20, 16, 0.85) !important;
-      border: 1px solid rgba(212, 172, 13, 0.3) !important;
-      border-radius: 8px !important;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10;
-      font-size: 18px;
-      color: var(--parchment) !important;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .carousel-btn:hover {
-      background: rgba(192, 57, 43, 0.9) !important;
-      border-color: var(--ember) !important;
-    }
-
-    .carousel-btn.prev {
-      left: 12px;
-    }
-
-    .carousel-btn.next {
-      right: 12px;
-    }
-
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 14px;
-    }
-
-    .carousel-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--ash-lighter) !important;
-      border: 1px solid var(--border-mid) !important;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .carousel-dot.active {
-      background: var(--gold) !important;
-      border-color: var(--gold) !important;
-    }
-
-    /* ── FOOTER CTA ─────────────────────────────── */
-    .footer-cta {
-      background: var(--ash-mid) !important;
-      border-top: 1px solid var(--border) !important;
-      padding: 52px 24px 60px !important;
-      text-align: center !important;
-    }
-
-    .footer-cta h2 {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 32px !important;
-      font-weight: 700 !important;
-      color: var(--text-primary) !important;
-      margin-bottom: 12px !important;
-      text-align: center !important;
-    }
-
-    .footer-cta p {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 15px !important;
-      font-weight: 400 !important;
-      color: var(--text-secondary) !important;
-      margin-bottom: 28px !important;
-      max-width: 480px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      text-align: center !important;
-      line-height: 1.7 !important;
-    }
-
-    .footer-cta-actions {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .footer-link,
-    .footer-link:link,
-    .footer-link:visited {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 13px !important;
-      font-weight: 400 !important;
-      color: var(--text-tertiary) !important;
-      text-decoration: none !important;
-      transition: color 0.2s;
-    }
-
-    .footer-link:hover {
-      color: var(--parchment) !important;
-    }
-
-    /* ── RESPONSIVE ─────────────────────────────── */
-    @media (max-width: 640px) {
-      .hero-content {
-        padding: 40px 20px 36px;
-      }
-
-      .hero-tagline {
-        font-size: 15px !important;
-      }
-
-      .countdown-num {
-        font-size: 28px !important;
-        min-width: 44px !important;
-      }
-
-      .quote-section {
-        flex-direction: column;
-        gap: 24px;
-      }
-
-      .quote-img {
-        width: 240px;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr !important;
-      }
-
-      .footer-cta h2 {
-        font-size: 24px !important;
-      }
-    }
-  
-    /* ENTRANCE ANIMATIONS */
-    @keyframes ftsHeroUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .js-ready .hero-badge   { animation: ftsHeroUp 0.7s 0.05s cubic-bezier(.16,1,.3,1) both !important; }
-    .js-ready .hero-title   { animation: ftsHeroUp 0.85s 0.15s cubic-bezier(.16,1,.3,1) both !important; }
-    .js-ready .hero-genre   { animation: ftsHeroUp 0.7s 0.28s cubic-bezier(.16,1,.3,1) both !important; }
-    .js-ready .hero-desc    { animation: ftsHeroUp 0.7s 0.38s cubic-bezier(.16,1,.3,1) both !important; }
-    .js-ready .hero-meta    { animation: ftsHeroUp 0.7s 0.47s cubic-bezier(.16,1,.3,1) both !important; }
-    .js-ready .hero-actions { animation: ftsHeroUp 0.7s 0.55s cubic-bezier(.16,1,.3,1) both !important; }
-    .js-ready .fts-card {
-      opacity: 0; transform: translateY(22px);
-      transition: opacity 0.65s cubic-bezier(.16,1,.3,1), transform 0.65s cubic-bezier(.16,1,.3,1) !important;
-    }
-    .js-ready .fts-card.fts-in { opacity: 1 !important; transform: translateY(0) !important; }
-    .js-ready .fts-card.fts-d1 { transition-delay: 0.1s !important; }
-    .js-ready .fts-card.fts-d2 { transition-delay: 0.1s !important; }
-    .js-ready .fts-card.fts-d3 { transition-delay: 0.2s !important; }
-    .feature-card {
-      transition: transform 0.25s cubic-bezier(.16,1,.3,1), box-shadow 0.25s, border-color 0.2s, background 0.2s !important;
-    }
-    .feature-card:hover {
-      transform: translateY(-3px) !important;
-      box-shadow: 0 10px 36px rgba(0,0,0,0.4) !important;
-      border-color: rgba(212,172,13,0.45) !important;
-    }
-    /* CAMPAIGN LIVE WIDGET */
-    .fts-campaign-live { padding: 28px 24px 24px !important; text-align: center !important; }
-    .fts-live-eyebrow {
-      font-size: 11px !important; font-weight: 700 !important;
-      letter-spacing: 0.12em !important; text-transform: uppercase !important;
-      color: var(--gold) !important; display: block !important; margin-bottom: 20px !important;
-    }
-    .fts-campaign-stats {
-      display: flex !important; justify-content: center !important; align-items: center !important;
-      gap: 0 !important; margin-bottom: 20px !important; flex-wrap: wrap !important;
-    }
-    .fts-stat { display: flex !important; flex-direction: column !important; align-items: center !important; padding: 0 28px !important; }
-    .fts-stat-num {
-      font-size: 36px !important; font-weight: 700 !important;
-      color: var(--parchment) !important; line-height: 1 !important;
-      letter-spacing: -0.02em !important; display: block !important; margin-bottom: 6px !important;
-    }
-    .fts-stat-lbl {
-      font-size: 11px !important; font-weight: 600 !important;
-      letter-spacing: 0.06em !important; text-transform: uppercase !important;
-      color: var(--text-tertiary) !important; display: block !important;
-    }
-    .fts-stat-divider { width: 1px !important; height: 40px !important; background: var(--border-mid) !important; flex-shrink: 0 !important; }
-    .fts-progress-track {
-      max-width: 480px !important; margin: 0 auto 20px !important;
-      height: 6px !important; background: var(--ash-lighter) !important;
-      border-radius: 999px !important; overflow: hidden !important;
-    }
-    .fts-progress-bar {
-      height: 100% !important;
-      background: linear-gradient(90deg, var(--ember), var(--gold)) !important;
-      border-radius: 999px !important; transition: width 1.2s cubic-bezier(.16,1,.3,1) !important;
-    }
-    @media (max-width: 640px) {
-      .fts-stat { padding: 0 16px !important; }
-      .fts-stat-num { font-size: 26px !important; }
-    }
-
-    /* ── loading overlay (Lottie gem) ─────────────────────────── */
-    #loader-overlay {
-      position: fixed; inset: 0; z-index: 9999;
-      background: #262730;
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.45s ease;
-    }
-    #loader-overlay.gone { opacity: 0; pointer-events: none; }
-    #loader-gem { width: 140px; height: 140px; }
-    @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
-  
-    .hero-logo{display:block;width:auto;max-width:300px;height:auto;}
-  .hero-presskit,.hero-presskit:link,.hero-presskit:visited{color:var(--gold-bright)!important;transition:color .2s !important;}
-    .hero-presskit:hover{color:var(--parchment)!important;}
-  </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoGame", "name": "Feed the Scorchpot", "description": "A tabletop roguelike about keeping a very opinionated dragon fed for twenty years without going bankrupt.", "image": "https://indieformer.com/images/scorchpot/presskit/og.jpg", "url": "https://indieformer.com/scorchpot/", "genre": ["Roguelike", "Strategy", "Simulation"], "gamePlatform": "PC", "operatingSystem": "Windows", "author": {"@type": "Organization", "name": "Moravian Games"}, "publisher": {"@type": "Organization", "name": "Indieformer", "url": "https://indieformer.com/"}, "sameAs": "https://store.steampowered.com/app/3966510/Feed_the_Scorchpot/"}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://indieformer.com/"}, {"@type": "ListItem", "position": 2, "name": "Feed the Scorchpot", "item": "https://indieformer.com/scorchpot/"}]}</script>
-</head>
-
-<body>
-
-  <div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-  <script>
-    (function () {
-      var o = document.getElementById('loader-overlay');
-      if (!o) return;
-      var anim;
-      try {
-        if (typeof lottie !== 'undefined') {
-          anim = lottie.loadAnimation({
-            container: document.getElementById('loader-gem'),
-            renderer: 'svg', loop: true, autoplay: true,
-            path: '/loading-gem.json'
-          });
-        }
-      } catch (e) {}
-      var shown = Date.now();
-      function hide() {
-        if (o.classList.contains('gone')) return;
-        o.classList.add('gone');
-        setTimeout(function () {
-          try { if (anim) anim.destroy(); } catch (e) {}
-          if (o.parentNode) o.parentNode.removeChild(o);
-        }, 500);
-      }
-      function maybeHide() {
-        setTimeout(hide, Math.max(0, 400 - (Date.now() - shown)));
-      }
-      if (document.readyState === 'complete') maybeHide();
-      else window.addEventListener('load', maybeHide);
-      setTimeout(hide, 4000);
-    })();
-  </script>
-
-  <!-- ── HERO ─────────────────────────────────────────────────────── -->
-  <div class="hero-banner">
-    <div class="hero-banner-bg" id="hero-bg"></div>
-    <div class="hero-banner-overlay"></div>
-  </div>
-
-  <div class="hero-columns">
-    <div class="hero-left">
-      <img id="vertical-capsule" src="" alt="Feed the Scorchpot" class="vertical-capsule-img">
-    </div>
-    <div class="hero-right">
-      <div class="hero-head">
-        <div class="hero-badge">✦ Published by Indieformer</div>
-        <h1 class="hero-title"><img src="/images/scorchpot/logo.png" alt="Feed the Scorchpot" class="hero-logo"></h1>
-      </div>
-      <p class="hero-genre"><span class="genre-tt">Tabletop </span>roguelike · Dice · Dragons · Cooking</p>
-      <p class="hero-desc">You manage a medieval farm and cook meals for a very opinionated dragon, trying to survive 20 years without going bankrupt. Every roll matters, and one bad dish can undo a run. Published by Indieformer.</p>
-      <div class="hero-meta">
-        <div class="hero-meta-item">
-          <span class="hero-meta-label">Developer</span><span class="hero-meta-val">Moravian Games</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-label">Publisher</span><span class="hero-meta-val">Indieformer</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-label">Steam release</span><span class="hero-meta-val">August 20, 2026</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-label">Press</span><span class="hero-meta-val"><a href="/scorchpot/presskit/" class="hero-presskit">Press kit →</a></span>
-        </div>
-      </div>
-      <div class="hero-actions">
-        <a href="https://store.steampowered.com/app/4338170/Feed_the_Scorchpot_Demo/" target="_blank"
-          class="btn-steam">▶ Play the Demo</a>
-        <a href="https://discord.gg/KZgxrn3Kpv" target="_blank" rel="noopener"
-          class="btn-steam">Join the Discord</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── LIVE TRANSPARENCY TRACKER — in-palette reskin ─────────────── -->
-  <style>
-    .fts-ts-wrap {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 44px 24px 12px;
-    }
-    .fts-ts {
-      background: var(--ash-mid);
-      border: 1px solid rgba(212, 172, 13, 0.18);
-      border-radius: 14px;
-      padding: 26px 28px;
-      position: relative;
-      overflow: hidden;
-    }
-    .fts-ts::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold-bright), var(--ember-bright), var(--gold));
-    }
-    .fts-ts-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 4px;
-    }
-    .fts-ts-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--ember-bright);
-      box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.20);
-      animation: fts-ts-pulse 2.2s ease-in-out infinite;
-    }
-    @keyframes fts-ts-pulse {
-      0%, 100% { box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.20); }
-      50%      { box-shadow: 0 0 0 7px rgba(231, 76, 60, 0.04); }
-    }
-    .fts-ts-eyebrow {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.08em !important;
-      text-transform: uppercase !important;
-      color: var(--gold-bright) !important;
-    }
-    .fts-ts-title {
-      font-family: 'Caveat', cursive !important;
-      font-size: 30px !important;
-      font-weight: 700 !important;
-      color: var(--gold-bright) !important;
-      margin: 0 0 18px !important;
-      display: inline-block !important;
-      transform: rotate(-1.5deg);
-    }
-    .fts-ts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px;
-    }
-    .fts-ts-tile {
-      background: var(--ash);
-      border: 1px solid rgba(212, 172, 13, 0.10);
-      border-radius: 10px;
-      padding: 18px 20px;
-      text-align: left;
-    }
-    .fts-ts-label {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 10px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.08em !important;
-      text-transform: uppercase !important;
-      color: var(--text-tertiary) !important;
-      margin-bottom: 8px !important;
-      display: block !important;
-    }
-    .fts-ts-num {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 28px !important;
-      font-weight: 800 !important;
-      letter-spacing: -0.02em !important;
-      color: var(--parchment) !important;
-      line-height: 1 !important;
-      display: block !important;
-      margin-bottom: 4px !important;
-    }
-    .fts-ts-num.gold  { color: var(--gold-bright) !important; }
-    .fts-ts-num.ember { color: var(--ember-bright) !important; }
-    .fts-ts-sub {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 12px !important;
-      font-weight: 400 !important;
-      color: var(--text-secondary) !important;
-      display: block !important;
-    }
-    .fts-ts-footer {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 11px !important;
-      color: var(--text-tertiary) !important;
-      margin-top: 16px !important;
-      padding-top: 14px !important;
-      border-top: 1px solid rgba(212, 172, 13, 0.10) !important;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 14px;
-    }
-    @media (max-width: 640px) {
-      .fts-ts-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-
-  <div class="fts-ts-wrap">
-    <div class="fts-ts">
-      <h3 class="fts-ts-title">Where this campaign stands.</h3>
-      <div class="fts-ts-grid">
-        <!-- TILE 1 — Wishlists (manual; bump in DASHBOARD config below) -->
-        <div class="fts-ts-tile">
-          <span class="fts-ts-label">Steam wishlists</span>
-          <span class="fts-ts-num gold" data-fts-ts="wishlists">—</span>
-          <span class="fts-ts-sub">as of August 6, 2026</span>
-        </div>
-        <!-- TILE 2 — Days to Launch -->
-        <div class="fts-ts-tile">
-          <span class="fts-ts-label">Days to launch</span>
-          <span class="fts-ts-num ember" data-fts-ts="days-to-launch">—</span>
-          <span class="fts-ts-sub" data-fts-ts="launch-target">Steam release · Aug 20, 2026</span>
-        </div>
-        <!-- TILE 3 — Playing demo now (Steam API, refreshed daily by GitHub Action) -->
-        <div class="fts-ts-tile">
-          <span class="fts-ts-label">Playing the demo now</span>
-          <span class="fts-ts-num gold" data-fts-ts="demo-players">—</span>
-          <span class="fts-ts-sub">Live from Steam · refresh: <span data-fts-ts="demo-players-asof">—</span></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    /* ── Live Transparency Tracker ───────────────────────────────────
-       Edit the values below as the campaign moves. Everything is hand-
-       updated on purpose — this panel is a promise to the reader,
-       not an integration.
-    ────────────────────────────────────────────────────────────────── */
-    (function () {
-      var DASHBOARD = {
-        wishlists: '10,300+',             // manual — bump as Steamworks updates
-        launchDate: '2026-08-20',         // YYYY-MM-DD — Steam launch target
-        launchTargetLabel: 'Steam release · Aug 20, 2026'
-      };
-
-      function setText(sel, val) {
-        var el = document.querySelector('[data-fts-ts="' + sel + '"]');
-        if (el) el.textContent = val;
-      }
-
-      setText('wishlists', DASHBOARD.wishlists);
-      setText('launch-target', DASHBOARD.launchTargetLabel);
-
-      var target = new Date(DASHBOARD.launchDate + 'T00:00:00');
-      var now = new Date();
-      var diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
-      setText('days-to-launch', isNaN(diff) ? '—' : (diff > 0 ? diff : 'LIVE'));
-
-      // Pull live Steam data — written daily by scripts/fetch_steam_data.py
-      // (GitHub Action commits the JSON file alongside notes.html).
-      fetch('/data/scorchpot.json', { cache: 'no-store' })
-        .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (d) {
-          if (!d) return;
-          if (d.demoPlayers != null) {
-            setText('demo-players', Number(d.demoPlayers).toLocaleString());
-          }
-          if (d.demoPlayersAsOf) {
-            try {
-              var dt = new Date(d.demoPlayersAsOf);
-              setText('demo-players-asof', dt.toLocaleString('en-AU', { dateStyle: 'medium', timeStyle: 'short' }));
-            } catch (e) { /* keep dash */ }
-          }
-        })
-        .catch(function () { /* silent — tile keeps the em dash */ });
-    })();
-  </script>
-
-  <!-- ── PUBLISHER'S NOTE — collapsible, in-palette ────────────────── -->
-  <style>
-    .fts-note-wrap {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 16px 24px 44px;
-    }
-    .fts-note {
-      background: var(--ash-mid);
-      border: 1px solid rgba(231, 76, 60, 0.18);
-      border-left: 3px solid var(--ember-bright);
-      border-radius: 12px;
-      padding: 0;
-      overflow: hidden;
-      transition: background 0.2s ease;
-    }
-    .fts-note[open] {
-      background: var(--ash-lite);
-    }
-    .fts-note > summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 22px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-    .fts-note > summary::-webkit-details-marker { display: none; }
-    .fts-note > summary::marker { display: none; content: ''; }
-    .fts-note-summary-text {
-      flex: 1;
-      min-width: 0;
-      text-align: left;
-    }
-    .fts-note-eyebrow {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.08em !important;
-      text-transform: uppercase !important;
-      color: var(--ember-bright) !important;
-      margin-bottom: 4px !important;
-      display: block !important;
-    }
-    .fts-note-teaser {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 15px !important;
-      font-weight: 600 !important;
-      color: var(--parchment) !important;
-      line-height: 1.35 !important;
-      letter-spacing: -0.005em;
-    }
-    .fts-note-toggle {
-      flex-shrink: 0;
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.06em !important;
-      text-transform: uppercase !important;
-      color: var(--text-tertiary) !important;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border: 1px solid rgba(212, 172, 13, 0.18);
-      border-radius: 20px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .fts-note:hover .fts-note-toggle {
-      color: var(--gold-bright) !important;
-      border-color: rgba(212, 172, 13, 0.45);
-    }
-    .fts-note-toggle .caret {
-      display: inline-block;
-      transition: transform 0.2s ease;
-      font-size: 10px;
-    }
-    .fts-note[open] .fts-note-toggle .caret {
-      transform: rotate(180deg);
-    }
-    .fts-note-read-label::before { content: 'Read the full note'; }
-    .fts-note[open] .fts-note-read-label::before { content: 'Close'; }
-    .fts-note-body {
-      padding: 4px 30px 28px;
-      border-top: 1px solid rgba(212, 172, 13, 0.12);
-      margin-top: -2px;
-    }
-    .fts-note-body h3 {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 20px !important;
-      font-weight: 700 !important;
-      letter-spacing: -0.01em !important;
-      color: var(--parchment) !important;
-      margin: 22px 0 14px !important;
-      line-height: 1.25 !important;
-    }
-    .fts-note-body p {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 15px !important;
-      font-weight: 400 !important;
-      line-height: 1.8 !important;
-      color: var(--text-secondary) !important;
-      margin-bottom: 14px !important;
-    }
-    .fts-note-body p:last-of-type { margin-bottom: 0 !important; }
-    .fts-note-body p strong {
-      color: var(--parchment) !important;
-      font-weight: 600 !important;
-    }
-    .fts-note-sig {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 12px !important;
-      font-weight: 600 !important;
-      color: var(--parchment-dk) !important;
-      margin-top: 22px !important;
-      padding-top: 18px !important;
-      border-top: 1px solid rgba(212, 172, 13, 0.10) !important;
-      letter-spacing: 0.02em;
-    }
-    .fts-note-sig em {
-      font-style: normal;
-      color: var(--text-tertiary);
-      font-weight: 400;
-      margin-left: 6px;
-    }
-    @media (max-width: 640px) {
-      .fts-note > summary { padding: 18px 22px; gap: 12px; flex-wrap: wrap; }
-      .fts-note-body { padding: 4px 22px 24px; }
-      .fts-note-toggle { padding: 5px 10px; }
-    }
-  </style>
-
-  <!-- ── TRAILER ───────────────────────────────────────────────────── -->
-  <div class="section">
-    <span class="section-label">Trailer</span>
-    <h2>See it in action.</h2>
-    <p class="section-sub">You build up the board and harvest what you can, all while keeping the dragon from burning it down.</p>
-    <div class="video-wrap">
-      <iframe
-        src="https://www.youtube.com/embed/PIUX-b2aF18?rel=0&modestbranding=1&autoplay=1&mute=1&loop=1&playlist=PIUX-b2aF18"
-        title="Feed the Scorchpot Official Trailer"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; muted"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- ── DRAGON QUOTE ──────────────────────────────────────────────── -->
-  <div class="quote-section">
-    <img id="dragon-quote-img" src="" alt="Feed the Scorchpot — Dragon Quote" class="quote-img">
-    <div class="quote-text-wrap">
-      <span class="quote-eyebrow">About the game</span>
-      <p
-        style="font-family:'Sora',Arial,sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:1.8!important;color:#C4AF8E!important;margin-bottom:20px!important;">
-        Feed the Scorchpot is a tabletop roguelike. You manage a medieval farm and cook for a dragon with strong opinions about food and a short temper about everything else.
-      </p>
-      <p
-        style="font-family:'Sora',Arial,sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:1.8!important;color:#C4AF8E!important;margin-bottom:28px!important;">
-        Every run plays out differently, and one bad roll can undo the whole thing.
-      </p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="https://store.steampowered.com/app/4338170/Feed_the_Scorchpot_Demo/" target="_blank"
-          class="btn-steam">Play Demo Free</a>
-      </div>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- ── FEATURES ──────────────────────────────────────────────────── -->
-  <div class="section">
-    <span class="section-label">What it is</span>
-    <h2>It turns on you fast.</h2>
-    <p class="section-sub">You can play smart for an hour and lose it to one roll.</p>
-    <div class="features-grid">
-      <div class="feature-card">
-        <span class="feature-icon">🎲</span>
-        <span class="feature-title">Dice-driven roguelike</span>
-        <span class="feature-body">Every harvest, every recipe, every catastrophe rolls from the dice pool. No two runs play the same way.</span>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🐉</span>
-        <span class="feature-title">A very hungry dragon</span>
-        <span class="feature-body">Your landlord, your critic, your nemesis. Keep the Scorchpot fed — or face the consequences.</span>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🍳</span>
-        <span class="feature-title">Tabletop feel, digital play</span>
-        <span class="feature-body">Built like a board game. Plays like a roguelike. Feels like both at once — in the best possible way.</span>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🌾</span>
-        <span class="feature-title">Build, harvest, cook, survive</span>
-        <span class="feature-body">Manage your farm board, chain combos, discover recipes, and try to make it through 20 years without going bankrupt.</span>
-      </div>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- ── SCREENSHOTS ───────────────────────────────────────────────── -->
-  <div class="section">
-    <span class="section-label">Screenshots</span>
-    <h2>Inside the kitchen.</h2>
-    <p class="section-sub">The early years feel cozy. By the late ones you're just trying to survive.</p>
-
-    <div class="carousel-wrap">
-      <div class="carousel-track" id="carousel-track">
-        <div class="carousel-slide"><img src="/images/scorchpot/presskit/big-hunger.jpg?v=2" alt="Big hunger — the Emperor" loading="lazy"></div>
-        <div class="carousel-slide"><img src="/images/scorchpot/presskit/dice-recipes.jpg?v=2" alt="Dice and recipes" loading="lazy"></div>
-        <div class="carousel-slide"><img src="/images/scorchpot/presskit/duchess.jpg?v=2" alt="The Duchess" loading="lazy"></div>
-        <div class="carousel-slide"><img src="/images/scorchpot/presskit/recipes.jpg?v=2" alt="Recipes" loading="lazy"></div>
-        <div class="carousel-slide"><img src="/images/scorchpot/presskit/harvest.jpg?v=2" alt="In-game harvest" loading="lazy"></div>
-        <div class="carousel-slide"><img src="/images/scorchpot/presskit/shop2.jpg?v=2" alt="The shop" loading="lazy"></div>
-        <div class="carousel-slide"><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/b1874f87-4422-486e-9b2b-83c00adfa93f/Early_Game_-_Snarky_Dragon.png" alt="Early game — Snarky Dragon" loading="lazy">
-        </div>
-        <div class="carousel-slide"><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/5c06691d-aa72-4499-81bb-8fa13f84ba6e/Shop.png" alt="The Shop" loading="lazy">
-        </div>
-        <div class="carousel-slide"><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/ff80847c-9b4e-4b63-b674-eb3f519bd676/Dragon_Waiting_Quip.png" alt="Dragon waiting" loading="lazy">
-        </div>
-        <div class="carousel-slide"><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/42861017-8b1a-40d4-8748-4bc6d196af17/Cooking.png" alt="Cooking" loading="lazy">
-        </div>
-        <div class="carousel-slide"><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/e9fecc13-3d17-4e77-afbc-c66a9e2a1958/Late_Game_Board.png" alt="Late game board" loading="lazy">
-        </div>
-        <div class="carousel-slide"><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/9cb9f4cd-538b-452a-8d13-9c321fa51627/Cooking_2.png" alt="Cooking 2" loading="lazy">
-        </div>
-        <div class="carousel-slide"><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/dabf2015-1447-4f50-a3b3-17c6d5aa587e/Dragon_Hangry.png" alt="Hangry dragon" loading="lazy">
-        </div>
-        <div class="carousel-slide"><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/05f57b14-9174-4959-928e-61770129cf5a/Mid-Game_Board.png" alt="Mid game board" loading="lazy">
-        </div>
-        <div class="carousel-slide"><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/8bbcb9c6-9245-4f82-84ba-c5d62bdd18fb/Cooking_3.png" alt="Cooking 3" loading="lazy">
-        </div>
-        <div class="carousel-slide"><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/9803f7a2-ca1b-480e-93bd-ab1096dc5a69/Very_Late_Game_Board.png" alt="Very late game board" loading="lazy">
-        </div>
-      </div>
-      <button class="carousel-btn prev" id="carousel-prev">‹</button>
-      <button class="carousel-btn next" id="carousel-next">›</button>
-    </div>
-    <div class="carousel-dots" id="carousel-dots"></div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- ── FOOTER CTA ────────────────────────────────────────────────── -->
-  <div class="footer-cta">
-    <h2>Go feed the dragon.</h2>
-    <p>Jump straight into the demo. It's one very hungry dragon and a bag of dice, no sign-up needed.</p>
-    <div class="footer-cta-actions">
-      <a href="https://store.steampowered.com/app/4338170/Feed_the_Scorchpot_Demo/" target="_blank" class="btn-steam">▶
-        Play the Demo Free</a>
-    </div>
-    <div class="footer-links">
-      <a href="https://discord.gg/KZgxrn3Kpv" target="_blank" class="footer-link">Join the Discord</a>
-      <a href="https://www.indieformer.com" class="footer-link">Indieformer</a>
-      <a href="https://x.com/indieformer" target="_blank" class="footer-link">Twitter / X</a>
-      <a href="/scorchpot/presskit/" class="footer-link">Press kit</a>
-      <a href="https://www.indieformer.com/privacy/" class="footer-link">Privacy</a>
-      <a href="https://www.indieformer.com/terms/" class="footer-link">Terms</a>
-    </div>
-  </div>
-
-  <!-- ── SCRIPTS ───────────────────────────────────────────────────── -->
-  <script>
-    (function() {
-
-  // ── IMAGE ASSETS ──────────────────────────────
-  var ASSETS = {
-    heroBg:         'assets/img-384b6c1a0d.jpg',
-    verticalCapsule:'assets/img-1a5a9101b4.jpg',
-    dragonQuote:    'assets/img-2644839db3.webp',
-    banner:         'assets/img-e657c5cbca.jpg',
-  };
-
-  // Set hero background
-  var heroBg = document.getElementById('hero-bg');
-  if (heroBg) heroBg.style.backgroundImage = 'url(' + ASSETS.heroBg + ')';
-
-  var vcImg = document.getElementById('vertical-capsule');
-  if (vcImg) vcImg.src = ASSETS.verticalCapsule;
-
-  // Set logo — use banner on mobile, library logo on desktop
-  var heroLogo = document.getElementById('hero-logo');
-  if (heroLogo) {
-    heroLogo.src = window.innerWidth <= 640 ? ASSETS.banner : ASSETS.libraryLogo;
-    window.addEventListener('resize', function() {
-      heroLogo.src = window.innerWidth <= 640 ? ASSETS.banner : ASSETS.libraryLogo;
-    });
-  }
-
-  // Set dragon quote image
-  var dqImg = document.getElementById('dragon-quote-img');
-  if (dqImg) dqImg.src = ASSETS.dragonQuote;
-
-  // ── CAROUSEL ──────────────────────────────────
-  var track  = document.getElementById('carousel-track');
-  var dotsEl = document.getElementById('carousel-dots');
-  var slides = track ? track.querySelectorAll('.carousel-slide') : [];
-  var current = 0;
-  var total   = slides.length;
-
-  if (total > 0 && dotsEl) {
-    // Build dots
-    for (var i = 0; i < total; i++) {
-      var dot = document.createElement('div');
-      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('data-index', i);
-      dot.addEventListener('click', function() {
-        goTo(parseInt(this.getAttribute('data-index')));
-      });
-      dotsEl.appendChild(dot);
-    }
-
-    function goTo(n) {
-      current = (n + total) % total;
-      track.style.transform = 'translateX(-' + (current * 100) + '%)';
-      var dots = dotsEl.querySelectorAll('.carousel-dot');
-      dots.forEach(function(d, idx) {
-        d.className = 'carousel-dot' + (idx === current ? ' active' : '');
-      });
-    }
-
-    var prevBtn = document.getElementById('carousel-prev');
-    var nextBtn = document.getElementById('carousel-next');
-    if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); });
-    if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); });
-
-    // Auto-advance every 5 seconds
-    setInterval(function() { goTo(current + 1); }, 5000);
-
-    // Touch swipe
-    var touchStartX = 0;
-    track.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, {passive: true});
-    track.addEventListener('touchend', function(e) {
-      var diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
-    }, {passive: true});
-  }
-
-
-  // ENTRANCE ANIMATIONS
-  document.documentElement.classList.add('js-ready');
-  var fcards = document.querySelectorAll('.feature-card');
-  if (fcards.length > 0) {
-    var delays = ['', 'fts-d1', 'fts-d2', 'fts-d3'];
-    fcards.forEach(function(card, i) {
-      card.classList.add('fts-card');
-      if (delays[i]) card.classList.add(delays[i]);
-    });
-    var cardObs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('fts-in'); cardObs.unobserve(e.target); }
-      });
-    }, { threshold: 0.12 });
-    fcards.forEach(function(card) { cardObs.observe(card); });
-  }
-
-})();
-  </script>
-
-<!-- ════ INDIEFORMER VOICE PASS ════
-     Neutralises the uppercase letter-spaced eyebrow tropes (AI-tell) and
-     replaces them with Caveat handwritten labels. Keeps the game's warm
-     parchment palette intact — only the chrome changes.
--->
 <style>
-  @import url('/fonts/fonts.css');
+@import url('/fonts/fonts.css');
+/* Cinzel — self-hosted (medieval display serif for headings) */
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:600 800;font-display:swap;src:url('/fonts/cinzel.woff2') format('woff2');}
 
-  /* visual eyebrows → Caveat, slight tilt, no uppercase, no letter-spacing */
-  .hero-badge,
-  .section-label,
-  .quote-eyebrow,
-  .fts-ts-eyebrow,
-  .fts-note-eyebrow,
-  .fts-live-eyebrow {
-    font-family: 'Caveat', cursive !important;
-    font-size: 22px !important;
-    font-weight: 600 !important;
-    letter-spacing: 0 !important;
-    text-transform: none !important;
-    background: transparent !important;
-    padding: 0 !important;
-    border: none !important;
-    display: inline-block !important;
-    transform: rotate(-1.5deg);
-    line-height: 1.1 !important;
-  }
-  .hero-badge       { margin-bottom: 14px !important; color: var(--gold-bright) !important; }
-  .section-label    { margin-bottom: 6px  !important; color: var(--ember-bright) !important; }
-  .quote-eyebrow    { margin-bottom: 10px !important; color: var(--gold-bright) !important; }
-  .fts-ts-eyebrow   { color: var(--gold-bright) !important; }
-  .fts-note-eyebrow { color: var(--gold-bright) !important; font-size: 20px !important; }
-  .fts-live-eyebrow { color: var(--ember-bright) !important; font-size: 18px !important; }
+:root{
+  --ash:#140F0B; --ash-mid:#211812; --ash-lite:#312317; --ash-lighter:#4A3722;
+  --ember-bright:#F0592F; --ember:#C0392B; --coal:#7A2418;
+  --gold-bright:#F6C544; --gold:#D4A020; --gold-deep:#9A6A12;
+  --violet:#9C7BD6; --violet-dim:#6E568F;
+  --parchment:#F3E4C4; --parchment-mid:#E4CFA3; --parchment-ink:#3A2A18;
+  --text-1:#F5E9CF; --text-2:#CBB289; --text-3:#93795A;
+  --max:1120px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Sora',system-ui,sans-serif;background:var(--ash);color:var(--text-1);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
 
-  /* data labels (TS panel tiles, stat blocks, hero meta) — clean lowercase Sora */
-  .fts-ts-label,
-  .fts-stat-lbl,
-  .hero-meta-label,
-  .countdown-unit-label {
-    font-size: 12px !important;
-    font-weight: 500 !important;
-    letter-spacing: 0 !important;
-    text-transform: none !important;
-  }
+/* back to the main site */
+.if-back{position:fixed;top:15px;left:18px;z-index:70;font-family:'Caveat',cursive;font-size:22px;font-weight:600;color:var(--gold-bright);text-shadow:0 2px 10px rgba(0,0,0,.7);transition:transform .2s,color .2s;}
+.if-back:hover{color:var(--parchment);transform:translateX(-4px) rotate(-2deg);}
 
-  /* the pulsing status dot was flagged as "very AI" — hide it */
-  .fts-ts-dot,
-  .fts-live-pulse-dot {
-    display: none !important;
-  }
+/* parchment/soot grain over everything */
+#grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:200px 200px;}
 
-  /* small "back to Indieformer" link, fixed top-left */
-  .if-back {
-    position: fixed;
-    top: 18px; left: 22px;
-    font-family: 'Caveat', cursive;
-    font-size: 22px;
-    color: var(--gold-bright);
-    text-decoration: none !important;
-    z-index: 100;
-    transform: rotate(-2deg);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
-    transition: transform 0.2s ease, color 0.2s ease;
-  }
-  .if-back:hover { color: var(--parchment) !important; transform: rotate(-2deg) translateX(-4px); }
-  @media (max-width: 640px) {
-    .if-back { font-size: 19px; top: 14px; left: 16px; }
-  }
+/* drifting embers — across the whole page */
+.embers{position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden;}
+.embers i{position:absolute;bottom:-14px;width:4px;height:4px;border-radius:50%;
+  background:var(--gold-bright);box-shadow:0 0 8px 2px rgba(246,150,60,.8);opacity:0;animation:rise linear infinite;}
+@keyframes rise{0%{opacity:0;transform:translateY(0) translateX(0) scale(1)}
+  8%{opacity:.85}88%{opacity:.45}100%{opacity:0;transform:translateY(-102vh) translateX(26px) scale(.35)}}
+
+/* handwritten dragon voice */
+.dragon{font-family:'Caveat',cursive;color:var(--gold-bright);line-height:1.15;text-shadow:0 2px 14px rgba(240,89,47,.35);}
+.dragon.big{font-size:clamp(25px,3.4vw,38px);transform:rotate(-1.6deg);}
+.dragon.aside{font-size:clamp(22px,2.6vw,30px);transform:rotate(-1.2deg);color:var(--gold);}
+
+/* ═══════════════ HERO ═══════════════ */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate;}
+.hero-video{position:absolute;inset:0;z-index:0;background:#000 center/cover no-repeat url("assets/scorchpot-key-art.jpg");}
+.hero-video iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:140vw;height:78.75vw;min-height:140vh;min-width:248.9vh;border:0;pointer-events:none;filter:saturate(1.05);}
+/* flat cover in the page colour to calm the video so it doesn't fight the title */
+.hero-cover{position:absolute;inset:0;z-index:1;pointer-events:none;background:rgba(20,15,11,.45);}
+
+/* firelight from below + violet cool rim from above — fully opaque at the base so it meets the next section seamlessly */
+.fire-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg, transparent 84%, #140F0B 99%),
+    radial-gradient(70% 45% at 50% 108%, rgba(240,89,47,.55) 0%, rgba(192,57,43,.28) 34%, transparent 62%),
+    radial-gradient(46% 30% at 50% 116%, rgba(246,197,68,.5) 0%, transparent 55%),
+    radial-gradient(90% 60% at 76% -12%, rgba(156,123,214,.16) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(15,10,7,.55) 0%, rgba(15,10,7,.12) 20%, rgba(13,9,6,.5) 46%, rgba(12,8,5,.9) 74%, #140F0B 94%);
+  animation:flicker 5.5s ease-in-out infinite;}
+@keyframes flicker{0%,100%{opacity:1}42%{opacity:.9}62%{opacity:.97}78%{opacity:.86}}
+/* explicit gradient that fades the bottom of the background video into the page (independent of the scrim) */
+.hero-fade{position:absolute;left:0;right:0;bottom:0;height:45%;z-index:3;pointer-events:none;background:linear-gradient(to top,#140F0B 6%,rgba(20,15,11,.6) 40%,transparent 100%);}
+
+.hero-inner{position:relative;z-index:4;width:100%;max-width:var(--max);margin:0 auto;padding:0 clamp(20px,4vw,44px) clamp(46px,6vw,74px);text-align:center;}
+.hero-greet{margin-bottom:20px;}
+.hero-logo{width:min(660px,82vw);height:auto;margin:0 auto 22px;filter:drop-shadow(0 10px 34px rgba(240,89,47,.45)) drop-shadow(0 2px 30px rgba(156,123,214,.3));}
+.hero-pitch{font-size:clamp(17px,2.2vw,23px);font-weight:500;color:var(--parchment-mid);max-width:640px;line-height:1.5;margin:0 auto 28px;text-shadow:0 2px 14px rgba(0,0,0,.7);}
+.hero-pitch b{color:var(--parchment);font-weight:700;}
+
+/* tactile stat tokens */
+.tokens{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px;justify-content:center;}
+.token{display:inline-flex;flex-direction:column;gap:2px;padding:11px 18px;border-radius:12px;
+  background:linear-gradient(180deg,rgba(49,35,23,.82),rgba(20,15,11,.82));border:1px solid rgba(214,160,32,.34);backdrop-filter:blur(8px);
+  box-shadow:inset 0 1px 0 rgba(246,197,68,.14),0 8px 22px rgba(0,0,0,.4);}
+.token b{font-size:20px;font-weight:800;color:var(--gold-bright);letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1;}
+.token span{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);}
+
+.hero-cta{display:flex;flex-wrap:wrap;gap:13px;align-items:center;justify-content:center;margin-bottom:16px;}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-size:15px;font-weight:700;padding:15px 30px;border-radius:12px;cursor:pointer;border:1.5px solid transparent;transition:transform .16s ease,box-shadow .25s ease,background .2s,border-color .2s;}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{color:#2a1608;background:linear-gradient(180deg,var(--gold-bright),var(--gold));box-shadow:0 10px 32px rgba(214,160,32,.42),inset 0 1px 0 rgba(255,255,255,.42);}
+.btn-primary:hover{background:linear-gradient(180deg,#FFD76A,var(--ember-bright));box-shadow:0 14px 44px rgba(240,89,47,.5),inset 0 1px 0 rgba(255,255,255,.5);}
+.btn-ghost{color:var(--parchment);background:rgba(20,15,11,.5);border-color:rgba(214,160,32,.4);backdrop-filter:blur(8px);}
+.btn-ghost:hover{border-color:var(--gold-bright);background:rgba(20,15,11,.72);}
+/* underlined text link with arrow */
+.link-arrow{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--parchment-mid);
+  text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(214,160,32,.55);transition:color .2s;margin-bottom:16px;}
+.link-arrow:hover{color:var(--gold-bright);text-decoration-color:var(--gold-bright);}
+.hero-meta{font-size:12.5px;color:var(--text-3);letter-spacing:.02em;}
+.hero-meta b{color:var(--text-2);font-weight:600;}
+
+/* ═══════════════ SECTIONS ═══════════════ */
+.wrap{max-width:var(--max);margin:0 auto;padding:clamp(46px,6.5vw,82px) clamp(20px,4vw,44px);text-align:center;}
+.rule{display:flex;align-items:center;gap:18px;margin-bottom:24px;}
+.rule::before,.rule::after{content:'';height:1px;background:linear-gradient(90deg,transparent,rgba(214,160,32,.5),transparent);flex:1;}
+.rule img{width:54px;height:54px;opacity:.95;filter:drop-shadow(0 2px 10px rgba(240,89,47,.4));}
+h2.sec{font-family:'Cinzel',serif;font-size:clamp(30px,5vw,52px);font-weight:800;letter-spacing:-.01em;line-height:1.06;color:var(--parchment);margin-bottom:18px;text-wrap:balance;}
+h2.sec em{font-style:normal;color:var(--ember-bright);}
+
+/* pitch + scrollable screenshots — full width */
+.pitch-body{max-width:760px;margin:0 auto;}
+.pitch-body p{font-size:17px;line-height:1.85;color:var(--text-2);margin-bottom:16px;text-wrap:pretty;}
+.pitch-body p b{color:var(--parchment);font-weight:600;}
+
+.gallery{position:relative;margin-top:30px;}
+/* fade the carousel edges into the page (like the hero video fade) */
+.gallery::before,.gallery::after{content:'';position:absolute;top:0;bottom:40px;width:80px;pointer-events:none;z-index:3;}
+.gallery::before{left:0;background:linear-gradient(to right,var(--ash),transparent);}
+.gallery::after{right:0;background:linear-gradient(to left,var(--ash),transparent);}
+.shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory;scrollbar-width:none;}
+.shots::-webkit-scrollbar{display:none;}
+.shots figure{flex:0 0 clamp(280px,52vw,600px);scroll-snap-align:center;border-radius:14px;overflow:hidden;position:relative;border:1px solid var(--ash-lite);box-shadow:0 16px 44px rgba(0,0,0,.5);}
+.shots img{width:100%;aspect-ratio:16/9;object-fit:cover;}
+.shots figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 12px;font-family:'Caveat',cursive;font-size:19px;color:var(--parchment-mid);background:linear-gradient(transparent,rgba(12,8,5,.9));}
+.gallery-hint{margin-top:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);}
+
+/* recipe cards (parchment on the table) */
+.recipes{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px;}
+.recipe{position:relative;background:linear-gradient(158deg,var(--parchment) 0%,var(--parchment-mid) 100%);color:var(--parchment-ink);border-radius:12px;padding:24px 22px 22px;box-shadow:0 14px 34px rgba(0,0,0,.45),inset 0 0 0 1px rgba(154,106,18,.25),inset 0 1px 0 rgba(255,255,255,.5);}
+/* fixed-height icon slot, icons bottom-aligned so titles line up even when one icon is taller */
+.ico-slot{height:74px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:14px;}
+.recipe .ico{height:64px;width:auto;max-width:110px;object-fit:contain;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.25));}
+.recipe h3{font-family:'Cinzel',serif;font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em;min-height:48px;}
+.recipe p{font-size:13.5px;color:#5c4526;line-height:1.6;min-height:66px;}
+
+/* deal section — mirrored looming dragon on the left (reverse of the CTA one) */
+.deal{position:relative;overflow:hidden;}
+.deal .wrap{position:relative;z-index:2;}
+.deal-dragon{position:absolute;left:0;top:250px;width:min(440px,46vw);height:min(520px,52%);z-index:1;pointer-events:none;opacity:.12;filter:saturate(.9);background:url("assets/scorchpot-dragon-flip.png") left top/contain no-repeat;-webkit-mask-image:linear-gradient(to right,#000 30%,transparent 90%);mask-image:linear-gradient(to right,#000 30%,transparent 90%);}
+
+/* trailer */
+.band{background:var(--ash);}
+.trailer-frame{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;margin-top:30px;box-shadow:0 30px 80px rgba(0,0,0,.6);border:1px solid rgba(214,160,32,.28);}
+.trailer-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+
+/* the pot — CTA, with a looming dragon */
+.pot{position:relative;text-align:center;overflow:hidden;background:radial-gradient(80% 120% at 50% 130%,rgba(240,89,47,.4),rgba(192,57,43,.12) 40%,transparent 66%),var(--ash);}
+.pot .emberfloor{position:absolute;left:0;right:0;bottom:0;height:40%;pointer-events:none;z-index:1;background:radial-gradient(60% 100% at 50% 100%,rgba(246,197,68,.28),transparent 70%);animation:flicker 4s infinite;}
+.pot .pot-dragon{position:absolute;right:0;bottom:0;width:min(440px,46vw);height:94%;z-index:1;pointer-events:none;background:url("assets/scorchpot-dragon.png") right bottom/contain no-repeat;opacity:.15;filter:saturate(.92);-webkit-mask-image:linear-gradient(to left,#000 30%,transparent 90%);mask-image:linear-gradient(to left,#000 30%,transparent 90%);}
+.pot .wrap{position:relative;z-index:2;}
+.pot-seal{font-family:'Caveat',cursive;font-size:clamp(24px,3.4vw,36px);color:var(--gold-bright);transform:rotate(-1.6deg);margin-bottom:14px;}
+.pot h2{font-family:'Cinzel',serif;font-size:clamp(34px,6vw,64px);font-weight:800;letter-spacing:-.01em;color:var(--parchment);margin-bottom:16px;line-height:1.04;}
+.pot p.lead{font-size:18px;color:var(--text-2);max-width:600px;margin:0 auto 30px;}
+.pot .hero-cta{justify-content:center;}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:center;margin-top:26px;}
+.foot-links a{font-size:13px;color:var(--text-3);transition:color .2s;}
+.foot-links a:hover{color:var(--gold-bright);}
+
+@media(max-width:860px){.recipes{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.recipes{grid-template-columns:1fr;}}
 </style>
-
+</head>
+<body>
+<div id="grain"></div>
 <a class="if-back" href="/" aria-label="Back to Indieformer">← Indieformer</a>
 
-</body>
+<!-- embers drift across the whole page -->
+<div class="embers">
+  <i style="left:6%;animation-duration:8.5s;animation-delay:0s"></i>
+  <i style="left:15%;animation-duration:10.5s;animation-delay:2.4s"></i>
+  <i style="left:23%;animation-duration:7.6s;animation-delay:1.1s"></i>
+  <i style="left:34%;animation-duration:9.4s;animation-delay:3.6s"></i>
+  <i style="left:43%;animation-duration:8s;animation-delay:.6s"></i>
+  <i style="left:52%;animation-duration:11s;animation-delay:2.9s"></i>
+  <i style="left:61%;animation-duration:7.9s;animation-delay:4.3s"></i>
+  <i style="left:70%;animation-duration:9.8s;animation-delay:1.7s"></i>
+  <i style="left:79%;animation-duration:8.3s;animation-delay:3.1s"></i>
+  <i style="left:88%;animation-duration:10.2s;animation-delay:.3s"></i>
+  <i style="left:95%;animation-duration:7.4s;animation-delay:2.2s"></i>
+</div>
 
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="hero-video">
+    <!-- textless version for the ambient background so it doesn't compete with the title -->
+    <iframe src="https://www.youtube.com/embed/1gl3befqDrA?autoplay=1&mute=1&loop=1&playlist=1gl3befqDrA&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3"
+      title="Feed the Scorchpot ambient background" allow="autoplay; encrypted-media" tabindex="-1"></iframe>
+  </div>
+  <div class="hero-cover"></div>
+  <div class="fire-scrim"></div>
+  <div class="hero-fade"></div>
+
+  <div class="hero-inner">
+    <p class="hero-greet dragon big">"You're late, little cook."</p>
+    <img class="hero-logo" src="assets/scorchpot-logo.png" alt="Feed the Scorchpot">
+    <p class="hero-pitch">A dice roguelike about feeding a dragon for twenty years. You build an island out of dice rolls and fuse ingredients into recipes that break the score wide open. <b>Miss a meal and you're next on the menu.</b></p>
+
+    <div class="tokens">
+      <span class="token"><b id="s-wish">10,500+</b><span>Wishlists</span></span>
+      <span class="token"><b id="s-days">14</b><span>Days to launch</span></span>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://store.steampowered.com/app/3966510/Feed_the_Scorchpot/" target="_blank">Wishlist on Steam</a>
+      <!-- Demo CTA: temporary — remove at launch (Aug 20) when the full game replaces it -->
+      <a class="btn btn-ghost" href="https://store.steampowered.com/app/4338170/Feed_the_Scorchpot_Demo/" target="_blank">▶ Play the Free Demo</a>
+      <a class="btn btn-ghost" href="https://discord.gg/KZgxrn3Kpv" target="_blank">Join the Discord</a>
+    </div>
+    <a class="link-arrow" href="https://drive.google.com/drive/folders/13hfH1I9sGzxhJgHxj5E1AXK_-O7eQ3Wv" target="_blank">Press Kit ↗</a>
+    <p class="hero-meta">Developed by <b>Moravian Games</b> · Published by <b>Indieformer</b> · Launches <b>August 20, 2026</b></p>
+  </div>
+</header>
+
+<!-- ═══════════════ THE DEAL + SCREENSHOTS ═══════════════ -->
+<section class="deal">
+  <div class="wrap">
+  <div class="rule"><img src="assets/scorchpot-divider.png" alt=""></div>
+  <h2 class="sec">You struck a deal with a <em>dragon.</em></h2>
+  <p class="dragon aside">Twenty years is not survival. It is seasoning.</p>
+  <div class="pitch-body" style="margin-top:14px;">
+    <p>You traded twenty years of dinner service for the dragon's protection. <b>The island does well under its watch, as long as the meals keep coming.</b></p>
+    <p>Every year the dragon wakes hungrier. You roll dice to work the island, fusing what you harvest into recipes and cooking it down in the Scorchpot, the pot you keep full or end up in. Get the meal wrong and you're smoke.</p>
+  </div>
+
+  <div class="gallery">
+    <div class="shots">
+      <figure><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/b1874f87-4422-486e-9b2b-83c00adfa93f/Early_Game_-_Snarky_Dragon.png" alt=""><figcaption>"Year one. You amuse me. Briefly."</figcaption></figure>
+      <figure><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/42861017-8b1a-40d4-8748-4bc6d196af17/Cooking.png" alt=""><figcaption>"Tribute, as the contract demands."</figcaption></figure>
+      <figure><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/e9fecc13-3d17-4e77-afbc-c66a9e2a1958/Late_Game_Board.png" alt=""><figcaption>"A stay of execution, well seasoned."</figcaption></figure>
+      <figure><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/5c06691d-aa72-4499-81bb-8fa13f84ba6e/Shop.png" alt=""><figcaption>"Your gold is crunchy and flavorless. Spend it."</figcaption></figure>
+      <figure><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/ff80847c-9b4e-4b63-b674-eb3f519bd676/Dragon_Waiting_Quip.png" alt=""><figcaption>"The furnace is patient. I am not."</figcaption></figure>
+    </div>
+    <div class="gallery-hint">← drag to see more →</div>
+  </div>
+
+  <div class="recipes">
+    <div class="recipe"><span class="ico-slot"><img class="ico" src="assets/black_col_5.png" alt=""></span><h3>Build a scoring engine</h3><p>Place buildings so they feed each other. A few tiles snowball into big numbers.</p></div>
+    <div class="recipe"><span class="ico-slot"><img class="ico" src="assets/forbidden_fruit.png" alt=""></span><h3>Meals are maths</h3><p>Fuse ingredients and stack multipliers to send the score up, then go bigger.</p></div>
+    <div class="recipe"><span class="ico-slot"><img class="ico" src="assets/cat_ordeals.png" alt=""></span><h3>Press your luck</h3><p>Each year the odds harden and the dragon gets pickier. One roll ends a run.</p></div>
+    <div class="recipe"><span class="ico-slot"><img class="ico" src="assets/monastery.png" alt="" style="height:74px"></span><h3>Hand-drawn</h3><p>Every piece drawn by hand by Daniela, the artist half of the duo who made it.</p></div>
+  </div>
+  </div>
+  <div class="deal-dragon"></div>
+</section>
+
+<!-- ═══════════════ TRAILER ═══════════════ -->
+<section class="band">
+  <div class="wrap">
+    <div class="rule"><img src="assets/scorchpot-divider.png" alt=""></div>
+    <h2 class="sec">See it with sound.</h2>
+    <div class="trailer-frame">
+      <iframe src="https://www.youtube.com/embed/1zX-0OBf0j0?rel=0&modestbranding=1" title="Feed the Scorchpot — full trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ THE POT — CTA ═══════════════ -->
+<section class="pot">
+  <div class="emberfloor"></div>
+  <div class="pot-dragon"></div>
+  <div class="wrap">
+    <p class="pot-seal">"Keep the pot full, little cook. The alternative fills it too."</p>
+    <h2>Feed the dragon.</h2>
+    <p class="lead">Feed the Scorchpot launches August 20. Wishlist to be there on day one, or roll into the free demo tonight. For a two-person publisher and the duo who made it, a wishlist is the most useful thing you can do.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://store.steampowered.com/app/3966510/Feed_the_Scorchpot/" target="_blank">Wishlist on Steam</a>
+      <!-- Demo CTA: temporary — remove at launch (Aug 20) -->
+      <a class="btn btn-ghost" href="https://store.steampowered.com/app/4338170/Feed_the_Scorchpot_Demo/" target="_blank">▶ Play the Free Demo</a>
+    </div>
+    <div class="foot-links">
+      <a href="https://store.steampowered.com/app/3966510/Feed_the_Scorchpot/" target="_blank">Steam</a>
+      <a href="https://drive.google.com/drive/folders/13hfH1I9sGzxhJgHxj5E1AXK_-O7eQ3Wv" target="_blank">Press Kit</a>
+      <a href="https://discord.gg/KZgxrn3Kpv" target="_blank">Join the Discord</a>
+      <a href="https://www.indieformer.com">Indieformer</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  var launch = new Date('2026-08-20T00:00:00');
+  var days = Math.ceil((launch - new Date()) / 86400000);
+  var el = document.getElementById('s-days');
+  if (el) el.textContent = days > 0 ? days : 'NOW';
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoGame", "name": "Feed the Scorchpot", "description": "A tabletop roguelike about keeping a very opinionated dragon fed for twenty years without going bankrupt.", "image": "https://indieformer.com/images/scorchpot/presskit/og.jpg", "url": "https://indieformer.com/scorchpot/", "genre": ["Roguelike", "Strategy", "Simulation"], "gamePlatform": "PC", "operatingSystem": "Windows", "author": {"@type": "Organization", "name": "Moravian Games"}, "publisher": {"@type": "Organization", "name": "Indieformer", "url": "https://indieformer.com/"}, "sameAs": "https://store.steampowered.com/app/3966510/Feed_the_Scorchpot/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://indieformer.com/"}, {"@type": "ListItem", "position": 2, "name": "Feed the Scorchpot", "item": "https://indieformer.com/scorchpot/"}]}</script>
+</body>
 </html>
