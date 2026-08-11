@@ -27,423 +27,201 @@
 
   <style>
     @import url('/fonts/fonts.css');
+    @font-face{font-family:'Oswald';font-style:normal;font-weight:200 700;font-display:swap;src:url('/fonts/oswald.woff2') format('woff2');}
+:root{
+  --void:#0C0E11; --void-mid:#14171C; --void-lite:#1D2127; --void-lighter:#282D35;
+  --blood:#D5342A; --blood-bright:#F35A4B; --gold:#E3AE3F; --gold-bright:#FFC95E; --gold-dim:#A6802F;
+  --steel:#6FA0BE; --steel-bright:#93C0DC; --ash:#AEC1CE;
+  --bone:#ECF1F4; --text-1:#ECF1F4; --text-2:#A8B4BE; --text-3:#6C7680;
+  --max:1120px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Sora',system-ui,sans-serif;background:var(--void);color:var(--text-1);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.disp{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.01em;}
 
-    :root {
-      /* Slots & Slaughter — sampled from the key art: cool charcoal + the reel triad (gold / red / steel). */
-      --void: #0E1013;
-      --void-mid: #15181C;
-      --void-lite: #1D2127;
-      --void-lighter: #282D35;
-      --gold: #E3AE3F;
-      --gold-bright: #FFC95E;
-      --gold-dim: #A6802F;
-      --blood: #D5342A;
-      --blood-bright: #F35A4B;
-      --steel: #6FA0BE;
-      --steel-bright: #93C0DC;
-      --ash: #AEC1CE;
-      --bone: #ECF1F4;
-      --text-primary: #ECF1F4;
-      --text-secondary: #A8B4BE;
-      --text-tertiary: #6C7680;
-      --border: rgba(190, 205, 216, 0.10);
-      --border-mid: rgba(190, 205, 216, 0.20);
-    }
+#grit{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.08;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:200px 200px;}
+/* hard vignette to close the frame in */
+#vig{position:fixed;inset:0;pointer-events:none;z-index:9998;background:radial-gradient(125% 105% at 50% 38%,transparent 52%,rgba(0,0,0,.6) 100%);}
 
-    body {
-      background: var(--void) !important;
-      color: var(--text-primary) !important;
-      font-family: 'Sora', Arial, sans-serif !important;
-      -webkit-font-smoothing: antialiased;
-      text-align: left !important;
-      overflow-x: hidden;
-    }
+.eyebrow{display:inline-block;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:600;color:var(--gold-bright);border-left:3px solid var(--blood);padding-left:12px;margin-bottom:16px;}
 
-    a { text-decoration: none !important; color: inherit !important; }
-    .divider { border: none !important; border-top: 1px solid var(--border) !important; margin: 0 !important; }
+.if-back{position:fixed;top:16px;left:20px;z-index:200;font-family:'Caveat',cursive;font-size:21px;color:var(--gold-bright);transform:rotate(-2deg);text-shadow:0 2px 12px rgba(0,0,0,.85);transition:transform .2s,color .2s;}
+.if-back:hover{color:var(--bone);transform:rotate(-2deg) translateX(-4px);}
 
-    /* ── HERO BANNER ────────────────────────────── */
-    .hero-banner {
-      position: relative;
-      height: 300px;
-      overflow: hidden;
-      background:
-        radial-gradient(120% 90% at 78% 12%, rgba(227, 174, 63, 0.10), transparent 60%),
-        linear-gradient(160deg, #161A1F 0%, var(--void) 74%);
-    }
+/* ═══════════════ HERO ═══════════════ */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate;border-bottom:3px solid var(--blood);}
+.hero-video{position:absolute;inset:0;z-index:0;background:#000 center/cover no-repeat url("/images/slots-slaughter/hero.jpg");}
+.hero-video iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140vw;height:78.75vw;min-height:140vh;min-width:248.9vh;border:0;pointer-events:none;}
+.hero-cover{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(12,14,17,.66) 0%,rgba(12,14,17,.35) 40%,rgba(12,14,17,.72) 74%,var(--void) 99%);}
+.hero-cover::after{content:'';position:absolute;inset:0;background:radial-gradient(70% 55% at 80% 12%,rgba(213,52,42,.22),transparent 60%);}
+.hero-fade{position:absolute;left:0;right:0;bottom:0;height:42%;z-index:3;pointer-events:none;background:linear-gradient(to top,var(--void) 4%,transparent 100%);}
 
-    .hero-banner-bg {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center 34%;
-      filter: brightness(0.82) saturate(1.04);
-    }
+.hero-inner{position:relative;z-index:4;width:100%;max-width:var(--max);margin:0 auto;padding:0 clamp(20px,4vw,48px) clamp(50px,6vw,80px);text-align:center;}
+.hero-logo{width:min(420px,66vw);height:auto;margin:0 auto 24px;filter:drop-shadow(0 8px 26px rgba(0,0,0,.7));}
+.hero-hook{font-family:'Oswald',sans-serif;text-transform:uppercase;font-weight:700;font-size:clamp(32px,6.4vw,70px);line-height:.96;letter-spacing:-.01em;color:var(--bone);margin:0 auto 20px;max-width:min(680px,92vw);text-wrap:balance;text-shadow:0 3px 22px rgba(0,0,0,.7);}
+.hero-hook .nowrap{white-space:nowrap;}
+.hero-hook em{font-style:normal;color:var(--blood-bright);text-shadow:0 0 26px rgba(243,90,75,.5);}
+.hero-sub{font-size:clamp(15px,1.9vw,19px);color:var(--text-2);max-width:520px;margin:0 auto 30px;line-height:1.7;}
+.hero-sub b{color:var(--bone);font-weight:600;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:13px;align-items:center;justify-content:center;margin-bottom:20px;}
+/* notched corner drawn as two clipped layers so the stroke survives the cut */
+.btn{position:relative;z-index:0;display:inline-flex;align-items:center;gap:9px;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;font-size:15px;font-weight:600;padding:15px 30px;cursor:pointer;background:transparent;border:0;transition:transform .15s,box-shadow .25s,color .2s;
+  --notch:polygon(0 0,100% 0,100% calc(100% - 11px),calc(100% - 11px) 100%,0 100%);}
+.btn::before{content:"";position:absolute;inset:0;z-index:-2;clip-path:var(--notch);background:var(--edge,transparent);transition:background .2s;}
+.btn::after{content:"";position:absolute;inset:2px;z-index:-1;clip-path:var(--notch);background:var(--fill,transparent);transition:background .2s;}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{color:#160404;--fill:linear-gradient(180deg,var(--gold-bright),var(--gold));--edge:var(--gold-bright);box-shadow:0 8px 26px rgba(227,174,63,.36);}
+.btn-primary:hover{color:#fff;--fill:linear-gradient(180deg,#FFD87A,var(--blood-bright));--edge:var(--blood-bright);box-shadow:0 12px 40px rgba(243,90,75,.5);}
+.btn-ghost{color:var(--bone);--edge:rgba(147,192,220,.45);--fill:rgba(12,14,17,.42);}
+.btn-ghost:hover{color:var(--steel-bright);--edge:var(--steel-bright);}
+.link-arrow{display:inline-flex;align-items:center;gap:6px;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:13px;font-weight:600;color:var(--ash);text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(147,192,220,.5);transition:color .2s,text-decoration-color .2s;margin-bottom:16px;}
+.link-arrow:hover{color:var(--gold-bright);text-decoration-color:var(--gold-bright);}
+.hero-meta{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:12.5px;color:var(--text-3);}
+.hero-meta b{color:var(--steel);}
 
-    .hero-banner-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(14, 16, 19, 0.15) 0%, transparent 28%, var(--void) 100%);
-    }
+/* ═══════════════ SECTIONS ═══════════════ */
+.wrap{max-width:var(--max);margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px);}
+/* sections read centered, like the other two games */
+.pitch .wrap,.band .wrap,.cta .wrap{text-align:center;}
+.pitch .lead,.band .lead,.cta .lead{margin-left:auto;margin-right:auto;}
+.cta .foot-links{justify-content:center;}
+h2.sec{position:relative;font-family:'Oswald',sans-serif;text-transform:uppercase;font-weight:700;font-size:clamp(30px,5.4vw,60px);line-height:1;letter-spacing:.005em;color:var(--bone);margin-bottom:24px;padding-top:20px;}
+/* a hard red slash struck above each heading */
+h2.sec::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%) skewX(-24deg);width:52px;height:5px;background:var(--blood);box-shadow:0 0 18px rgba(213,52,42,.6);}
+h2.sec em{font-style:normal;color:var(--blood-bright);}
+.lead{font-size:clamp(16px,1.9vw,19px);line-height:1.8;color:var(--text-2);max-width:640px;}
+.lead b{color:var(--bone);font-weight:600;}
 
-    /* ── HERO CONTENT (two columns — capsule + copy, per Abelina) ── */
-    .hero-columns {
-      max-width: 900px;
-      margin: -90px auto 0;
-      padding: 0 24px 52px;
-      display: flex;
-      gap: 40px;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
+/* pitch band with a hard steel top edge */
+.pitch{border-top:3px solid var(--steel);background:linear-gradient(180deg,var(--void-mid),var(--void));}
 
-    .hero-left { flex-shrink: 0; width: 230px; }
+/* screenshots */
+.gallery{position:relative;margin-top:34px;}
+.gallery::before,.gallery::after{content:'';position:absolute;top:0;bottom:14px;width:80px;pointer-events:none;z-index:3;}
+.gallery::before{left:0;background:linear-gradient(to right,var(--void),transparent);}
+.gallery::after{right:0;background:linear-gradient(to left,var(--void),transparent);}
+.shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory;scrollbar-width:none;}
+.shots::-webkit-scrollbar{display:none;}
+.shots figure{flex:0 0 clamp(280px,52vw,600px);scroll-snap-align:center;border-radius:0;overflow:hidden;position:relative;border:1px solid var(--void-lighter);box-shadow:0 16px 40px rgba(0,0,0,.6);text-align:left;}
+.shots img{width:100%;aspect-ratio:16/9;object-fit:cover;}
+.shots figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 14px 10px;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:var(--ash);background:linear-gradient(transparent,rgba(8,9,11,.92));}
+.hint{margin-top:12px;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--text-3);}
 
-    .capsule-frame {
-      position: relative;
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 2px solid var(--border-mid);
-      box-shadow: 0 12px 44px rgba(0, 0, 0, 0.65), 0 0 30px rgba(227, 174, 63, 0.07);
-      aspect-ratio: 748 / 896;
-      background: var(--void-lite);
-    }
+/* feature cards — hard-cut, colored top bars */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;text-align:left;}
+.card{position:relative;background:var(--void-lite);border:1px solid var(--void-lighter);border-radius:0;padding:29px 22px 24px;text-align:center;clip-path:polygon(0 0,100% 0,100% 100%,16px 100%,0 calc(100% - 16px));transition:transform .18s,border-color .18s;}
+.card:hover{transform:translateY(-3px);border-color:var(--c,var(--blood));}
+/* slashed top bar, torn on its lower edge */
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--c,var(--blood));clip-path:polygon(0 0,100% 0,100% 45%,0 100%);}
+.card .ico-slot{height:76px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:14px;}
+.card .ico{height:68px;width:auto;max-width:92px;object-fit:contain;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,.6));}
+.card h3{font-family:'Oswald',sans-serif;text-transform:uppercase;font-weight:600;font-size:16px;letter-spacing:.02em;color:var(--bone);margin-bottom:9px;min-height:38px;}
+.card p{font-size:13.5px;color:var(--text-2);line-height:1.6;min-height:64px;}
 
-    .capsule-frame img {
-      position: absolute; inset: 0;
-      width: 100% !important; height: 100% !important;
-      object-fit: cover !important; display: block !important;
-    }
+/* trailer */
+.band{background:var(--void);border-top:3px solid var(--gold);}
+.trailer-frame{position:relative;aspect-ratio:16/9;border-radius:0;overflow:hidden;margin-top:30px;box-shadow:0 30px 70px rgba(0,0,0,.7);border:1px solid var(--void-lighter);}
+.trailer-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
 
-    .hero-right { flex: 1; min-width: 0; }
+/* closing — hard, with Sir Clank-a-lot */
+.cta{position:relative;overflow:hidden;border-top:3px solid var(--blood);background:radial-gradient(80% 90% at 50% 120%,rgba(213,52,42,.28),transparent 62%),var(--void);}
+.cta .knight{position:absolute;right:2%;bottom:0;width:min(300px,34vw);z-index:1;pointer-events:none;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6));-webkit-mask-image:linear-gradient(to left,#000 55%,transparent 96%);mask-image:linear-gradient(to left,#000 55%,transparent 96%);opacity:.9;}
+.cta .wrap{position:relative;z-index:2;}
+.cta h2{font-family:'Oswald',sans-serif;text-transform:uppercase;font-weight:700;font-size:clamp(32px,6vw,66px);line-height:.98;color:var(--bone);margin-bottom:16px;}
+.cta h2 em{font-style:normal;color:var(--gold-bright);}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:40px;padding-top:24px;border-top:1px solid var(--void-lighter);}
+.foot-links a{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--text-3);transition:color .2s;}
+.foot-links a:hover{color:var(--gold-bright);}
 
-    .hero-badge {
-      display: inline-block !important;
-      font-family: 'Caveat', cursive !important;
-      font-size: 23px !important; font-weight: 600 !important;
-      color: var(--blood-bright) !important;
-      transform: rotate(-1.5deg);
-      margin-bottom: 12px !important;
-    }
-
-    .hero-logo {
-      display: block !important; width: auto !important;
-      max-width: 210px !important; height: auto !important;
-      margin-bottom: 16px !important;
-    }
-
-    .hero-genre {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 12px !important; font-weight: 600 !important;
-      letter-spacing: 0.04em !important;
-      color: var(--gold) !important;
-      margin-bottom: 16px !important;
-    }
-
-    .hero-desc {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 15px !important; font-weight: 400 !important;
-      line-height: 1.7 !important;
-      color: var(--text-secondary) !important;
-      margin-bottom: 22px !important; max-width: 480px !important;
-    }
-
-    .hero-meta { display: flex !important; gap: 26px !important; margin-bottom: 24px !important; flex-wrap: wrap !important; }
-    .hero-meta-item { display: flex !important; flex-direction: column !important; gap: 3px !important; }
-    .hero-meta-label { font-size: 12px !important; font-weight: 500 !important; color: var(--text-tertiary) !important; }
-    .hero-meta-val { font-size: 13px !important; font-weight: 600 !important; color: var(--text-primary) !important; }
-
-    .hero-actions { display: flex !important; gap: 12px !important; flex-wrap: wrap !important; }
-
-    @media (max-width: 640px) {
-      .hero-banner { height: 200px; }
-      .hero-columns { display: block; margin-top: -56px; padding: 0 16px 40px; }
-      .hero-left { float: left; width: 104px; margin: 0 16px 10px 0; }
-      .hero-head { display: flow-root; }
-      .hero-logo { max-width: 150px !important; }
-      .hero-genre { clear: both; }
-      .hero-desc { clear: both; }
-      .hero-actions { gap: 10px !important; margin-top: 18px !important; }
-      .hero-actions .btn-steam, .hero-actions .btn-ghost {
-        flex: 1 1 0 !important; text-align: center !important;
-        padding: 11px 12px !important; font-size: 13px !important; white-space: nowrap !important;
-      }
-      .hero-meta { gap: 18px !important; }
-    }
-
-    /* ── BUTTONS ────────────────────────────────── */
-    .btn-steam, .btn-steam:link, .btn-steam:visited {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 14px !important; font-weight: 700 !important;
-      padding: 13px 26px !important; border-radius: 8px !important;
-      background: var(--gold) !important; color: #1c110c !important;
-      border: none !important; cursor: pointer !important;
-      display: inline-block !important; white-space: nowrap !important;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .btn-steam:hover { background: var(--gold-bright) !important; box-shadow: 0 0 28px rgba(227, 174, 63, 0.34) !important; }
-
-    .btn-ghost, .btn-ghost:link, .btn-ghost:visited {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 14px !important; font-weight: 700 !important;
-      padding: 13px 26px !important; border-radius: 8px !important;
-      background: transparent !important; color: var(--bone) !important;
-      border: 2px solid var(--border-mid) !important; cursor: pointer !important;
-      display: inline-block !important; white-space: nowrap !important;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-ghost:hover { border-color: var(--gold) !important; color: var(--gold-bright) !important; }
-
-    /* ── SECTIONS ───────────────────────────────── */
-    .section { padding: 54px 24px !important; max-width: 900px !important; margin: 0 auto !important; text-align: left !important; }
-    .section-label {
-      font-family: 'Caveat', cursive !important;
-      font-size: 23px !important; font-weight: 600 !important;
-      color: var(--blood-bright) !important; margin-bottom: 6px !important;
-      display: inline-block !important; transform: rotate(-1.5deg);
-    }
-    .section h2 {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 27px !important; font-weight: 700 !important;
-      line-height: 1.15 !important; letter-spacing: -0.01em !important;
-      color: var(--text-primary) !important; margin-bottom: 8px !important;
-    }
-    .section-sub {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 15px !important; font-weight: 400 !important;
-      line-height: 1.65 !important; color: var(--text-secondary) !important;
-      margin-bottom: 4px !important; max-width: 640px !important;
-    }
-
-    /* ── PREMISE (SirClankalot fades into the section colour) ── */
-    .quote-section {
-      background: var(--void-mid) !important;
-      border-top: 1px solid var(--border) !important;
-      border-bottom: 1px solid var(--border) !important;
-      padding: 48px 24px !important;
-    }
-    .quote-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 44px; }
-
-    .quote-img-frame { flex-shrink: 0; width: 340px; position: relative; }
-    .quote-img-frame img { width: 100%; height: auto; display: block; }
-    /* fade the character into the section background colour at the bottom */
-    .quote-img-frame::after {
-      content: ''; position: absolute; left: -4%; right: -4%; bottom: -1px; height: 40%;
-      background: linear-gradient(to bottom, transparent 0%, var(--void-mid) 90%);
-      pointer-events: none;
-    }
-
-    .quote-text-wrap { max-width: 460px; }
-    .quote-eyebrow {
-      font-family: 'Caveat', cursive !important;
-      font-size: 23px !important; font-weight: 600 !important;
-      color: var(--blood-bright) !important; margin-bottom: 10px !important;
-      display: inline-block !important; transform: rotate(-1.5deg);
-    }
-    .quote-text-wrap p {
-      font-family: 'Sora', Arial, sans-serif !important;
-      font-size: 16px !important; line-height: 1.8 !important;
-      color: var(--text-secondary) !important; margin-bottom: 18px !important;
-    }
-    .quote-text-wrap p strong { color: var(--bone) !important; font-weight: 600 !important; }
-
-    /* ── HOW IT PLAYS — compact chips, no essays ── */
-    .play-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-    .play-chip {
-      display: flex; align-items: center; gap: 9px;
-      background: var(--void-mid); border: 1px solid var(--border);
-      border-radius: 999px; padding: 10px 17px;
-    }
-    .play-chip .ic { font-size: 16px; }
-    .play-chip span { font-family: 'Sora', sans-serif; font-size: 13.5px; font-weight: 600; color: var(--bone); }
-
-    /* ── A GLIMPSE ── */
-    .ss-feature { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); margin-top: 18px; }
-    .ss-feature img { width: 100%; height: auto; display: block; }
-    .ss-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px; }
-    .ss-row .cell { aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); }
-    .ss-row .cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    @media (max-width: 640px) { .ss-row { grid-template-columns: 1fr; } }
-
-    /* ── FOOTER CTA ── */
-    .footer-cta { background: var(--void-mid) !important; border-top: 1px solid var(--border) !important; padding: 54px 24px 60px !important; text-align: center !important; }
-    .footer-cta h2 { font-family: 'Sora', Arial, sans-serif !important; font-size: 30px !important; font-weight: 700 !important; color: var(--text-primary) !important; margin-bottom: 12px !important; }
-    .footer-cta p { font-size: 15px !important; color: var(--text-secondary) !important; margin: 0 auto 26px !important; max-width: 640px !important; line-height: 1.65 !important; }
-    .footer-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
-    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-    .footer-link, .footer-link:link, .footer-link:visited { font-size: 13px !important; color: var(--text-tertiary) !important; transition: color 0.2s; }
-    .footer-link:hover { color: var(--gold) !important; }
-
-    /* ── TRACKER ── */
-    .ss-ts-wrap { max-width: 800px; margin: 0 auto; padding: 44px 24px; }
-    .ss-ts { background: var(--void-mid); border: 1px solid var(--border); border-radius: 14px; padding: 26px 28px; position: relative; overflow: hidden; }
-    .ss-ts::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--blood), var(--steel)); }
-    .ss-ts-title { font-family: 'Caveat', cursive !important; font-size: 30px !important; font-weight: 700 !important; color: var(--blood-bright) !important; margin: 0 0 18px !important; display: inline-block !important; transform: rotate(-1.5deg); }
-    .ss-ts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
-    .ss-ts-tile { background: var(--void); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
-    .ss-ts-label { font-size: 12px !important; font-weight: 500 !important; color: var(--text-tertiary) !important; margin-bottom: 8px !important; display: block !important; }
-    .ss-ts-num { font-size: 26px !important; font-weight: 800 !important; letter-spacing: -0.02em !important; color: var(--bone) !important; line-height: 1.05 !important; display: block !important; margin-bottom: 4px !important; }
-    .ss-ts-num.steel { color: var(--steel-bright) !important; }
-    .ss-ts-num.blood { color: var(--blood-bright) !important; }
-    .ss-ts-sub { font-size: 12px !important; color: var(--text-secondary) !important; display: block !important; }
-    .ss-ts-footer { font-size: 12px !important; color: var(--text-tertiary) !important; margin-top: 16px !important; padding-top: 14px !important; border-top: 1px solid var(--border) !important; line-height: 1.6; }
-    @media (max-width: 640px) { .ss-ts-grid { grid-template-columns: 1fr; } }
-
-    /* ── BACK LINK ── */
-    .if-back { position: fixed; top: 18px; left: 22px; font-family: 'Caveat', cursive; font-size: 22px; color: var(--blood-bright); z-index: 100; transform: rotate(-2deg); text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7); transition: transform 0.2s ease, color 0.2s ease; }
-    .if-back:hover { color: var(--bone) !important; transform: rotate(-2deg) translateX(-4px); }
-    @media (max-width: 640px) { .if-back { font-size: 19px; top: 14px; left: 16px; } .quote-inner { flex-direction: column; gap: 18px; } .quote-img-frame { width: 240px; } .footer-cta h2 { font-size: 24px !important; } }
-
-    /* ── LOADING OVERLAY ── */
-    #loader-overlay { position: fixed; inset: 0; z-index: 9999; background: var(--void); display: flex; align-items: center; justify-content: center; transition: opacity 0.45s ease; }
-    #loader-overlay.gone { opacity: 0; pointer-events: none; }
-    #loader-gem { width: 140px; height: 140px; }
-    @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
-    .video-wrap { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); margin-bottom: 20px; }
-    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+@media(max-width:860px){.cards{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.cards{grid-template-columns:1fr;} .cta .knight{opacity:.4;}}
   </style>
+</head>
+<body>
+<div id="grit"></div>
+<div id="vig"></div>
+<a class="if-back" href="/" aria-label="Back to Indieformer">← Indieformer</a>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="hero-video">
+    <iframe src="https://www.youtube.com/embed/uvk66cGkHoM?autoplay=1&mute=1&loop=1&playlist=uvk66cGkHoM&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3"
+      title="Slots & Slaughter background" allow="autoplay; encrypted-media" tabindex="-1"></iframe>
+  </div>
+  <div class="hero-cover"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <img class="hero-logo" src="/images/slots-slaughter/logo.png" alt="Slots & Slaughter">
+    <h1 class="hero-hook">A card game that runs on <span class="nowrap">a <em>slot machine.</em></span></h1>
+    <p class="hero-sub">You're a broke gladiator whose entire kit is locked inside a slot machine. <b>Spin to gear up, roll a d20, and watch the fight play out.</b></p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank">Wishlist on Steam</a>
+      <a class="btn btn-ghost" href="https://discord.gg/3UUVNXey4V" target="_blank">Join the Discord</a>
+    </div>
+    <a class="link-arrow" href="/slots-slaughter/presskit/">Press Kit ↗</a>
+    <p class="hero-meta">Roguelike deck-builder · <b>Coming soon</b> · 2026</p>
+  </div>
+</header>
+
+<!-- ═══════════════ PITCH + SCREENSHOTS ═══════════════ -->
+<section class="pitch"><div class="wrap">
+    <h2 class="sec">Spin. Roll. <em>Bleed.</em></h2>
+  <p class="lead">Every fight starts at the slot machine. Spin to load your gear, then roll a d20 and watch it play out. Between fights you patch up at the Sanitarium and buy from the Merchant, stacking your deck for whatever the pit throws next.</p>
+  <p class="lead" style="margin-top:14px;"><b>Your items are the deck, and the machine decides what you play each turn.</b> It's a slot machine and a combat game running at once.</p>
+
+  <div class="gallery">
+    <div class="shots">
+      <figure><img src="/images/slots-slaughter/shot-board.jpg" alt=""><figcaption>Load the reels, then let the d20 decide</figcaption></figure>
+      <figure><img src="/images/slots-slaughter/shot-attack.jpg" alt=""><figcaption>Every fight is a fresh pull of the lever</figcaption></figure>
+      <figure><img src="/images/slots-slaughter/shot-merchant.jpg" alt=""><figcaption>Buy gear from the Merchant between fights</figcaption></figure>
+      <figure><img src="/images/slots-slaughter/shot-sanitarium.jpg" alt=""><figcaption>Patch up at the Sanitarium, then back in</figcaption></figure>
+    </div>
+    <div class="hint">← drag to see more →</div>
+  </div>
+
+  <div class="cards">
+    <div class="card" style="--c:var(--gold)"><span class="ico-slot"><img class="ico" src="/images/slots-slaughter/shortsword.png" alt=""></span><h3>Spin to gear up</h3><p>Your kit is locked in the machine. Every fight opens with a pull of the lever.</p></div>
+    <div class="card" style="--c:var(--blood)"><span class="ico-slot"><img class="ico" src="/images/slots-slaughter/cursedcoin.png" alt=""></span><h3>Roll and watch it land</h3><p>Load your gear, roll a d20, and watch the whole turn resolve at once.</p></div>
+    <div class="card" style="--c:var(--steel)"><span class="ico-slot"><img class="ico" src="/images/slots-slaughter/axe.png" alt=""></span><h3>Heal, then re-arm</h3><p>Patch up at the Sanitarium and buy from the Merchant before the next pit.</p></div>
+    <div class="card" style="--c:var(--gold)"><span class="ico-slot"><img class="ico" src="/images/slots-slaughter/goldcoin.png" alt=""></span><h3>Every reroll costs more</h3><p>Push your luck for a better hand. The machine charges you for the privilege.</p></div>
+  </div>
+</div></section>
+
+<!-- ═══════════════ TRAILER ═══════════════ -->
+<section class="band"><div class="wrap">
+    <h2 class="sec">See it in action.</h2>
+  <div class="trailer-frame">
+    <iframe src="https://www.youtube.com/embed/uvk66cGkHoM?rel=0&modestbranding=1" title="Slots & Slaughter — trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div></section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta">
+  <img class="knight" src="/images/slots-slaughter/sirclankalot.png" alt="">
+  <div class="wrap">
+        <h2>Bet on the <em>gladiator.</em></h2>
+    <p class="lead">Slots &amp; Slaughter is coming soon. A wishlist on Steam is the best way to help, and the Discord is how you'll hear the second it has a date.</p>
+    <div class="hero-cta" style="margin-top:26px;">
+      <a class="btn btn-primary" href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank">Wishlist on Steam</a>
+      <a class="btn btn-ghost" href="https://discord.gg/3UUVNXey4V" target="_blank">Join the Discord</a>
+    </div>
+    <div class="foot-links">
+      <a href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank">Steam</a>
+      <a href="/slots-slaughter/presskit/">Press Kit</a>
+      <a href="https://discord.gg/3UUVNXey4V" target="_blank">Discord</a>
+      <a href="https://x.com/SlotSlaughter" target="_blank">X</a>
+      <a href="https://www.threads.com/@slotsslaughter" target="_blank">Threads</a>
+      <a href="https://bsky.app/profile/slots.indieformer.com" target="_blank">Bluesky</a>
+      <a href="https://www.indieformer.com">Indieformer</a>
+    </div>
+  </div>
+</section>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Slots & Slaughter","description":"A roguelike deck-builder where your gear is your deck and a slot machine decides what you fight with. Spin to load your loadout, gamble on the reroll, and fight your way to freedom.","image":"https://indieformer.com/images/slots-slaughter/og.jpg","url":"https://indieformer.com/slots-slaughter/","genre":["Roguelike","Deck-building","Card Battler","Strategy"],"gamePlatform":"PC","operatingSystem":["Windows","macOS"],"author":{"@type":"Organization","name":"Laser Castle"},"publisher":{"@type":"Organization","name":"Indieformer","url":"https://indieformer.com/"},"sameAs":"https://store.steampowered.com/app/4504900/Slots__Slaughter/"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indieformer.com/"},{"@type":"ListItem","position":2,"name":"Slots & Slaughter","item":"https://indieformer.com/slots-slaughter/"}]}</script>
-</head>
-
-<body>
-
-  <div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-  <script>
-    (function () {
-      var o = document.getElementById('loader-overlay'); if (!o) return;
-      var anim;
-      try { if (typeof lottie !== 'undefined') { anim = lottie.loadAnimation({ container: document.getElementById('loader-gem'), renderer: 'svg', loop: true, autoplay: true, path: '/loading-gem.json' }); } } catch (e) { }
-      var shown = Date.now();
-      function hide() { if (o.classList.contains('gone')) return; o.classList.add('gone'); setTimeout(function () { try { if (anim) anim.destroy(); } catch (e) { } if (o.parentNode) o.parentNode.removeChild(o); }, 500); }
-      function maybeHide() { setTimeout(hide, Math.max(0, 400 - (Date.now() - shown))); }
-      if (document.readyState === 'complete') maybeHide(); else window.addEventListener('load', maybeHide);
-      setTimeout(hide, 4000);
-    })();
-  </script>
-
-  <a class="if-back" href="/" aria-label="Back to Indieformer">← Indieformer</a>
-
-  <!-- ── HERO ── art: library_hero.png (banner) + library_capsule.png (box art) + library_logo_transparent.png -->
-  <div class="hero-banner">
-    <div class="hero-banner-bg" style="background-image:url('/images/slots-slaughter/hero.jpg');"></div>
-    <div class="hero-banner-overlay"></div>
-  </div>
-
-  <div class="hero-columns">
-    <div class="hero-left">
-      <div class="capsule-frame">
-        <img src="/images/slots-slaughter/capsule.jpg" alt="Slots & Slaughter box art">
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-head">
-        <div class="hero-badge">✦ Published by Indieformer</div>
-        <img class="hero-logo" src="/images/slots-slaughter/logo.png" alt="Slots & Slaughter">
-      </div>
-      <p class="hero-genre">Roguelike deck-builder · dark humour · single-player</p>
-      <p class="hero-desc">You're a broke gladiator whose entire kit is locked inside a slot machine. Spin to gear up,
-        gamble on the reroll, and win your freedom. Or die a legend who gambled it all away.</p>
-      <div class="hero-meta">
-        <div class="hero-meta-item"><span class="hero-meta-label">Developer</span><span class="hero-meta-val">Laser Castle</span></div>
-        <div class="hero-meta-item"><span class="hero-meta-label">Publisher</span><span class="hero-meta-val">Indieformer</span></div>
-        <div class="hero-meta-item"><span class="hero-meta-label">Release</span><span class="hero-meta-val">Coming soon</span></div>
-      </div>
-      <div class="hero-actions">
-        <a href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank" rel="noopener" class="btn-steam">✦ Wishlist on Steam</a>
-        <a href="https://discord.gg/3UUVNXey4V" target="_blank" rel="noopener" class="btn-ghost">Join the Discord</a>
-        <a href="/slots-slaughter/presskit/" class="btn-ghost">Press kit</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── TRACKER ── -->
-  <div class="ss-ts-wrap">
-    <div class="ss-ts">
-      <h3 class="ss-ts-title">Where Slots &amp; Slaughter's at.</h3>
-      <div class="ss-ts-grid">
-        <div class="ss-ts-tile"><span class="ss-ts-label">Stage</span><span class="ss-ts-num steel">In development</span><span class="ss-ts-sub">Signed to Indieformer</span></div>
-        <div class="ss-ts-tile"><span class="ss-ts-label">Beta</span><span class="ss-ts-num blood">On the way</span><span class="ss-ts-sub">wishlist on Steam to hear when it opens</span></div>
-        <div class="ss-ts-tile"><span class="ss-ts-label">Steam wishlists</span><span class="ss-ts-num steel">49</span><span class="ss-ts-sub">as of August 2, 2026</span></div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- ── PREMISE (SirClankalot) ── -->
-  <div class="quote-section">
-    <div class="quote-inner">
-      <div class="quote-img-frame">
-        <img src="/images/slots-slaughter/sirclankalot.png" alt="Sir Clankalot, a Slots & Slaughter gladiator">
-      </div>
-      <div class="quote-text-wrap">
-        <span class="quote-eyebrow">The premise</span>
-        <p>You're a broke gladiator, and every fight starts at the slot machine. Spin to load your gear, then roll a d20 and watch it play out. Between fights you heal up at the Sanitarium and buy gear from the Merchant, stacking your deck for what's next. Get far enough and you've bought your freedom.</p>
-      </div>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- ── HOW IT PLAYS (compact) ── -->
-  <div class="section">
-    <span class="section-label">how it plays</span>
-    <h2>It's a card game that runs on a slot machine.</h2>
-    <p class="section-sub">Your items are the deck, and the machine decides what you play with each turn. Every reroll costs more than the last. It's a slot machine and a combat game running at once.</p>
-    <div class="play-chips">
-      <div class="play-chip"><span class="ic">🎰</span><span>Spin to gear up</span></div>
-      <div class="play-chip"><span class="ic">🔁</span><span>Reroll (costs more)</span></div>
-      <div class="play-chip"><span class="ic">🎲</span><span>Roll a d20</span></div>
-      <div class="play-chip"><span class="ic">🩸</span><span>Buy your freedom, or don't</span></div>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- ── A GLIMPSE ── -->
-  <div class="section">
-    <span class="section-label">a glimpse</span>
-    <h2>See it in action.</h2>
-    <div class="video-wrap">
-      <iframe
-        src="https://www.youtube.com/embed/uvk66cGkHoM?rel=0&modestbranding=1&autoplay=1&mute=1&loop=1&playlist=uvk66cGkHoM"
-        title="Slots &amp; Slaughter — Trailer"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
-    <div class="ss-feature"><img src="/images/slots-slaughter/shot-attack.jpg" alt="Slots & Slaughter combat board" loading="lazy"></div>
-    <div class="ss-row">
-      <div class="cell"><img src="/images/slots-slaughter/shot-sanitarium.jpg" alt="The Sanitarium heal screen in Slots & Slaughter" loading="lazy"></div>
-      <div class="cell"><img src="/images/slots-slaughter/shot-merchant.jpg" alt="The Merchant shop in Slots & Slaughter" loading="lazy"></div>
-      <div class="cell"><img src="/images/slots-slaughter/shot-board.jpg" alt="Fighting Medusa in Slots & Slaughter" loading="lazy"></div>
-    </div>
-  </div>
-
-  <!-- ── FOOTER CTA ── -->
-  <div class="footer-cta">
-    <h2>Follow along as we build it.</h2>
-    <p>It's early. We'd love a wishlist on Steam, and joining the Discord is how you'll hear the second it has a date.</p>
-    <div class="footer-cta-actions">
-      <a href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank" rel="noopener" class="btn-steam">✦ Wishlist on Steam</a>
-      <a href="https://discord.gg/3UUVNXey4V" target="_blank" rel="noopener" class="btn-ghost">Join the Discord</a>
-      <a href="/slots-slaughter/presskit/" class="btn-ghost">Press kit</a>
-    </div>
-    <div class="footer-links">
-      <a href="https://discord.gg/3UUVNXey4V" target="_blank" rel="noopener" class="footer-link">Discord</a>
-      <a href="https://x.com/SlotSlaughter" target="_blank" rel="noopener" class="footer-link">X (Twitter)</a>
-      <a href="https://bsky.app/profile/slots.indieformer.com" target="_blank" rel="noopener" class="footer-link">Bluesky</a>
-      <a href="https://www.threads.com/@slotsslaughter" target="_blank" rel="noopener" class="footer-link">Threads</a>
-      <a href="/slots-slaughter/presskit/" class="footer-link">Press kit</a>
-      <a href="https://www.indieformer.com" class="footer-link">Indieformer</a>
-      <a href="https://www.indieformer.com/privacy/" class="footer-link">Privacy</a>
-      <a href="https://www.indieformer.com/terms/" class="footer-link">Terms</a>
-    </div>
-  </div>
-
 </body>
-
 </html>
