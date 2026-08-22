@@ -9,11 +9,11 @@ Override the output path with SCORCHPOT_DATA_OUT.
 """
 import os, sys, json, datetime, urllib.request, urllib.error
 
-DEMO_APP_ID = 4338170  # Feed the Scorchpot Demo
+APP_ID = 3966510  # Feed the Scorchpot (full game)
 OUT         = os.environ.get("SCORCHPOT_DATA_OUT", "data/scorchpot.json")
 TIMEOUT     = 12
 
-def get_demo_players(app_id: int) -> int | None:
+def get_players(app_id: int) -> int | None:
     url = (
         "https://api.steampowered.com/ISteamUserStats/"
         f"GetNumberOfCurrentPlayers/v1/?appid={app_id}"
@@ -32,7 +32,7 @@ def get_demo_players(app_id: int) -> int | None:
 
 
 def main():
-    players = get_demo_players(DEMO_APP_ID)
+    players = get_players(APP_ID)
     now = datetime.datetime.now(datetime.timezone.utc)
 
     # If the API fails, keep the previous value if we can read it,
@@ -41,14 +41,14 @@ def main():
     if os.path.exists(OUT):
         try:
             with open(OUT) as f:
-                fallback_players = json.load(f).get("demoPlayers")
+                fallback_players = json.load(f).get("players")
         except Exception:
             pass
 
     payload = {
-        "demoPlayers": players if players is not None else fallback_players,
-        "demoPlayersAsOf": now.isoformat(timespec="seconds"),
-        "demoAppId": DEMO_APP_ID,
+        "players": players if players is not None else fallback_players,
+        "playersAsOf": now.isoformat(timespec="seconds"),
+        "appId": APP_ID,
         "_apiStatus": "ok" if players is not None else "stale",
     }
 
@@ -58,7 +58,7 @@ def main():
         f.write("\n")
 
     print(
-        f"Steam demo players: {payload['demoPlayers']}  "
+        f"Steam players: {payload['players']}  "
         f"({payload['_apiStatus']}) → {OUT}",
         file=sys.stderr,
     )
