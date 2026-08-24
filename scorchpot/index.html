@@ -94,6 +94,9 @@ img{max-width:100%;display:block;}
 .token b{font-size:20px;font-weight:800;color:var(--gold-bright);letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1;}
 .token span{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);}
 .token[hidden]{display:none;}
+/* stat tokens share the stores grid: 3 equal columns, aligned under the store cards */
+.stats{display:flex;gap:12px;max-width:660px;margin:0 auto 14px;}
+.stats .token{flex:1 1 0;align-items:center;text-align:center;}
 
 .hero-cta{display:flex;flex-wrap:wrap;gap:13px;align-items:center;justify-content:center;margin-bottom:16px;}
 .btn{display:inline-flex;align-items:center;gap:10px;font-family:inherit;font-size:15px;font-weight:700;padding:15px 30px;border-radius:12px;cursor:pointer;border:1.5px solid transparent;transition:transform .16s ease,box-shadow .25s ease,background .2s,border-color .2s;}
@@ -101,8 +104,9 @@ img{max-width:100%;display:block;}
 .btn-primary{color:#2a1608;background:linear-gradient(180deg,var(--gold-bright),var(--gold));box-shadow:0 10px 32px rgba(214,160,32,.42),inset 0 1px 0 rgba(255,255,255,.42);}
 .btn-primary:hover{background:linear-gradient(180deg,#FFD76A,var(--ember-bright));box-shadow:0 14px 44px rgba(240,89,47,.5),inset 0 1px 0 rgba(255,255,255,.5);}
 .btn-ghost{color:var(--parchment);background:rgba(20,15,11,.5);border-color:rgba(214,160,32,.4);backdrop-filter:blur(8px);}
-/* trim the hero Discord button so the stat row tucks within the stores grid */
-.hero .hero-cta .btn{padding-left:20px;padding-right:20px;}
+/* Discord as a full-width bar under the stats, matching the stores/stat grid width */
+.hero .hero-cta{max-width:660px;margin-left:auto;margin-right:auto;}
+.hero .hero-cta .btn-wide{width:100%;justify-content:center;}
 .btn-ghost:hover{border-color:var(--gold-bright);background:rgba(20,15,11,.72);}
 /* underlined text link with arrow */
 .link-arrow{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--parchment-mid);
@@ -252,11 +256,13 @@ h2.sec em{font-style:normal;color:var(--ember-bright);}
       </span>
     </div>
 
-    <div class="hero-cta">
+    <div class="stats">
       <span class="token" id="tok-play" hidden><b id="s-play">—</b><span>Playing now</span></span>
       <span class="token"><b id="s-sold">10,500+</b><span>Copies sold</span></span>
       <span class="token"><b id="s-wish">25,000+</b><span>Outstanding wishlists</span></span>
-      <a class="btn btn-ghost" href="https://discord.gg/KZgxrn3Kpv" target="_blank">Discord</a>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-ghost btn-wide" href="https://discord.gg/KZgxrn3Kpv" target="_blank">Join the Discord</a>
     </div>
     <a class="link-arrow" href="/scorchpot/presskit/">Press Kit ↗</a>
     <p class="hero-meta">Developed by <b>Moravian Games</b> · Published by <b>Indieformer</b> · <b>Out now</b></p>
