@@ -151,6 +151,8 @@ h2.sec em{font-style:italic;color:var(--phosphor-bright);}
 .gallery::before,.gallery::after{content:'';position:absolute;top:0;bottom:14px;width:90px;pointer-events:none;z-index:3;}
 .gallery::before{left:0;background:linear-gradient(to right,var(--void),transparent);}
 .gallery::after{right:0;background:linear-gradient(to left,var(--void),transparent);}
+.gnav{position:absolute;top:calc(50% - 8px);transform:translateY(-50%);z-index:5;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:24px;line-height:1;padding-bottom:3px;backdrop-filter:blur(8px);transition:background .2s,border-color .2s,color .2s,transform .15s;box-shadow:0 6px 18px rgba(0,0,0,.45);}.gnav:hover{transform:translateY(-50%) scale(1.06);}.gnav:active{transform:translateY(-50%) scale(.96);}.gprev{left:10px;}.gnext{right:10px;}@media(max-width:520px){.gnav{width:36px;height:36px;font-size:20px;}}
+.gnav{border:1.5px solid rgba(95,224,166,.4);background:rgba(11,12,21,.62);color:var(--phosphor-bright);border-radius:50%;}.gnav:hover{border-color:var(--phosphor-bright);background:rgba(27,29,44,.9);}
 .hint{margin-top:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);text-align:center;}
 
 /* gameplay video */
@@ -254,7 +256,8 @@ h2.sec em{font-style:italic;color:var(--phosphor-bright);}
       <figure><img src="/images/abelina/shot-3.jpg" alt=""></figure>
       <figure><img src="/images/abelina/shot-4.jpg" alt=""></figure>
     </div>
-    <div class="hint">← drag to see more →</div>
+    <button class="gnav gprev" type="button" aria-label="Previous screenshots">‹</button>
+    <button class="gnav gnext" type="button" aria-label="Next screenshots">›</button>
   </div>
 </section>
 
@@ -266,7 +269,7 @@ h2.sec em{font-style:italic;color:var(--phosphor-bright);}
   <div class="maker-grid">
     <div class="maker">
       <div class="role">Direction & Animation</div>
-      <h3>Gabe</h3>
+      <h3>Gabe Askew</h3>
       <p>Nine years at Hornet directing campaigns for Dolby, Purina and Campbell's, then supervising cinematics at Blur Studio. Abelina is all of that pointed at one strange, personal world, built solo.</p>
     </div>
     <div class="maker">
@@ -300,5 +303,15 @@ h2.sec em{font-style:italic;color:var(--phosphor-bright);}
 </div></section>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoGame", "name": "Abelina", "description": "A surreal, hand-crafted afterlife platformer. You died, and you woke up here. A mature story about life and death, told through who you meet along the way.", "image": "https://indieformer.com/images/abelina/og.jpg", "url": "https://indieformer.com/abelina/", "genre": ["Platformer", "Adventure"], "gamePlatform": "PC", "operatingSystem": "Windows", "author": {"@type": "Organization", "name": "Gabe Askew"}, "publisher": {"@type": "Organization", "name": "Indieformer", "url": "https://indieformer.com/"}, "sameAs": "https://store.steampowered.com/app/3682900/Abelina/"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://indieformer.com/"}, {"@type": "ListItem", "position": 2, "name": "Abelina", "item": "https://indieformer.com/abelina/"}]}</script>
+<script>
+document.querySelectorAll('.gallery').forEach(function(g){
+  var s=g.querySelector('.shots'); if(!s) return;
+  var cs=getComputedStyle(s); var gap=parseFloat(cs.columnGap||cs.gap)||16;
+  function step(){var f=s.querySelector('figure');return (f?f.getBoundingClientRect().width:s.clientWidth*0.8)+gap;}
+  var p=g.querySelector('.gprev'),n=g.querySelector('.gnext');
+  if(p)p.addEventListener('click',function(){s.scrollBy({left:-step(),behavior:'smooth'});});
+  if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});
+});
+</script>
 </body>
 </html>

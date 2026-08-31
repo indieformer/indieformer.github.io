@@ -138,6 +138,8 @@ h2.sec em{font-style:normal;color:var(--ember-bright);}
 .shots figure{flex:0 0 clamp(280px,52vw,600px);scroll-snap-align:center;border-radius:14px;overflow:hidden;position:relative;border:1px solid var(--ash-lite);box-shadow:0 16px 44px rgba(0,0,0,.5);}
 .shots img{width:100%;aspect-ratio:16/9;object-fit:cover;}
 .shots figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 12px;font-family:'Caveat',cursive;font-size:19px;color:var(--parchment-mid);background:linear-gradient(transparent,rgba(12,8,5,.9));}
+.gnav{position:absolute;top:calc(50% - 8px);transform:translateY(-50%);z-index:5;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:24px;line-height:1;padding-bottom:3px;backdrop-filter:blur(8px);transition:background .2s,border-color .2s,color .2s,transform .15s;box-shadow:0 6px 18px rgba(0,0,0,.45);}.gnav:hover{transform:translateY(-50%) scale(1.06);}.gnav:active{transform:translateY(-50%) scale(.96);}.gprev{left:10px;}.gnext{right:10px;}@media(max-width:520px){.gnav{width:36px;height:36px;font-size:20px;}}
+.gnav{border:1.5px solid rgba(214,160,32,.5);background:rgba(20,15,11,.72);color:var(--gold-bright);border-radius:50%;}.gnav:hover{border-color:var(--gold-bright);background:rgba(42,31,18,.92);}
 .gallery-hint{margin-top:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);}
 
 /* recipe cards (parchment on the table) */
@@ -257,8 +259,8 @@ h2.sec em{font-style:normal;color:var(--ember-bright);}
 
     <div class="stats">
       <span class="token" id="tok-play" hidden><b id="s-play">—</b><span>Feeding the dragon</span></span>
-      <span class="token"><b id="s-sold">16,000+</b><span>Copies sold</span></span>
-      <span class="token"><b id="s-wish">30,000+</b><span>Outstanding wishlists</span></span>
+      <span class="token"><b id="s-sold">17,200+</b><span>Copies sold</span></span>
+      <span class="token"><b id="s-wish">31,500+</b><span>Outstanding wishlists</span></span>
     </div>
     <div class="hero-cta">
       <a class="btn btn-ghost btn-wide" href="https://discord.gg/KZgxrn3Kpv" target="_blank">Join the Discord</a>
@@ -287,7 +289,8 @@ h2.sec em{font-style:normal;color:var(--ember-bright);}
       <figure><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/5c06691d-aa72-4499-81bb-8fa13f84ba6e/Shop.png" alt=""><figcaption>"Your gold is crunchy and flavorless. Spend it."</figcaption></figure>
       <figure><img src="https://media.beehiiv.com/cdn-cgi/image/format=auto,fit=scale-down,onerror=redirect/uploads/asset/file/ff80847c-9b4e-4b63-b674-eb3f519bd676/Dragon_Waiting_Quip.png" alt=""><figcaption>"The furnace is patient. I am not."</figcaption></figure>
     </div>
-    <div class="gallery-hint">← drag to see more →</div>
+    <button class="gnav gprev" type="button" aria-label="Previous screenshots">‹</button>
+    <button class="gnav gnext" type="button" aria-label="Next screenshots">›</button>
   </div>
 
   <div class="recipes">
@@ -335,6 +338,16 @@ h2.sec em{font-style:normal;color:var(--ember-bright);}
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://indieformer.com/"}, {"@type": "ListItem", "position": 2, "name": "Feed the Scorchpot", "item": "https://indieformer.com/scorchpot/"}]}</script>
 <script>
 fetch("/data/scorchpot.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){var n=d&&d.players;if(n&&n>0){document.getElementById("s-play").textContent=n.toLocaleString();document.getElementById("tok-play").hidden=false;}}).catch(function(){});
+</script>
+<script>
+document.querySelectorAll('.gallery').forEach(function(g){
+  var s=g.querySelector('.shots'); if(!s) return;
+  var cs=getComputedStyle(s); var gap=parseFloat(cs.columnGap||cs.gap)||16;
+  function step(){var f=s.querySelector('figure');return (f?f.getBoundingClientRect().width:s.clientWidth*0.8)+gap;}
+  var p=g.querySelector('.gprev'),n=g.querySelector('.gnext');
+  if(p)p.addEventListener('click',function(){s.scrollBy({left:-step(),behavior:'smooth'});});
+  if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});
+});
 </script>
 </body>
 </html>
