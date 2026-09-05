@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#85 | Our own idea engine — Indieformer</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- Warm up DNS+TLS for the origins every page hits — fonts + Beehiiv image CDN. -->
+<link rel="preconnect" href="https://media.beehiiv.com" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+<meta name="description" content="Patch Notes is back.">
+<link rel="canonical" href="https://indieformer.com/notes/85-our-own-idea-engine/">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "#85 | Our own idea engine", "description": "Patch Notes is back.", "image": "https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/58cf53c4-8f34-4064-b8d8-6d8daf9fa227/ten-days-after-launch-a-dev-diary-v0-lohumnv16imh1.webp?t=1788144488", "datePublished": "", "url": "https://indieformer.com/notes/85-our-own-idea-engine/", "mainEntityOfPage": "https://indieformer.com/notes/85-our-own-idea-engine/", "author": {"@type": "Organization", "name": "Indieformer", "url": "https://indieformer.com/"}, "publisher": {"@type": "Organization", "name": "Indieformer", "logo": {"@type": "ImageObject", "url": "https://indieformer.com/logo.png"}}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://indieformer.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://indieformer.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "Our own idea engine", "item": "https://indieformer.com/notes/85-our-own-idea-engine/"}]}</script>
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="#85 | Our own idea engine">
+<meta property="og:description" content="Patch Notes is back.">
+<meta property="og:url" content="https://indieformer.com/notes/85-our-own-idea-engine/">
+<meta property="og:image" content="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/58cf53c4-8f34-4064-b8d8-6d8daf9fa227/ten-days-after-launch-a-dev-diary-v0-lohumnv16imh1.webp?t=1788144488">
+<meta property="article:published_time" content="">
+<meta property="article:section" content="publog">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="#85 | Our own idea engine">
+<meta name="twitter:description" content="Patch Notes is back.">
+<meta name="twitter:image" content="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/58cf53c4-8f34-4064-b8d8-6d8daf9fa227/ten-days-after-launch-a-dev-diary-v0-lohumnv16imh1.webp?t=1788144488">
+
+<link rel="stylesheet" href="/notes-post.css">
+</head>
+<body>
+
+<span class="crop bl"></span><span class="crop br"></span>
+
+<header class="site-nav" data-shared-nav></header>
+
+<section class="post-header">
+  <a href="/notes/" class="back-link">← All notes</a>
+  <h1 class="post-title">Our own idea engine</h1>
+  <p class="post-subtitle">Patch Notes is back.</p>
+  <figure class="post-hero">
+    <img src="https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/58cf53c4-8f34-4064-b8d8-6d8daf9fa227/ten-days-after-launch-a-dev-diary-v0-lohumnv16imh1.webp?t=1788144488" alt="Our own idea engine" loading="eager" width="1200" height="630">
+  </figure>
+  <div class="post-meta">
+    <span class="post-tag">publog<span class="dot">·</span><span class="num">Issue #85</span></span>
+    <time datetime=""></time>
+  </div>
+</section>
+
+<article class="post-content">
+<div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:50%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/a801e027-c3a5-4747-ab41-b9c3ad501af0/ND4MR_Primary_Colour.png?t=1785293180"/ loading="lazy" decoding="async"><div style="margin:0 auto 0 auto;padding:4px 0px 4px 0px;text-align:center;width:50%;"><small style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:12px;font-style:italic;text-decoration-color:#ffffff;text-decoration:none;"><p><i>Issue #85</i></p></small></div></div></div><div style="font-size:0px;line-height:0px;padding:30px 0px 30px;"><div style="margin: 0 auto; border-top: 3px Solid #9381ff; width:50%;"></div></div><div id="publog" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h6 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:14px;font-weight:Bold;line-height:0.875;margin:0;text-align:left;"><span style="color:#9381FF;">PUBLOG</span></h6></div><div id="the-game-jam" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;">The Game Jam</h2></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Two jams so far. Over 500 entries between them, thousands of votes, and a handful of little gems we never would have seen otherwise. It started as an experiment. It&#39;s now a thing that people continuously ask us about. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Patch Notes v2.0 runs October 9 to 12. </p></div><div style="padding-left:15px;padding-right:15px;"><div style="padding-bottom:20px;padding-left:0px;padding-right:0px;padding-top:20px;"><img alt="" style="margin:0 auto 0 auto;width:100%;" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/0ee84250-be57-474a-abf4-25ebc84331ee/banner.png?t=1788604566"/ loading="lazy" decoding="async"></div></div><div id="why" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;"><span style="color:#28E291;">Why?</span></h2></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> When we started, it was a cool little way to give back. Support indie from the ground up, get people building together. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Now that we&#39;re a publishing house (still wild to say that), we look at it differently. The core goal is the same: help people at the <i>inception</i> of an idea. But now those ideas don&#39;t have to stay prototypes. We can pick out the ones we love and help take them further. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Full disclosure though: Zero of the games we&#39;ve signed came out of the jam. <b>We&#39;d like to change that.</b></p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> There may not be a game in every jam. But this is the purest version of what a publisher is supposed to do. Find it early. Back it. </p></div><div id="patch-notes-20" style="padding-bottom:4px;padding-left:15px;padding-right:15px;padding-top:16px;"><h2 style="color:#28e291;font-family:'Poppins',Helvetica,sans-serif;font-size:24px;font-weight:Bold;line-height:1.5;margin:0;text-align:left;">Patch Notes 2.0</h2></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We promised that once Scorchpot was out the door, the jam would come back. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> We&#39;re going back to 72 hours, one theme. The sprint. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Flock (our Discord mod, judge on both previous jams) is running this one. We&#39;ll be around, but it&#39;s his show. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"><a class="link" href="https://itch.io/jam/patch-notes" target="_blank" rel="noopener noreferrer nofollow" style="-webkit-text-decoration:underline #f78154;color:#f78154;font-weight:bold;text-decoration:underline #f78154;word-break:break-word;;">Sign up for the jam here.</a> Kicks off Friday October 9, midday PDT. That&#39;s Saturday morning if you&#39;re with us in Australia. </p></div><div style="padding-bottom:12px;padding-left:15px;padding-right:15px;padding-top:12px;"><p style="color:#ffffff;color:var(--wt-text-on-background-color) !important;font-family:'DM Sans',Lato,Montserrat,sans-serif;font-size:16px;line-height:1.5;text-align:left;"> Josh & Clem </p></div>
+</article>
+
+<footer class="site-footer" data-shared-footer></footer>
+
+<script src="/site-chrome.js" defer></script>
+</body>
+</html>
