@@ -20,4 +20,12 @@ jobs:
       - name: Probe partner API
         env:
           STEAM_PARTNER_KEY: ${{ secrets.STEAM_PARTNER_KEY }}
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
+          STEAM_WEBAPI_KEY: ${{ secrets.STEAM_WEBAPI_KEY }}
+          STEAMWORKS_API_KEY: ${{ secrets.STEAMWORKS_API_KEY }}
+          STEAMWORKS_KEY: ${{ secrets.STEAMWORKS_KEY }}
+          STEAM_PUBLISHER_KEY: ${{ secrets.STEAM_PUBLISHER_KEY }}
+          STEAM_KEY: ${{ secrets.STEAM_KEY }}
+          STEAM_SECRET: ${{ secrets.STEAM_SECRET }}
         run: python3 scripts/steam_probe.py

@@ -6,7 +6,16 @@ Read-only. Prints STRUCTURE + unit counts only — never the key, never USD reve
 """
 import os, sys, json, datetime, urllib.request, urllib.parse, urllib.error
 
-KEY = os.environ.get("STEAM_PARTNER_KEY", "").strip()
+CANDIDATES = ["STEAM_PARTNER_KEY","STEAM_API_KEY","STEAM_WEB_API_KEY","STEAM_WEBAPI_KEY",
+              "STEAMWORKS_API_KEY","STEAMWORKS_KEY","STEAM_PUBLISHER_KEY","STEAM_KEY","STEAM_SECRET"]
+KEY, SRC = "", ""
+for _n in CANDIDATES:
+    _v = os.environ.get(_n, "").strip()
+    print(f"env {_n}: {'SET (len '+str(len(_v))+')' if _v else 'empty'}")
+    if _v and not KEY:
+        KEY, SRC = _v, _n
+if KEY:
+    print(f">>> using key from: {SRC}")
 APPIDS = {"scorchpot": 3966510, "abelina": 3682900, "slots": 4504900, "encrafted": 4093900}
 PARTNER = "https://partner.steam-api.com"
 
