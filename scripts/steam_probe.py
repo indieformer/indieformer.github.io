@@ -70,26 +70,35 @@ def main():
     except Exception:
         print("body[:400]:", body[:400])
 
-    # 3) DETAILED SALES — print KEYS + summed net units only. NO USD values.
-    print(f"\n--- GetDetailedSales (all apps, {d_pac}) ---")
-    st, body = get(f"{PARTNER}/IPartnerFinancialsService/GetDetailedSales/v001/?key={KEY}&date={d_pac}&highwatermark_id=0")
-    print("status:", st)
-    try:
-        resp = json.loads(body).get("response", json.loads(body))
-        print("top-level keys:", list(resp.keys()))
-        items = resp.get("sales") or resp.get("line_items") or resp.get("results") or []
-        print("line-item count:", len(items))
-        if items:
-            print("line-item field names:", list(items[0].keys()))
-            per_app = {}
-            for it in items:
-                aid = it.get("primary_appid") or it.get("appid")
-                per_app[aid] = per_app.get(aid, 0) + int(it.get("net_units_sold", 0) or 0)
-            print("net UNITS by appid (that day):", per_app)
-        if "max_id" in resp or "highwatermark_id" in resp:
-            print("pagination present:", resp.get("max_id", resp.get("highwatermark_id")))
-    except Exception:
-        print("body[:400]:", body[:400])
+    # 3) SALES — diagnose shape across dates + candidate methods. Structure only; redact if monetary.
+    def safe(body):
+        low = body.lower()
+        return "[REDACTED: contains sales/usd values]" if ("usd" in low or "gross_sales" in low or "net_sales" in low) else body[:260]
+    dates = [d_pac,
+             (datetime.datetime.utcnow()-datetime.timedelta(days=1)).strftime("%Y-%m-%d"),
+             (datetime.datetime.utcnow()-datetime.timedelta(days=14)).strftime("%Y-%m-%d")]
+    methods = [
+        f"{PARTNER}/IPartnerFinancialsService/GetDetailedSales/v001/?key={KEY}&date=DATE&highwatermark_id=0",
+        f"{PARTNER}/IPartnerFinancialsService/GetPackageSalesData/v001/?key={KEY}&date=DATE",
+        f"{PARTNER}/ISteamApps/GetSalesData/v1/?key={KEY}&date=DATE",
+    ]
+    for tmpl in methods:
+        base=tmpl.split('?')[0]
+        print(f"\n--- {base.rsplit('/',3)[-3]}/{base.rsplit('/',2)[-2]} ---")
+        for dt in dates:
+            st, body = get(tmpl.replace("DATE", dt))
+            info=""
+            try:
+                j=json.loads(body); r=j.get("response", j)
+                items = (r.get("sales") or r.get("line_items") or r.get("results") or r.get("detailed_sales") or []) if isinstance(r,dict) else []
+                keys = list(r.keys()) if isinstance(r,dict) else type(r).__name__
+                units=None
+                if items:
+                    units=sum(int(it.get("net_units_sold",it.get("units",0)) or 0) for it in items)
+                info=f"resp keys={keys} items={len(items)} unitsThatDay={units} fields={list(items[0].keys()) if items else None}"
+            except Exception:
+                info=f"non-json: {safe(body)}"
+            print(f"  {dt}: HTTP {st} len {len(body)} | {info}")
 
     print("\n=== END PROBE ===")
 
