@@ -6,7 +6,7 @@ Read-only. Prints STRUCTURE + unit counts only — never the key, never USD reve
 """
 import os, sys, json, datetime, urllib.request, urllib.parse, urllib.error
 
-CANDIDATES = ["STEAM_PARTNER_KEY","STEAM_API_KEY","STEAM_WEB_API_KEY","STEAM_WEBAPI_KEY",
+CANDIDATES = ["STEAM_PARNTER_KEY","STEAM_PARTNER_KEY","STEAM_API_KEY","STEAM_WEB_API_KEY","STEAM_WEBAPI_KEY",
               "STEAMWORKS_API_KEY","STEAMWORKS_KEY","STEAM_PUBLISHER_KEY","STEAM_KEY","STEAM_SECRET"]
 KEY, SRC = "", ""
 for _n in CANDIDATES:
