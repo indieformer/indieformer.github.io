@@ -33,8 +33,10 @@ GAMES = {
     "abelina":         {"appid": 3682900, "players": False, "wishlists": True, "units": False},
     "slots-slaughter": {"appid": 4504900, "players": False, "wishlists": True, "units": False},
 }
-# exact lifetime units at first-seed time (see backend dashboard). Only seed once.
-UNIT_SEED = {"scorchpot": 20024}
+# first sales date (launch) per game. Units are backfilled EXACTLY from here from
+# the partner sales API, so there is no seed/boundary-date guesswork.
+UNITS_START = {"scorchpot": "2026-08-20"}
+UNITS_BACKFILL_CAP = 90   # sales dates per run (short history, so one run covers it)
 
 
 def http_json(url):
@@ -138,18 +140,19 @@ def update_wishlists(slug, appid, data, target):
 
 
 def update_units(slug, appid, data, target):
-    """Seed once, then add net units for each new sales date up to `target`."""
+    """Backfill exact net units from the launch date to `target` (Pacific sales day)."""
+    status = "ok"
     if "units" not in data or "unitsThrough" not in data:
-        data["units"] = int(UNIT_SEED.get(slug, 0))
-        data["unitsThrough"] = ymd(target)      # seed represents everything through target
-        data["unitsAsOf"] = ymd(target)
-        print(f"  units: seeded {data['units']} through {target}")
-        return "ok"
+        s = UNITS_START.get(slug)
+        start = d(s) if s else (target - datetime.timedelta(days=30))
+        data["units"] = 0
+        data["unitsThrough"] = ymd(start - datetime.timedelta(days=1))
+        print(f"  units: backfilling from launch {start}")
 
     cur = d(data["unitsThrough"])
     total = int(data["units"])
-    status = "ok"
-    while cur < target:
+    processed = 0
+    while cur < target and processed < UNITS_BACKFILL_CAP:
         day = cur + datetime.timedelta(days=1)
         try:
             per = units_by_app_for_date(ymd(day))
@@ -159,11 +162,13 @@ def update_units(slug, appid, data, target):
             break
         total += int(per.get(appid, 0))
         cur = day
-        time.sleep(0.15)
+        processed += 1
+        time.sleep(0.1)
     data["units"] = total
     data["unitsThrough"] = ymd(cur)
     data["unitsAsOf"] = ymd(cur)
-    print(f"  units: {total} through {cur}")
+    caught = "caught up" if cur >= target else f"backfilling ({processed} days this run)"
+    print(f"  units: {total} through {cur} [{caught}]")
     return status
 
 
