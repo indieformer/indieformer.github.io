@@ -123,6 +123,7 @@ img{max-width:100%;display:block;}
 .btn-ghost{color:var(--bone);border-color:rgba(236,232,218,.28);background:rgba(11,12,21,.35);backdrop-filter:blur(8px);}
 .btn-ghost:hover{border-color:var(--phosphor);color:var(--phosphor-bright);}
 .hero-stat{font-size:13.5px;color:var(--text-2);margin-bottom:14px;}
+.upd{color:var(--text-3);font-size:.82em;}
 .hero-stat b{color:var(--phosphor-bright);font-weight:700;font-variant-numeric:tabular-nums;}
 .hero-meta{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);}
 .hero-meta b{color:var(--text-2);font-weight:600;}
@@ -217,7 +218,7 @@ h2.sec em{font-style:italic;color:var(--phosphor-bright);}
       <a class="btn btn-primary" href="https://store.steampowered.com/app/3682900/Abelina/" target="_blank">Wishlist on Steam</a>
       <a class="btn btn-ghost" href="https://discord.gg/xE9eTQNJT4" target="_blank">Join the Discord</a>
     </div>
-    <p class="hero-stat"><b>1,100+</b> wishlists on Steam</p>
+    <p class="hero-stat"><b id="ab-wish">1,100+</b> wishlists on Steam<span class="upd" id="ab-upd" hidden></span></p>
     <a class="link-arrow" href="/abelina/presskit/">Press Kit ↗</a>
     <p class="hero-meta">Surreal afterlife platformer · <b>In development</b> · 2027</p>
   </div>
@@ -313,5 +314,6 @@ document.querySelectorAll('.gallery').forEach(function(g){
   if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});
 });
 </script>
+<script>fetch("/data/abelina.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.wishlists){document.getElementById("ab-wish").textContent=Number(d.wishlists).toLocaleString();}var w=d&&d.wishlistsAsOf;if(w){var u=document.getElementById("ab-upd");if(u){var dt=new Date(w+"T00:00:00Z");u.textContent=" \u00b7 updated "+dt.toLocaleDateString(undefined,{day:"numeric",month:"short"});u.hidden=false;}}}).catch(function(){});</script>
 </body>
 </html>
