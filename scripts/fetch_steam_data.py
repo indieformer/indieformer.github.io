@@ -73,21 +73,22 @@ def wishlist_day(appid, date_str):
 
 
 def units_by_app_for_date(date_str):
-    """{appid: net_units_sold} for a Pacific sales date, paginated over max_id."""
-    per, hwm = {}, 0
+    """({appid: net}, {appid: gross}) for a Pacific sales date, paginated over max_id."""
+    net, gross, hwm = {}, {}, 0
     for _ in range(500):  # page guard
         r = http_json(f"{PARTNER}/IPartnerFinancialsService/GetDetailedSales/v001/"
                       f"?key={KEY}&date={date_str}&highwatermark_id={hwm}").get("response", {})
         rows = r.get("results", []) or []
         for it in rows:
             aid = it.get("primary_appid")
-            per[aid] = per.get(aid, 0) + int(it.get("net_units_sold", 0) or 0)
+            net[aid]   = net.get(aid, 0)   + int(it.get("net_units_sold", 0) or 0)
+            gross[aid] = gross.get(aid, 0) + int(it.get("gross_units_sold", 0) or 0)
         mx = r.get("max_id")
         if not rows or not mx or mx == hwm:
             break
         hwm = mx
         time.sleep(0.1)
-    return per
+    return net, gross
 
 
 def load(slug):
@@ -151,20 +152,23 @@ def update_units(slug, appid, data, target):
 
     cur = d(data["unitsThrough"])
     total = int(data["units"])
+    gtotal = int(data.get("unitsGross", 0))
     processed = 0
     while cur < target and processed < UNITS_BACKFILL_CAP:
         day = cur + datetime.timedelta(days=1)
         try:
-            per = units_by_app_for_date(ymd(day))
+            net, gross = units_by_app_for_date(ymd(day))
         except Exception as e:
             print(f"  units: stop at {day} ({e})", file=sys.stderr)
             status = "stale"
             break
-        total += int(per.get(appid, 0))
+        total  += int(net.get(appid, 0))
+        gtotal += int(gross.get(appid, 0))
         cur = day
         processed += 1
         time.sleep(0.1)
     data["units"] = total
+    data["unitsGross"] = gtotal
     data["unitsThrough"] = ymd(cur)
     data["unitsAsOf"] = ymd(cur)
     caught = "caught up" if cur >= target else f"backfilling ({processed} days this run)"
