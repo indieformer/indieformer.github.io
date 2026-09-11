@@ -8,12 +8,7 @@
   "wishlistsAsOf": "2026-09-10",
   "_status": {
     "players": "ok",
-    "wishlists": "ok",
-    "units": "ok"
+    "wishlists": "ok"
   },
-  "updatedAt": "2026-09-11T05:36:19+00:00",
-  "units": 17239,
-  "unitsThrough": "2026-09-09",
-  "unitsAsOf": "2026-09-09",
-  "unitsGross": 0
+  "updatedAt": "2026-09-11T05:36:19+00:00"
 }
