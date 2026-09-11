@@ -1,67 +1,207 @@
 #!/usr/bin/env python3
 """
-Fetch live Steam data for Feed the Scorchpot and write it to data/scorchpot.json.
+Fetch live Steam data for the Indieformer game pages and write per-game JSON
+under data/<game>.json. The pages read these client-side.
 
-scorchpot.html reads this file client-side to populate the live tracker tile.
-Run on the same daily GitHub Action cron that refreshes the notes index.
+Streams, each self-contained and stored with its own "through" date so runs are
+incremental and can never double-count:
 
-Override the output path with SCORCHPOT_DATA_OUT.
+  players    - public GetNumberOfCurrentPlayers (no key). Scorchpot only.
+  wishlists  - exact outstanding balance, reconstructed from the daily partner
+               Wishlist reporting (adds - deletes - purchases - gifts), backfilled
+               from the app's first date. Needs STEAM_FINANCIAL_KEY.
+  units      - lifetime copies sold. SEEDED once from a known exact total, then
+               each day's net units from GetDetailedSales is added. Needs the key.
+
+Partner endpoints only work with a WebAPI key that has the Sales Data permission.
+Run on the daily Action; safe to run more often. Backfill is capped per run and
+resumes on the next run via the stored "through" dates.
 """
-import os, sys, json, datetime, urllib.request, urllib.error
+import os, sys, json, time, datetime, urllib.request, urllib.error
 
-APP_ID = 3966510  # Feed the Scorchpot (full game)
-OUT         = os.environ.get("SCORCHPOT_DATA_OUT", "data/scorchpot.json")
-TIMEOUT     = 12
+KEY      = os.environ.get("STEAM_FINANCIAL_KEY", "").strip()
+DATA_DIR = os.environ.get("STEAM_DATA_DIR", "data")
+PUBLIC   = "https://api.steampowered.com"
+PARTNER  = "https://partner.steam-api.com"
+TIMEOUT  = 30
+BACKFILL_CAP = 400          # max days of wishlist history to process per run
+UA = {"User-Agent": "indieformer-stats (indieformer.com)"}
 
-def get_players(app_id: int) -> int | None:
-    url = (
-        "https://api.steampowered.com/ISteamUserStats/"
-        f"GetNumberOfCurrentPlayers/v1/?appid={app_id}"
-    )
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": "Mozilla/5.0 (scorchpot-tracker; indieformer.com)"}
-    )
+# game slug -> config. Add encrafted once its page is live.
+GAMES = {
+    "scorchpot":       {"appid": 3966510, "players": True,  "wishlists": True, "units": True},
+    "abelina":         {"appid": 3682900, "players": False, "wishlists": True, "units": False},
+    "slots-slaughter": {"appid": 4504900, "players": False, "wishlists": True, "units": False},
+}
+# exact lifetime units at first-seed time (see backend dashboard). Only seed once.
+UNIT_SEED = {"scorchpot": 20024}
+
+
+def http_json(url):
+    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=TIMEOUT) as r:
+        return json.loads(r.read().decode("utf-8", "replace"))
+
+def d(s):   # "YYYY-MM-DD" -> date
+    return datetime.date.fromisoformat(s)
+
+def ymd(dt):
+    return dt.isoformat()
+
+def yesterday_utc():
+    return datetime.datetime.now(datetime.timezone.utc).date() - datetime.timedelta(days=1)
+
+
+def get_players(appid):
     try:
-        with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
-            data = json.loads(r.read().decode())
-        return int(data.get("response", {}).get("player_count", 0))
-    except (urllib.error.URLError, ValueError, TypeError) as e:
-        print(f"warning: Steam API call failed: {e}", file=sys.stderr)
+        r = http_json(f"{PUBLIC}/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid={appid}")
+        return int(r.get("response", {}).get("player_count", 0))
+    except Exception as e:
+        print(f"  players: FAILED {e}", file=sys.stderr)
         return None
 
 
-def main():
-    players = get_players(APP_ID)
-    now = datetime.datetime.now(datetime.timezone.utc)
+def wishlist_day(appid, date_str):
+    """(net_change, app_min_date). net = adds - deletes - purchases - gifts."""
+    r = http_json(f"{PARTNER}/IPartnerFinancialsService/GetAppWishlistReporting/v001/"
+                  f"?key={KEY}&appid={appid}&date={date_str}").get("response", {})
+    w = r.get("wishlist_summary", {}) or {}
+    net = (int(w.get("wishlist_adds", 0)) - int(w.get("wishlist_deletes", 0))
+           - int(w.get("wishlist_purchases", 0)) - int(w.get("wishlist_gifts", 0)))
+    return net, r.get("app_min_date")
 
-    # If the API fails, keep the previous value if we can read it,
-    # so a transient outage doesn't blank the tile.
-    fallback_players = None
-    if os.path.exists(OUT):
+
+def units_by_app_for_date(date_str):
+    """{appid: net_units_sold} for a Pacific sales date, paginated over max_id."""
+    per, hwm = {}, 0
+    for _ in range(500):  # page guard
+        r = http_json(f"{PARTNER}/IPartnerFinancialsService/GetDetailedSales/v001/"
+                      f"?key={KEY}&date={date_str}&highwatermark_id={hwm}").get("response", {})
+        rows = r.get("results", []) or []
+        for it in rows:
+            aid = it.get("primary_appid")
+            per[aid] = per.get(aid, 0) + int(it.get("net_units_sold", 0) or 0)
+        mx = r.get("max_id")
+        if not rows or not mx or mx == hwm:
+            break
+        hwm = mx
+        time.sleep(0.1)
+    return per
+
+
+def load(slug):
+    path = os.path.join(DATA_DIR, f"{slug}.json")
+    if os.path.exists(path):
         try:
-            with open(OUT) as f:
-                fallback_players = json.load(f).get("players")
+            with open(path) as f:
+                return json.load(f)
         except Exception:
             pass
+    return {}
 
-    payload = {
-        "players": players if players is not None else fallback_players,
-        "playersAsOf": now.isoformat(timespec="seconds"),
-        "appId": APP_ID,
-        "_apiStatus": "ok" if players is not None else "stale",
-    }
 
-    os.makedirs(os.path.dirname(OUT) or ".", exist_ok=True)
-    with open(OUT, "w") as f:
-        json.dump(payload, f, indent=2)
-        f.write("\n")
+def update_wishlists(slug, appid, data, target):
+    """Advance the stored cumulative wishlist balance up to `target` date."""
+    status = "ok"
+    # establish a starting point on first run
+    if "wishlists" not in data or "wishlistsThrough" not in data:
+        try:
+            _, amin = wishlist_day(appid, ymd(target))
+        except Exception as e:
+            print(f"  wishlists: init FAILED {e}", file=sys.stderr)
+            return "stale"
+        start = d(amin) if amin else (target - datetime.timedelta(days=400))
+        data["wishlists"] = 0
+        data["wishlistsThrough"] = ymd(start - datetime.timedelta(days=1))
+        print(f"  wishlists: seeding backfill from app_min_date {start}")
 
-    print(
-        f"Steam players: {payload['players']}  "
-        f"({payload['_apiStatus']}) → {OUT}",
-        file=sys.stderr,
-    )
+    cur = d(data["wishlistsThrough"])
+    total = int(data["wishlists"])
+    processed = 0
+    while cur < target and processed < BACKFILL_CAP:
+        day = cur + datetime.timedelta(days=1)
+        try:
+            net, _ = wishlist_day(appid, ymd(day))
+        except Exception as e:
+            print(f"  wishlists: stop at {day} ({e})", file=sys.stderr)
+            status = "stale"
+            break
+        total += net
+        cur = day
+        processed += 1
+        time.sleep(0.12)
+    data["wishlists"] = total
+    data["wishlistsThrough"] = ymd(cur)
+    data["wishlistsAsOf"] = ymd(cur)
+    caught = "caught up" if cur >= target else f"backfilling ({processed} days this run)"
+    print(f"  wishlists: {total} through {cur} [{caught}]")
+    return status
+
+
+def update_units(slug, appid, data, target):
+    """Seed once, then add net units for each new sales date up to `target`."""
+    if "units" not in data or "unitsThrough" not in data:
+        data["units"] = int(UNIT_SEED.get(slug, 0))
+        data["unitsThrough"] = ymd(target)      # seed represents everything through target
+        data["unitsAsOf"] = ymd(target)
+        print(f"  units: seeded {data['units']} through {target}")
+        return "ok"
+
+    cur = d(data["unitsThrough"])
+    total = int(data["units"])
+    status = "ok"
+    while cur < target:
+        day = cur + datetime.timedelta(days=1)
+        try:
+            per = units_by_app_for_date(ymd(day))
+        except Exception as e:
+            print(f"  units: stop at {day} ({e})", file=sys.stderr)
+            status = "stale"
+            break
+        total += int(per.get(appid, 0))
+        cur = day
+        time.sleep(0.15)
+    data["units"] = total
+    data["unitsThrough"] = ymd(cur)
+    data["unitsAsOf"] = ymd(cur)
+    print(f"  units: {total} through {cur}")
+    return status
+
+
+def main():
+    os.makedirs(DATA_DIR, exist_ok=True)
+    target = yesterday_utc()
+    have_key = bool(KEY)
+    if not have_key:
+        print("no STEAM_FINANCIAL_KEY: players only, keeping any stored wishlist/units.", file=sys.stderr)
+
+    for slug, cfg in GAMES.items():
+        print(f"[{slug}] appid {cfg['appid']}")
+        data = load(slug)
+        data["appId"] = cfg["appid"]
+        status = data.get("_status", {}) if isinstance(data.get("_status"), dict) else {}
+
+        if cfg["players"]:
+            p = get_players(cfg["appid"])
+            if p is not None:
+                data["players"] = p
+                data["playersAsOf"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
+                status["players"] = "ok"
+            else:
+                status["players"] = "stale"
+
+        if have_key and cfg["wishlists"]:
+            status["wishlists"] = update_wishlists(slug, cfg["appid"], data, target)
+        if have_key and cfg["units"]:
+            status["units"] = update_units(slug, cfg["appid"], data, target)
+
+        data["_status"] = status
+        data["updatedAt"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
+
+        path = os.path.join(DATA_DIR, f"{slug}.json")
+        with open(path, "w") as f:
+            json.dump(data, f, indent=2)
+            f.write("\n")
+        print(f"  -> {path}")
 
 
 if __name__ == "__main__":
