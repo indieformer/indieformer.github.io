@@ -7,18 +7,16 @@ Three streams, each stored with its own "through" date so runs are incremental
 and never double-count:
 
   players    - public GetNumberOfCurrentPlayers (no key). Scorchpot only.
-  wishlists  - EXACT outstanding balance, reconstructed from the daily partner
-               Wishlist reporting (adds - deletes - purchases - gifts), backfilled
-               from the app's first date then kept current. Uses the GMT day.
-  units      - lifetime copies sold. ANCHORED to the exact dashboard total (a
-               known figure the dev reads off Steamworks), then advanced by each
-               day's net_units_sold. Uses the Steamworks/Pacific sales day.
+  wishlists  - EXACT outstanding balance from the daily partner Wishlist reporting
+               (adds - deletes - purchases - gifts), backfilled from the app's
+               first date then kept current. Uses the GMT day.
+  units      - EXACT lifetime copies sold, GROSS (ignoring returns): summed from
+               GetDetailedSales `gross_units_sold` per app, backfilled from the
+               game's launch date. Uses the Steamworks/Pacific sales day.
 
-Why units are anchored, not summed from scratch: the partner sales feed's
-per-line units don't reconstruct the dashboard's headline "lifetime units"
-exactly (gross vs net vs bundle accounting), so the dev's dashboard number is
-the source of truth. Re-seed it (bump UNIT_SEED + clear the stored fields) if it
-ever drifts. Needs STEAM_FINANCIAL_KEY (Sales Data permission).
+Needs STEAM_FINANCIAL_KEY (a partner WebAPI key with the Sales Data permission).
+Everything is computed from the API — no manual figures. Backfill is capped per
+run and resumes via the stored "through" dates.
 """
 import os, sys, json, time, datetime, urllib.request, urllib.error
 from zoneinfo import ZoneInfo
@@ -28,7 +26,8 @@ DATA_DIR = os.environ.get("STEAM_DATA_DIR", "data")
 PUBLIC   = "https://api.steampowered.com"
 PARTNER  = "https://partner.steam-api.com"
 TIMEOUT  = 30
-BACKFILL_CAP = 400          # max wishlist days to process per run (resumes next run)
+WL_CAP   = 400          # max wishlist days per run (resumes next run)
+UNITS_CAP = 120         # max sales days per run (short history, one run covers it)
 PACIFIC  = ZoneInfo("America/Los_Angeles")   # Steamworks closes the sales day on Pacific time
 UA = {"User-Agent": "indieformer-stats (indieformer.com)"}
 
@@ -37,8 +36,8 @@ GAMES = {
     "abelina":         {"appid": 3682900, "players": False, "wishlists": True, "units": False},
     "slots-slaughter": {"appid": 4504900, "players": False, "wishlists": True, "units": False},
 }
-# exact lifetime units from the Steamworks dashboard, as of the seed's "through" day.
-UNIT_SEED = {"scorchpot": 20024}
+# first sales day (store launch) per game — where the units backfill starts.
+UNITS_START = {"scorchpot": "2026-08-20"}
 
 
 def http_json(url):
@@ -68,16 +67,16 @@ def wishlist_day(appid, date_str):
     return net, r.get("app_min_date")
 
 
-def net_units_by_app(date_str):
-    """{appid: net_units_sold} for a Pacific sales date, paginated over max_id."""
+def gross_units_by_app(date_str):
+    """{appid: gross_units_sold} (units IGNORING returns) for a Pacific sales date."""
     per, hwm = {}, 0
-    for _ in range(500):
+    for _ in range(1000):
         r = http_json(f"{PARTNER}/IPartnerFinancialsService/GetDetailedSales/v001/"
                       f"?key={KEY}&date={date_str}&highwatermark_id={hwm}").get("response", {})
         rows = r.get("results", []) or []
         for it in rows:
             aid = it.get("primary_appid")
-            per[aid] = per.get(aid, 0) + int(it.get("net_units_sold", 0) or 0)
+            per[aid] = per.get(aid, 0) + int(it.get("gross_units_sold", 0) or 0)
         mx = r.get("max_id")
         if not rows or not mx or mx == hwm:
             break
@@ -97,7 +96,7 @@ def load(slug):
     return {}
 
 
-def update_wishlists(slug, appid, data, target):
+def update_wishlists(appid, data, target):
     status = "ok"
     if "wishlists" not in data or "wishlistsThrough" not in data:
         try:
@@ -111,7 +110,7 @@ def update_wishlists(slug, appid, data, target):
         print(f"  wishlists: backfilling from app_min_date {start}")
 
     cur, total, processed = d(data["wishlistsThrough"]), int(data["wishlists"]), 0
-    while cur < target and processed < BACKFILL_CAP:
+    while cur < target and processed < WL_CAP:
         day = cur + datetime.timedelta(days=1)
         try:
             net, _ = wishlist_day(appid, ymd(day))
@@ -126,26 +125,27 @@ def update_wishlists(slug, appid, data, target):
 
 
 def update_units(slug, appid, data, target):
-    """Anchor to the dashboard seed, then add each day's net units up to `target`."""
+    """Backfill EXACT gross units (ignore returns) from launch up to `target`."""
+    status = "ok"
     if "units" not in data or "unitsThrough" not in data:
-        data["units"] = int(UNIT_SEED.get(slug, 0))
-        data["unitsThrough"] = ymd(target)     # seed is the total THROUGH target
-        data["unitsAsOf"] = ymd(target)
-        print(f"  units: anchored {data['units']} through {target}")
-        return "ok"
+        s = UNITS_START.get(slug)
+        start = d(s) if s else (target - datetime.timedelta(days=45))
+        data["units"] = 0
+        data["unitsThrough"] = ymd(start - datetime.timedelta(days=1))
+        print(f"  units: backfilling gross from launch {start}")
 
-    cur, total, status = d(data["unitsThrough"]), int(data["units"]), "ok"
-    while cur < target:
+    cur, total, processed = d(data["unitsThrough"]), int(data["units"]), 0
+    while cur < target and processed < UNITS_CAP:
         day = cur + datetime.timedelta(days=1)
         try:
-            per = net_units_by_app(ymd(day))
+            per = gross_units_by_app(ymd(day))
         except Exception as e:
             print(f"  units: stop at {day} ({e})", file=sys.stderr)
             status = "stale"; break
-        total += int(per.get(appid, 0)); cur = day
+        total += int(per.get(appid, 0)); cur = day; processed += 1
         time.sleep(0.1)
     data["units"], data["unitsThrough"], data["unitsAsOf"] = total, ymd(cur), ymd(cur)
-    print(f"  units: {total} through {cur}")
+    print(f"  units: {total} through {cur} [{'caught up' if cur >= target else f'backfilling ({processed})'}]")
     return status
 
 
@@ -173,7 +173,7 @@ def main():
                 status["players"] = "stale"
 
         if have_key and cfg["wishlists"]:
-            status["wishlists"] = update_wishlists(slug, cfg["appid"], data, wl_target)
+            status["wishlists"] = update_wishlists(cfg["appid"], data, wl_target)
         if have_key and cfg["units"]:
             status["units"] = update_units(slug, cfg["appid"], data, sales_target)
 
