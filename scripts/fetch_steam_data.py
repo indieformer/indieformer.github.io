@@ -169,7 +169,9 @@ def update_units(slug, appid, data, target):
 
 def main():
     os.makedirs(DATA_DIR, exist_ok=True)
-    target = yesterday_utc()
+    today = datetime.datetime.now(datetime.timezone.utc).date()
+    wl_target    = today - datetime.timedelta(days=1)   # wishlists finalise per GMT day
+    sales_target = today - datetime.timedelta(days=2)   # sales are US Pacific; skip the day still closing
     have_key = bool(KEY)
     if not have_key:
         print("no STEAM_FINANCIAL_KEY: players only, keeping any stored wishlist/units.", file=sys.stderr)
@@ -190,9 +192,9 @@ def main():
                 status["players"] = "stale"
 
         if have_key and cfg["wishlists"]:
-            status["wishlists"] = update_wishlists(slug, cfg["appid"], data, target)
+            status["wishlists"] = update_wishlists(slug, cfg["appid"], data, wl_target)
         if have_key and cfg["units"]:
-            status["units"] = update_units(slug, cfg["appid"], data, target)
+            status["units"] = update_units(slug, cfg["appid"], data, sales_target)
 
         data["_status"] = status
         data["updatedAt"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
