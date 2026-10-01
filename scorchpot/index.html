@@ -226,7 +226,7 @@ h2.sec em{font-style:normal;color:var(--ember-bright);}
 <header class="hero" id="top">
   <div class="hero-video">
     <!-- textless version for the ambient background so it doesn't compete with the title -->
-    <iframe src="https://www.youtube.com/embed/1gl3befqDrA?autoplay=1&mute=1&loop=1&playlist=1gl3befqDrA&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3"
+    <iframe data-loop-fade src="https://www.youtube.com/embed/1gl3befqDrA?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=1gl3befqDrA&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3"
       title="Feed the Scorchpot ambient background" allow="autoplay; encrypted-media" tabindex="-1"></iframe>
   </div>
   <div class="hero-cover"></div>
@@ -356,5 +356,6 @@ document.querySelectorAll('.gallery').forEach(function(g){
   if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});
 });
 </script>
+<script src="/video-fade.js" defer></script>
 </body>
 </html>

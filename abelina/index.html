@@ -222,7 +222,7 @@ h2.sec em{font-style:italic;color:var(--phosphor-bright);}
   <div class="hero-bg"></div>
   <div class="hero-video">
     <!-- textless version for the ambient background so it doesn't compete with the title -->
-    <iframe src="https://www.youtube.com/embed/iBWvcRHdHm0?autoplay=1&mute=1&loop=1&playlist=iBWvcRHdHm0&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3"
+    <iframe data-loop-fade src="https://www.youtube.com/embed/iBWvcRHdHm0?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=iBWvcRHdHm0&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3"
       title="Abelina ambient background" allow="autoplay; encrypted-media" aria-hidden="true" tabindex="-1"></iframe>
   </div>
   <div class="hero-cover"></div>
@@ -260,7 +260,7 @@ h2.sec em{font-style:italic;color:var(--phosphor-bright);}
   <span class="hand">See it move.</span>
   <h2 class="sec">Current gameplay <em>footage.</em></h2>
   <div class="video-frame">
-    <iframe src="https://www.youtube.com/embed/tENYi25be7k?autoplay=1&mute=1&loop=1&playlist=tENYi25be7k&rel=0&modestbranding=1&playsinline=1" title="Abelina — gameplay footage" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    <iframe data-loop-fade src="https://www.youtube.com/embed/tENYi25be7k?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=tENYi25be7k&rel=0&modestbranding=1&playsinline=1" title="Abelina — gameplay footage" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
   </div>
 </section>
 
@@ -333,5 +333,6 @@ document.querySelectorAll('.gallery').forEach(function(g){
 });
 </script>
 <script>fetch("/data/abelina.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.wishlists){document.getElementById("ab-wish").textContent=Number(d.wishlists).toLocaleString();}var w=d&&d.wishlistsAsOf;if(w){var u=document.getElementById("ab-upd");if(u){var dt=new Date(w+"T00:00:00Z");u.textContent=" \u00b7 updated "+dt.toLocaleDateString(undefined,{day:"numeric",month:"short"});u.hidden=false;}}}).catch(function(){});</script>
+<script src="/video-fade.js" defer></script>
 </body>
 </html>

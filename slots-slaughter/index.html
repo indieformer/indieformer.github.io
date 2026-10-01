@@ -59,6 +59,11 @@ img{max-width:100%;display:block;}
 .hero-video iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140vw;height:78.75vw;min-height:140vh;min-width:248.9vh;border:0;pointer-events:none;}
 .hero-cover{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(12,14,17,.66) 0%,rgba(12,14,17,.35) 40%,rgba(12,14,17,.72) 74%,var(--void) 99%);}
 .hero-cover::after{content:'';position:absolute;inset:0;background:radial-gradient(70% 55% at 80% 12%,rgba(213,52,42,.22),transparent 60%);}
+/* Phones and reduced-motion drop the player and keep hero.jpg, which .hero-video
+   already carries as its own background. Hide the iframe, not the wrapper, or the
+   hero loses its background entirely. */
+@media(max-width:768px){.hero-video iframe{display:none;}}
+@media(prefers-reduced-motion:reduce){.hero-video iframe{display:none;}}
 .hero-fade{position:absolute;left:0;right:0;bottom:0;height:42%;z-index:3;pointer-events:none;background:linear-gradient(to top,var(--void) 4%,transparent 100%);}
 
 .hero-inner{position:relative;z-index:4;width:100%;max-width:var(--max);margin:0 auto;padding:0 clamp(20px,4vw,48px) clamp(50px,6vw,80px);text-align:center;}
@@ -155,7 +160,7 @@ h2.sec em{font-style:normal;color:var(--blood-bright);}
 <!-- ═══════════════ HERO ═══════════════ -->
 <header class="hero">
   <div class="hero-video">
-    <iframe src="https://www.youtube.com/embed/uvk66cGkHoM?autoplay=1&mute=1&loop=1&playlist=uvk66cGkHoM&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3"
+    <iframe data-loop-fade src="https://www.youtube.com/embed/uvk66cGkHoM?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=uvk66cGkHoM&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3"
       title="Slots & Slaughter background" allow="autoplay; encrypted-media" tabindex="-1"></iframe>
   </div>
   <div class="hero-cover"></div>
@@ -241,5 +246,6 @@ document.querySelectorAll('.gallery').forEach(function(g){
 });
 </script>
 <script>fetch("/data/slots-slaughter.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.wishlists){document.getElementById("ss-wish").textContent=Number(d.wishlists).toLocaleString();}var w=d&&d.wishlistsAsOf;if(w){var u=document.getElementById("ss-upd");if(u){var dt=new Date(w+"T00:00:00Z");u.textContent=" \u00b7 updated "+dt.toLocaleDateString(undefined,{day:"numeric",month:"short"});u.hidden=false;}}}).catch(function(){});</script>
+<script src="/video-fade.js" defer></script>
 </body>
 </html>
