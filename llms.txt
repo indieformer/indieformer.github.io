@@ -4,24 +4,26 @@
 
 Indieformer is a small indie game publisher. We publish indie games and talk about the process. What we're learning, what we're trying, what didn't work. The free newsletter goes out roughly monthly. It is also a YouTube channel, a release tracker called Waypoint (now archived), and a game jam called Patch Notes.
 
-The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a tabletop roguelike by Moravian Games. Steam release August 2026.
+The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a dice roguelike by Moravian Games. It launched on Steam on 20 August 2026.
 
 ## Pages
 
 - [Home](https://indieformer.com/): Who we are, what we publish, and how to reach us.
 - [The Approach](https://indieformer.com/how-we-make-a-game-popular/): How we make a game popular. Our publishing philosophy, including The Sauce (the pasta-sauce metaphor for what makes a game memorable), The Slow Burn, The Boring List, and Your Half.
-- [Notes](https://indieformer.com/notes/): The Indieformer newsletter index, refreshed daily from the beehiiv RSS feed. ~77 issues. Free. No paywall.
-- [Feed the Scorchpot](https://indieformer.com/scorchpot/): Page for the first game on our publishing slate.
-- [Abelina](https://indieformer.com/abelina/): Our second signed game — a surreal, hand-crafted afterlife game by solo developer Gabe Askew, in development for a Q1 2027 Steam release.
-- [Slots & Slaughter](https://indieformer.com/slots-slaughter/): Our third signed game — a roguelike deck-builder where your gear is your deck and a slot machine decides what you fight with, by Taiwan-based solo developer Laser Castle. In development.
+- [Notes: The Publog](https://indieformer.com/notes/): Writing from inside the publishing house. What we're trying, what's working, what isn't. Free. No paywall.
+- [Notes: Frontline](https://indieformer.com/notes/frontline/): Case studies of how indie games actually get made. Tactics, trade-offs, and the hard parts developers are willing to talk about.
+- [Notes: Curator Archive](https://indieformer.com/notes/archive/): The back catalogue from the curator years. Monthly showcases and indie development round-ups. Roughly 86 issues across all three tabs, rebuilt daily from the beehiiv API.
+- [Feed the Scorchpot](https://indieformer.com/scorchpot/): Page for the first game on our publishing slate, with live Steam figures.
+- [Abelina](https://indieformer.com/abelina/): Our second signed game. A surreal, hand-crafted afterlife game by solo developer Gabe Askew, in development for a Q1 2027 Steam release.
+- [Slots & Slaughter](https://indieformer.com/slots-slaughter/): Our third signed game. A roguelike deck-builder where your gear is your deck and a slot machine decides what you fight with, by Taiwan-based solo developer Laser Castle. In development.
+- [Press Kit Guide](https://indieformer.com/press-kit-guide/): Guide to building a press kit as an indie game developer.
+- [Steam Marketing Guide](https://indieformer.com/steam-marketing-guide/): Guide to Steam marketing for indie developers.
+- [The Essay (How to Really Make a Game)](https://indieformer.com/essay/): Our long-form essay on what it takes to make an indie game.
 
 ## Related properties
 
 - [Newsletter archive on beehiiv](https://indieformer.beehiiv.com): The full archive of all newsletter issues.
-- [The Essay (How to Really Make a Game)](https://indieformer.com/essay/): Our long-form essay on what it takes to make an indie game.
 - [Waypoint archive](https://waypoint.indieformer.com): Decommissioned indie game release calendar. Kept as a read-only archive.
-- [Press Kit Guide](https://indieformer.beehiiv.com/press-kit-guide): Guide to building a press kit as an indie game developer.
-- [Steam Marketing Guide](https://indieformer.beehiiv.com/steam-marketing-guide): Guide to Steam marketing for indie developers.
 
 ## Contact
 
@@ -33,8 +35,8 @@ The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a 
 
 ## Positioning
 
-Indieformer is moving from being an indie-game outlet (curation, reviews, showcases) toward being an indie-game publisher. We document the publishing journey. What we're learning, what we're trying, what didn't work. The newsletter has shifted with us, from "what to play" toward "what it's like to publish".
+Indieformer is a publisher that writes in public about the craft and business of publishing indie games. We came out of twelve years as a curator, newsletter and YouTube channel, and we dropped curation so we would not be reviewing games we compete with. We document the publishing journey. What we're learning, what we're trying, what didn't work. The newsletter has shifted with us, from "what to play" toward "what it's like to publish".
 
-We do not chase trends. We are slow. We sign games because they have something only their developer could have made, not because they fit a commercial slot. Our standard developer/publisher split is up to 30/70 in the developer's favour; it never moves against the developer.
+We do not chase trends. We are slow. We sign games because they have something only their developer could have made, not because they fit a commercial slot.
 
 Josh & Clem
