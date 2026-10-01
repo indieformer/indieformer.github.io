@@ -36,6 +36,7 @@ import re
 import sys
 import json
 import time
+import shutil
 import urllib.request
 import urllib.parse
 import urllib.error
@@ -99,6 +100,10 @@ CATEGORY_CONFIG = {
 
 CATEGORIES_IN_ORDER = ["publog", "frontline", "archive"]
 CATEGORY_LABELS = {"publog": "Publog", "frontline": "Frontline", "archive": "Curator Archive"}
+
+# Directories under notes/ that hold an index page rather than a post. Derived
+# from CATEGORY_CONFIG so adding a tab can't leave the reaper out of date.
+INDEX_DIRS = {os.path.basename(os.path.dirname(c["out"])) for c in CATEGORY_CONFIG.values()}
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -616,6 +621,47 @@ def render_index_page(category: str, posts_in_cat: list[dict]) -> str:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Reaping
+# ─────────────────────────────────────────────────────────────────────────────
+
+def reap_orphan_posts(live_slugs: set, posts_manifest: dict, notes_root: str = "notes") -> int:
+    """Remove post pages and manifest entries for slugs Beehiiv no longer publishes.
+
+    The manifest only ever gained entries, so renaming a post's slug left the old
+    page serving forever. /notes/82-s-s/ and /notes/83-11-000-wishlists-we-need-
+    20-000-sales/ both shipped that way, alongside their renamed versions.
+
+    Circuit breaker: a truncated or failed listing looks exactly like every post
+    being unpublished at once, so cap how much one run may remove. A slug rename
+    drops one page. Anything wholesale is a bad listing, and a human should look
+    at it before the archive goes."""
+    on_disk = {
+        d for d in os.listdir(notes_root)
+        if d not in INDEX_DIRS
+        and os.path.isfile(os.path.join(notes_root, d, "index.html"))
+    }
+    orphans = on_disk - live_slugs
+    stale_entries = set(posts_manifest) - live_slugs
+    if not orphans and not stale_entries:
+        return 0
+
+    budget = max(5, len(posts_manifest) // 5)
+    doomed = orphans | stale_entries
+    if len(doomed) > budget:
+        print(f"  reap: SKIPPED, {len(doomed)} slugs went missing at once "
+              f"(budget {budget}) against {len(posts_manifest)} in the manifest. "
+              f"Treating as a bad listing: {sorted(doomed)[:5]}", file=sys.stderr)
+        return 0
+
+    for slug in sorted(orphans):
+        shutil.rmtree(os.path.join(notes_root, slug))
+        print(f"  - {slug:40s} removed (no longer published)", file=sys.stderr)
+    for slug in stale_entries:
+        posts_manifest.pop(slug, None)
+    return len(orphans)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Main
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -728,6 +774,11 @@ def main() -> int:
         with open(out, "w", encoding="utf-8") as f:
             f.write(page)
         print(f"  ✓ index → {out} ({len(by_cat[cat])} posts)", file=sys.stderr)
+
+    # ── Reap pages for posts Beehiiv no longer publishes ─────────────────
+    live_slugs = {p.get("slug") for p in raw_posts if p.get("slug")}
+    reaped = reap_orphan_posts(live_slugs, posts_manifest)
+    print(f"  posts: reaped={reaped}", file=sys.stderr)
 
     # ── Persist manifest ─────────────────────────────────────────────────
     manifest = {"template_version": TEMPLATE_VERSION, "posts": posts_manifest}
