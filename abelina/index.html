@@ -103,6 +103,18 @@ img{max-width:100%;display:block;}
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;isolation:isolate;}
 .hero-fade{position:absolute;left:0;right:0;bottom:0;height:40%;z-index:3;pointer-events:none;background:linear-gradient(to top,var(--void) 4%,transparent 100%);}
 .hero-bg{position:absolute;inset:0;z-index:0;background:#000 center/cover no-repeat url("/images/abelina/hero-bg.jpg");animation:breathe 26s ease-in-out infinite;}
+/* Textless background video. Same structure as scorchpot/index.html: the wrapper
+   carries the still as its own background so there's no black frame before
+   YouTube paints and no letterbox edge if the iframe misbehaves. Oversized 1.4x
+   so YouTube's title card sits outside the hero's clipped box. */
+.hero-video{position:absolute;inset:0;z-index:0;background:#000 center/cover no-repeat url("/images/abelina/hero-bg.jpg");}
+.hero-video iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:140vw;height:78.75vw;min-height:140vh;min-width:248.9vh;border:0;pointer-events:none;filter:saturate(1.05);}
+/* flat cover in the page colour to calm the video so it doesn't fight the title */
+.hero-cover{position:absolute;inset:0;z-index:1;pointer-events:none;background:rgba(11,12,21,.42);}
+/* phones and reduced-motion drop back to the still .hero-bg above, breathe and all */
+@media(max-width:768px){.hero-video,.hero-cover{display:none;}}
+@media(prefers-reduced-motion:reduce){.hero-video,.hero-cover{display:none;}}
 @keyframes breathe{0%,100%{transform:scale(1.02)}50%{transform:scale(1.09)}}
 /* moon glow top + soft dark scrim for legibility */
 .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -208,6 +220,12 @@ h2.sec em{font-style:italic;color:var(--phosphor-bright);}
 
 <header class="hero">
   <div class="hero-bg"></div>
+  <div class="hero-video">
+    <!-- textless version for the ambient background so it doesn't compete with the title -->
+    <iframe src="https://www.youtube.com/embed/iBWvcRHdHm0?autoplay=1&mute=1&loop=1&playlist=iBWvcRHdHm0&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3"
+      title="Abelina ambient background" allow="autoplay; encrypted-media" aria-hidden="true" tabindex="-1"></iframe>
+  </div>
+  <div class="hero-cover"></div>
   <div class="hero-scrim"></div>
   <div class="hero-fade"></div>
   <div class="hero-inner">

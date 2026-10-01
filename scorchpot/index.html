@@ -66,6 +66,12 @@ img{max-width:100%;display:block;}
   width:140vw;height:78.75vw;min-height:140vh;min-width:248.9vh;border:0;pointer-events:none;filter:saturate(1.05);}
 /* flat cover in the page colour to calm the video so it doesn't fight the title */
 .hero-cover{position:absolute;inset:0;z-index:1;pointer-events:none;background:rgba(20,15,11,.45);}
+/* Phones and reduced-motion drop the player and keep the key art, which .hero-video
+   already carries as its own background. Hide the iframe, not the wrapper, or the
+   hero loses its background entirely. Muted autoplay in a third-party iframe is
+   unreliable on iOS, and it's a big download on mobile data either way. */
+@media(max-width:768px){.hero-video iframe{display:none;}}
+@media(prefers-reduced-motion:reduce){.hero-video iframe{display:none;}}
 
 /* firelight from below + violet cool rim from above — fully opaque at the base so it meets the next section seamlessly */
 .fire-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
