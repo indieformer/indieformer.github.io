@@ -161,6 +161,8 @@
     .pk-quote cite { color: var(--text-tertiary); font-size: 13px; font-style: normal; }
 
     .pk-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pk-video { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); }
+    .pk-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
     .pk-shot { position: relative; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid var(--border); background: radial-gradient(60% 80% at 30% 20%, rgba(95,224,166,0.12), transparent 70%), linear-gradient(160deg, #1a1d2c, #0f111a); display: flex; align-items: center; justify-content: center; }
     .pk-shot .ph { font-family: 'Caveat', cursive; font-size: 18px; color: var(--phosphor-bright); opacity: .8; }
     .pk-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s; }
@@ -268,7 +270,8 @@
       <a href="#description">Description</a>
       <a href="#about">What it is</a>
       <a href="#story">Dev's note</a>
-      <a href="#media">Media</a>
+      <a href="#trailer">Trailer</a>
+          <a href="#media">Media</a>
       <a href="#team">Team</a>
       <a href="#specs">Specs</a>
       <a href="#streaming">Streaming</a>
@@ -334,6 +337,13 @@
           <cite>— Gabe Askew</cite>
         </div>
         <p>Gabe spent decades in animation telling other people's stories, with nine years at Hornet and a stint supervising cinematics at Blur Studio. He left Blur in 2024 to make something of his own. Abelina is the result: his first game, drawn from a lifetime of craft and pointed at one strange, personal world.</p>
+      </section>
+
+      <section class="pk-section" id="trailer">
+        <h2 class="pk-h2">Trailer</h2>
+        <div class="pk-video">
+          <iframe src="https://www.youtube.com/embed/tENYi25be7k?rel=0&modestbranding=1" title="Abelina — gameplay footage" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
       </section>
 
       <section class="pk-section" id="media">

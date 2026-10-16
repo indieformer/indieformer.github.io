@@ -1,0 +1,77 @@
+name: Abelina trailer go-live
+
+# One-off. Puts the Abelina announcement trailer live on the game page and the
+# press kit when the MIX showcase finishes.
+#
+#   05:00 Sat 17 Oct 2026 Melbourne (AEDT, UTC+11)  =  18:00 Fri 16 Oct UTC
+#
+# GitHub's scheduled runs are best effort and are regularly a few minutes late,
+# occasionally a lot later when the platform is busy. It will not fire at 05:00
+# exactly. Late is the safe direction for an embargo, but if it has to be sharp,
+# use "Run workflow" on the Actions tab instead and fire it by hand.
+#
+# After it has run, delete this file and scripts/swap_abelina_trailer.py.
+
+on:
+  schedule:
+    - cron: '0 18 16 10 *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: abelina-trailer
+  cancel-in-progress: false
+
+jobs:
+  go-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      # cron has no year field, so '0 18 16 10 *' would fire again on 16 Oct 2027.
+      # A manual dispatch skips this check on purpose.
+      - name: Only the intended date
+        if: github.event_name == 'schedule'
+        run: |
+          today=$(date -u +%F)
+          if [ "$today" != "2026-10-16" ]; then
+            echo "UTC date is $today, not 2026-10-16. This one-off has already passed; doing nothing."
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Swap the trailer in
+        run: python3 scripts/swap_abelina_trailer.py
+
+      - name: Commit and push
+        run: |
+          git config user.name  "indieformer-bot"
+          git config user.email "bot@indieformer.com"
+          git add abelina/index.html abelina/presskit/index.html
+          if git diff --staged --quiet; then
+            echo "no changes, trailer was already live"
+            exit 0
+          fi
+          git commit -m "Abelina: announcement trailer live on the page and the press kit"
+          # the daily refresh action commits on its own schedule, so never assume
+          # main is where we left it
+          git fetch origin main
+          git rebase origin/main
+          git push
+
+      - name: Confirm what went out
+        run: |
+          echo "page:"
+          grep -o 'embed/[A-Za-z0-9_-]*' abelina/index.html | sed 's/^/  /'
+          echo "press kit:"
+          grep -o 'embed/[A-Za-z0-9_-]*' abelina/presskit/index.html | sed 's/^/  /'
