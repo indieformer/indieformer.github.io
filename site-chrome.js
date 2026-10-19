@@ -8,9 +8,12 @@
   var NAV_LINKS = [
     { href: '/how-we-make-a-game-popular/', label: 'The Approach' },
     { href: '/notes/', label: 'Notes' },
-    { href: '/scorchpot/', label: 'Scorchpot' },
-    { href: '/abelina/', label: 'Abelina' },
-    { href: '/slots-slaughter/', label: 'Slots' }
+    // a group renders as a dropdown. Add a game here and nowhere else.
+    { label: 'Games', children: [
+      { href: '/scorchpot/',       label: 'Feed the Scorchpot' },
+      { href: '/abelina/',         label: 'Abelina' },
+      { href: '/slots-slaughter/', label: 'Slots & Slaughter' }
+    ] }
   ];
 
   var path = location.pathname;
@@ -20,15 +23,82 @@
     return href !== '/' && (path === href || path.indexOf(href) === 0);
   }
 
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
   function navHTML() {
     var links = NAV_LINKS.map(function (l) {
-      return '<a href="' + l.href + '"' + (isCurrent(l.href) ? ' class="current"' : '') + '>' + l.label + '</a>';
+      if (!l.children) {
+        return '<a href="' + l.href + '"' + (isCurrent(l.href) ? ' class="current"' : '') +
+               '>' + esc(l.label) + '</a>';
+      }
+      var open = l.children.some(function (c) { return isCurrent(c.href); });
+      var items = l.children.map(function (c) {
+        return '<a role="menuitem" href="' + c.href + '"' +
+               (isCurrent(c.href) ? ' class="current"' : '') + '>' + esc(c.label) + '</a>';
+      }).join('');
+      return '<span class="nav-group">' +
+          '<button type="button" class="nav-trigger' + (open ? ' current' : '') +
+            '" aria-expanded="false" aria-haspopup="true">' + esc(l.label) +
+            '<svg viewBox="0 0 10 6" aria-hidden="true" width="10" height="6"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>' +
+          '</button>' +
+          '<span class="nav-menu" role="menu">' + items + '</span>' +
+        '</span>';
     }).join('\n    ');
     return '' +
       '<a class="brand" href="/" aria-label="Indieformer home">\n' +
       '    <img src="/logo.png" alt="Indieformer" width="40" height="40">\n' +
       '  </a>\n' +
       '  <nav class="primary-nav" aria-label="Primary">\n    ' + links + '\n  </nav>';
+  }
+
+  /* The nav links themselves are styled by each page. The dropdown is new, so
+     its CSS ships here rather than being copied into eighteen files. Colours
+     fall back to literals for any page that does not define the tokens. */
+  var NAV_CSS = '' +
+    '.nav-group{position:relative;display:inline-flex}' +
+    '.nav-trigger{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;' +
+      'display:inline-flex;align-items:center;gap:6px}' +
+    '.nav-trigger svg{transition:transform .18s ease;opacity:.7}' +
+    '.nav-group[data-open] .nav-trigger svg{transform:rotate(180deg)}' +
+    '.nav-menu{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(-4px);' +
+      'display:flex;flex-direction:column;min-width:190px;padding:7px;gap:2px;z-index:300;' +
+      'background:var(--shadow-mid,#2F3040);border:1px solid var(--border-mid,rgba(255,255,255,.16));' +
+      'border-radius:11px;box-shadow:0 18px 44px rgba(0,0,0,.5);' +
+      'opacity:0;visibility:hidden;pointer-events:none;transition:opacity .16s ease,transform .16s ease}' +
+    '.nav-group[data-open] .nav-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}' +
+    '.nav-menu a{display:block;padding:8px 11px;border-radius:7px;white-space:nowrap;text-decoration:none}' +
+    '.nav-menu a:hover,.nav-menu a:focus-visible{background:var(--shadow-lite,#383A4D)}' +
+    /* no hover on touch, so the click handler carries it there */
+    '@media (hover:hover){.nav-group:hover .nav-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}}' +
+    '@media (max-width:640px){.nav-menu{left:0;transform:none;min-width:170px}' +
+      '.nav-group[data-open] .nav-menu{transform:none}' +
+      '@media (hover:hover){.nav-group:hover .nav-menu{transform:none}}}';
+
+  function wireDropdowns(root) {
+    var groups = [].slice.call(root.querySelectorAll('.nav-group'));
+    function closeAll(except) {
+      groups.forEach(function (g) {
+        if (g === except) return;
+        g.removeAttribute('data-open');
+        g.querySelector('.nav-trigger').setAttribute('aria-expanded', 'false');
+      });
+    }
+    groups.forEach(function (g) {
+      var btn = g.querySelector('.nav-trigger');
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = g.hasAttribute('data-open');
+        closeAll(g);
+        if (open) { g.removeAttribute('data-open'); btn.setAttribute('aria-expanded', 'false'); }
+        else { g.setAttribute('data-open', ''); btn.setAttribute('aria-expanded', 'true'); }
+      });
+    });
+    document.addEventListener('click', function () { closeAll(null); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      var open = root.querySelector('.nav-group[data-open]');
+      if (open) { closeAll(null); open.querySelector('.nav-trigger').focus(); }
+    });
   }
 
   // ── footer markup (kept byte-identical to the original site-footer) ──
@@ -72,6 +142,13 @@
     var el = document.querySelector(sel);
     if (el) el.innerHTML = html;
   }
-  fill('[data-shared-nav]', navHTML());
+  var navEl = document.querySelector('[data-shared-nav]');
+  if (navEl) {
+    var st = document.createElement('style');
+    st.textContent = NAV_CSS;
+    document.head.appendChild(st);
+    navEl.innerHTML = navHTML();
+    wireDropdowns(navEl);
+  }
   fill('[data-shared-footer]', FOOTER_HTML);
 })();
