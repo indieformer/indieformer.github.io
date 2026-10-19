@@ -696,12 +696,20 @@ def main() -> int:
             "category":    category,
         })
 
-    # Exclude posts dated in the future (scheduled / not yet released — never show these)
+    # Exclude anything that isn't actually published.
+    #
+    # Two filters, and the first one matters most. Beehiiv's posts endpoint
+    # returns drafts even when asked for status=published, so #87, #88 and #89
+    # all shipped live pages that were never sent. A real published post always
+    # carries a publish or scheduled date; a draft has neither, which is why
+    # those three were the only ones in the manifest with an empty date_iso.
+    # The old condition explicitly let dateless posts through, which is what
+    # turned an API quirk into a public leak.
     now_iso = datetime.now(timezone.utc).isoformat()
     _before = len(posts)
-    posts = [p for p in posts if not p["date_iso"] or p["date_iso"] <= now_iso]
+    posts = [p for p in posts if p["date_iso"] and p["date_iso"] <= now_iso]
     if len(posts) != _before:
-        print(f"  dropped {_before - len(posts)} future-dated posts", file=sys.stderr)
+        print(f"  dropped {_before - len(posts)} unpublished or future-dated posts", file=sys.stderr)
 
     # Sort newest-first for the index pages
     posts.sort(key=lambda x: x["date_iso"] or "", reverse=True)
@@ -776,7 +784,9 @@ def main() -> int:
         print(f"  ✓ index → {out} ({len(by_cat[cat])} posts)", file=sys.stderr)
 
     # ── Reap pages for posts Beehiiv no longer publishes ─────────────────
-    live_slugs = {p.get("slug") for p in raw_posts if p.get("slug")}
+    # the filtered list, not raw_posts: a draft that slipped through the API
+    # must be reaped, not preserved
+    live_slugs = {p["slug"] for p in posts if p["slug"]}
     reaped = reap_orphan_posts(live_slugs, posts_manifest)
     print(f"  posts: reaped={reaped}", file=sys.stderr)
 
