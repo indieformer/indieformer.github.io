@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devilcoin Press Kit | Indieformer</title>
+<meta name="description" content="Press kit for Devilcoin, a coin-flip roguelite by Smilingface, published by Indieformer. Factsheet, descriptions, screenshots, team, specs, streaming permission, downloads and contact.">
+<link rel="canonical" href="https://indieformer.com/devilcoin/presskit/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="Devilcoin — Press Kit">
+<meta property="og:description" content="A coin-flip roguelite by Smilingface, published by Indieformer. Screenshots, logos, specs and contact for press.">
+<meta property="og:url" content="https://indieformer.com/devilcoin/presskit/">
+<meta property="og:image" content="https://indieformer.com/images/devilcoin/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Devilcoin — Press Kit">
+<meta name="twitter:description" content="A coin-flip roguelite by Smilingface, published by Indieformer. Screenshots, logos, specs and contact for press.">
+<meta name="twitter:image" content="https://indieformer.com/images/devilcoin/og.jpg">
+<link rel="icon" type="image/png" href="../assets/web/favicon.png">
+<!-- Caveat (and Sora) are self-hosted at the site root; the press kit keeps Caveat on brand. -->
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+/* Unutterable (GGBotNet, SIL OFL 1.1), self-hosted. */
+@font-face{
+  font-family:'Unutterable';
+  src:url('../assets/fonts/unutterable-regular.woff2') format('woff2'),
+      local('Unutterable');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+/* Karla (SIL OFL), self-hosted variable latin subset. No Google Fonts in production. */
+@font-face{
+  font-family:'Karla';
+  src:url('../assets/fonts/karla-latin.woff2') format('woff2');
+  font-weight:400 700;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Karla';
+  src:url('../assets/fonts/karla-italic-latin.woff2') format('woff2');
+  font-weight:400 700;font-style:italic;font-display:swap;
+}
+:root{
+  --void:#0B0406; --void-mid:#150809; --void-lite:#200C0F; --border:#2A1215; --border-mid:#3A181C;
+  --blood:#7A1216; --ember:#E8452C; --head-red:#C41217;
+  --gold:#C9972F; --gold-bright:#EFC45C;
+  --bone:#EFE6D6; --text-1:#EFE6D6; --text-2:#C2AC9F; --text-3:#8A7168;
+  --max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--void);color:var(--text-1);font-family:'Karla',system-ui,sans-serif;
+  line-height:1.72;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--gold-bright)}
+a:hover{color:var(--ember)}
+
+/* the back link stays on Indieformer brand type. A press kit is the publisher's
+   surface, not the game's, which is why this one is Caveat and the game page's
+   is Unutterable. */
+.pk-back{position:fixed;top:16px;left:20px;z-index:200;font-family:'Caveat',cursive;font-size:21px;
+  color:var(--gold-bright);text-decoration:none;transform:rotate(-2deg);
+  text-shadow:0 2px 12px rgba(0,0,0,.85);transition:transform .2s,color .2s}
+.pk-back:hover{color:var(--bone);transform:rotate(-2deg) translateX(-4px)}
+
+.pk-hero{position:relative;padding:92px 20px 46px;text-align:center;overflow:hidden;
+  border-bottom:1px solid var(--border)}
+.pk-hero-bg{position:absolute;inset:0;z-index:0;opacity:.3;
+  background:var(--void) 62% center/cover no-repeat url("../assets/web/hero-bg.jpg")}
+.pk-hero-scrim{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(11,4,6,.6),rgba(11,4,6,.92) 78%,var(--void))}
+.pk-hero-in{position:relative;z-index:2;max-width:760px;margin:0 auto}
+.pk-hero img{width:min(380px,74vw);margin:0 auto 14px}
+.pk-kicker{font-family:'Unutterable',Georgia,serif;font-size:clamp(26px,4vw,40px);
+  color:var(--head-red);letter-spacing:.01em;line-height:1.1}
+.pk-sub{color:var(--text-2);font-size:15.5px;margin-top:8px}
+
+.pk-nav{position:sticky;top:0;z-index:100;background:rgba(11,4,6,.93);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.pk-nav::-webkit-scrollbar{display:none}
+.pk-nav-in{display:flex;gap:4px;max-width:var(--max);margin:0 auto;padding:0 16px;white-space:nowrap}
+.pk-nav a{display:inline-block;padding:13px 12px;font-size:13.5px;font-weight:700;color:var(--text-2);
+  text-decoration:none;border-bottom:2px solid transparent}
+.pk-nav a:hover{color:var(--gold-bright);border-bottom-color:var(--gold)}
+
+.pk-wrap{display:grid;grid-template-columns:260px 1fr;gap:44px;max-width:var(--max);
+  margin:0 auto;padding:44px 20px 80px}
+@media(max-width:860px){.pk-wrap{grid-template-columns:1fr;gap:28px}}
+
+aside{align-self:start;position:sticky;top:70px}
+@media(max-width:860px){aside{position:static}}
+.pk-fact{border-bottom:1px solid var(--border);padding:11px 0}
+.pk-fact:last-child{border-bottom:0}
+.pk-fact dt{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-3);margin-bottom:3px}
+.pk-fact dd{font-size:14.5px;color:var(--text-1)}
+
+.pk-section{margin-bottom:44px;scroll-margin-top:66px}
+.pk-h2{font-family:'Unutterable',Georgia,serif;font-size:clamp(24px,3.2vw,34px);color:var(--head-red);
+  letter-spacing:.01em;margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid var(--border)}
+.pk-section p{color:var(--text-2);margin-bottom:13px;max-width:70ch}
+.pk-section p b{color:var(--bone)}
+.pk-section ul{margin:0 0 13px 20px;color:var(--text-2)}
+.pk-section li{margin-bottom:7px}
+.pk-section li b{color:var(--gold-bright);font-weight:700}
+
+.pk-gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:620px){.pk-gallery{grid-template-columns:1fr}}
+.pk-shot img{border-radius:9px;border:1px solid var(--border-mid)}
+.pk-cap{font-size:12px;color:var(--text-3);margin-top:5px}
+
+.pk-specs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:620px){.pk-specs{grid-template-columns:1fr}}
+.pk-specs-card{background:var(--void-mid);border:1px solid var(--border-mid);border-radius:9px;padding:16px 18px}
+.pk-specs-card>b{display:block;font-family:'Unutterable',Georgia,serif;font-size:19px;
+  color:var(--gold-bright);margin-bottom:9px;letter-spacing:.01em}
+.pk-specs-card ul{margin:0;list-style:none;color:var(--text-2);font-size:14px}
+.pk-specs-card li{margin-bottom:5px;line-height:1.5}
+.pk-specs-card li span{color:var(--text-3);display:inline-block;min-width:44px}
+.pk-dl .ic{font-size:19px;margin-right:9px;float:left;line-height:1.3}
+.pk-dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.pk-dl a{display:block;padding:14px 16px;border:1px solid var(--border-mid);border-radius:9px;
+  background:var(--void-mid);text-decoration:none;color:var(--bone);font-weight:700;font-size:14px}
+.pk-dl a:hover{border-color:var(--ember);color:var(--ember)}
+.pk-dl span{display:block;font-weight:400;font-size:12px;color:var(--text-3);margin-top:2px}
+
+.pk-note{border-left:2px solid var(--blood);padding:4px 0 4px 16px;color:var(--text-3);font-size:13.5px}
+footer{border-top:1px solid var(--border);padding:26px 20px;text-align:center;
+  font-size:12.5px;color:var(--text-3)}
+</style>
+</head>
+<body>
+<a class="pk-back" href="/">← Indieformer</a>
+
+<header class="pk-hero">
+  <div class="pk-hero-bg"></div>
+  <div class="pk-hero-scrim"></div>
+  <div class="pk-hero-in">
+    <img src="../assets/logo.png" alt="Devilcoin">
+    <p class="pk-kicker">PRESS KIt</p>
+    <p class="pk-sub">A coin-flip roguelite by Smilingface, published by Indieformer.</p>
+  </div>
+</header>
+
+<nav class="pk-nav">
+  <div class="pk-nav-in">
+    <a href="#description">Description</a>
+    <a href="#about">What it is</a>
+    <a href="#media">Screenshots</a>
+    <a href="#team">Team</a>
+    <a href="#specs">Specs</a>
+    <a href="#streaming">Streaming</a>
+    <a href="#downloads">Downloads</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="pk-wrap">
+  <aside>
+    <dl>
+      <div class="pk-fact"><dt>Title</dt><dd>Devilcoin</dd></div>
+      <div class="pk-fact"><dt>Developer</dt><dd>Smilingface</dd></div>
+      <div class="pk-fact"><dt>Based in</dt><dd>Kraków, Poland</dd></div>
+      <div class="pk-fact"><dt>Publisher</dt><dd>Indieformer, Melbourne</dd></div>
+      <div class="pk-fact"><dt>Genre</dt><dd>Coin-flip roguelite</dd></div>
+      <div class="pk-fact"><dt>Platform</dt><dd>PC via Steam</dd></div>
+      <div class="pk-fact"><dt>Release</dt><dd>To be announced</dd></div>
+      <div class="pk-fact"><dt>Price</dt><dd>To be announced</dd></div>
+    </dl>
+  </aside>
+
+  <main>
+    <section class="pk-section" id="description">
+      <h2 class="pk-h2">DESCRIPtION</h2>
+      <p><b>Short version.</b> A coin-flip roguelite. You traded your soul for money, and now the only way out of this occult purgatory is to keep flipping. Bet on heads or tails, collect Artifacts that bend the odds, and hit the score before your flips run out.</p>
+      <p><b>Long version.</b> You sold your soul for money. The buyer had antlers, stood behind a counter, and settles every debt on the toss of a coin. Now you're stuck in his purgatory, a place built out of Slavic folklore, and the only way out is to beat the house at its own game.</p>
+      <p>Every round gives you a score to hit and a set number of flips to hit it with. Pick a side, place your bet, flip. Wins pay out currency, and the currency buys Artifacts and Blessings that shift the odds, multiply your payouts and stack into each other. Miss the score and the run is over.</p>
+      <p>Between runs you can walk the Main Room. Poke around, solve what's solvable, and work out where you are and who you've been playing against. Every run opens up a bit more of it, win or lose.</p>
+    </section>
+
+    <section class="pk-section" id="about">
+      <h2 class="pk-h2">WHAt It IS</h2>
+      <ul>
+        <li><b>Fifty-fifty, at first.</b> The base odds are even. Stack enough Artifacts and Blessings and a 50/50 stops being a 50/50.</li>
+        <li><b>Build around the flip.</b> 40 Artifacts and 12 Blessings, each one changing how a flip pays out or how often it lands your way.</li>
+        <li><b>More coins.</b> Later you're flipping two at once. Then three.</li>
+        <li><b>Something to keep.</b> Unlocks carry over between runs, so a loss still gets you new Artifacts, new parts of the room and more of the story.</li>
+        <li><b>A bit of mercy.</b> A run of tails won't always finish you. Pity mechanics, like a flip that's guaranteed to land your way, give you a route back.</li>
+        <li><b>Slavic folk horror.</b> The setting draws on Slavic folklore and the old stories about bargaining with the devil. The ones that rarely end well.</li>
+      </ul>
+      <p><b>Who it's for.</b> Roguelite players, because runs are short and the rules are simple and the depth is all in how your Artifacts combine. People who want a story with their runs, told through the room around you and the scenes you unlock, the way Inscryption and The Room do it. And anyone at all, because it's heads or tails and you already know how to play.</p>
+    </section>
+
+    <section class="pk-section" id="media">
+      <h2 class="pk-h2">SCREENSHOtS</h2>
+      <p>Full-resolution versions are in the downloads below.</p>
+      <div class="pk-gallery">
+        <figure class="pk-shot"><img src="../assets/web/shots/main-clean.jpg" alt="Devilcoin, the flip table mid-run" loading="lazy"><figcaption class="pk-cap">The flip table</figcaption></figure>
+        <figure class="pk-shot"><img src="../assets/web/shots/flip-won.jpg" alt="Devilcoin, a winning flip paying out" loading="lazy"><figcaption class="pk-cap">A flip paying out</figcaption></figure>
+        <figure class="pk-shot"><img src="../assets/web/shots/artifacts.jpg" alt="Devilcoin, the Artifacts on offer" loading="lazy"><figcaption class="pk-cap">Artifacts</figcaption></figure>
+        <figure class="pk-shot"><img src="../assets/web/shots/blessings.jpg" alt="Devilcoin, the Blessings on offer" loading="lazy"><figcaption class="pk-cap">Blessings</figcaption></figure>
+        <figure class="pk-shot"><img src="../assets/web/shots/bet-value.jpg" alt="Devilcoin, sizing a bet before the flip" loading="lazy"><figcaption class="pk-cap">Sizing a bet</figcaption></figure>
+        <figure class="pk-shot"><img src="../assets/web/shots/wife.jpg" alt="Devilcoin, a scene unlocked in the Main Room" loading="lazy"><figcaption class="pk-cap">A scene from the Main Room</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="pk-section" id="team">
+      <h2 class="pk-h2">tHE tEAM</h2>
+      <p><b>Smilingface</b> is a solo developer in Kraków, Poland, building Devilcoin alone and doing all of its art.</p>
+      <p><b>Indieformer</b> is a two-person publisher in Melbourne, Australia, run by Josh Chiodo and Clement Schmutz. We came out of twelve years as an indie-game curator and newsletter, and we write in public about the business of publishing while we do it.</p>
+    </section>
+
+    <section class="pk-section" id="specs">
+      <h2 class="pk-h2">SYStEM REQUIREMENtS</h2>
+      <div class="pk-specs">
+        <div class="pk-specs-card">
+          <b>MINIMUM</b>
+          <ul>
+            <li><span>OS:</span> Windows 10 (64-bit)</li>
+            <li><span>CPU:</span> Intel Core i3-4160 @ 3.6 GHz or AMD FX-6300 @ 3.5 GHz</li>
+            <li><span>RAM:</span> 8 GB</li>
+            <li><span>GPU:</span> NVIDIA GeForce GTX 750 Ti (2 GB) or AMD Radeon RX 550 (2 GB)</li>
+            <li><span>DirectX:</span> Version 11</li>
+            <li><span>Storage:</span> 2 GB available space</li>
+            <li><span>Sound:</span> DirectX compatible soundcard or onboard audio</li>
+          </ul>
+        </div>
+        <div class="pk-specs-card">
+          <b>RECOMMENDED</b>
+          <ul>
+            <li><span>OS:</span> Windows 10 / 11 (64-bit)</li>
+            <li><span>CPU:</span> Intel Core i5-6500 @ 3.2 GHz or AMD Ryzen 3 3100 @ 3.6 GHz</li>
+            <li><span>RAM:</span> 8 GB</li>
+            <li><span>GPU:</span> NVIDIA GeForce GTX 1050 Ti (4 GB) or AMD Radeon RX 570 (4 GB)</li>
+            <li><span>DirectX:</span> Version 11</li>
+            <li><span>Storage:</span> 2 GB available space</li>
+            <li><span>Sound:</span> DirectX compatible soundcard or onboard audio</li>
+          </ul>
+        </div>
+      </div>
+      <p class="pk-note" style="margin-top:12px">Requires a 64-bit processor and operating system.</p>
+    </section>
+
+    <section class="pk-section" id="streaming">
+      <h2 class="pk-h2">StREAMING PERMISSION</h2>
+      <p>Yes, go for it. Indieformer and Smilingface grant everyone the right to record, stream and monetize video content of Devilcoin, including on YouTube, Twitch and any other platform. No prior permission needed.</p>
+    </section>
+
+    <section class="pk-section" id="downloads">
+      <h2 class="pk-h2">DOWNLOADS</h2>
+      <div class="pk-dl">
+        <a href="https://drive.google.com/drive/folders/1YaktiReIMy7gHkwyuppTKtwI4f-KYTM4?usp=sharing" target="_blank" rel="noopener"><span class="ic">📦</span><span>Full press kit<span>Screenshots, logos and key art on Drive</span></span></a>
+        <a href="../assets/downloads/library-logo.png" download><span class="ic">🅰️</span><span>Logo<span>PNG with transparency, 1280&times;810</span></span></a>
+        <a href="../assets/web/key-art-capsule.png" download><span class="ic">🖼️</span><span>Key art<span>Main capsule, PNG 1232&times;706</span></span></a>
+        <a href="../assets/downloads/hero-banner.png" download><span class="ic">🏞️</span><span>Hero banner<span>PNG, 3840&times;1240</span></span></a>
+        <a href="../assets/downloads/host.png" download><span class="ic">👹</span><span>The host<span>PNG with transparency, 3102&times;2701</span></span></a>
+        <a href="../assets/downloads/icon.png" download><span class="ic">🪙</span><span>Icon<span>PNG, 512&times;512</span></span></a>
+      </div>
+      <p class="pk-note" style="margin-top:14px">Screenshots are available at full resolution, 3024&times;1964, on request. The Drive folder above has them at full size.</p>
+    </section>
+
+    <section class="pk-section" id="contact">
+      <h2 class="pk-h2">CONtACt</h2>
+      <p><b>Press and inquiries:</b> <a href="mailto:devilcoin@indieformer.com">devilcoin@indieformer.com</a></p>
+      <p><b>Web:</b> <a href="https://indieformer.com/devilcoin/">indieformer.com/devilcoin</a></p>
+      <p class="pk-note">Review keys, a build, or anything else you need for a piece: just ask. We would rather send it than have you guess.</p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  Devilcoin is developed by Smilingface and published by <a href="/">Indieformer</a>.
+</footer>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Devilcoin","description":"A coin-flip roguelite set in an occult purgatory built out of Slavic folklore. Developed by Smilingface, published by Indieformer.","image":"https://indieformer.com/images/devilcoin/og.jpg","url":"https://indieformer.com/devilcoin/","genre":["Roguelite","Indie","Strategy"],"gamePlatform":"PC","operatingSystem":"Windows","author":{"@type":"Organization","name":"Smilingface"},"publisher":{"@type":"Organization","name":"Indieformer","url":"https://indieformer.com/"},"sameAs":"https://store.steampowered.com/app/5279430/Devilcoin/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indieformer.com/"},{"@type":"ListItem","position":2,"name":"Devilcoin","item":"https://indieformer.com/devilcoin/"},{"@type":"ListItem","position":3,"name":"Press Kit","item":"https://indieformer.com/devilcoin/presskit/"}]}</script>
+</body>
+</html>

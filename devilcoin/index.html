@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devilcoin | Indieformer</title>
+<meta name="description" content="Devilcoin is a coin-flip roguelite set in an occult purgatory built from Slavic folklore. Bet heads or tails, stack Artifacts until the odds stop being fair, and hit the score before you run out of flips. Developed by Smilingface, published by Indieformer.">
+<link rel="canonical" href="https://indieformer.com/devilcoin/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Indieformer">
+<meta property="og:title" content="Devilcoin">
+<meta property="og:description" content="A coin-flip roguelite in an occult purgatory. Bet heads or tails, stack Artifacts, and beat the house before you run out of flips.">
+<meta property="og:url" content="https://indieformer.com/devilcoin/">
+<meta property="og:image" content="https://indieformer.com/images/devilcoin/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Devilcoin">
+<meta name="twitter:description" content="A coin-flip roguelite in an occult purgatory. Bet heads or tails, stack Artifacts, and beat the house before you run out of flips.">
+<meta name="twitter:image" content="https://indieformer.com/images/devilcoin/og.jpg">
+<link rel="icon" type="image/png" href="assets/web/favicon.png">
+<style>
+/* Unutterable by GGBotNet, SIL Open Font License 1.1 (commercial use fine,
+   cannot be sold on its own). Not on Google Fonts, so it is self-hosted. */
+@font-face{
+  font-family:'Unutterable';
+  src:url('assets/fonts/unutterable-regular.woff2') format('woff2'),
+      local('Unutterable');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Unutterable';
+  src:url('assets/fonts/unutterable-italic.woff2') format('woff2');
+  font-weight:400;font-style:italic;font-display:swap;
+}
+/* Karla (SIL OFL), self-hosted so there is no Google Fonts link in production.
+   Variable latin subset, 400..700. */
+@font-face{
+  font-family:'Karla';
+  src:url('assets/fonts/karla-latin.woff2') format('woff2');
+  font-weight:400 700;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Karla';
+  src:url('assets/fonts/karla-italic-latin.woff2') format('woff2');
+  font-weight:400 700;font-style:italic;font-display:swap;
+}
+:root{
+  /* eyedropped from store_page_background_clean.png */
+  --void:#0B0406; --void-2:#150809; --void-3:#200C0F; --line:#3A181C;
+  --blood:#7A1216; --blood-bright:#C21A1E; --ember:#E8452C;
+  --gold:#C9972F; --gold-bright:#EFC45C; --gold-deep:#8A6418;
+  --bone:#EFE6D6;
+  --text-1:#EFE6D6; --text-2:#C2AC9F; --text-3:#8A7168;
+  --max:1120px;
+  /* the wordmark's own reds run #6C0000 to #9C0000, which only hits 2.3:1 on
+     this background. Lifted to clear 3:1 for large text while keeping the hue. */
+  --head-red:#C41217;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  position:relative;background:var(--void);
+  font-family:'Karla',system-ui,sans-serif;color:var(--text-1);
+  line-height:1.72;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+.disp{font-family:'Unutterable',Georgia,serif;}
+a{color:inherit}
+
+/* grain, so the flat reds do not band */
+#grit{position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-size:200px 200px;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");}
+
+.if-back{position:absolute;top:18px;left:20px;z-index:20;font-family:'Unutterable',Georgia,serif;
+  font-size:20px;color:var(--gold-bright);text-decoration:none;opacity:.9;
+  transition:opacity .2s,transform .2s}
+.if-back:hover{opacity:1;transform:translateX(-4px)}
+
+/* ═══════════════ HERO ═══════════════ */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;
+  justify-content:center;overflow:hidden;isolation:isolate;}
+/* Textless cut behind the title. House pattern: the wrapper carries the still
+   as its own background, so there is no black frame before YouTube paints and
+   no letterbox edge if the iframe misbehaves. The iframe is oversized 1.4x in
+   both axes to push YouTube's title card outside the hero's clipped box;
+   modestbranding no longer suppresses it. */
+.hero-bg{position:absolute;inset:0;z-index:0;
+  background:var(--void) 62% center/cover no-repeat url("assets/hero-bg.jpg");}
+.hero-bg iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:140vw;height:78.75vw;min-height:140vh;min-width:248.9vh;
+  border:0;pointer-events:none;filter:saturate(1.05);}
+/* Phones and reduced-motion keep the still, which this wrapper already carries. */
+@media(max-width:768px){.hero-bg iframe{display:none;}}
+@media(prefers-reduced-motion:reduce){.hero-bg iframe{display:none;}}
+.hero-cover{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,4,6,.62) 0%,rgba(11,4,6,.3) 34%,rgba(11,4,6,.78) 74%,var(--void) 99%);}
+.hero-cover::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(62% 48% at 50% 108%,rgba(194,26,30,.3),transparent 62%);}
+.hero-fade{position:absolute;left:0;right:0;bottom:0;height:46%;z-index:2;pointer-events:none;
+  background:linear-gradient(to top,var(--void) 3%,rgba(11,4,6,.6) 38%,transparent 100%);}
+.hero-inner{position:relative;z-index:4;width:100%;max-width:var(--max);margin:0 auto;
+  padding:clamp(72px,12vh,120px) clamp(20px,4vw,44px) clamp(48px,7vw,80px);text-align:center;}
+.hero-logo{width:min(560px,84vw);height:auto;margin:0 auto 20px;
+  filter:drop-shadow(0 10px 36px rgba(0,0,0,.75)) drop-shadow(0 0 40px rgba(194,26,30,.35));}
+.hero-hook{font-family:'Unutterable',Georgia,serif;font-weight:700;letter-spacing:.01em;color:var(--head-red);
+  font-size:clamp(24px,3.4vw,42px);line-height:1.1;
+  max-width:760px;margin:0 auto 16px;text-shadow:0 3px 22px rgba(0,0,0,.85);text-wrap:balance;}
+.hero-hook em{font-style:normal;color:var(--gold-bright);}
+.hero-sub{font-size:clamp(15px,1.8vw,18px);color:var(--text-2);max-width:600px;margin:0 auto 30px;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:13px;justify-content:center;margin-bottom:16px;}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:inherit;font-size:15px;font-weight:700;
+  padding:14px 28px;border-radius:4px;cursor:pointer;text-decoration:none;
+  border:1.5px solid transparent;transition:transform .2s,box-shadow .3s,background .25s,color .25s,border-color .25s;}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{color:#1A0406;background:linear-gradient(180deg,var(--gold-bright),var(--gold));
+  box-shadow:0 8px 28px rgba(201,151,47,.34);}
+.btn-primary:hover{box-shadow:0 12px 38px rgba(239,196,92,.5)}
+.btn-ghost{color:var(--bone);border-color:rgba(239,230,214,.26);background:rgba(11,4,6,.42);backdrop-filter:blur(8px);}
+.btn-ghost:hover{border-color:var(--ember);color:var(--ember)}
+.hero-stat{font-size:13.5px;color:var(--text-2);margin-bottom:12px}
+.hero-stat b{color:var(--gold-bright);font-weight:700;font-variant-numeric:tabular-nums}
+.link-arrow{display:inline-flex;gap:6px;font-size:13px;font-weight:700;color:var(--ember);
+  text-decoration:underline;text-underline-offset:4px;margin-bottom:14px}
+.hero-meta{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.hero-meta b{color:var(--text-2);font-weight:600}
+
+/* ═══════════════ SECTIONS ═══════════════ */
+.wrap{max-width:var(--max);margin:0 auto;padding:clamp(64px,9vw,118px) clamp(20px,4vw,44px);position:relative}
+h2.sec{font-family:'Unutterable',Georgia,serif;font-weight:700;letter-spacing:.01em;
+  font-size:clamp(30px,4.8vw,54px);line-height:1.04;color:var(--head-red);margin:6px 0 18px;text-wrap:balance}
+h2.sec em{font-style:normal;color:var(--gold-bright)}
+.lead{font-size:clamp(16px,1.85vw,18.5px);line-height:1.8;color:var(--text-2);max-width:66ch}
+.lead + .lead{margin-top:16px}
+.lead b{color:var(--bone);font-weight:700}
+.centered{text-align:center}
+.centered .lead{margin-left:auto;margin-right:auto}
+
+/* a thin gold rule with a coin on it, used between bands */
+.divider{display:flex;align-items:center;justify-content:center;gap:16px;opacity:.5}
+.divider::before,.divider::after{content:'';height:1px;flex:1;max-width:220px;
+  background:linear-gradient(90deg,transparent,var(--gold-deep),transparent)}
+.divider img{width:26px;height:26px;opacity:.85}
+
+/* the host, beside the copy rather than lurking at the bottom. */
+.meet{display:grid;grid-template-columns:1fr .78fr;gap:clamp(26px,5vw,58px);align-items:center}
+.meet-host{position:relative;max-width:430px;margin:0 auto}
+.meet-host img{width:100%;filter:drop-shadow(0 30px 56px rgba(0,0,0,.72));
+  -webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent 99%);
+  mask-image:linear-gradient(to bottom,#000 72%,transparent 99%)}
+.meet-host::after{content:'';position:absolute;inset:-8% -12% -16% -12%;z-index:-1;
+  background:radial-gradient(52% 46% at 52% 40%,rgba(194,26,30,.24),transparent 70%)}
+@media(max-width:760px){.meet{grid-template-columns:1fr}.meet-host{order:-1;max-width:290px}}
+
+/* ═══════════════ CARDS ═══════════════ */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px;text-align:left}
+@media(max-width:1000px){.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.cards{grid-template-columns:1fr}}
+.card{background-color:var(--void-2);border:1px solid var(--line);border-radius:10px;padding:24px 22px}
+.card .num{font-family:'Unutterable',Georgia,serif;font-size:30px;line-height:1;color:var(--blood-bright);margin-bottom:10px}
+.card h3{font-family:'Unutterable',Georgia,serif;font-weight:700;font-size:20px;
+  color:var(--bone);margin-bottom:8px;text-wrap:balance}
+.card p{font-size:14.5px;color:var(--text-2);line-height:1.62}
+
+/* ═══════════════ FEATURE ROWS ═══════════════ */
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:18px 34px;margin-top:38px}
+@media(max-width:720px){.feats{grid-template-columns:1fr}}
+.feat{border-left:2px solid var(--blood);padding-left:18px}
+.feat h4{font-family:'Unutterable',Georgia,serif;font-weight:700;font-size:18px;color:var(--gold-bright);margin-bottom:4px}
+.feat p{font-size:14.5px;color:var(--text-2);line-height:1.62}
+
+/* ═══════════════ WHO IT'S FOR ═══════════════ */
+.who{background:none}
+.who::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);
+  background:linear-gradient(180deg,transparent,rgba(122,18,22,.14),transparent);pointer-events:none;z-index:0}
+.who > *{position:relative;z-index:1}
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;text-align:left}
+@media(max-width:800px){.who-grid{grid-template-columns:1fr}}
+.who-card{background:rgba(21,8,9,.6);border:1px solid var(--line);border-radius:10px;padding:26px 24px}
+.who-card h3{font-family:'Unutterable',Georgia,serif;font-weight:700;font-size:19px;color:var(--bone);margin-bottom:8px}
+.who-card p{font-size:14.5px;color:var(--text-2);line-height:1.62}
+
+/* ═══════════════ SCREENSHOTS ═══════════════ */
+/* scrollable shot carousel with faded edges, per the playbook */
+.gallery{position:relative;margin-top:38px}
+.shots{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  padding-bottom:6px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.shots::-webkit-scrollbar{display:none}
+.shots figure{flex:0 0 min(640px,82%);scroll-snap-align:center;margin:0}
+.shots img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line);
+  box-shadow:0 18px 44px rgba(0,0,0,.55)}
+.gnav{position:absolute;top:calc(50% - 4px);transform:translateY(-50%);z-index:5;width:40px;height:40px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;line-height:1;
+  border-radius:999px;border:1px solid var(--line);background:rgba(11,4,6,.72);color:var(--bone);
+  backdrop-filter:blur(8px);transition:border-color .2s,color .2s}
+.gnav:hover{border-color:var(--ember);color:var(--ember)}
+.gprev{left:4px} .gnext{right:4px}
+@media(max-width:620px){.gnav{display:none}}
+
+/* the real trailer, with sound, started by the viewer */
+.trailer{position:relative;aspect-ratio:16/9;margin-top:30px;border-radius:12px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:0 26px 60px rgba(0,0,0,.6)}
+.trailer iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ═══════════════ CLOSE ═══════════════ */
+/* the hand from the key art, holding the coin, rising into the closing CTA */
+.close-hand{position:absolute;left:-5%;bottom:0;
+  width:min(220px,19vw);z-index:0;pointer-events:none;user-select:none;
+  -webkit-mask-image:linear-gradient(to top,transparent 1%,#000 22%);
+  mask-image:linear-gradient(to top,transparent 1%,#000 22%)}
+.close-hand.right{left:auto;right:-5%;transform:scaleX(-1)}
+.close > *:not(.close-hand){position:relative;z-index:1}
+.close{padding-bottom:clamp(120px,15vw,190px)}
+@media(max-width:620px){.close-hand{width:40vw;left:-12%}
+  .close-hand.right{right:-12%;left:auto}}
+.close{position:relative;text-align:center;
+  background:radial-gradient(70% 60% at 50% 100%,rgba(122,18,22,.4),transparent 70%)}
+.close h2{font-family:'Unutterable',Georgia,serif;font-weight:800;letter-spacing:.01em;
+  font-size:clamp(34px,6vw,76px);line-height:1;color:var(--head-red);margin-bottom:14px}
+.close .lead{margin:0 auto 26px}
+footer{border-top:1px solid var(--line);padding:30px 20px;text-align:center;
+  font-size:12.5px;color:var(--text-3)}
+footer a{color:var(--text-2)}
+</style>
+</head>
+<body>
+<div id="grit"></div>
+<a class="if-back" href="/">← Indieformer</a>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="hero-bg">
+    <!-- textless cut so it does not compete with the wordmark -->
+    <iframe data-loop-fade src="https://www.youtube.com/embed/p0GjqmMzotY?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=p0GjqmMzotY&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3"
+      title="Devilcoin ambient background" allow="autoplay; encrypted-media" aria-hidden="true" tabindex="-1"></iframe>
+  </div>
+  <div class="hero-cover"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <img class="hero-logo" src="assets/logo.png" alt="Devilcoin">
+    <h1 class="hero-hook">YoU SoLD YoUR SOUL FoR MONEY. tHE oNLY WAY oUT IS to <em>WIN It BACK oN A COIN.</em></h1>
+    <p class="hero-sub">A coin-flip roguelite set in an occult purgatory built out of Slavic folklore. Bet heads or tails, stack Artifacts until the odds stop being fair, and hit the score before you run out of flips.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://store.steampowered.com/app/5279430/Devilcoin/" target="_blank" rel="noopener">Wishlist on Steam</a>
+      <a class="btn btn-ghost" href="https://discord.gg/jFyGBUbdwG" target="_blank" rel="noopener">Join the Discord</a>
+    </div>
+    <p class="hero-stat" id="d-stat">Coming to Steam</p>
+    <a class="link-arrow" href="/devilcoin/presskit/">Press Kit ↗</a>
+    <p class="hero-meta">Developed by <b>Smilingface</b></p>
+  </div>
+</header>
+
+<!-- ═══════════════ THE PITCH ═══════════════ -->
+<section class="wrap">
+  <div class="meet">
+    <div>
+    <h2 class="sec">tHE HOUSE SEttLES <em>EVERY DEBT</em> oN A COIN.</h2>
+  <p class="lead">You sold your soul for money. The buyer had antlers, stood behind a counter, and settles every debt on the toss of a coin. Now you're stuck in his purgatory, a place built out of Slavic folklore, and the only way out is to beat the house at its own game. On a coin. Good luck.</p>
+  <p class="lead">Every round gives you a score to hit and a set number of flips to hit it with. Pick a side, place your bet, flip. Wins pay out currency, and the currency buys <b>Artifacts</b> and <b>Blessings</b> that shift the odds, multiply your payouts and stack into each other. Miss the score and the run is over. No appeals.</p>
+    </div>
+    <div class="meet-host"><img src="assets/web/character.png" alt="The horned host who settles every debt"></div>
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="num">I</div><h3>PICK A SIDE</h3><p>Heads or tails. The odds start even, and the size of the bet is yours.</p></div>
+    <div class="card"><div class="num">II</div><h3>BEND THE ODDS</h3><p>40 Artifacts and 12 Blessings, each one sensibly ruining the math in your favor.</p></div>
+    <div class="card"><div class="num">III</div><h3>ADD MoRE CoINS</h3><p>Later you're flipping two at once. Then three.</p></div>
+    <div class="card"><div class="num">IV</div><h3>KEEP SoMEtHING</h3><p>Keep your unlocks. Losing isn't always a bad thing.</p></div>
+  </div>
+</section>
+
+<div class="divider"><img src="assets/web/coin.png" alt="" width="26" height="26"></div>
+
+<!-- ═══════════════ THE ROOM ═══════════════ -->
+<section class="wrap">
+  <h2 class="sec">BETWEEN RUNS, <em>WALK tHE RooM.</em></h2>
+  <p class="lead">Between runs you can walk the Main Room. Poke around, solve what's solvable, and work out where you are and who you've been playing against. Every run opens up a bit more of it, win or lose.</p>
+
+  <div class="feats">
+    <div class="feat"><h4>FIFtY-FIFtY, At FIRSt</h4><p>The base odds are even. Stack enough Artifacts and Blessings and a 50/50 stops being a 50/50.</p></div>
+    <div class="feat"><h4>A BIt oF MERCY</h4><p>A run of tails won't always finish you. Pity mechanics, like a flip that's guaranteed to land your way, give you a route back.</p></div>
+    <div class="feat"><h4>SLAVIC FoLK HoRRoR</h4><p>The setting draws on Slavic folklore and the old stories about bargaining with the devil. The ones that rarely end well.</p></div>
+    <div class="feat"><h4>SHoRt RUNS, DEEP BAGS</h4><p>The rules fit in a sentence. What you're actually playing is whichever Artifacts you ended up holding.</p></div>
+  </div>
+
+  <div class="gallery">
+    <div class="shots">
+      <figure><img src="assets/web/shots/main-clean.jpg" alt="Devilcoin, the flip table mid-run" loading="lazy"></figure>
+      <figure><img src="assets/web/shots/flip-won.jpg" alt="Devilcoin, a winning flip paying out" loading="lazy"></figure>
+      <figure><img src="assets/web/shots/artifacts.jpg" alt="Devilcoin, the Artifacts on offer" loading="lazy"></figure>
+      <figure><img src="assets/web/shots/blessings.jpg" alt="Devilcoin, the Blessings on offer" loading="lazy"></figure>
+      <figure><img src="assets/web/shots/bet-value.jpg" alt="Devilcoin, sizing a bet before the flip" loading="lazy"></figure>
+      <figure><img src="assets/web/shots/wife.jpg" alt="Devilcoin, a scene unlocked in the Main Room" loading="lazy"></figure>
+      <figure><img src="assets/web/shots/children.jpg" alt="Devilcoin, another scene from the Main Room" loading="lazy"></figure>
+    </div>
+    <button class="gnav gprev" type="button" aria-label="Previous screenshots">‹</button>
+    <button class="gnav gnext" type="button" aria-label="Next screenshots">›</button>
+  </div>
+</section>
+
+<!-- ═══════════════ WHO IT'S FOR ═══════════════ -->
+<section class="wrap who centered">
+  <h2 class="sec">WHO IT'S <em>FoR.</em></h2>
+  <div class="who-grid">
+    <div class="who-card"><h3>ROGUELITE PLAYERS</h3><p>Runs are short, the rules are simple, and the depth is all in how your Artifacts combine.</p></div>
+    <div class="who-card"><h3>PEoPLE WHo WANt A StoRY WItH tHEIR RUNS</h3><p>It's told through the room around you and the scenes you unlock. Inscryption and The Room do it the same way.</p></div>
+    <div class="who-card"><h3>ANYoNE</h3><p>Heads or tails. You already know how to play.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════════ TRAILER ═══════════════ -->
+<section class="wrap centered">
+  <h2 class="sec">tHE ANNOUNCEMENt <em>tRAILER.</em></h2>
+  <div class="trailer">
+    <iframe src="https://www.youtube.com/embed/snpgJAzptk4?rel=0&modestbranding=1&playsinline=1"
+      title="Devilcoin — Official Announcement Trailer"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- ═══════════════ CLOSE ═══════════════ -->
+<section class="wrap close">
+  <img class="close-hand" src="assets/web/hand.png" alt="">
+  <img class="close-hand right" src="assets/web/hand.png" alt="">
+  <h2 class="disp">HEADS OR TAILS.</h2>
+  <p class="lead">It's in development, and the Steam page is live. A wishlist genuinely helps, and the Discord is where the news lands first.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="https://store.steampowered.com/app/5279430/Devilcoin/" target="_blank" rel="noopener">Wishlist on Steam</a>
+    <a class="btn btn-ghost" href="https://discord.gg/jFyGBUbdwG" target="_blank" rel="noopener">Join the Discord</a>
+  </div>
+</section>
+
+<footer>
+  Devilcoin is developed by Smilingface and published by <a href="/">Indieformer</a>.
+</footer>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Devilcoin","description":"A coin-flip roguelite set in an occult purgatory built out of Slavic folklore. Bet heads or tails, stack Artifacts until the odds stop being fair, and hit the score before you run out of flips.","image":"https://indieformer.com/images/devilcoin/og.jpg","url":"https://indieformer.com/devilcoin/","genre":["Roguelite","Indie","Strategy"],"gamePlatform":"PC","operatingSystem":"Windows","author":{"@type":"Organization","name":"Smilingface"},"publisher":{"@type":"Organization","name":"Indieformer","url":"https://indieformer.com/"},"sameAs":"https://store.steampowered.com/app/5279430/Devilcoin/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indieformer.com/"},{"@type":"ListItem","position":2,"name":"Devilcoin","item":"https://indieformer.com/devilcoin/"}]}</script>
+
+<script>
+document.querySelectorAll('.gallery').forEach(function(g){
+  var s=g.querySelector('.shots'); if(!s) return;
+  function step(){var f=s.querySelector('figure');var cs=getComputedStyle(s);
+    return (f?f.getBoundingClientRect().width:s.clientWidth*.8)+(parseFloat(cs.columnGap||cs.gap)||14);}
+  var p=g.querySelector('.gprev'),n=g.querySelector('.gnext');
+  if(p)p.addEventListener('click',function(){s.scrollBy({left:-step(),behavior:'smooth'});});
+  if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});
+});
+/* live wishlist count, written by the daily Steam fetch into /data/devilcoin.json */
+fetch("/data/devilcoin.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){
+  if(d&&d.wishlists){
+    var n=Number(d.wishlists).toLocaleString(), upd="";
+    if(d.wishlistsAsOf){var dt=new Date(d.wishlistsAsOf+"T00:00:00Z");
+      upd=" · updated "+dt.toLocaleDateString(undefined,{day:"numeric",month:"short"});}
+    var el=document.getElementById("d-stat");
+    if(el)el.innerHTML="<b>"+n+"</b> wishlists on Steam"+upd;
+  }
+}).catch(function(){});
+</script>
+<script src="/video-fade.js" defer></script>
+</body>
+</html>

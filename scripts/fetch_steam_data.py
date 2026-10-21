@@ -35,6 +35,7 @@ GAMES = {
     "scorchpot":       {"appid": 3966510, "players": True,  "wishlists": True, "units": True},
     "abelina":         {"appid": 3682900, "players": False, "wishlists": True, "units": False},
     "slots-slaughter": {"appid": 4504900, "players": False, "wishlists": True, "units": False},
+    "devilcoin":       {"appid": 5279430, "players": False, "wishlists": True, "units": False},
 }
 # first sales day (store launch) per game — where the units backfill starts.
 UNITS_START = {"scorchpot": "2026-08-20"}

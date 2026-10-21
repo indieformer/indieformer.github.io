@@ -12,7 +12,8 @@
     { label: 'Games', children: [
       { href: '/scorchpot/',       label: 'Feed the Scorchpot' },
       { href: '/abelina/',         label: 'Abelina' },
-      { href: '/slots-slaughter/', label: 'Slots & Slaughter' }
+      { href: '/slots-slaughter/', label: 'Slots & Slaughter' },
+      { href: '/devilcoin/',       label: 'Devilcoin' }
     ] }
   ];
 

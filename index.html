@@ -601,7 +601,7 @@
   /* ── Our games showcase ── */
   .games-showcase { padding-top: 40px; padding-bottom: 10px; }
   .games-eyebrow { font-family: 'Caveat', cursive; font-size: 26px; color: #E3AE3F; transform: rotate(-1.5deg); display: inline-block; margin-bottom: 14px; }
-  .games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .games-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
   .game-card { display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; text-decoration: none; border: 1px solid rgba(255,255,255,0.08); transition: transform .18s, box-shadow .2s, border-color .2s; }
   .game-card:hover { transform: translateY(-4px); }
   .game-card-art { aspect-ratio: 616 / 353; overflow: hidden; background: #0d0f12; }
@@ -615,7 +615,10 @@
   .game-card--ab:hover { border-color: rgba(95,224,166,0.45); box-shadow: 0 16px 40px rgba(63,166,124,0.28); }
   .game-card--sl { background: #0E1013; } .game-card--sl em { color: #E3AE3F; }
   .game-card--sl:hover { border-color: rgba(227,174,63,0.45); box-shadow: 0 16px 40px rgba(213,52,42,0.28); }
-  @media (max-width: 820px) { .games-grid { grid-template-columns: 1fr; } }
+  .game-card--dv { background: #150809; } .game-card--dv em { color: #EFC45C; }
+  .game-card--dv:hover { border-color: rgba(196,18,23,0.5); box-shadow: 0 16px 40px rgba(122,18,22,0.34); }
+  @media (max-width: 900px) { .games-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .games-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -691,6 +694,10 @@
     <a class="game-card game-card--sl" href="/slots-slaughter/">
       <div class="game-card-art"><img src="/images/slots-slaughter/capsule-main.jpg" alt="Slots &amp; Slaughter key art" loading="lazy"></div>
       <span>Your gear is your deck. A slot machine deals.</span><em>View →</em>
+    </a>
+    <a class="game-card game-card--dv" href="/devilcoin/">
+      <div class="game-card-art"><img src="/images/devilcoin/capsule-main.jpg" alt="Devilcoin key art" loading="lazy"></div>
+      <span>A coin-flip roguelite in an occult purgatory.</span><em>View →</em>
     </a>
   </div>
 </section>
