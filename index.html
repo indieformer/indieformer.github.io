@@ -601,24 +601,28 @@
   /* ── Our games showcase ── */
   .games-showcase { padding-top: 40px; padding-bottom: 10px; }
   .games-eyebrow { font-family: 'Caveat', cursive; font-size: 26px; color: #E3AE3F; transform: rotate(-1.5deg); display: inline-block; margin-bottom: 14px; }
-  .games-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-  .game-card { display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; text-decoration: none; border: 1px solid rgba(255,255,255,0.08); transition: transform .18s, box-shadow .2s, border-color .2s; }
+  /* vertical 2:3 library capsules; each carries its own wordmark, so no name label or blurb */
+  .games-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .game-card { position: relative; display: block; aspect-ratio: 2 / 3; border-radius: 14px; overflow: hidden; background: #0d0f12; border: 1px solid rgba(255,255,255,0.08); text-decoration: none; transition: transform .18s, box-shadow .2s, border-color .2s; }
+  .game-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
   .game-card:hover { transform: translateY(-4px); }
-  .game-card-art { aspect-ratio: 616 / 353; overflow: hidden; background: #0d0f12; }
-  .game-card-art img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
-  .game-card:hover .game-card-art img { transform: scale(1.04); }
-  .game-card span { font-size: 13px; color: #9aa4ae; line-height: 1.5; margin: 14px 18px 10px; flex: 1; }
-  .game-card em { font-style: normal; font-weight: 700; font-size: 12.5px; margin: 0 18px 16px; letter-spacing: .02em; }
-  .game-card--sc { background: #1A1410; } .game-card--sc em { color: #E74C3C; }
+  .game-card:hover img { transform: scale(1.04); }
+  /* status bug */
+  .game-bug { position: absolute; top: 10px; left: 10px; z-index: 2; font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 5px 9px; border-radius: 999px; background: rgba(8,10,14,0.72); color: #E7ECF2; backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.14); }
+  .game-bug.live { color: #5FE0A6; }
+  .game-bug.dev { color: #E3AE3F; }
+  .game-bug.new { color: #EFC45C; background: rgba(122,18,22,0.55); border-color: rgba(196,18,23,0.5); }
   .game-card--sc:hover { border-color: rgba(212,172,13,0.45); box-shadow: 0 16px 40px rgba(192,57,43,0.28); }
-  .game-card--ab { background: #0E0F18; } .game-card--ab em { color: #5FE0A6; }
   .game-card--ab:hover { border-color: rgba(95,224,166,0.45); box-shadow: 0 16px 40px rgba(63,166,124,0.28); }
-  .game-card--sl { background: #0E1013; } .game-card--sl em { color: #E3AE3F; }
   .game-card--sl:hover { border-color: rgba(227,174,63,0.45); box-shadow: 0 16px 40px rgba(213,52,42,0.28); }
-  .game-card--dv { background: #150809; } .game-card--dv em { color: #EFC45C; }
   .game-card--dv:hover { border-color: rgba(196,18,23,0.5); box-shadow: 0 16px 40px rgba(122,18,22,0.34); }
-  @media (max-width: 900px) { .games-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 520px) { .games-grid { grid-template-columns: 1fr; } }
+  /* under 900px the slate scroll-snaps instead of shrinking the capsules */
+  @media (max-width: 900px) {
+    .games-grid { display: flex; overflow-x: auto; gap: 14px; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 6px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
+    .games-grid::-webkit-scrollbar { display: none; }
+    .game-card { flex: 0 0 46%; scroll-snap-align: center; }
+  }
+  @media (max-width: 560px) { .game-card { flex-basis: 72%; } }
 </style>
 </head>
 <body>
@@ -683,21 +687,21 @@
 <section class="section games-showcase" aria-label="Our games">
   <span class="games-eyebrow">our games</span>
   <div class="games-grid">
-    <a class="game-card game-card--sc" href="/scorchpot/">
-      <div class="game-card-art"><img src="/images/scorchpot/capsule-main.jpg" alt="Feed the Scorchpot key art" loading="lazy"></div>
-      <span>A tabletop roguelike of dice, dragons &amp; cooking.</span><em>View →</em>
+    <a class="game-card game-card--sc" href="/scorchpot/" aria-label="Feed the Scorchpot">
+      <span class="game-bug live">Out now</span>
+      <img src="/images/scorchpot/capsule-vertical.jpg" alt="Feed the Scorchpot key art" loading="lazy">
     </a>
-    <a class="game-card game-card--ab" href="/abelina/">
-      <div class="game-card-art"><img src="/images/abelina/capsule-main.jpg" alt="Abelina key art" loading="lazy"></div>
-      <span>A surreal, hand-crafted afterlife adventure.</span><em>View →</em>
+    <a class="game-card game-card--ab" href="/abelina/" aria-label="Abelina">
+      <span class="game-bug dev">In development</span>
+      <img src="/images/abelina/capsule-vertical.jpg" alt="Abelina key art" loading="lazy">
     </a>
-    <a class="game-card game-card--sl" href="/slots-slaughter/">
-      <div class="game-card-art"><img src="/images/slots-slaughter/capsule-main.jpg" alt="Slots &amp; Slaughter key art" loading="lazy"></div>
-      <span>Your gear is your deck. A slot machine deals.</span><em>View →</em>
+    <a class="game-card game-card--sl" href="/slots-slaughter/" aria-label="Slots &amp; Slaughter">
+      <span class="game-bug dev">In development</span>
+      <img src="/images/slots-slaughter/capsule-vertical.jpg" alt="Slots &amp; Slaughter key art" loading="lazy">
     </a>
-    <a class="game-card game-card--dv" href="/devilcoin/">
-      <div class="game-card-art"><img src="/images/devilcoin/capsule-main.jpg" alt="Devilcoin key art" loading="lazy"></div>
-      <span>A coin-flip roguelite in an occult purgatory.</span><em>View →</em>
+    <a class="game-card game-card--dv" href="/devilcoin/" aria-label="Devilcoin">
+      <span class="game-bug new">Just announced</span>
+      <img src="/images/devilcoin/capsule-vertical.jpg" alt="Devilcoin key art" loading="lazy">
     </a>
   </div>
 </section>
