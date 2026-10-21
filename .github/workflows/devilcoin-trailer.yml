@@ -1,0 +1,79 @@
+name: Devilcoin trailer go-live
+
+# One-off. Reveals the Devilcoin announcement trailer on the game page and the
+# press kit at the embargo time. Until then both are held behind placeholder
+# comments (scripts/reveal_devilcoin_trailer.py does the swap).
+#
+#   06:00 Mon 26 Oct 2026 Pacific (PDT, UTC-7)  =  13:00 Mon 26 Oct UTC
+#   (US daylight time does not end until 1 Nov 2026, so Pacific is UTC-7 here.)
+#
+# GitHub's scheduled runs are best effort and are regularly a few minutes late,
+# occasionally much later when the platform is busy. It will not fire at 06:00
+# exactly. Late is the safe direction for an embargo; if it has to be sharp, use
+# "Run workflow" on the Actions tab instead and fire it by hand.
+#
+# After it has run, delete this file and scripts/reveal_devilcoin_trailer.py.
+
+on:
+  schedule:
+    - cron: '0 13 26 10 *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: devilcoin-trailer
+  cancel-in-progress: false
+
+jobs:
+  go-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      # cron has no year field, so '0 13 26 10 *' would fire again on 26 Oct 2027.
+      # A manual dispatch skips this check on purpose.
+      - name: Only the intended date
+        if: github.event_name == 'schedule'
+        run: |
+          today=$(date -u +%F)
+          if [ "$today" != "2026-10-26" ]; then
+            echo "UTC date is $today, not 2026-10-26. This one-off has already passed; doing nothing."
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Reveal the trailer
+        run: python3 scripts/reveal_devilcoin_trailer.py
+
+      - name: Commit and push
+        run: |
+          git config user.name  "indieformer-bot"
+          git config user.email "bot@indieformer.com"
+          git add devilcoin/index.html devilcoin/presskit/index.html
+          if git diff --staged --quiet; then
+            echo "no changes, trailer was already live"
+            exit 0
+          fi
+          git commit -m "Devilcoin: announcement trailer live on the page and the press kit"
+          # the daily refresh action commits on its own schedule, so never assume
+          # main is where we left it
+          git fetch origin main
+          git rebase origin/main
+          git push
+
+      - name: Confirm what went out
+        run: |
+          echo "page:"
+          grep -o 'embed/[A-Za-z0-9_-]*' devilcoin/index.html | sed 's/^/  /' || echo "  (no trailer on page)"
+          echo "press kit:"
+          grep -o 'embed/[A-Za-z0-9_-]*' devilcoin/presskit/index.html | sed 's/^/  /' || echo "  (no trailer in press kit)"
