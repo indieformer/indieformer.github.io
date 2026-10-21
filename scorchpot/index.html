@@ -62,7 +62,8 @@ img{max-width:100%;display:block;}
 /* ═══════════════ HERO ═══════════════ */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate;}
 .hero-video{position:absolute;inset:0;z-index:0;background:#000 center/cover no-repeat url("assets/scorchpot-key-art.jpg");}
-.hero-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;filter:saturate(1.05);}
+.hero-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;filter:saturate(1.05);opacity:0;transition:opacity .8s ease;}
+.hero-video video.ready{opacity:1;}
 /* flat cover in the page colour to calm the video so it doesn't fight the title */
 .hero-cover{position:absolute;inset:0;z-index:1;pointer-events:none;background:rgba(20,15,11,.45);}
 /* Phones and reduced-motion drop the player and keep the key art, which .hero-video
@@ -354,5 +355,7 @@ document.querySelectorAll('.gallery').forEach(function(g){
   if(p)p.addEventListener('click',function(){s.scrollBy({left:-step(),behavior:'smooth'});});
   if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});
 });
-</script></body>
+</script>
+<script src="/hero-video.js" defer></script>
+</body>
 </html>

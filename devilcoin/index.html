@@ -86,7 +86,8 @@ a{color:inherit}
 .hero-bg{position:absolute;inset:0;z-index:0;
   background:var(--void) 62% center/cover no-repeat url("assets/hero-bg.jpg");}
 .hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  pointer-events:none;filter:saturate(1.05);}
+  pointer-events:none;filter:saturate(1.05);opacity:0;transition:opacity .8s ease;}
+.hero-bg video.ready{opacity:1;}
 /* Phones and reduced-motion keep the still, which this wrapper already carries. */
 @media(max-width:768px){.hero-bg video{display:none;}}
 @media(prefers-reduced-motion:reduce){.hero-bg video{display:none;}}
@@ -347,5 +348,6 @@ fetch("/data/devilcoin.json",{cache:"no-store"}).then(function(r){return r.json(
   }
 }).catch(function(){});
 </script>
+<script src="/hero-video.js" defer></script>
 </body>
 </html>
