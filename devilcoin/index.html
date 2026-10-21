@@ -79,19 +79,17 @@ a{color:inherit}
 /* ═══════════════ HERO ═══════════════ */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;
   justify-content:center;overflow:hidden;isolation:isolate;}
-/* Textless cut behind the title. House pattern: the wrapper carries the still
-   as its own background, so there is no black frame before YouTube paints and
-   no letterbox edge if the iframe misbehaves. The iframe is oversized 1.4x in
-   both axes to push YouTube's title card outside the hero's clipped box;
-   modestbranding no longer suppresses it. */
+/* Self-hosted textless loop behind the title. The wrapper carries the key art
+   as its own background, so it is the poster/fallback and shows if the video is
+   dropped (phones, reduced-motion) or cannot decode. object-fit:cover fills the
+   hero; no oversize needed, since there is no YouTube chrome to push out. */
 .hero-bg{position:absolute;inset:0;z-index:0;
   background:var(--void) 62% center/cover no-repeat url("assets/hero-bg.jpg");}
-.hero-bg iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:140vw;height:78.75vw;min-height:140vh;min-width:248.9vh;
-  border:0;pointer-events:none;filter:saturate(1.05);}
+.hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  pointer-events:none;filter:saturate(1.05);}
 /* Phones and reduced-motion keep the still, which this wrapper already carries. */
-@media(max-width:768px){.hero-bg iframe{display:none;}}
-@media(prefers-reduced-motion:reduce){.hero-bg iframe{display:none;}}
+@media(max-width:768px){.hero-bg video{display:none;}}
+@media(prefers-reduced-motion:reduce){.hero-bg video{display:none;}}
 .hero-cover{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(180deg,rgba(11,4,6,.62) 0%,rgba(11,4,6,.3) 34%,rgba(11,4,6,.78) 74%,var(--void) 99%);}
 .hero-cover::after{content:'';position:absolute;inset:0;
@@ -229,9 +227,10 @@ footer a{color:var(--text-2)}
 <!-- ═══════════════ HERO ═══════════════ -->
 <header class="hero">
   <div class="hero-bg">
-    <!-- textless cut so it does not compete with the wordmark -->
-    <iframe data-loop-fade src="https://www.youtube.com/embed/p0GjqmMzotY?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=p0GjqmMzotY&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3"
-      title="Devilcoin ambient background" allow="autoplay; encrypted-media" aria-hidden="true" tabindex="-1"></iframe>
+    <!-- self-hosted textless loop, so it does not compete with the wordmark -->
+    <video autoplay muted loop playsinline aria-hidden="true" poster="assets/hero-bg.jpg">
+      <source src="assets/web/hero.webm" type="video/webm">
+    </video>
   </div>
   <div class="hero-cover"></div>
   <div class="hero-fade"></div>
@@ -348,6 +347,5 @@ fetch("/data/devilcoin.json",{cache:"no-store"}).then(function(r){return r.json(
   }
 }).catch(function(){});
 </script>
-<script src="/video-fade.js" defer></script>
 </body>
 </html>

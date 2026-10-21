@@ -103,13 +103,11 @@ img{max-width:100%;display:block;}
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;isolation:isolate;}
 .hero-fade{position:absolute;left:0;right:0;bottom:0;height:40%;z-index:3;pointer-events:none;background:linear-gradient(to top,var(--void) 4%,transparent 100%);}
 .hero-bg{position:absolute;inset:0;z-index:0;background:#000 center/cover no-repeat url("/images/abelina/hero-bg.jpg");animation:breathe 26s ease-in-out infinite;}
-/* Textless background video. Same structure as scorchpot/index.html: the wrapper
-   carries the still as its own background so there's no black frame before
-   YouTube paints and no letterbox edge if the iframe misbehaves. Oversized 1.4x
-   so YouTube's title card sits outside the hero's clipped box. */
+/* Self-hosted textless loop. The wrapper carries the still as its own background,
+   so the breathing .hero-bg still shows through if the video is dropped (phones,
+   reduced-motion) or cannot decode. object-fit:cover fills the hero, no oversize. */
 .hero-video{position:absolute;inset:0;z-index:0;background:#000 center/cover no-repeat url("/images/abelina/hero-bg.jpg");}
-.hero-video iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:140vw;height:78.75vw;min-height:140vh;min-width:248.9vh;border:0;pointer-events:none;filter:saturate(1.05);}
+.hero-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;filter:saturate(1.05);}
 /* flat cover in the page colour to calm the video so it doesn't fight the title */
 .hero-cover{position:absolute;inset:0;z-index:1;pointer-events:none;background:rgba(11,12,21,.42);}
 /* phones and reduced-motion drop back to the still .hero-bg above, breathe and all */
@@ -221,9 +219,10 @@ h2.sec em{font-style:italic;color:var(--phosphor-bright);}
 <header class="hero">
   <div class="hero-bg"></div>
   <div class="hero-video">
-    <!-- textless version for the ambient background so it doesn't compete with the title -->
-    <iframe data-loop-fade src="https://www.youtube.com/embed/iBWvcRHdHm0?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=iBWvcRHdHm0&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3"
-      title="Abelina ambient background" allow="autoplay; encrypted-media" aria-hidden="true" tabindex="-1"></iframe>
+    <!-- self-hosted textless loop for the ambient background so it doesn't compete with the title -->
+    <video autoplay muted loop playsinline aria-hidden="true" poster="/images/abelina/hero-bg.jpg">
+      <source src="/images/abelina/hero.webm" type="video/webm">
+    </video>
   </div>
   <div class="hero-cover"></div>
   <div class="hero-scrim"></div>
@@ -333,7 +332,5 @@ document.querySelectorAll('.gallery').forEach(function(g){
   if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});
 });
 </script>
-<script>fetch("/data/abelina.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.wishlists){document.getElementById("ab-wish").textContent=Number(d.wishlists).toLocaleString();}var w=d&&d.wishlistsAsOf;if(w){var u=document.getElementById("ab-upd");if(u){var dt=new Date(w+"T00:00:00Z");u.textContent=" \u00b7 updated "+dt.toLocaleDateString(undefined,{day:"numeric",month:"short"});u.hidden=false;}}}).catch(function(){});</script>
-<script src="/video-fade.js" defer></script>
-</body>
+<script>fetch("/data/abelina.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.wishlists){document.getElementById("ab-wish").textContent=Number(d.wishlists).toLocaleString();}var w=d&&d.wishlistsAsOf;if(w){var u=document.getElementById("ab-upd");if(u){var dt=new Date(w+"T00:00:00Z");u.textContent=" \u00b7 updated "+dt.toLocaleDateString(undefined,{day:"numeric",month:"short"});u.hidden=false;}}}).catch(function(){});</script></body>
 </html>

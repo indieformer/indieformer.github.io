@@ -62,16 +62,14 @@ img{max-width:100%;display:block;}
 /* ═══════════════ HERO ═══════════════ */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate;}
 .hero-video{position:absolute;inset:0;z-index:0;background:#000 center/cover no-repeat url("assets/scorchpot-key-art.jpg");}
-.hero-video iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:140vw;height:78.75vw;min-height:140vh;min-width:248.9vh;border:0;pointer-events:none;filter:saturate(1.05);}
+.hero-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;filter:saturate(1.05);}
 /* flat cover in the page colour to calm the video so it doesn't fight the title */
 .hero-cover{position:absolute;inset:0;z-index:1;pointer-events:none;background:rgba(20,15,11,.45);}
 /* Phones and reduced-motion drop the player and keep the key art, which .hero-video
-   already carries as its own background. Hide the iframe, not the wrapper, or the
-   hero loses its background entirely. Muted autoplay in a third-party iframe is
-   unreliable on iOS, and it's a big download on mobile data either way. */
-@media(max-width:768px){.hero-video iframe{display:none;}}
-@media(prefers-reduced-motion:reduce){.hero-video iframe{display:none;}}
+   already carries as its own background. Hide the video, not the wrapper, or the
+   hero loses its background entirely. It's also a big download on mobile data. */
+@media(max-width:768px){.hero-video video{display:none;}}
+@media(prefers-reduced-motion:reduce){.hero-video video{display:none;}}
 
 /* firelight from below + violet cool rim from above — fully opaque at the base so it meets the next section seamlessly */
 .fire-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -225,9 +223,10 @@ h2.sec em{font-style:normal;color:var(--ember-bright);}
 <!-- ═══════════════ HERO ═══════════════ -->
 <header class="hero" id="top">
   <div class="hero-video">
-    <!-- textless version for the ambient background so it doesn't compete with the title -->
-    <iframe data-loop-fade src="https://www.youtube.com/embed/1gl3befqDrA?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=1gl3befqDrA&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3"
-      title="Feed the Scorchpot ambient background" allow="autoplay; encrypted-media" tabindex="-1"></iframe>
+    <!-- self-hosted textless loop for the ambient background so it doesn't compete with the title -->
+    <video autoplay muted loop playsinline aria-hidden="true" poster="assets/scorchpot-key-art.jpg">
+      <source src="assets/scorchpot-hero.webm" type="video/webm">
+    </video>
   </div>
   <div class="hero-cover"></div>
   <div class="fire-scrim"></div>
@@ -355,7 +354,5 @@ document.querySelectorAll('.gallery').forEach(function(g){
   if(p)p.addEventListener('click',function(){s.scrollBy({left:-step(),behavior:'smooth'});});
   if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});
 });
-</script>
-<script src="/video-fade.js" defer></script>
-</body>
+</script></body>
 </html>
