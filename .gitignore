@@ -32,3 +32,8 @@ home-body.html
 # python bytecode
 __pycache__/
 *.pyc
+
+# local agent/editor state — never ships to Pages
+# the canonical launch.json lives in the Indieformer General folder
+.claude/
+Claude outputs/
