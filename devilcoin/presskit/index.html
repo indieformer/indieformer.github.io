@@ -103,8 +103,16 @@ aside{align-self:start;position:sticky;top:70px}
 
 .pk-gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:620px){.pk-gallery{grid-template-columns:1fr}}
-.pk-shot img{aspect-ratio:16/9;width:100%;object-fit:cover;border-radius:9px;border:1px solid var(--border-mid)}
-.pk-cap{font-size:12px;color:var(--text-3);margin-top:5px}
+.pk-shot{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;cursor:pointer;
+  border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(60% 80% at 30% 20%,rgba(201,151,47,.12),transparent 70%),linear-gradient(160deg,#200C0F,#0B0406)}
+.pk-shot .ph{font-family:'Caveat',cursive;font-size:18px;color:var(--gold-bright);opacity:.8;padding:8px;text-align:center}
+.pk-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.pk-shot:hover img{transform:scale(1.05)}
+#lb{position:fixed;inset:0;z-index:500;background:rgba(11,4,6,.94);display:none;align-items:center;
+  justify-content:center;padding:24px;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-width:96%;max-height:92%;border-radius:8px;box-shadow:0 20px 80px rgba(0,0,0,.6)}
 
 .pk-trailer{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;
   border:1px solid var(--border-mid);box-shadow:0 18px 44px rgba(0,0,0,.55)}
@@ -197,19 +205,19 @@ footer{border-top:1px solid var(--border);padding:26px 20px;text-align:center;
 
     <section class="pk-section" id="media">
       <h2 class="pk-h2">SCREENSHOtS</h2>
-      <p>Full-resolution versions are in the downloads below.</p>
-      <div class="pk-gallery">
-        <figure class="pk-shot"><img src="../assets/web/shots/hand-raise.jpg" alt="Devilcoin, the host behind the counter, waiting on your flip" loading="lazy"><figcaption class="pk-cap">The host behind the counter, waiting on your flip</figcaption></figure>
-        <figure class="pk-shot"><img src="../assets/web/shots/artifacts.jpg" alt="Devilcoin, the Artifacts on offer" loading="lazy"><figcaption class="pk-cap">The Artifacts on offer</figcaption></figure>
-        <figure class="pk-shot"><img src="../assets/web/shots/gold-bar.jpg" alt="Devilcoin, a gold bar among the winnings" loading="lazy"><figcaption class="pk-cap">A gold bar among the winnings</figcaption></figure>
-        <figure class="pk-shot"><img src="../assets/web/shots/money-stack.jpg" alt="Devilcoin, a stack of coins built up over a run" loading="lazy"><figcaption class="pk-cap">A stack of coins built up over a run</figcaption></figure>
-        <figure class="pk-shot"><img src="../assets/web/shots/axe.jpg" alt="Devilcoin, an axe on the table" loading="lazy"><figcaption class="pk-cap">An axe on the table</figcaption></figure>
-        <figure class="pk-shot"><img src="../assets/web/shots/cauldron.jpg" alt="Devilcoin, a cauldron in the back room" loading="lazy"><figcaption class="pk-cap">A cauldron in the back room</figcaption></figure>
-        <figure class="pk-shot"><img src="../assets/web/shots/skull-on-table.jpg" alt="Devilcoin, a skull set down on the table" loading="lazy"><figcaption class="pk-cap">A skull set down on the table</figcaption></figure>
-        <figure class="pk-shot"><img src="../assets/web/shots/knife-and-head.jpg" alt="Devilcoin, a knife and a severed head" loading="lazy"><figcaption class="pk-cap">A knife and a severed head</figcaption></figure>
-        <figure class="pk-shot"><img src="../assets/web/shots/hallway.jpg" alt="Devilcoin, a hallway in the purgatory" loading="lazy"><figcaption class="pk-cap">A hallway in the purgatory</figcaption></figure>
-        <figure class="pk-shot"><img src="../assets/web/shots/bodies-hanging.jpg" alt="Devilcoin, bodies hanging in the dark" loading="lazy"><figcaption class="pk-cap">Bodies hanging in the dark</figcaption></figure>
-        <figure class="pk-shot"><img src="../assets/web/shots/children.jpg" alt="Devilcoin, a scene unlocked in the Main Room" loading="lazy"><figcaption class="pk-cap">A scene unlocked in the Main Room</figcaption></figure>
+      <p>Click any shot to enlarge. Full-resolution versions are in the downloads below.</p>
+      <div class="pk-gallery" id="pk-gallery">
+        <div class="pk-shot"><span class="ph">The host behind the counter, waiting on your flip</span><img src="../assets/web/shots/hand-raise.jpg" alt="Devilcoin, the host behind the counter, waiting on your flip" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pk-shot"><span class="ph">The Artifacts on offer</span><img src="../assets/web/shots/artifacts.jpg" alt="Devilcoin, the Artifacts on offer" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pk-shot"><span class="ph">A gold bar among the winnings</span><img src="../assets/web/shots/gold-bar.jpg" alt="Devilcoin, a gold bar among the winnings" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pk-shot"><span class="ph">A stack of coins built up over a run</span><img src="../assets/web/shots/money-stack.jpg" alt="Devilcoin, a stack of coins built up over a run" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pk-shot"><span class="ph">An axe on the table</span><img src="../assets/web/shots/axe.jpg" alt="Devilcoin, an axe on the table" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pk-shot"><span class="ph">A cauldron in the back room</span><img src="../assets/web/shots/cauldron.jpg" alt="Devilcoin, a cauldron in the back room" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pk-shot"><span class="ph">A skull set down on the table</span><img src="../assets/web/shots/skull-on-table.jpg" alt="Devilcoin, a skull set down on the table" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pk-shot"><span class="ph">A knife and a severed head</span><img src="../assets/web/shots/knife-and-head.jpg" alt="Devilcoin, a knife and a severed head" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pk-shot"><span class="ph">A hallway in the purgatory</span><img src="../assets/web/shots/hallway.jpg" alt="Devilcoin, a hallway in the purgatory" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pk-shot"><span class="ph">Bodies hanging in the dark</span><img src="../assets/web/shots/bodies-hanging.jpg" alt="Devilcoin, bodies hanging in the dark" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pk-shot"><span class="ph">A scene unlocked in the Main Room</span><img src="../assets/web/shots/children.jpg" alt="Devilcoin, a scene unlocked in the Main Room" loading="lazy" onerror="this.style.display='none'"></div>
       </div>
     </section>
 
@@ -283,5 +291,21 @@ footer{border-top:1px solid var(--border);padding:26px 20px;text-align:center;
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Devilcoin","description":"A coin-flip roguelite set in an occult purgatory built out of Slavic folklore. Developed by Smilingface, published by Indieformer.","image":"https://indieformer.com/images/devilcoin/og.jpg","url":"https://indieformer.com/devilcoin/","genre":["Roguelite","Indie","Strategy"],"gamePlatform":"PC","operatingSystem":"Windows","author":{"@type":"Organization","name":"Smilingface"},"publisher":{"@type":"Organization","name":"Indieformer","url":"https://indieformer.com/"},"sameAs":"https://store.steampowered.com/app/5279430/Devilcoin/"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indieformer.com/"},{"@type":"ListItem","position":2,"name":"Devilcoin","item":"https://indieformer.com/devilcoin/"},{"@type":"ListItem","position":3,"name":"Press Kit","item":"https://indieformer.com/devilcoin/presskit/"}]}</script>
+<div id="lb"><img src="" alt=""></div>
+<script>
+  // lightbox, same behaviour as the other three press kits
+  var lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+  document.getElementById('pk-gallery').addEventListener('click', function (e) {
+    var shot = e.target.closest('.pk-shot');
+    var img = shot && shot.querySelector('img');
+    if (img && img.style.display !== 'none' && img.complete && img.naturalWidth) {
+      lbImg.src = img.src; lb.classList.add('on');
+    }
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('on'); lbImg.src = ''; });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { lb.classList.remove('on'); lbImg.src = ''; }
+  });
+</script>
 </body>
 </html>
