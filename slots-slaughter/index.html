@@ -177,7 +177,6 @@ h2.sec em{font-style:normal;color:var(--blood-bright);}
       <a class="btn btn-ghost" href="https://player.gg/explore/games/411731-slots-and-slaughter" target="_blank" rel="noopener">Request playtest access</a>
       <a class="btn btn-ghost" href="https://discord.gg/3UUVNXey4V" target="_blank">Join the Discord</a>
     </div>
-    <p class="hero-stat"><b id="ss-wish">73</b> wishlists on Steam<span class="upd" id="ss-upd" hidden></span></p>
     <a class="link-arrow" href="/slots-slaughter/presskit/">Press Kit ↗</a>
     <p class="hero-meta">Developed by <b>Laser Castle</b></p>
   </div>
@@ -250,7 +249,6 @@ document.querySelectorAll('.gallery').forEach(function(g){
   if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});
 });
 </script>
-<script>fetch("/data/slots-slaughter.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.wishlists){document.getElementById("ss-wish").textContent=Number(d.wishlists).toLocaleString();}var w=d&&d.wishlistsAsOf;if(w){var u=document.getElementById("ss-upd");if(u){var dt=new Date(w+"T00:00:00Z");u.textContent=" \u00b7 updated "+dt.toLocaleDateString(undefined,{day:"numeric",month:"short"});u.hidden=false;}}}).catch(function(){});</script>
 <script src="/hero-video.js" defer></script>
 </body>
 </html>

@@ -243,7 +243,6 @@ footer a{color:var(--text-2)}
       <a class="btn btn-primary" href="https://store.steampowered.com/app/5279430/Devilcoin/" target="_blank" rel="noopener">Wishlist on Steam</a>
       <a class="btn btn-ghost" href="https://discord.gg/jFyGBUbdwG" target="_blank" rel="noopener">Join the Discord</a>
     </div>
-    <p class="hero-stat" id="d-stat">Coming to Steam</p>
     <a class="link-arrow" href="/devilcoin/presskit/">Press Kit ↗</a>
     <p class="hero-meta">Developed by <b>Smilingface</b></p>
   </div>
@@ -341,16 +340,6 @@ document.querySelectorAll('.gallery').forEach(function(g){
   if(p)p.addEventListener('click',function(){s.scrollBy({left:-step(),behavior:'smooth'});});
   if(n)n.addEventListener('click',function(){s.scrollBy({left:step(),behavior:'smooth'});});
 });
-/* live wishlist count, written by the daily Steam fetch into /data/devilcoin.json */
-fetch("/data/devilcoin.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){
-  if(d&&d.wishlists){
-    var n=Number(d.wishlists).toLocaleString(), upd="";
-    if(d.wishlistsAsOf){var dt=new Date(d.wishlistsAsOf+"T00:00:00Z");
-      upd=" · updated "+dt.toLocaleDateString(undefined,{day:"numeric",month:"short"});}
-    var el=document.getElementById("d-stat");
-    if(el)el.innerHTML="<b>"+n+"</b> wishlists on Steam"+upd;
-  }
-}).catch(function(){});
 </script>
 <script src="/hero-video.js" defer></script>
 </body>
