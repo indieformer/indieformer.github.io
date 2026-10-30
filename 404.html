@@ -98,6 +98,15 @@
     color: var(--text-tertiary);
   }
   .note a { color: var(--emerald); border-bottom: 1px solid rgba(40, 226, 145, 0.42); text-decoration: none; }
+
+/* keyboard focus: the site set none, so the UA default was the only ring. */
+:focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+/* respect a reduced-motion preference */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+/* gate 34: the root box needs it too, not just body */
+html,body{overflow-x:clip}
 </style>
 </head>
 <body>
@@ -109,7 +118,7 @@
     <span class="eyebrow">page not found.</span>
     <h1>4<span class="em">0</span>4.</h1>
     <p class="lead">
-      The page you're after isn't here. Most likely it's an old <strong>indieformer.com/p/&lt;something&gt;</strong> link from when the newsletter lived on this domain — that archive now lives on the beehiiv subdomain.
+      The page you're after isn't here. Most likely it's an old <strong>indieformer.com/p/&lt;something&gt;</strong> link from when the newsletter lived on this domain. That archive now lives on the beehiiv subdomain.
     </p>
     <div class="links">
       <a href="/">Home</a>

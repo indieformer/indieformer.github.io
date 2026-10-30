@@ -35,7 +35,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Sora',system-ui,sans-serif;background:var(--ash);color:var(--text-1);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+body{font-family:'Sora',system-ui,sans-serif;background:var(--ash);color:var(--text-1);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip;}
 a{color:inherit;text-decoration:none;}
 img{max-width:100%;display:block;}
 
@@ -200,6 +200,11 @@ h2.sec em{font-style:normal;color:var(--ember-bright);}
 .store-soon{opacity:.5;filter:grayscale(.35);color:var(--text-2);cursor:default;}
 .store-soon .store-txt span{color:var(--text-3);}
 @media(max-width:640px){.stores{grid-template-columns:1fr 1fr;}}
+
+/* keyboard focus: the site set none, so the UA default was the only ring. */
+:focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+/* gate 34: the root box needs it too, not just body */
+html{overflow-x:clip}
 </style>
 </head>
 <body>

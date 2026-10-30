@@ -41,7 +41,7 @@
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     padding: 28px 20px;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
@@ -421,6 +421,11 @@
     .about-jake h3 { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
     .about-jake p { color: var(--text-secondary); font-size: 15px; line-height: 1.65; margin: 0; max-width: none; }
     .about-jake a { color: var(--emerald); text-decoration: none; border-bottom: 1px solid rgba(40,226,145,0.42); }
+
+/* keyboard focus: the site set none, so the UA default was the only ring. */
+:focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+/* gate 34: the root box needs it too, not just body */
+html{overflow-x:clip}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Press Kit Guide for Indie Games", "description": "Make your game press-ready. A clean, complete press kit that makes it easy for creators, media, and platforms to share your game.", "image": "https://indieformer.com/og-image.png", "url": "https://indieformer.com/press-kit-guide/", "mainEntityOfPage": "https://indieformer.com/press-kit-guide/", "author": {"@type": "Organization", "name": "Indieformer", "url": "https://indieformer.com/"}, "publisher": {"@type": "Organization", "name": "Indieformer", "logo": {"@type": "ImageObject", "url": "https://indieformer.com/logo.png"}}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://indieformer.com/"}, {"@type": "ListItem", "position": 2, "name": "Press Kit Guide", "item": "https://indieformer.com/press-kit-guide/"}]}</script>

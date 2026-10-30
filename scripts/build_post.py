@@ -374,7 +374,7 @@ PAGE_CSS = """  :root {
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     padding: 28px 20px;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .crop { position: absolute; width: 18px; height: 18px; opacity: 0; animation: fade 0.6s ease 0.2s forwards; z-index: 5; pointer-events: none; }
@@ -526,6 +526,15 @@ PAGE_CSS = """  :root {
 
   /* hoisted from per-post Beehiiv content (it repeated this inline 20-40x/page) */
   p span[style*="font-size"] { line-height: 1.6; }
+
+/* keyboard focus: the site set none, so the UA default was the only ring. */
+:focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+/* respect a reduced-motion preference */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+/* gate 34: the root box needs it too, not just body */
+html{overflow-x:clip}
 """
 
 PAGE_TEMPLATE = """<!DOCTYPE html>

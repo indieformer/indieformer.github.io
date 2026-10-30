@@ -75,7 +75,7 @@
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     padding: 28px 20px;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .sr-only {
@@ -282,7 +282,6 @@
   .entry-body .callout > p { margin: 0; }
   .entry-body .callout > p + p { margin-top: 0.9em; }
   .entry-body .callout em { font-style: italic; color: var(--emerald); }
-  .entry-body .callout .dragon { color: var(--coral); font-weight: 700; }
   .entry-body .callout > p.punch {
     margin: 18px 0 6px;
     border-left: 3px solid var(--emerald);
@@ -473,7 +472,6 @@
     stroke-dashoffset: 1;
     animation: draw 1.4s ease forwards;
   }
-  .dragon { font-style: italic; color: var(--coral); font-weight: 600; }
 
   /* inline hand-drawn moments inside the entry bodies */
   .entry-body .u { position: relative; display: inline-block; white-space: nowrap; }
@@ -634,8 +632,6 @@
     overflow: visible; pointer-events: none;
   }
 
-  /* Dragon — italic + coral, the Scorchpot reveal moment */
-  .dragon { font-style: italic; color: var(--coral); font-weight: 600; }
 
   /* inline body-text links (back to home etc.) */
   a.ilink {
@@ -728,6 +724,11 @@
   }
   .social-icons a:hover { color: var(--text-primary) !important; transform: translateY(-2px); }
   .social-icons svg { display: block; }
+
+/* keyboard focus: the site set none, so the UA default was the only ring. */
+:focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+/* gate 34: the root box needs it too, not just body */
+html{overflow-x:clip}
 </style>
 </head>
 <body>
@@ -815,7 +816,7 @@
     <div class="preamble-box">
       So, yes. Shame on us. Slap on the wrist for a bit of clickbait to get you here. We do our best
       work on marketing, content, influencer outreach, financing, regional and international
-      distribution — all publishers do that. We can't guarantee a creator will pick a game up
+      distribution. All publishers do that. We can't guarantee a creator will pick a game up
       (news flash: no one can), we can't guarantee you a website feature, we can't guarantee you
       success. But if we're working together, there's a good chance we <em>think</em> we can get
       there. And as for the games we choose, there is a concept we like to abide by.
@@ -846,7 +847,7 @@
             <p>
               Let's treat your game like a bowl of pasta. The foundation is the Pasta. There can be many
               types of foundations. They're all similarly built, and can be swapped out for another
-              foundation. But the sauce — <span class="u">the sauce<svg class="ink" viewBox="0 0 160 18" preserveAspectRatio="none" aria-hidden="true">
+              foundation. But the sauce. <span class="u">The sauce<svg class="ink" viewBox="0 0 160 18" preserveAspectRatio="none" aria-hidden="true">
                 <path class="draw" pathLength="1" d="M5 10 Q 40 3 80 9 T 155 9" fill="none" stroke="#F78154" stroke-width="3" stroke-linecap="round"/>
               </svg></span> is what makes the pasta memorable. And the combination
               of correct pasta, and correct sauce is next level.
@@ -861,7 +862,7 @@
             </p>
 
             <p>
-              We look for the pasta — a game with a good foundation. And then we listen for the sauce.
+              We look for the pasta, a game with a good foundation. And then we listen for the sauce.
               What are you combining it with to make a <span class="circ">killer combo<svg class="circ-ring ink" viewBox="0 0 130 30" preserveAspectRatio="none" aria-hidden="true">
                 <path class="draw" pathLength="1" d="M8 16 C 12 4 50 -2 65 2 C 85 4 124 6 122 16 C 120 26 80 30 65 28 C 30 26 4 24 8 16" fill="none" stroke="#F78154" stroke-width="2" stroke-linecap="round"/>
               </svg></span>?
@@ -871,32 +872,6 @@
               That sauce is unique to every game, and it's the thing we focus on projecting. Not always
               the thing that gets marketed, but the thing people remember.
             </p>
-
-            <div class="callout">
-              <p>
-                Take Feed the Scorchpot (FtS). The sauce was obvious — it's the
-                <span class="dragon">Dragon</span>. Spotting that was the easy part. The work was
-                <em>personifying</em> it.
-              </p>
-
-              <p>
-                So the Dragon shows up everywhere it can. In the trailers. In the in-game quips. And, most
-                importantly, in the Discord — as an actual member.
-              </p>
-
-              <p>
-                Ping the Dragon on Discord? You'll get a response. A good one.
-              </p>
-
-              <p class="punch">
-                Now the Dragon isn't a character in a game you played. It's a regular in a discord you're in.
-              </p>
-
-              <p>
-                This is no "saving grace", or "marketing genius" that turns FtS into a mega-hit. But it's
-                memorable. It's the extra step that connects the game into someone's life.
-              </p>
-            </div>
 
           </div>
         </div>
@@ -937,7 +912,7 @@
 
             <p>
               The culmination of development, content, marketing, feedback, features (we could list
-              for days here) — this feeling — this is where we want to sit. It will test your game to the
+              for days here). This feeling. This is where we want to sit. It will test your game to the
               nth degree, and make you question whether it's the right thing to pursue.
             </p>
 
@@ -949,7 +924,7 @@
 
               <p>
                 Yes, you're making a game you want to play, but you're making a game you need to sell
-                as well, so you can keep making games you want to play. A "necessary evil", sure — but
+                as well, so you can keep making games you want to play. A "necessary evil", sure. But
                 then, isn't most of the world?
               </p>
 
@@ -1015,7 +990,7 @@
 
             <p>
               It's mostly just a time-suck, and most don't want to do it. We pride ourselves on whatever
-              it is we need to do — it's done to the best standard we can think of.
+              it is we need to do: it's done to the best standard we can think of.
             </p>
 
             <p>
@@ -1050,8 +1025,7 @@
             </p>
 
             <p>
-              Writing about our failings, what we're trying to achieve, how we are
-              doing it — can all hopefully help some other wandering soul out there navigate the
+              Writing about our failings, what we're trying to achieve, how we are doing it. All of it can hopefully help some other wandering soul out there navigate the
               undulating slopes of creating and releasing a game.
             </p>
 
@@ -1083,8 +1057,7 @@
             <span class="illustration-caption">your passion (the organ)</span>
 
             <p>
-              Yes, above we spoke about the sauce of the <em>game</em>, but the other sauce is <em>you</em>
-              — the developer. Without undying, relentless passion, your game isn't being given a good
+              Yes, above we spoke about the sauce of the <em>game</em>, but the other sauce is <em>you</em>, the developer. Without undying, relentless passion, your game isn't being given a good
               shot. It is hard.
             </p>
 
@@ -1118,7 +1091,7 @@
         <div class="entry-body">
           <div class="body-inner">
 
-            <p style="font-size:19px;font-weight:600;margin-bottom:20px;">So — can we make your game popular?</p>
+            <p style="font-size:19px;font-weight:600;margin-bottom:20px;">So, can we make your game popular?</p>
 
             <p>
               If the above is anything to go by, no. We cannot. But we can <span class="u">die trying<svg class="ink" viewBox="0 0 160 18" preserveAspectRatio="none" aria-hidden="true">

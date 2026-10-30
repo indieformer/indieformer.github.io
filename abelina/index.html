@@ -40,7 +40,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Sora',system-ui,sans-serif;background:var(--void);color:var(--text-1);line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative;}
+body{font-family:'Sora',system-ui,sans-serif;background:var(--void);color:var(--text-1);line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:clip;position:relative;}
 .hero,body>section{position:relative;z-index:1;}
 a{color:inherit;text-decoration:none;}
 img{max-width:100%;display:block;}
@@ -193,7 +193,12 @@ h2.sec em{font-style:italic;color:var(--phosphor-bright);}
 .if-back:hover{color:var(--bone);transform:translateX(-4px);}
 
 @media(max-width:800px){.world,.maker-grid{grid-template-columns:1fr;} .world-bird{max-width:360px;margin:0 auto;order:-1;}}
-  </style>
+  
+/* keyboard focus: the site set none, so the UA default was the only ring. */
+:focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+/* gate 34: the root box needs it too, not just body */
+html{overflow-x:clip}
+</style>
 </head>
 <body>
 <div id="paper"></div>

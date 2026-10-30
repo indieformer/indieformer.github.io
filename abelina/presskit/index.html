@@ -55,7 +55,7 @@
       color: var(--text-primary) !important;
       font-family: 'Sora', Arial, sans-serif !important;
       -webkit-font-smoothing: antialiased;
-      line-height: 1.6; overflow-x: hidden;
+      line-height: 1.6; overflow-x: clip;
     }
     a { text-decoration: none; color: inherit; }
 
@@ -104,7 +104,7 @@
       font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700;
       padding: 12px 22px; border-radius: 8px; cursor: pointer;
       display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
-      border: 2px solid transparent; transition: all .2s;
+      border: 2px solid transparent; transition: background-color .2s, border-color .2s, color .2s, box-shadow .2s;
     }
     .btn-primary { background: var(--phosphor); color: var(--void); border-color: var(--phosphor); }
     .btn-primary:hover { background: var(--phosphor-bright); border-color: var(--phosphor-bright); box-shadow: 0 0 26px rgba(95,224,166,.35); }
@@ -146,7 +146,7 @@
 
     .pk-desc-block { margin-bottom: 16px; }
     .pk-desc-block .k { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); display: block; margin-bottom: 5px; }
-    .btn-copy { font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 7px; background: transparent; border: 1px solid var(--border-mid); color: var(--text-secondary); cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-copy { font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 7px; background: transparent; border: 1px solid var(--border-mid); color: var(--text-secondary); cursor: pointer; transition: border-color .2s, color .2s; display: inline-flex; align-items: center; gap: 6px; }
     .btn-copy:hover { border-color: var(--phosphor); color: var(--bone); }
     .btn-copy.done { color: var(--phosphor-bright); border-color: var(--phosphor-bright); }
 
@@ -184,7 +184,7 @@
     .pk-specs-card li span { color: var(--text-tertiary); }
 
     .pk-dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .pk-dl a { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; transition: all .2s; }
+    .pk-dl a { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; transition: border-color .2s, background-color .2s; }
     .pk-dl a:hover { border-color: var(--phosphor); background: var(--void-lite); }
     .pk-dl .ic { font-size: 22px; }
     .pk-dl b { display: block; font-size: 14px; color: var(--bone); }
@@ -218,7 +218,16 @@
     #loader-overlay.gone { opacity: 0; pointer-events: none; }
     #loader-gem { width: 140px; height: 140px; }
     @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
-  </style>
+  
+/* keyboard focus: the site set none, so the UA default was the only ring. */
+:focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+/* respect a reduced-motion preference */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+/* gate 34: the root box needs it too, not just body */
+html{overflow-x:clip}
+</style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://indieformer.com/"}, {"@type": "ListItem", "position": 2, "name": "Abelina", "item": "https://indieformer.com/abelina/"}, {"@type": "ListItem", "position": 3, "name": "Press Kit", "item": "https://indieformer.com/abelina/presskit/"}]}</script>
 </head>
 

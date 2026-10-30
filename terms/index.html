@@ -44,7 +44,7 @@
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     padding: 28px 20px;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .crop {
@@ -181,6 +181,15 @@
   }
   .social-icons a:hover { color: var(--text-primary) !important; transform: translateY(-2px); }
   .social-icons svg { display: block; }
+
+/* keyboard focus: the site set none, so the UA default was the only ring. */
+:focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+/* respect a reduced-motion preference */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+/* gate 34: the root box needs it too, not just body */
+html{overflow-x:clip}
 </style>
 </head>
 <body>
@@ -249,7 +258,7 @@
 
     <h2>The content is ours</h2>
     <p>
-      The writing, illustrations, branding, code, and structure of this site are ours, or used with permission. You're welcome to quote us briefly with a link back — that's how the internet works, and we want people to. What you can't do without asking: copy whole pages, repackage and sell anything from here, train a commercial product on the writing, or pretend our words are yours.
+      The writing, illustrations, branding, code, and structure of this site are ours, or used with permission. You're welcome to quote us briefly with a link back. That's how the internet works, and we want people to. What you can't do without asking: copy whole pages, repackage and sell anything from here, train a commercial product on the writing, or pretend our words are yours.
     </p>
     <p>
       If you want to do something with our content and you're not sure if it's okay, email <a href="mailto:support@indieformer.com">support@indieformer.com</a>. Saying yes is something we do a lot.
@@ -270,7 +279,7 @@
 
     <h2>Third-party stuff we link to</h2>
     <p>
-      We link to other people's sites — Beehiiv, Steam, Discord, friends' games, occasional articles. We don't control those, and a link isn't an endorsement of everything that site has ever done. If something at the other end of a link goes south, that's on them.
+      We link to other people's sites: Beehiiv, Steam, Discord, friends' games, occasional articles. We don't control those, and a link isn't an endorsement of everything that site has ever done. If something at the other end of a link goes south, that's on them.
     </p>
 
     <h2>Trademarks</h2>
@@ -280,7 +289,7 @@
 
     <h2>Changes</h2>
     <p>
-      If we update these terms in a way that meaningfully changes them, the date at the top moves and we'll mention it in a newsletter. Small fixes — typos, links, clarifications — happen quietly.
+      If we update these terms in a way that meaningfully changes them, the date at the top moves and we'll mention it in a newsletter. Small fixes (typos, links, clarifications) happen quietly.
     </p>
 
     <h2>Governing law</h2>
