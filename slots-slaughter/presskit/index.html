@@ -64,7 +64,7 @@
     a { text-decoration: none; color: inherit; }
 
     .pk-back {
-      position: fixed; top: 16px; left: 20px; z-index: 200;
+      position: absolute; top: 16px; left: 20px; z-index: 200;  /* absolute, not fixed: fixed pinned it over the sticky section nav */
       font-family: 'Caveat', cursive; font-size: 21px;
       color: var(--blood-bright); transform: rotate(-2deg);
       text-shadow: 0 2px 12px rgba(0,0,0,0.8); transition: transform .2s, color .2s;
@@ -73,7 +73,7 @@
 
     /* HERO */
     .pk-hero {
-      position: relative; min-height: 52vh;
+      position: relative; min-height: 52svh;  /* svh, not vh: the hero would jump when mobile chrome collapses */
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center; padding: 84px 24px 52px; overflow: hidden;
       /* on-brand fill until key art lands */
@@ -123,14 +123,14 @@
 
     /* NAV */
     .pk-nav { position: sticky; top: 0; z-index: 100; background: rgba(19,10,12,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-    .pk-nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 16px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+    .pk-nav-inner { max-width: 1340px; margin: 0 auto; padding: 0 16px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
     .pk-nav-inner::-webkit-scrollbar { display: none; }
     .pk-nav a { flex: 0 0 auto; padding: 14px 14px; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-tertiary); border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; white-space: nowrap; }
     .pk-nav a:hover { color: var(--text-secondary); }
     .pk-nav a.active { color: var(--blood-bright); border-bottom-color: var(--blood-bright); }
 
     /* LAYOUT */
-    .pk-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+    .pk-wrap { max-width: 1340px; margin: 0 auto; padding: 0 24px 80px; display: grid; grid-template-columns: 260px minmax(0,1fr); gap: 48px; align-items: start; }
 
     /* FACTSHEET */
     .pk-fact { position: sticky; top: 64px; padding-top: 48px; }
@@ -161,9 +161,8 @@
     .btn-copy:hover { border-color: var(--gold); color: var(--bone); }
     .btn-copy.done { color: var(--blood-bright); border-color: var(--blood-bright); }
 
-    .pk-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .pk-feature { background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
-    .pk-feature .ic { font-size: 22px; display: block; margin-bottom: 8px; }
+    .pk-features { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 44px; }
+    .pk-feature { padding: 2px 0 0; }
     .pk-feature b { color: var(--bone); font-size: 14.5px; display: block; margin-bottom: 4px; }
     .pk-feature span { color: var(--text-secondary); font-size: 13px; line-height: 1.55; }
 
@@ -171,31 +170,24 @@
     .pk-quote p { color: var(--bone); font-size: 17px; font-style: italic; margin-bottom: 6px; }
     .pk-quote cite { color: var(--text-tertiary); font-size: 13px; font-style: normal; }
 
-    .pk-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pk-gallery { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
     .pk-shot { position: relative; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid var(--border); background: radial-gradient(60% 80% at 30% 20%, rgba(229,169,60,0.14), transparent 70%), linear-gradient(160deg, #2a151a, #140b0d); display: flex; align-items: center; justify-content: center; }
     .pk-shot .ph { font-family: 'Caveat', cursive; font-size: 18px; color: var(--blood-bright); opacity: .8; }
     .pk-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s; }
     .pk-shot:hover img { transform: scale(1.05); }
 
-    .pk-team { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .pk-team-card { background: var(--void-mid); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+    .pk-team { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px 44px; }
+    .pk-team-card { padding: 2px 0 0 20px; border-left: 2px solid var(--border-mid); }
     .pk-team-card .role { font-family: 'Caveat', cursive; font-size: 20px; color: var(--blood-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 4px; }
-    .pk-team-card h4 { font-size: 18px; font-weight: 700; color: var(--bone); margin-bottom: 8px; }
+    .pk-team-card h3 { font-size: 18px; font-weight: 700; color: var(--bone); margin-bottom: 8px; }
     .pk-team-card p { font-size: 13.5px; margin-bottom: 0; }
     .pk-team-card .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
     .pk-team-card .pills span { font-size: 11px; color: var(--ash); background: rgba(229,169,60,0.06); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; }
 
-    .pk-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .pk-specs-card { background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px; }
-    .pk-specs-card b { color: var(--blood-bright); font-size: 13px; letter-spacing: .05em; text-transform: uppercase; display: block; margin-bottom: 10px; }
-    .pk-specs-card ul { list-style: none; }
-    .pk-specs-card li { font-size: 13px; color: var(--text-secondary); padding: 3px 0; }
-    .pk-specs-card li span { color: var(--text-tertiary); }
-
     .pk-dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .pk-dl a { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; transition: border-color .2s, background-color .2s; }
     .pk-dl a:hover { border-color: var(--gold); background: var(--void-lite); }
-    .pk-dl .ic { font-size: 22px; }
+    .pk-dl .ic { width: 26px; height: 26px; flex: 0 0 26px; color: var(--gold); }
     .pk-dl b { display: block; font-size: 14px; color: var(--bone); }
     .pk-dl span { font-size: 12px; color: var(--text-tertiary); }
 
@@ -215,17 +207,22 @@
     #lb img { max-width: 96%; max-height: 92%; border-radius: 8px; box-shadow: 0 20px 80px rgba(0,0,0,.6); }
 
     @media (max-width: 860px) {
-      .pk-wrap { grid-template-columns: 1fr; gap: 0; }
+      .pk-wrap { grid-template-columns: minmax(0,1fr); gap: 0; }
       .pk-fact { position: static; padding-top: 36px; }
       .pk-main { padding-top: 28px; }
-      .pk-features, .pk-team, .pk-specs, .pk-dl { grid-template-columns: 1fr; }
+      .pk-features, .pk-team, .pk-dl { grid-template-columns: minmax(0,1fr); }
       .pk-hero-logo { max-width: 210px; }
     }
+
+    /* one screenshot a row on phones: two makes them 156px wide */
+    @media (max-width: 620px) { .pk-gallery { grid-template-columns: minmax(0,1fr); } }
     .pk-video { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); }
     .pk-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
   
 /* keyboard focus: the site set none, so the UA default was the only ring. */
 :focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+    /* press feedback: touch has no hover, so this is the only cue there */
+    .pk-dl a:active, .btn-primary:active, .btn-ghost:active, .btn-copy:active { transform: scale(.985); }
 /* respect a reduced-motion preference */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
@@ -237,6 +234,39 @@ html{overflow-x:clip}
 </head>
 
 <body>
+<svg class="pk-icons" width="0" height="0" aria-hidden="true" focusable="false">
+  <!-- Lucide 1.65.0, ISC. Only the symbols these press kits use. -->
+  <defs>
+    <!-- full press kit / asset pack -->
+    <symbol id="i-pack" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+      <path d="M12 22V12" />
+      <polyline points="3.29 7 12 12 20.71 7" />
+      <path d="m7.5 4.27 9 5.15" />
+    </symbol>
+    <!-- game logo -->
+    <symbol id="i-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+      <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+      <circle cx="10" cy="12" r="2" />
+      <path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22" />
+    </symbol>
+    <!-- key art -->
+    <symbol id="i-keyart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+      <circle cx="9" cy="9" r="2" />
+      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+    </symbol>
+    <!-- store page -->
+    <symbol id="i-pad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="6" x2="10" y1="11" y2="11" />
+      <line x1="8" x2="8" y1="9" y2="13" />
+      <line x1="15" x2="15.01" y1="12" y2="12" />
+      <line x1="18" x2="18.01" y1="10" y2="10" />
+      <path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+    </symbol>
+  </defs>
+</svg>
   <a class="pk-back" href="/slots-slaughter/">← Slots &amp; Slaughter</a>
 
   <header class="pk-hero">
@@ -259,9 +289,9 @@ html{overflow-x:clip}
       <a href="#about">How it plays</a>
       <a href="#media">Media</a>
       <a href="#trailer">Trailer</a>
+      <a href="#downloads">Downloads</a>
       <a href="#team">Team</a>
       <a href="#streaming">Streaming</a>
-      <a href="#downloads">Downloads</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
@@ -307,10 +337,10 @@ html{overflow-x:clip}
       <section class="pk-section" id="about">
         <h2 class="pk-h2">How it plays</h2>
         <div class="pk-features">
-          <div class="pk-feature"><span class="ic">🎰</span><b>Your gear's in the machine</b><span>Your items are the deck. Spin at the top of the turn to see which ones are loaded and ready to swing.</span></div>
-          <div class="pk-feature"><span class="ic">🎲</span><b>Spin again (it'll cost you)</b><span>Hate the pull? Go again. It just gets more expensive every time. At some point you take what you're given and hope.</span></div>
-          <div class="pk-feature"><span class="ic">⚔️</span><b>Then you fight</b><span>Roll a d20 to see who goes first, then it plays out in the arena. You set the fight up; it does the swinging.</span></div>
-          <div class="pk-feature"><span class="ic">🩸</span><b>Buy your freedom, or don't</b><span>Between fights, spend gold to heal, upgrade and re-stock. Enough wins and you walk free. Otherwise, you were great while it lasted.</span></div>
+          <div class="pk-feature"><b>Your gear's in the machine</b><span>Your items are the deck. Spin at the top of the turn to see which ones are loaded and ready to swing.</span></div>
+          <div class="pk-feature"><b>Spin again (it'll cost you)</b><span>Hate the pull? Go again. It just gets more expensive every time. At some point you take what you're given and hope.</span></div>
+          <div class="pk-feature"><b>Then you fight</b><span>Roll a d20 to see who goes first, then it plays out in the arena. You set the fight up; it does the swinging.</span></div>
+          <div class="pk-feature"><b>Buy your freedom, or don't</b><span>Between fights, spend gold to heal, upgrade and re-stock. Enough wins and you walk free. Otherwise, you were great while it lasted.</span></div>
         </div>
       </section>
 
@@ -332,20 +362,23 @@ html{overflow-x:clip}
         </div>
       </section>
 
+      <section class="pk-section" id="downloads">
+        <h2 class="pk-h2">Downloads</h2>
+        <div class="pk-dl">
+          <a href="https://drive.google.com/drive/folders/1Oyu8hB36oPboH7C_eCgc4eWyofaRoOU0?usp=sharing" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pack"></use></svg><span><b>Full asset pack</b><span>Key art, capsules, logos (Google Drive)</span></span></a>
+          <a href="/images/slots-slaughter/presskit/logo.png" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-logo"></use></svg><span><b>Game logo</b><span>PNG, transparent</span></span></a>
+          <a href="/images/slots-slaughter/presskit/key-art.png" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-keyart"></use></svg><span><b>Key art</b><span>PNG</span></span></a>
+          <a href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pad"></use></svg><span><b>Steam page</b><span>store.steampowered.com</span></span></a>
+        </div>
+      </section>
       <section class="pk-section" id="team">
         <h2 class="pk-h2">The Team</h2>
         <div class="pk-team">
           <div class="pk-team-card">
             <span class="role">the game</span>
-            <h4>Laser Castle</h4>
+            <h3>Laser Castle</h3>
             <p>A Slovak-born, Taiwan-based front-end developer by day and gamer by night. Passionate about board games and turn-based video games, he's finally trying to make one of his own.</p>
             <div class="pills"><span>Developer</span><span>Roguelike</span><span>Deck-builder</span></div>
-          </div>
-          <div class="pk-team-card">
-            <span class="role">the publisher</span>
-            <h4>Indieformer</h4>
-            <p>Josh &amp; Clem, out of Melbourne. Two of us, plus a network we lean on. We get involved early, from the design and the loop through to the marketing, and we stay from idea to release. We work as part of the team.</p>
-            <div class="pills"><span>Melbourne</span><span>Publisher</span><span>Scorchpot</span><span>Abelina</span></div>
           </div>
         </div>
       </section>
@@ -357,15 +390,6 @@ html{overflow-x:clip}
         </div>
       </section>
 
-      <section class="pk-section" id="downloads">
-        <h2 class="pk-h2">Downloads</h2>
-        <div class="pk-dl">
-          <a href="https://drive.google.com/drive/folders/1Oyu8hB36oPboH7C_eCgc4eWyofaRoOU0?usp=sharing" target="_blank" rel="noopener"><span class="ic">📦</span><span><b>Full asset pack</b><span>Key art, capsules, logos (Google Drive)</span></span></a>
-          <a href="/images/slots-slaughter/presskit/logo.png" target="_blank" rel="noopener"><span class="ic">🅰️</span><span><b>Game logo</b><span>PNG, transparent</span></span></a>
-          <a href="/images/slots-slaughter/presskit/key-art.png" target="_blank" rel="noopener"><span class="ic">🖼️</span><span><b>Key art</b><span>PNG</span></span></a>
-          <a href="https://store.steampowered.com/app/4504900/Slots__Slaughter/" target="_blank" rel="noopener"><span class="ic">🎮</span><span><b>Steam page</b><span>store.steampowered.com</span></span></a>
-        </div>
-      </section>
 
       <section class="pk-section" id="contact">
         <h2 class="pk-h2">Contact</h2>
@@ -418,6 +442,9 @@ html{overflow-x:clip}
       if (img && img.style.display !== 'none' && img.complete && img.naturalWidth) { lbImg.src = img.src; lb.classList.add('on'); }
     });
     lb.addEventListener('click', function () { lb.classList.remove('on'); lbImg.src = ''; });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { lb.classList.remove('on'); lbImg.src = ''; }
+    });
   </script>
 </body>
 

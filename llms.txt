@@ -4,7 +4,7 @@
 
 Indieformer is a small indie game publisher. We publish indie games and talk about the process. What we're learning, what we're trying, what didn't work. The free newsletter goes out roughly monthly. It is also a YouTube channel, a release tracker called Waypoint (now archived), and a game jam called Patch Notes.
 
-The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a dice roguelike by Moravian Games. It launched on Steam on 20 August 2026.
+The first game on the Indieformer publishing slate is **Feed the Scorchpot**, a dice roguelike by Moravian. It launched on Steam on 20 August 2026.
 
 ## Pages
 

@@ -44,7 +44,7 @@
   --blood:#7A1216; --ember:#E8452C; --head-red:#C41217;
   --gold:#C9972F; --gold-bright:#EFC45C;
   --bone:#EFE6D6; --text-1:#EFE6D6; --text-2:#C2AC9F; --text-3:#8A7168;
-  --max:1180px;
+  --max:1340px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--void);color:var(--text-1);font-family:'Karla',system-ui,sans-serif;
@@ -56,7 +56,8 @@ a:hover{color:var(--ember)}
 /* the back link stays on Indieformer brand type. A press kit is the publisher's
    surface, not the game's, which is why this one is Caveat and the game page's
    is Unutterable. */
-.pk-back{position:fixed;top:16px;left:20px;z-index:200;font-family:'Caveat',cursive;font-size:21px;
+/* absolute, not fixed: fixed pinned it over the sticky section nav */
+.pk-back{position:absolute;top:16px;left:20px;z-index:200;font-family:'Caveat',cursive;font-size:21px;
   color:var(--gold-bright);text-decoration:none;transform:rotate(-2deg);
   text-shadow:0 2px 12px rgba(0,0,0,.85);transition:transform .2s,color .2s}
 .pk-back:hover{color:var(--bone);transform:rotate(-2deg) translateX(-4px)}
@@ -81,9 +82,9 @@ a:hover{color:var(--ember)}
   text-decoration:none;border-bottom:2px solid transparent}
 .pk-nav a:hover{color:var(--gold-bright);border-bottom-color:var(--gold)}
 
-.pk-wrap{display:grid;grid-template-columns:260px 1fr;gap:44px;max-width:var(--max);
+.pk-wrap{display:grid;grid-template-columns:260px minmax(0,1fr);gap:44px;max-width:var(--max);
   margin:0 auto;padding:44px 20px 80px}
-@media(max-width:860px){.pk-wrap{grid-template-columns:1fr;gap:28px}}
+@media(max-width:860px){.pk-wrap{grid-template-columns:minmax(0,1fr);gap:28px}}
 
 aside{align-self:start;position:sticky;top:70px}
 @media(max-width:860px){aside{position:static}}
@@ -101,8 +102,8 @@ aside{align-self:start;position:sticky;top:70px}
 .pk-section li{margin-bottom:7px}
 .pk-section li b{color:var(--gold-bright);font-weight:700}
 
-.pk-gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:620px){.pk-gallery{grid-template-columns:1fr}}
+.pk-gallery{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+@media(max-width:620px){.pk-gallery{grid-template-columns:minmax(0,1fr)}}
 .pk-shot{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;cursor:pointer;
   border:1px solid var(--border-mid);display:flex;align-items:center;justify-content:center;
   background:radial-gradient(60% 80% at 30% 20%,rgba(201,151,47,.12),transparent 70%),linear-gradient(160deg,#200C0F,#0B0406)}
@@ -117,16 +118,7 @@ aside{align-self:start;position:sticky;top:70px}
 .pk-trailer{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;
   border:1px solid var(--border-mid);box-shadow:0 18px 44px rgba(0,0,0,.55)}
 .pk-trailer iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-
-.pk-specs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:620px){.pk-specs{grid-template-columns:1fr}}
-.pk-specs-card{background:var(--void-mid);border:1px solid var(--border-mid);border-radius:9px;padding:16px 18px}
-.pk-specs-card>b{display:block;font-family:'Unutterable',Georgia,serif;font-size:19px;
-  color:var(--gold-bright);margin-bottom:9px;letter-spacing:.01em}
-.pk-specs-card ul{margin:0;list-style:none;color:var(--text-2);font-size:14px}
-.pk-specs-card li{margin-bottom:5px;line-height:1.5}
-.pk-specs-card li span{color:var(--text-3);display:inline-block;min-width:44px}
-.pk-dl .ic{font-size:19px;margin-right:9px;float:left;line-height:1.3}
+.pk-dl .ic{width:22px;height:22px;margin-right:9px;float:left;color:var(--ember)}
 .pk-dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
 .pk-dl a{display:block;padding:14px 16px;border:1px solid var(--border-mid);border-radius:9px;
   background:var(--void-mid);text-decoration:none;color:var(--bone);font-weight:700;font-size:14px}
@@ -139,6 +131,8 @@ footer{border-top:1px solid var(--border);padding:26px 20px;text-align:center;
 
 /* keyboard focus: the site set none, so the UA default was the only ring. */
 :focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+/* press feedback: touch has no hover, so this is the only cue there */
+.pk-dl a:active{transform:scale(.985)}
 /* respect a reduced-motion preference */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
@@ -148,6 +142,47 @@ html,body{overflow-x:clip}
 </style>
 </head>
 <body>
+<svg class="pk-icons" width="0" height="0" aria-hidden="true" focusable="false">
+  <!-- Lucide 1.65.0, ISC. Only the symbols these press kits use. -->
+  <defs>
+    <!-- full press kit / asset pack -->
+    <symbol id="i-pack" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+      <path d="M12 22V12" />
+      <polyline points="3.29 7 12 12 20.71 7" />
+      <path d="m7.5 4.27 9 5.15" />
+    </symbol>
+    <!-- game logo -->
+    <symbol id="i-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+      <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+      <circle cx="10" cy="12" r="2" />
+      <path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22" />
+    </symbol>
+    <!-- key art -->
+    <symbol id="i-keyart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+      <circle cx="9" cy="9" r="2" />
+      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+    </symbol>
+    <!-- hero banner -->
+    <symbol id="i-banner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 3v18" />
+      <rect width="12" height="18" x="6" y="3" rx="2" />
+      <path d="M22 3v18" />
+    </symbol>
+    <!-- a character asset -->
+    <symbol id="i-character" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 11c-1.5 0-2.5.5-3 2" />
+      <path d="M4 6a2 2 0 0 0-2 2v4a5 5 0 0 0 5 5 8 8 0 0 1 5 2 8 8 0 0 1 5-2 5 5 0 0 0 5-5V8a2 2 0 0 0-2-2h-3a8 8 0 0 0-5 2 8 8 0 0 0-5-2z" />
+      <path d="M6 11c1.5 0 2.5.5 3 2" />
+    </symbol>
+    <!-- app / store icon -->
+    <symbol id="i-appicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9-9 9-9-1.8-9-9 1.8-9 9-9" />
+    </symbol>
+  </defs>
+</svg>
 <a class="pk-back" href="/">← Indieformer</a>
 
 <header class="pk-hero">
@@ -166,10 +201,9 @@ html,body{overflow-x:clip}
     <a href="#about">What it is</a>
     <a href="#trailer">Trailer</a>
     <a href="#media">Screenshots</a>
-    <a href="#team">Team</a>
-    <a href="#specs">Specs</a>
-    <a href="#streaming">Streaming</a>
     <a href="#downloads">Downloads</a>
+    <a href="#team">Team</a>
+    <a href="#streaming">Streaming</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -238,41 +272,21 @@ html,body{overflow-x:clip}
       </div>
     </section>
 
+    <section class="pk-section" id="downloads">
+      <h2 class="pk-h2">DOWNLOADS</h2>
+      <div class="pk-dl">
+        <a href="https://drive.google.com/drive/folders/1YaktiReIMy7gHkwyuppTKtwI4f-KYTM4?usp=sharing" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pack"></use></svg><span>Full press kit<span>Screenshots, logos and key art on Drive</span></span></a>
+        <a href="../assets/downloads/library-logo.png" download><svg class="ic" aria-hidden="true"><use href="#i-logo"></use></svg><span>Logo<span>PNG with transparency, 1280&times;810</span></span></a>
+        <a href="../assets/web/key-art-capsule.png" download><svg class="ic" aria-hidden="true"><use href="#i-keyart"></use></svg><span>Key art<span>Main capsule, PNG 1232&times;706</span></span></a>
+        <a href="../assets/downloads/hero-banner.png" download><svg class="ic" aria-hidden="true"><use href="#i-banner"></use></svg><span>Hero banner<span>PNG, 3840&times;1240</span></span></a>
+        <a href="../assets/downloads/host.png" download><svg class="ic" aria-hidden="true"><use href="#i-character"></use></svg><span>The host<span>PNG with transparency, 3102&times;2701</span></span></a>
+        <a href="../assets/downloads/icon.png" download><svg class="ic" aria-hidden="true"><use href="#i-appicon"></use></svg><span>Icon<span>PNG, 512&times;512</span></span></a>
+      </div>
+      <p class="pk-note" style="margin-top:14px">Screenshots are available at full resolution, 3024&times;1964, on request. The Drive folder above has them at full size.</p>
+    </section>
     <section class="pk-section" id="team">
       <h2 class="pk-h2">tHE tEAM</h2>
       <p><b>Smilingface</b> is a solo developer in Kraków, Poland, building Devilcoin alone and doing all of its art.</p>
-      <p><b>Indieformer</b> is a two-person publisher in Melbourne, Australia, run by Josh Chiodo and Clement Schmutz. We came out of twelve years as an indie-game curator and newsletter, and we write in public about the business of publishing while we do it.</p>
-    </section>
-
-    <section class="pk-section" id="specs">
-      <h2 class="pk-h2">SYStEM REQUIREMENtS</h2>
-      <div class="pk-specs">
-        <div class="pk-specs-card">
-          <b>MINIMUM</b>
-          <ul>
-            <li><span>OS:</span> Windows 10 (64-bit)</li>
-            <li><span>CPU:</span> Intel Core i3-4160 @ 3.6 GHz or AMD FX-6300 @ 3.5 GHz</li>
-            <li><span>RAM:</span> 8 GB</li>
-            <li><span>GPU:</span> NVIDIA GeForce GTX 750 Ti (2 GB) or AMD Radeon RX 550 (2 GB)</li>
-            <li><span>DirectX:</span> Version 11</li>
-            <li><span>Storage:</span> 2 GB available space</li>
-            <li><span>Sound:</span> DirectX compatible soundcard or onboard audio</li>
-          </ul>
-        </div>
-        <div class="pk-specs-card">
-          <b>RECOMMENDED</b>
-          <ul>
-            <li><span>OS:</span> Windows 10 / 11 (64-bit)</li>
-            <li><span>CPU:</span> Intel Core i5-6500 @ 3.2 GHz or AMD Ryzen 3 3100 @ 3.6 GHz</li>
-            <li><span>RAM:</span> 8 GB</li>
-            <li><span>GPU:</span> NVIDIA GeForce GTX 1050 Ti (4 GB) or AMD Radeon RX 570 (4 GB)</li>
-            <li><span>DirectX:</span> Version 11</li>
-            <li><span>Storage:</span> 2 GB available space</li>
-            <li><span>Sound:</span> DirectX compatible soundcard or onboard audio</li>
-          </ul>
-        </div>
-      </div>
-      <p class="pk-note" style="margin-top:12px">Requires a 64-bit processor and operating system.</p>
     </section>
 
     <section class="pk-section" id="streaming">
@@ -280,21 +294,9 @@ html,body{overflow-x:clip}
       <p>Yes, go for it. Indieformer and Smilingface grant everyone the right to record, stream and monetize video content of Devilcoin, including on YouTube, Twitch and any other platform. No prior permission needed.</p>
     </section>
 
-    <section class="pk-section" id="downloads">
-      <h2 class="pk-h2">DOWNLOADS</h2>
-      <div class="pk-dl">
-        <a href="https://drive.google.com/drive/folders/1YaktiReIMy7gHkwyuppTKtwI4f-KYTM4?usp=sharing" target="_blank" rel="noopener"><span class="ic">📦</span><span>Full press kit<span>Screenshots, logos and key art on Drive</span></span></a>
-        <a href="../assets/downloads/library-logo.png" download><span class="ic">🅰️</span><span>Logo<span>PNG with transparency, 1280&times;810</span></span></a>
-        <a href="../assets/web/key-art-capsule.png" download><span class="ic">🖼️</span><span>Key art<span>Main capsule, PNG 1232&times;706</span></span></a>
-        <a href="../assets/downloads/hero-banner.png" download><span class="ic">🏞️</span><span>Hero banner<span>PNG, 3840&times;1240</span></span></a>
-        <a href="../assets/downloads/host.png" download><span class="ic">👹</span><span>The host<span>PNG with transparency, 3102&times;2701</span></span></a>
-        <a href="../assets/downloads/icon.png" download><span class="ic">🪙</span><span>Icon<span>PNG, 512&times;512</span></span></a>
-      </div>
-      <p class="pk-note" style="margin-top:14px">Screenshots are available at full resolution, 3024&times;1964, on request. The Drive folder above has them at full size.</p>
-    </section>
 
     <section class="pk-section" id="contact">
-      <h2 class="pk-h2">CONtACt</h2>
+      <h2 class="pk-h2">CONTACt</h2>
       <p><b>Press and inquiries:</b> <a href="mailto:devilcoin@indieformer.com">devilcoin@indieformer.com</a></p>
       <p><b>Web:</b> <a href="https://indieformer.com/devilcoin/">indieformer.com/devilcoin</a></p>
       <p class="pk-note">Review keys, a build, or anything else you need for a piece: just ask. We would rather send it than have you guess.</p>

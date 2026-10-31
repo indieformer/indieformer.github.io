@@ -69,7 +69,7 @@
 
     /* HERO */
     .pk-hero {
-      position: relative; min-height: 56vh;
+      position: relative; min-height: 56svh;  /* svh, not vh: the hero would jump when mobile chrome collapses */
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center; padding: 84px 24px 52px; overflow: hidden;
     }
@@ -113,14 +113,14 @@
 
     /* NAV */
     .pk-nav { position: sticky; top: 0; z-index: 100; background: rgba(14,15,24,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-    .pk-nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 16px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+    .pk-nav-inner { max-width: 1340px; margin: 0 auto; padding: 0 16px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
     .pk-nav-inner::-webkit-scrollbar { display: none; }
     .pk-nav a { flex: 0 0 auto; padding: 14px 14px; font-size: 13.5px; font-weight: 600; letter-spacing: 0; color: var(--text-tertiary); border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; white-space: nowrap; }
     .pk-nav a:hover { color: var(--text-secondary); }
     .pk-nav a.active { color: var(--phosphor-bright); border-bottom-color: var(--phosphor-bright); }
 
     /* LAYOUT */
-    .pk-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+    .pk-wrap { max-width: 1340px; margin: 0 auto; padding: 0 24px 80px; display: grid; grid-template-columns: 260px minmax(0,1fr); gap: 48px; align-items: start; }
 
     /* FACTSHEET */
     .pk-fact { position: sticky; top: 64px; padding-top: 48px; }
@@ -150,9 +150,8 @@
     .btn-copy:hover { border-color: var(--phosphor); color: var(--bone); }
     .btn-copy.done { color: var(--phosphor-bright); border-color: var(--phosphor-bright); }
 
-    .pk-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .pk-feature { background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
-    .pk-feature .ic { font-size: 22px; display: block; margin-bottom: 8px; }
+    .pk-features { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 44px; }
+    .pk-feature { padding: 2px 0 0; }
     .pk-feature b { color: var(--bone); font-size: 14.5px; display: block; margin-bottom: 4px; }
     .pk-feature span { color: var(--text-secondary); font-size: 13px; line-height: 1.55; }
 
@@ -160,7 +159,7 @@
     .pk-quote p { color: var(--bone); font-size: 17px; font-style: italic; margin-bottom: 6px; }
     .pk-quote cite { color: var(--text-tertiary); font-size: 13px; font-style: normal; }
 
-    .pk-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pk-gallery { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
     .pk-video { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-mid); }
     .pk-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
     .pk-shot { position: relative; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid var(--border); background: radial-gradient(60% 80% at 30% 20%, rgba(95,224,166,0.12), transparent 70%), linear-gradient(160deg, #1a1d2c, #0f111a); display: flex; align-items: center; justify-content: center; }
@@ -168,25 +167,18 @@
     .pk-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s; }
     .pk-shot:hover img { transform: scale(1.05); }
 
-    .pk-team { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .pk-team-card { background: var(--void-mid); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+    .pk-team { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px 44px; }
+    .pk-team-card { padding: 2px 0 0 20px; border-left: 2px solid var(--border-mid); }
     .pk-team-card .role { font-family: 'Caveat', cursive; font-size: 20px; color: var(--phosphor-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 4px; }
-    .pk-team-card h4 { font-size: 18px; font-weight: 700; color: var(--bone); margin-bottom: 8px; }
+    .pk-team-card h3 { font-size: 18px; font-weight: 700; color: var(--bone); margin-bottom: 8px; }
     .pk-team-card p { font-size: 13.5px; margin-bottom: 0; }
     .pk-team-card .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
     .pk-team-card .pills span { font-size: 11px; color: var(--lichen); background: rgba(95,224,166,0.06); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; }
 
-    .pk-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .pk-specs-card { background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px; }
-    .pk-specs-card b { color: var(--phosphor-bright); font-size: 13px; letter-spacing: .05em; text-transform: uppercase; display: block; margin-bottom: 10px; }
-    .pk-specs-card ul { list-style: none; }
-    .pk-specs-card li { font-size: 13px; color: var(--text-secondary); padding: 3px 0; }
-    .pk-specs-card li span { color: var(--text-tertiary); }
-
     .pk-dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .pk-dl a { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--void-mid); border: 1px solid var(--border); border-radius: 12px; transition: border-color .2s, background-color .2s; }
     .pk-dl a:hover { border-color: var(--phosphor); background: var(--void-lite); }
-    .pk-dl .ic { font-size: 22px; }
+    .pk-dl .ic { width: 26px; height: 26px; flex: 0 0 26px; color: var(--phosphor-bright); }
     .pk-dl b { display: block; font-size: 14px; color: var(--bone); }
     .pk-dl span { font-size: 12px; color: var(--text-tertiary); }
 
@@ -206,12 +198,15 @@
     #lb img { max-width: 96%; max-height: 92%; border-radius: 8px; box-shadow: 0 20px 80px rgba(0,0,0,.6); }
 
     @media (max-width: 860px) {
-      .pk-wrap { grid-template-columns: 1fr; gap: 0; }
+      .pk-wrap { grid-template-columns: minmax(0,1fr); gap: 0; }
       .pk-fact { position: static; padding-top: 36px; }
       .pk-main { padding-top: 28px; }
-      .pk-features, .pk-team, .pk-specs, .pk-dl { grid-template-columns: 1fr; }
+      .pk-features, .pk-team, .pk-dl { grid-template-columns: minmax(0,1fr); }
       .pk-hero-logo { max-width: 280px; }
     }
+
+    /* one screenshot a row on phones: two makes them 156px wide */
+    @media (max-width: 620px) { .pk-gallery { grid-template-columns: minmax(0,1fr); } }
 
     /* ── loading overlay (Lottie gem) — matches main pages ── */
     #loader-overlay { position: fixed; inset: 0; z-index: 9999; background: var(--void); display: flex; align-items: center; justify-content: center; transition: opacity 0.45s ease; }
@@ -221,6 +216,8 @@
   
 /* keyboard focus: the site set none, so the UA default was the only ring. */
 :focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+    /* press feedback: touch has no hover, so this is the only cue there */
+    .pk-dl a:active, .btn-primary:active, .btn-ghost:active, .btn-copy:active { transform: scale(.985); }
 /* respect a reduced-motion preference */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
@@ -232,6 +229,37 @@ html{overflow-x:clip}
 </head>
 
 <body>
+<svg class="pk-icons" width="0" height="0" aria-hidden="true" focusable="false">
+  <!-- Lucide 1.65.0, ISC. Only the symbols these press kits use. -->
+  <defs>
+    <!-- full press kit / asset pack -->
+    <symbol id="i-pack" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+      <path d="M12 22V12" />
+      <polyline points="3.29 7 12 12 20.71 7" />
+      <path d="m7.5 4.27 9 5.15" />
+    </symbol>
+    <!-- game logo -->
+    <symbol id="i-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+      <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+      <circle cx="10" cy="12" r="2" />
+      <path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22" />
+    </symbol>
+    <!-- key art -->
+    <symbol id="i-keyart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+      <circle cx="9" cy="9" r="2" />
+      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+    </symbol>
+    <!-- dev site -->
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+      <path d="M2 12h20" />
+    </symbol>
+  </defs>
+</svg>
 
   <div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
@@ -281,10 +309,9 @@ html{overflow-x:clip}
       <a href="#story">Dev's note</a>
       <a href="#trailer">Trailer</a>
           <a href="#media">Media</a>
-      <a href="#team">Team</a>
-      <a href="#specs">Specs</a>
-      <a href="#streaming">Streaming</a>
       <a href="#downloads">Downloads</a>
+      <a href="#team">Team</a>
+      <a href="#streaming">Streaming</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
@@ -332,10 +359,10 @@ html{overflow-x:clip}
       <section class="pk-section" id="about">
         <h2 class="pk-h2">What it is</h2>
         <div class="pk-features">
-          <div class="pk-feature"><span class="ic">🪦</span><b>An afterlife to wander</b><span>You died, and now you explore Abelina, a strange world of biomes and settlers, piecing together what this place is.</span></div>
-          <div class="pk-feature"><span class="ic">🕯️</span><b>A story about transformation</b><span>Memory and purpose, told through who you meet and what they tell you, as your own past slowly reforms.</span></div>
-          <div class="pk-feature"><span class="ic">🤝</span><b>No combat, discovery instead</b><span>Progress comes from exploring and understanding. There's no fighting here.</span></div>
-          <div class="pk-feature"><span class="ic">✋</span><b>Hand-crafted by a veteran</b><span>Built by a CG-animation veteran (Valorant, League of Legends, Love, Death + Robots) with a Webby-winning composer on the score.</span></div>
+          <div class="pk-feature"><b>An afterlife to wander</b><span>You died, and now you explore Abelina, a strange world of biomes and settlers, piecing together what this place is.</span></div>
+          <div class="pk-feature"><b>A story about transformation</b><span>Memory and purpose, told through who you meet and what they tell you, as your own past slowly reforms.</span></div>
+          <div class="pk-feature"><b>No combat, discovery instead</b><span>Progress comes from exploring and understanding. There's no fighting here.</span></div>
+          <div class="pk-feature"><b>Hand-crafted by a veteran</b><span>Built by a CG-animation veteran (Valorant, League of Legends, Love, Death + Robots) with a Webby-winning composer on the score.</span></div>
         </div>
       </section>
 
@@ -366,48 +393,29 @@ html{overflow-x:clip}
         </div>
       </section>
 
+      <section class="pk-section" id="downloads">
+        <h2 class="pk-h2">Downloads</h2>
+        <div class="pk-dl">
+          <a href="https://drive.google.com/drive/folders/1XYnkhu3OXU8AwyNQAkSqUZVFMwEmHRro?usp=sharing" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pack"></use></svg><span><b>Full press kit</b><span>Screenshots, key art, logos (Google Drive)</span></span></a>
+          <a href="/images/abelina/logo.png" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-logo"></use></svg><span><b>Game logo</b><span>PNG, transparent</span></span></a>
+          <a href="/images/abelina/hero-bg.jpg" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-keyart"></use></svg><span><b>Key art</b><span>JPG</span></span></a>
+          <a href="https://gabeaskew.com/abelina" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-globe"></use></svg><span><b>Dev site</b><span>gabeaskew.com/abelina</span></span></a>
+        </div>
+      </section>
       <section class="pk-section" id="team">
         <h2 class="pk-h2">The Team</h2>
         <div class="pk-team">
           <div class="pk-team-card">
             <span class="role">the whole game</span>
-            <h4>Gabe Askew</h4>
+            <h3>Gabe Askew</h3>
             <p>Solo developer, handling art, animation and design. A career in CG animation, with nine years at Hornet directing campaigns for Dolby, Purina and Campbell's, then supervising cinematics at Blur Studio. Abelina is all of that pointed at one strange, personal world.</p>
             <div class="pills"><span>Valorant</span><span>League of Legends</span><span>Love, Death + Robots</span><span>Hornet</span><span>Blur Studio</span></div>
           </div>
           <div class="pk-team-card">
             <span class="role">music &amp; sound</span>
-            <h4>Ryan Holladay</h4>
+            <h3>Ryan Holladay</h3>
             <p>Gabe's longtime musical partner and a Webby Award-winning composer. VP of Music at WaitWhat and a Senior TED Fellow, who co-composed the 2025 film <em>Weapons</em> and is scoring Zach Cregger's upcoming <em>Resident Evil</em>.</p>
             <div class="pills"><span>Webby Award</span><span>Senior TED Fellow</span><span>WaitWhat</span><span>Weapons (2025)</span><span>Resident Evil (2026)</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="pk-section" id="specs">
-        <h2 class="pk-h2">System Requirements</h2>
-        <div class="pk-specs">
-          <div class="pk-specs-card">
-            <b>Minimum</b>
-            <ul>
-              <li><span>OS:</span> Windows 10</li>
-              <li><span>CPU:</span> Intel Core i5-2300 / AMD FX-4350</li>
-              <li><span>RAM:</span> 12 GB</li>
-              <li><span>GPU:</span> AMD RX 580 / Nvidia GTX 1050</li>
-              <li><span>DirectX:</span> 12</li>
-              <li><span>Storage:</span> 4 GB</li>
-            </ul>
-          </div>
-          <div class="pk-specs-card">
-            <b>Recommended</b>
-            <ul>
-              <li><span>OS:</span> Windows 11</li>
-              <li><span>CPU:</span> Intel Core i7-6700 / AMD Ryzen 7 1800X</li>
-              <li><span>RAM:</span> 14 GB</li>
-              <li><span>GPU:</span> AMD RX 6600 / Nvidia RTX 2050</li>
-              <li><span>DirectX:</span> 12</li>
-              <li><span>Storage:</span> 4 GB</li>
-            </ul>
           </div>
         </div>
       </section>
@@ -419,15 +427,6 @@ html{overflow-x:clip}
         </div>
       </section>
 
-      <section class="pk-section" id="downloads">
-        <h2 class="pk-h2">Downloads</h2>
-        <div class="pk-dl">
-          <a href="https://drive.google.com/drive/folders/1XYnkhu3OXU8AwyNQAkSqUZVFMwEmHRro?usp=sharing" target="_blank" rel="noopener"><span class="ic">📦</span><span><b>Full press kit</b><span>Screenshots, key art, logos (Google Drive)</span></span></a>
-          <a href="/images/abelina/logo.png" target="_blank" rel="noopener"><span class="ic">🅰️</span><span><b>Game logo</b><span>PNG, transparent</span></span></a>
-          <a href="/images/abelina/hero-bg.jpg" target="_blank" rel="noopener"><span class="ic">🖼️</span><span><b>Key art</b><span>JPG</span></span></a>
-          <a href="https://gabeaskew.com/abelina" target="_blank" rel="noopener"><span class="ic">🌐</span><span><b>Dev site</b><span>gabeaskew.com/abelina</span></span></a>
-        </div>
-      </section>
 
       <section class="pk-section" id="contact">
         <h2 class="pk-h2">Contact</h2>
@@ -479,6 +478,9 @@ html{overflow-x:clip}
       if (img && img.style.display !== 'none' && img.complete && img.naturalWidth) { lbImg.src = img.src; lb.classList.add('on'); }
     });
     lb.addEventListener('click', function () { lb.classList.remove('on'); lbImg.src = ''; });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { lb.classList.remove('on'); lbImg.src = ''; }
+    });
   </script>
 </body>
 

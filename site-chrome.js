@@ -73,7 +73,12 @@
     '@media (hover:hover){.nav-group:hover .nav-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}}' +
     '@media (max-width:640px){.nav-menu{left:0;transform:none;min-width:170px}' +
       '.nav-group[data-open] .nav-menu{transform:none}' +
-      '@media (hover:hover){.nav-group:hover .nav-menu{transform:none}}}';
+      '@media (hover:hover){.nav-group:hover .nav-menu{transform:none}}}' +
+    /* the gem turns to catch the light on hover; transform only, and it sits out
+       entirely for anyone who asked for less motion */
+    '@media (hover:hover) and (prefers-reduced-motion:no-preference){' +
+      '.brand img{transition:transform .35s cubic-bezier(.2,.9,.3,1)}' +
+      '.brand:hover img{transform:rotate(-8deg) scale(1.08)}}';
 
   function wireDropdowns(root) {
     var groups = [].slice.call(root.querySelectorAll('.nav-group'));

@@ -73,7 +73,7 @@
 
     /* ── HERO ── */
     .pk-hero {
-      position: relative; min-height: 56vh;
+      position: relative; min-height: 56svh;  /* svh, not vh: the hero would jump when mobile chrome collapses */
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center; padding: 84px 24px 52px;
@@ -125,7 +125,7 @@
       border-bottom: 1px solid var(--border);
     }
     .pk-nav-inner {
-      max-width: 1100px; margin: 0 auto; padding: 0 16px;
+      max-width: 1340px; margin: 0 auto; padding: 0 16px;
       display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
     }
     .pk-nav-inner::-webkit-scrollbar { display: none; }
@@ -140,8 +140,8 @@
 
     /* ── LAYOUT ── */
     .pk-wrap {
-      max-width: 1100px; margin: 0 auto; padding: 0 24px 80px;
-      display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start;
+      max-width: 1340px; margin: 0 auto; padding: 0 24px 80px;
+      display: grid; grid-template-columns: 260px minmax(0,1fr); gap: 48px; align-items: start;
     }
 
     /* ── FACTSHEET ── */
@@ -198,9 +198,8 @@
     .btn-copy.done { color: var(--gold-bright); border-color: var(--gold-bright); }
 
     /* features */
-    .pk-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .pk-feature { background: var(--ash-mid); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
-    .pk-feature .ic { font-size: 22px; display: block; margin-bottom: 8px; }
+    .pk-features { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 44px; }
+    .pk-feature { padding: 2px 0 0; }
     .pk-feature b { color: var(--parchment); font-size: 14.5px; display: block; margin-bottom: 4px; }
     .pk-feature span { color: var(--text-secondary); font-size: 13px; line-height: 1.55; }
 
@@ -216,7 +215,7 @@
     .pk-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
 
     /* gallery */
-    .pk-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .pk-gallery { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
     .pk-shot {
       position: relative; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; cursor: pointer;
       border: 1px solid var(--border); background:
@@ -229,10 +228,10 @@
     .pk-shot:hover img { transform: scale(1.05); }
 
     /* team */
-    .pk-team { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .pk-team-card { background: var(--ash-mid); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+    .pk-team { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px 44px; }
+    .pk-team-card { padding: 2px 0 0 20px; border-left: 2px solid var(--border-mid); }
     .pk-team-card .role { font-family: 'Caveat', cursive; font-size: 20px; color: var(--gold-bright); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 4px; }
-    .pk-team-card h4 { font-size: 18px; font-weight: 700; color: var(--parchment); margin-bottom: 8px; }
+    .pk-team-card h3 { font-size: 18px; font-weight: 700; color: var(--parchment); margin-bottom: 8px; }
     .pk-team-card p { font-size: 13.5px; margin-bottom: 0; }
 
     /* downloads */
@@ -242,7 +241,7 @@
       background: var(--ash-mid); border: 1px solid var(--border); border-radius: 12px; transition: border-color .2s, background-color .2s;
     }
     .pk-dl a:hover { border-color: var(--gold); background: var(--ash-lite); }
-    .pk-dl .ic { font-size: 22px; }
+    .pk-dl .ic { width: 26px; height: 26px; flex: 0 0 26px; color: var(--gold-bright); }
     .pk-dl b { display: block; font-size: 14px; color: var(--parchment); }
     .pk-dl span { font-size: 12px; color: var(--text-tertiary); }
 
@@ -268,11 +267,11 @@
     #lb img { max-width: 96%; max-height: 92%; border-radius: 8px; box-shadow: 0 20px 80px rgba(0,0,0,.6); }
 
     @media (max-width: 860px) {
-      .pk-wrap { grid-template-columns: 1fr; gap: 0; }
+      .pk-wrap { grid-template-columns: minmax(0,1fr); gap: 0; }
       .pk-fact { position: static; padding-top: 36px; }
       .pk-main { padding-top: 28px; }
       .pk-features, .pk-team, .pk-dl { grid-template-columns: 1fr; }
-      .pk-gallery { grid-template-columns: 1fr 1fr; }
+      .pk-gallery { grid-template-columns: minmax(0,1fr); }
       .pk-hero-logo { max-width: 320px; }
     }
 
@@ -284,6 +283,8 @@
   
 /* keyboard focus: the site set none, so the UA default was the only ring. */
 :focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
+    /* press feedback: touch has no hover, so this is the only cue there */
+    .pk-dl a:active, .btn-primary:active, .btn-ghost:active, .btn-copy:active { transform: scale(.985); }
 /* respect a reduced-motion preference */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
@@ -295,6 +296,38 @@ html{overflow-x:clip}
 </head>
 
 <body>
+<svg class="pk-icons" width="0" height="0" aria-hidden="true" focusable="false">
+  <!-- Lucide 1.65.0, ISC. Only the symbols these press kits use. -->
+  <defs>
+    <!-- full press kit / asset pack -->
+    <symbol id="i-pack" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+      <path d="M12 22V12" />
+      <polyline points="3.29 7 12 12 20.71 7" />
+      <path d="m7.5 4.27 9 5.15" />
+    </symbol>
+    <!-- game logo -->
+    <symbol id="i-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+      <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+      <circle cx="10" cy="12" r="2" />
+      <path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22" />
+    </symbol>
+    <!-- key art -->
+    <symbol id="i-keyart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+      <circle cx="9" cy="9" r="2" />
+      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+    </symbol>
+    <!-- trailer -->
+    <symbol id="i-film" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m12.296 3.464 3.02 3.956" />
+      <path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z" />
+      <path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <path d="m6.18 5.276 3.1 3.899" />
+    </symbol>
+  </defs>
+</svg>
 
   <div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
@@ -347,10 +380,10 @@ html{overflow-x:clip}
       <a href="#story">Story</a>
       <a href="#media">Media</a>
       <a href="#trailer">Trailer</a>
+      <a href="#downloads">Downloads</a>
       <a href="#quotes">Quotes</a>
       <a href="#team">Team</a>
       <a href="#streaming">Streaming</a>
-      <a href="#downloads">Downloads</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
@@ -361,7 +394,7 @@ html{overflow-x:clip}
       <div class="pk-fact-card">
         <span class="pk-fact-eyebrow">Factsheet</span>
         <div class="pk-fact-row"><span class="pk-fact-label">Title</span><span class="pk-fact-val">Feed the Scorchpot</span></div>
-        <div class="pk-fact-row"><span class="pk-fact-label">Developer</span><span class="pk-fact-val">Moravian Games</span></div>
+        <div class="pk-fact-row"><span class="pk-fact-label">Developer</span><span class="pk-fact-val">Moravian</span></div>
         <div class="pk-fact-row"><span class="pk-fact-label">Publisher</span><span class="pk-fact-val">Indieformer</span></div>
         <div class="pk-fact-row"><span class="pk-fact-label">Based in</span><span class="pk-fact-val">Czech Republic (dev) · Melbourne, Australia (publisher)</span></div>
         <div class="pk-fact-row"><span class="pk-fact-label">Release date</span><span class="pk-fact-val">August 20, 2026</span></div>
@@ -399,12 +432,12 @@ html{overflow-x:clip}
       <section class="pk-section" id="features">
         <h2 class="pk-h2">Key Features</h2>
         <div class="pk-features">
-          <div class="pk-feature"><span class="ic">🏗️</span><b>Build a scoring engine</b><span>Place farms, shrines and harbors so they feed each other. 50+ buildings and 80+ recipes, until a handful of tiles becomes board-breaking numbers.</span></div>
-          <div class="pk-feature"><span class="ic">🍲</span><b>Every meal is a math puzzle</b><span>Fuse ingredients into recipes that boost Flavor and Essence, multiplying your Fodder score into absurd, screen-shaking totals.</span></div>
-          <div class="pk-feature"><span class="ic">🎲</span><b>Build your dice</b><span>20+ dice types: odd, even, colored, even dice carved into six sixes. Tune your tray and pray the dragon's merciful.</span></div>
-          <div class="pk-feature"><span class="ic">🔥</span><b>Press your luck</b><span>Win in fewer years for a bigger payoff, but each year raises the stakes, with harsher odds and the odd tantrum that torches your board.</span></div>
-          <div class="pk-feature"><span class="ic">🧩</span><b>Broken combos, on purpose</b><span>Break the math on purpose, then rebuild when it all catches fire.</span></div>
-          <div class="pk-feature"><span class="ic">✍️</span><b>Hand-drawn, every inch</b><span>Every dragon, building and meal drawn by Daniela, the designer and artist of the duo.</span></div>
+          <div class="pk-feature"><b>Build a scoring engine</b><span>Place farms, shrines and harbors so they feed each other. 50+ buildings and 80+ recipes, until a handful of tiles becomes board-breaking numbers.</span></div>
+          <div class="pk-feature"><b>Every meal is a math puzzle</b><span>Fuse ingredients into recipes that boost Flavor and Essence, multiplying your Fodder score into absurd, screen-shaking totals.</span></div>
+          <div class="pk-feature"><b>Build your dice</b><span>20+ dice types: odd, even, colored, even dice carved into six sixes. Tune your tray and pray the dragon's merciful.</span></div>
+          <div class="pk-feature"><b>Press your luck</b><span>Win in fewer years for a bigger payoff, but each year raises the stakes, with harsher odds and the odd tantrum that torches your board.</span></div>
+          <div class="pk-feature"><b>Broken combos, on purpose</b><span>Break the math on purpose, then rebuild when it all catches fire.</span></div>
+          <div class="pk-feature"><b>Hand-drawn, every inch</b><span>Every dragon, building and meal drawn by Daniela, the designer and artist of the duo.</span></div>
         </div>
       </section>
 
@@ -412,7 +445,7 @@ html{overflow-x:clip}
         <h2 class="pk-h2">The Story</h2>
         <h3>A 20-year deal with a dragon.</h3>
         <p>You struck a deal: twenty years of protection in exchange for twenty years of dinner service. The island thrives under the beast's watchful eye, as long as the meals keep coming. Every year it wakes up hungrier and harder to please. Get the meal right and you prosper. Get it wrong and you're smoke.</p>
-        <p>Feed the Scorchpot is the first game from Moravian Games, the Czech married duo Jakub (code) and Daniela (design and art), and the first Indieformer has published. It sits comfortably alongside <em>Balatro</em> and <em>Slay the Spire</em>, a fresh spin on the roguelike where dice rolls fuel both the smart plays and the disasters.</p>
+        <p>Feed the Scorchpot is the first game from Moravian, the Czech married duo Jakub (code) and Daniela (design and art), and the first Indieformer has published. It sits comfortably alongside <em>Balatro</em> and <em>Slay the Spire</em>, a fresh spin on the roguelike where dice rolls fuel both the smart plays and the disasters.</p>
       </section>
 
       <section class="pk-section" id="media">
@@ -444,6 +477,15 @@ html{overflow-x:clip}
         </div>
       </section>
 
+      <section class="pk-section" id="downloads">
+        <h2 class="pk-h2">Downloads</h2>
+        <div class="pk-dl">
+          <a href="https://drive.google.com/drive/folders/13hfH1I9sGzxhJgHxj5E1AXK_-O7eQ3Wv?usp=sharing" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pack"></use></svg><span><b>Full press kit</b><span>Screenshots, key art, logos, GIFs (Google Drive)</span></span></a>
+          <a href="/images/scorchpot/logo.png" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-logo"></use></svg><span><b>Game logo</b><span>PNG, transparent</span></span></a>
+          <a href="/images/scorchpot/presskit/hero.jpg" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-keyart"></use></svg><span><b>Key art</b><span>JPG</span></span></a>
+          <a href="https://youtu.be/1zX-0OBf0j0" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-film"></use></svg><span><b>Launch trailer</b><span>YouTube</span></span></a>
+        </div>
+      </section>
       <section class="pk-section" id="quotes">
         <h2 class="pk-h2">Quotes</h2>
         <div class="pk-quote">
@@ -469,13 +511,8 @@ html{overflow-x:clip}
         <div class="pk-team">
           <div class="pk-team-card">
             <span class="role">the developer</span>
-            <h4>Moravian Games</h4>
+            <h3>Moravian</h3>
             <p>The husband-and-wife duo <strong>Jakub and Daniela</strong>, based in the Czech Republic. Jakub develops the game: all the code and systems. Daniela is the sole designer and artist, hand-drawing every dragon, building and meal. Feed the Scorchpot is their first commercial release.</p>
-          </div>
-          <div class="pk-team-card">
-            <span class="role">the publisher</span>
-            <h4>Indieformer</h4>
-            <p>A small, creator-led publisher run by <strong>Josh &amp; Clem</strong> in Melbourne, Australia. Twelve years writing about indie games; now we publish them, and write about that too, mistakes included.</p>
           </div>
         </div>
       </section>
@@ -487,15 +524,6 @@ html{overflow-x:clip}
         </div>
       </section>
 
-      <section class="pk-section" id="downloads">
-        <h2 class="pk-h2">Downloads</h2>
-        <div class="pk-dl">
-          <a href="https://drive.google.com/drive/folders/13hfH1I9sGzxhJgHxj5E1AXK_-O7eQ3Wv?usp=sharing" target="_blank" rel="noopener"><span class="ic">📦</span><span><b>Full press kit</b><span>Screenshots, key art, logos, GIFs (Google Drive)</span></span></a>
-          <a href="/images/scorchpot/logo.png" target="_blank" rel="noopener"><span class="ic">🅰️</span><span><b>Game logo</b><span>PNG, transparent</span></span></a>
-          <a href="/images/scorchpot/presskit/hero.jpg" target="_blank" rel="noopener"><span class="ic">🖼️</span><span><b>Key art</b><span>JPG</span></span></a>
-          <a href="https://youtu.be/1zX-0OBf0j0" target="_blank" rel="noopener"><span class="ic">🎬</span><span><b>Launch trailer</b><span>YouTube</span></span></a>
-        </div>
-      </section>
 
       <section class="pk-section" id="contact">
         <h2 class="pk-h2">Contact</h2>
@@ -512,7 +540,7 @@ html{overflow-x:clip}
   <footer class="pk-footer">
     <img src="/logo.png" alt="Indieformer" style="height:30px;display:block;margin:0 auto 8px;opacity:.92;">
     <div style="font-family:'Caveat',cursive;font-size:20px;color:var(--gold-bright);transform:rotate(-1deg);margin-bottom:10px;">an Indieformer press kit</div>
-    Feed the Scorchpot is developed by Moravian Games and published by <a href="https://indieformer.com/">Indieformer</a>.
+    Feed the Scorchpot is developed by Moravian and published by <a href="https://indieformer.com/">Indieformer</a>.
     &nbsp;·&nbsp; <a href="https://indieformer.com/scorchpot/">Game page</a> &nbsp;·&nbsp; <a href="https://indieformer.com/privacy/">Privacy</a>
   </footer>
 
@@ -557,6 +585,9 @@ html{overflow-x:clip}
       }
     });
     lb.addEventListener('click', function () { lb.classList.remove('on'); lbImg.src = ''; });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { lb.classList.remove('on'); lbImg.src = ''; }
+    });
   </script>
 </body>
 
