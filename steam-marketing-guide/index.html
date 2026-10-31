@@ -420,9 +420,11 @@
     position: fixed; inset: 0; z-index: 9999;
     background: #262730;
     display: flex; align-items: center; justify-content: center;
-    transition: opacity 0.45s ease;
+    transition: opacity 0.45s ease, background-color 0.45s ease;
   }
   #loader-overlay.gone { opacity: 0; pointer-events: none; }
+  /* while the gem is in flight only the backdrop clears, so the gem stays visible */
+  #loader-overlay.gone.flying { opacity: 1; background-color: transparent; }
   #loader-gem { width: 140px; height: 140px; }
   @media (max-width: 600px) { #loader-gem { width: 110px; height: 110px; } }
 
@@ -567,13 +569,31 @@ html{overflow-x:clip}
       }
     } catch (e) {}
     var shown = Date.now();
+    /* the gem flies into the nav logo rather than just vanishing: same mark,
+       so the loader resolves into the page it was covering */
+    function flyToBrand() {
+      var gem = document.getElementById('loader-gem');
+      var mark = document.querySelector('a.brand img');
+      if (!gem || !mark) return false;
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+      var g = gem.getBoundingClientRect(), m = mark.getBoundingClientRect();
+      if (!g.width || !m.width) return false;
+      gem.style.transformOrigin = 'top left';
+      gem.style.transition = 'transform .5s cubic-bezier(.65,0,.35,1), opacity .18s ease .36s';
+      void gem.offsetWidth;  /* a recalc between the two, or the transition can be skipped */
+      gem.style.transform = 'translate(' + (m.left - g.left) + 'px,' + (m.top - g.top) +
+                            'px) scale(' + (m.width / g.width) + ')';
+      gem.style.opacity = '0';
+      return true;
+    }
     function hide() {
       if (o.classList.contains('gone')) return;
+      if (flyToBrand()) o.classList.add('flying');
       o.classList.add('gone');
       setTimeout(function () {
         try { if (anim) anim.destroy(); } catch (e) {}
         if (o.parentNode) o.parentNode.removeChild(o);
-      }, 500);
+      }, 560);
     }
     function maybeHide() { setTimeout(hide, Math.max(0, 400 - (Date.now() - shown))); }
     if (document.readyState === 'complete') maybeHide();
