@@ -470,6 +470,17 @@
     transition: transform 0.15s ease, background 0.2s ease;
   }
   a.chat:hover { transform: translateY(-2px); background: var(--text-primary); }
+  /* mailto: does nothing for anyone without a mail client set up, so the
+     address is here in plain text to copy */
+  .chat-fallback {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text-secondary);  /* tertiary is 2.8:1 here, too faint for a fallback */
+    opacity: 0;
+    animation: rise 0.7s ease 0.65s forwards;
+  }
+  .chat-fallback a { color: var(--emerald); text-decoration: none; transition: color 0.2s ease; }
+  .chat-fallback a:hover { color: var(--text-primary); }
 
   /* ── hand-drawn arrow attached to "watching in real-time" → Waypoint image ── */
   .watching-mark { position: relative; display: inline-block; }
@@ -998,6 +1009,9 @@
     <div class="chat-wrap">
       <a class="chat" href="mailto:hello@indieformer.com?subject=Let's%20chat">Let's chat</a>
     </div>
+    <p class="chat-fallback">
+      Button not working? Our email is <a href="mailto:hello@indieformer.com">hello@indieformer.com</a>
+    </p>
 
   </div>
 
