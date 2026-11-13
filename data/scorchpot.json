@@ -1,18 +1,18 @@
 {
-  "players": 29,
-  "playersAsOf": "2026-11-12T15:49:11+00:00",
+  "players": 32,
+  "playersAsOf": "2026-11-13T15:09:35+00:00",
   "appId": 3966510,
   "_apiStatus": "ok",
-  "wishlists": 46604,
-  "wishlistsThrough": "2026-11-11",
-  "wishlistsAsOf": "2026-11-11",
+  "wishlists": 46617,
+  "wishlistsThrough": "2026-11-12",
+  "wishlistsAsOf": "2026-11-12",
   "_status": {
     "players": "ok",
     "wishlists": "ok",
     "units": "ok"
   },
-  "updatedAt": "2026-11-12T15:49:12+00:00",
-  "units": 26756,
-  "unitsThrough": "2026-11-11",
-  "unitsAsOf": "2026-11-11"
+  "updatedAt": "2026-11-13T15:09:36+00:00",
+  "units": 26778,
+  "unitsThrough": "2026-11-12",
+  "unitsAsOf": "2026-11-12"
 }
