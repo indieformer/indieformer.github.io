@@ -443,8 +443,8 @@ PAGE_CSS = """  :root {
   .post-content h6, .post-content h6.heading { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
 
   /* Only restyle Beehiiv's inline-text links — embed cards keep their own styles */
-  .post-content .link { color: var(--coral) !important; text-decoration: none; border-bottom: 1px solid rgba(247, 129, 84, 0.35); transition: color 0.2s, border-color 0.2s; }
-  .post-content .link:hover { color: var(--text-primary) !important; border-bottom-color: var(--text-primary); }
+  .post-content .link { color: var(--coral) !important; text-decoration: underline; text-decoration-color: rgba(247, 129, 84, 0.35); text-decoration-thickness: 1px; text-underline-offset: 0.2em; transition: color 0.2s, text-decoration-color 0.2s; }
+  .post-content .link:hover { color: var(--text-primary) !important; text-decoration-color: var(--text-primary); }
   .post-content em, .post-content i { color: var(--text-secondary); }
 
   /* Images */
@@ -494,8 +494,8 @@ PAGE_CSS = """  :root {
   .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
   .footer-col ul { list-style: none; }
   .footer-col li { margin-bottom: 6px; }
-  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
-  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-col a { color: var(--text-secondary); text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 1px; text-underline-offset: 0.2em; transition: color 0.2s, text-decoration-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); text-decoration-color: var(--text-primary); }
   .footer-meta { grid-column: 1 / -1; border-top: 1px solid var(--border); margin-top: 22px; padding-top: 18px; font-size: 13px; color: var(--text-tertiary); }
   .footer-meta a { color: var(--text-tertiary); border-bottom: 1px solid transparent; text-decoration: none; }
   .footer-meta a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }

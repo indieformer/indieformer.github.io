@@ -94,8 +94,8 @@
   h1 .em { color: var(--emerald); }
   .page-intro { color: var(--text-secondary); line-height: 1.7; font-size: 17px; margin-bottom: 16px; }
   .page-intro strong { color: var(--text-primary); font-weight: 600; }
-  .page-intro a { color: var(--emerald); border-bottom: 1px solid rgba(40, 226, 145, 0.42); text-decoration: none; }
-  .page-intro a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .page-intro a { color: var(--emerald); text-decoration: underline; text-decoration-color: rgba(40, 226, 145, 0.42); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+  .page-intro a:hover { color: var(--text-primary); text-decoration-color: var(--text-primary); }
 
   .facts {
     max-width: 1000px; margin: 28px auto 0;
@@ -172,10 +172,9 @@
   .point-body strong { font-weight: 700; }
   .point-body a {
     color: var(--emerald);
-    border-bottom: 1px solid rgba(40, 226, 145, 0.42);
-    text-decoration: none;
+    text-decoration: underline; text-decoration-color: rgba(40, 226, 145, 0.42); text-decoration-thickness: 1px; text-underline-offset: 0.2em;
   }
-  .point-body a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .point-body a:hover { color: var(--text-primary); text-decoration-color: var(--text-primary); }
   .point-tip {
     display: block; margin-top: 12px;
     font-family: 'Caveat', cursive;
@@ -187,10 +186,9 @@
   .point-tip strong { color: var(--text-primary); font-weight: 700; }
   .point-tip a {
     color: var(--coral);
-    border-bottom: 1px solid rgba(247, 129, 84, 0.42);
-    text-decoration: none;
+    text-decoration: underline; text-decoration-color: rgba(247, 129, 84, 0.42); text-decoration-thickness: 1px; text-underline-offset: 0.2em;
   }
-  .point-tip a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .point-tip a:hover { color: var(--text-primary); text-decoration-color: var(--text-primary); }
 
   /* template-text block (section 3) */
   .template {
@@ -392,8 +390,8 @@
   .footer-label { font-family: 'Caveat'; font-size: 22px; color: var(--text-tertiary); margin-bottom: 6px; transform: rotate(-1deg); display: inline-block; }
   .footer-col ul { list-style: none; }
   .footer-col li { margin-bottom: 6px; }
-  .footer-col a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
-  .footer-col a:hover { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+  .footer-col a { color: var(--text-secondary); text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 1px; text-underline-offset: 0.2em; transition: color 0.2s, text-decoration-color 0.2s; }
+  .footer-col a:hover { color: var(--text-primary); text-decoration-color: var(--text-primary); }
   .footer-meta {
     grid-column: 1 / -1; border-top: 1px solid var(--border);
     margin-top: 22px; padding-top: 18px;
@@ -533,7 +531,7 @@
     .about-if .eyebrow2 { font-family: 'Caveat', cursive; font-size: 24px; color: var(--coral); transform: rotate(-1.5deg); display: inline-block; margin-bottom: 6px; }
     .about-if h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.01em; color: var(--text-primary); margin-bottom: 14px; }
     .about-if p { color: var(--text-secondary); line-height: 1.75; font-size: 16px; max-width: 760px; margin-bottom: 14px; }
-    .about-if p a { color: var(--emerald); text-decoration: none; border-bottom: 1px solid rgba(40,226,145,0.42); }
+    .about-if p a { color: var(--emerald); text-decoration: underline; text-decoration-color: rgba(40,226,145,0.42); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
     .about-if .about-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
     .about-if .about-cta a { border: 1px solid var(--border-mid); border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: var(--text-primary); text-decoration: none; }
     .about-if .about-cta a:hover { border-color: var(--emerald); color: var(--emerald); }
@@ -541,7 +539,7 @@
     .about-jake-role { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); display: block; margin-bottom: 8px; }
     .about-jake h3 { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
     .about-jake p { color: var(--text-secondary); font-size: 15px; line-height: 1.65; margin: 0; max-width: none; }
-    .about-jake a { color: var(--emerald); text-decoration: none; border-bottom: 1px solid rgba(40,226,145,0.42); }
+    .about-jake a { color: var(--emerald); text-decoration: underline; text-decoration-color: rgba(40,226,145,0.42); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 
 /* keyboard focus: the site set none, so the UA default was the only ring. */
 :focus-visible{outline:3px solid #F0EEE8;outline-offset:2px;border-radius:3px}
