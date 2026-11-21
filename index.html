@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Indieformer, indie game publisher run by Josh &amp; Clem</title>
 
 <!-- ── icons ── -->
@@ -631,7 +632,9 @@
   .game-card--dv:hover { border-color: rgba(196,18,23,0.5); box-shadow: 0 16px 40px rgba(122,18,22,0.34); }
   /* under 900px the slate scroll-snaps instead of shrinking the capsules */
   @media (max-width: 900px) {
-    .games-grid { display: flex; overflow-x: auto; gap: 14px; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 6px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
+    .games-grid { display: flex; overflow-x: auto; gap: 14px; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 6px;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
     .games-grid::-webkit-scrollbar { display: none; }
     .game-card { flex: 0 0 46%; scroll-snap-align: center; }
   }

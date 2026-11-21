@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- the hero is a CSS background, so the browser only finds it after the
+       stylesheet parses; preloading it is what fetchpriority does for an <img> -->
+  <link rel="preload" as="image" href="/images/abelina/hero-bg.jpg" fetchpriority="high">
   <title>Abelina | Indieformer</title>
   <meta name="description"
     content="Abelina is a surreal, hand-crafted adventure platformer by Gabe Askew, published by Indieformer. No combat, a vast world to explore, and a mature story about life and death. Wishlist on Steam, out Q1 2027.">

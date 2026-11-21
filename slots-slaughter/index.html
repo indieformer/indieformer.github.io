@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- the hero is a CSS background, so the browser only finds it after the
+       stylesheet parses; preloading it is what fetchpriority does for an <img> -->
+  <link rel="preload" as="image" href="/images/slots-slaughter/hero.jpg" fetchpriority="high">
   <title>Slots &amp; Slaughter | Indieformer</title>
   <meta name="description"
     content="Slots & Slaughter — a roguelike deck-builder where your gear is your deck and a slot machine decides what you fight with. Developed by Laser Castle, published by Indieformer. In development. Wishlist on Steam.">

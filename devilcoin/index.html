@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- the hero is a CSS background, so the browser only finds it after the
+       stylesheet parses; preloading it is what fetchpriority does for an <img> -->
+  <link rel="preload" as="image" href="assets/hero-bg.jpg" fetchpriority="high">
 <title>Devilcoin | Indieformer</title>
 <meta name="description" content="Devilcoin is a coin-flip roguelite set in an occult purgatory built from Slavic folklore. Bet heads or tails, stack Artifacts until the odds stop being fair, and hit the score before you run out of flips. Developed by Smilingface, published by Indieformer.">
 <link rel="canonical" href="https://indieformer.com/devilcoin/">
@@ -182,7 +186,9 @@ h2.sec em{font-style:normal;color:var(--gold-bright)}
 /* scrollable shot carousel with faded edges, per the playbook */
 .gallery{position:relative;margin-top:38px}
 .shots{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
-  padding-bottom:6px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+  padding-bottom:6px;scrollbar-width:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
 .shots::-webkit-scrollbar{display:none}
 .shots figure{flex:0 0 min(640px,82%);scroll-snap-align:center;margin:0}
 .shots img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line);

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>How We Make a Game Popular | Indieformer</title>
 
 <!-- ── icons ── -->
@@ -246,12 +247,9 @@
     animation: rise 0.6s ease both;
     scroll-margin-top: 24px;
   }
-  .entry:nth-of-type(1) { animation-delay: 0.55s; }
-  .entry:nth-of-type(2) { animation-delay: 0.7s; }
-  .entry:nth-of-type(3) { animation-delay: 0.85s; }
-  .entry:nth-of-type(4) { animation-delay: 1.0s; }
-  .entry:nth-of-type(5) { animation-delay: 1.15s; }
-  .entry:nth-of-type(6) { animation-delay: 1.3s; }
+  /* one rule instead of a delay per child; the six .entry are the only children
+     of .dictionary, so sibling-index() matches the nth-of-type it replaces */
+  .entry { animation-delay: calc(0.4s + sibling-index() * 0.15s); }
   .preamble-box em { font-style: italic; color: var(--coral); }
   .preamble-box::before {
     content: '✎';
