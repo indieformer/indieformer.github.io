@@ -193,10 +193,12 @@
     .pk-footer a { color: var(--text-secondary); }
     .pk-footer a:hover { color: var(--phosphor-bright); }
 
-    #lb { position: fixed; inset: 0; z-index: 500; background: rgba(6,7,12,0.94); display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
-    #lb.on { display: flex; }
-    #lb img { max-width: 96%; max-height: 92%; border-radius: 8px; box-shadow: 0 20px 80px rgba(0,0,0,.6); }
-
+    /* native <dialog>: the browser gives us the top layer, focus containment,
+       Esc and page inertness, so none of that is hand-written any more */
+    #lb { border: 0; padding: 0; background: transparent; margin: auto; max-width: 96vw; max-height: 92vh; overscroll-behavior: contain; }
+    #lb[open] { display: block; }
+    #lb::backdrop { background: rgba(6,7,12,0.94); overflow: hidden; overscroll-behavior: contain; }
+    #lb img { display: block; max-width: 96vw; max-height: 92vh; border-radius: 8px; box-shadow: 0 20px 80px rgba(0,0,0,.6); cursor: zoom-out; }
     @media (max-width: 860px) {
       .pk-wrap { grid-template-columns: minmax(0,1fr); gap: 0; }
       .pk-fact { position: static; padding-top: 36px; }
@@ -262,7 +264,10 @@ html{overflow-x:clip}
 </svg>
 
   <div id="loader-overlay" aria-hidden="true"><div id="loader-gem"></div></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"
+        integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
   <script>
     (function () {
       var o = document.getElementById('loader-overlay');
@@ -453,7 +458,7 @@ html{overflow-x:clip}
     &nbsp;·&nbsp; <a href="https://indieformer.com/abelina/">Game page</a> &nbsp;·&nbsp; <a href="https://indieformer.com/privacy/">Privacy</a>
   </footer>
 
-  <div id="lb"><img src="" alt=""></div>
+  <dialog id="lb" closedby="any" aria-label="Enlarged screenshot"><img src="" alt=""></dialog>
 
   <script>
     document.querySelectorAll('.btn-copy').forEach(function (b) {
@@ -481,12 +486,12 @@ html{overflow-x:clip}
     var lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
     document.getElementById('pk-gallery').addEventListener('click', function (e) {
       var sh = e.target.closest('.pk-shot'); var img = sh && sh.querySelector('img');
-      if (img && img.style.display !== 'none' && img.complete && img.naturalWidth) { lbImg.src = img.src; lb.classList.add('on'); }
+      if (img && img.style.display !== 'none' && img.complete && img.naturalWidth) { lbImg.src = img.src; lbImg.alt = img.alt || ''; lb.showModal(); }
     });
-    lb.addEventListener('click', function () { lb.classList.remove('on'); lbImg.src = ''; });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { lb.classList.remove('on'); lbImg.src = ''; }
-    });
+    // clicking the shot itself closes too, the way the old overlay did; this also
+    // covers backdrop clicks where closedby is not supported yet (Safari)
+    lb.addEventListener('click', function () { lb.close(); });
+    lb.addEventListener('close', function () { lbImg.src = ''; lbImg.alt = ''; });
   </script>
 </body>
 
